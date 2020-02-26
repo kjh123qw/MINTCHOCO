@@ -46,7 +46,7 @@ local.properties
 .texlipse
 
 # STS (Spring Tool Suite)
-#.springBeans
+.springBeans
 
 # Code Recommenders
 .recommenders/
@@ -71,9 +71,9 @@ local.properties
 
 .sts4-cache/
 
-.MF
+*.MF
 
-.properties
+*.properties
 
 # End of https://www.gitignore.io/api/eclipse
 

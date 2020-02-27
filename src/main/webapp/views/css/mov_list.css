@@ -1,0 +1,24 @@
+<!-- 
+
+	담당 : 천세문
+
+ -->
+ 
+#mov_list{
+    margin: 0; 
+    padding: 0; 
+    margin: 0 auto; 
+    box-sizing: border-box;
+    font-style: fantasy;
+	position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.movie{
+    position: relative;
+}
+
+.movie img .movie h3{
+    cursor: pointer;
+}

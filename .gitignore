@@ -4,6 +4,7 @@
 # Edit at https://www.gitignore.io/?templates=eclipse
 
 ### Eclipse ###
+target/m2e-wtp/web-resources/META-INF/
 .metadata
 bin/
 tmp/

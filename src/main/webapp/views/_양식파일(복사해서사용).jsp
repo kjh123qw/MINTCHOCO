@@ -6,6 +6,8 @@
 */
 %>
 
+<% // 양식파일이다. 이부분을 삭제하고 사용하도록. %>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>

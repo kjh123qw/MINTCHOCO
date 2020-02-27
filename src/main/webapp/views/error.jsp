@@ -1,8 +1,11 @@
-<!-- 
-	깃허브 테스트8
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%
+/*
 	담당자 : 
+*/
+%>
 
- -->
 <%@ include file="./_header.jsp" %>
 
 

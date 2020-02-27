@@ -2,8 +2,14 @@
 
 	담당 : 천세문
 
+	디자인 수정중...
+
  -->
- 
+
+body{
+	background-color: #565656; 
+}
+
 #mov_list{
     margin: 0; 
     padding: 0; 
@@ -12,13 +18,18 @@
     font-style: fantasy;
 	position: relative;
     overflow: hidden;
+    background-color: #565656; 
+}
+
+#mov_list h1{
     text-align: center;
 }
 
 .movie{
     position: relative;
+    text-align: center;
 }
 
-.movie img .movie h3{
+.movie img, h3, h2{
     cursor: pointer;
 }

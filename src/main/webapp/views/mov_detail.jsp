@@ -7,13 +7,29 @@
 */
 %>
 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title> MINT CHOCO </title>
+<script src="./js/public.js"></script>
+<link rel="./css/public.css">
+
+<!-- 담당자 js/css -->
+<link rel="stylesheet" href="./css/mov_detail.css">
+
+</head>
+<body>
 <%@ include file="./_header.jsp" %>
 
-<link rel="stylesheet" href="mov_detail.css">
+<div id="mov_detail">
 
-<div id="mov_list">
-
+	<hr>
+	
 	<h1> 영화 내용 상세 </h1>
+	
 	<hr>
 	
 	<!-- 영화 정보 -->
@@ -61,7 +77,7 @@
 	</div>		
 	<hr>
 	
-	<!-- 영화 티저 -->>
+	<!-- 영화 티저 -->
 	<div class="teaser">
 	
 		<!-- ${movie_teaser} 를 forEach로 돌림 -->
@@ -120,3 +136,6 @@
 </div>
 
 <%@ include file="./_footer.jsp" %>
+
+</body>
+</html>

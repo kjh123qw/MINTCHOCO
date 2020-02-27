@@ -13,6 +13,10 @@
 <head>
 <meta charset="UTF-8">
 <title>MINT CHOCO</title>
+<script src="./js/public.js"></script>
+<link rel="./css/public.css">
+<!-- 담당자 js/css -->
+
 </head>
 <body>
 <%@ include file="./_header.jsp" %>
@@ -20,5 +24,6 @@
 
 
 <%@ include file="./_footer.jsp" %>
+
 </body>
 </html>

@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 <!-- 
 
 	담당 : 천세문
@@ -21,6 +19,6 @@
     position: relative;
 }
 
-.movie img, .movie h3{
+.movie img .movie h3{
     cursor: pointer;
 }

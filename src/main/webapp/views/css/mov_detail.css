@@ -1,5 +1,3 @@
-@charset "UTF-8";
-
 <!-- 
 
 	담당 : 천세문
@@ -30,7 +28,7 @@
     border-left: none;
 }
 
-.rating img{
+.rating table tr td img{
     width: 40px;
     height: 40px;
 }

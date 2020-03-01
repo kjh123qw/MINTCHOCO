@@ -1,6 +1,10 @@
 package com.kosmo.mintchoco.common;
 
-
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 /*
  * 담당자 : 김정호
@@ -8,33 +12,42 @@ package com.kosmo.mintchoco.common;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.0.0";				// 현재 데이터 베이스 버전
-	String creVerTbl = "create table version(" + 		// 버전 테이블 sql
-			"version_id varchar(5) primary key, " + 
-			"current_version varchar2(10), " + 
-			"update_date date default sysdate" + 
-			")";
-	String verInsert = "insert into version(VERSION_ID, CURRENT_VERSION) values('ver', '?')"; // 버전 인서트 sql
-	String verSql = "select CURRENT_VERSION from version where VERSION_ID = 'ver'"; // 버전 확인용 sql
+	final String THIS_VERSION = "1.0.0";				// 현재 데이터 베이스 버전 H2 용
+	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
+	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
+	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
 	
-	String[] delSql = { // 기존 테이블 및 시퀀스 삭제 sql
-			"drop table notice",
-			"drop table faq",
+	private String[] drpSql = { // 기존 테이블 및 시퀀스 삭제 sql
+			"drop table VERSION",
+			"drop table NOTICE",
+			"drop table FAQ",
 			"drop table tag_mapping",
 			"drop table tag",
 			"drop view ASSESSMENT_view",
 			"drop table ASSESSMENT_EST",
 			"drop table ASSESSMENT",
 			"drop table favorite",
-			"drop table movie",
+			"drop table MOVIE",
 			"drop table MEMBER",
 			"drop sequence MEMBER_SEQ",
-			"drop sequence movie_seq",
-			"drop sequence faq_seq",
-			"drop sequence notice_seq"
+			"drop sequence MOVIE_SEQ",
+			"drop sequence FAQ_SEQ",
+			"drop sequence NOTICE_SEQ"
+	};
+
+	private String[] delSql = { // 데이터 삭제 sql
+			"delete notice",
+			"delete faq",
+			"delete tag_mapping",
+			"delete tag",
+			"delete ASSESSMENT_EST",
+			"delete ASSESSMENT",
+			"delete favorite",
+			"delete movie",
+			"delete MEMBER"
 	};
 	
-	String[] selSql = { // 테이블 select sql
+	private String[] selSql = { // 테이블 select sql
 			"select * from ASSESSMENT",
 			"select * from ASSESSMENT_EST",
 			"select * from ASSESSMENT_view",
@@ -48,7 +61,13 @@ public class DBVersionManager {
 			"select * from TAG_MAPPING"
 	};
 	
-	String[] creTblSql = { // 테이블 생성 sql
+	private String[] creTblSql = { // 테이블 생성 sql
+			"create table version(" + 		// 버전 테이블 sql
+			"version_id varchar(5) primary key, " + 
+			"current_version varchar2(10), " + 
+			"update_date date default sysdate" + 
+			")",
+			
 			"CREATE TABLE MEMBER(" +							// 회원 (유지상) 
 			"    MEMBER_NUMBER NUMBER(10) PRIMARY KEY, " +		// 시퀀스 회원 번호 // 구분 용도, 세션 저장 
 			"    MEMBER_EMAIL VARCHAR2(60) UNIQUE, " +			// 회원 이메일 // 로그인용 
@@ -66,19 +85,19 @@ public class DBVersionManager {
 			
 			"create table movie(" + 
 			"    movie_number number(10) primary key, " + 		// 영화 확인용 고유번호(시퀀스 사용)
-			"    movie_poster varchar2(30) NOT NULL, " +		// 영화 이미지 주소 링크 
-			"    movie_teaser varchar2(50) NOT NULL, " +		// 영화 티저영상 주소 링크 
+			"    movie_poster varchar2(50) NOT NULL, " +		// 영화 이미지 주소 링크 
+			"    movie_teaser varchar2(200) NOT NULL, " +		// 영화 티저영상 주소 링크 
 			"    movie_title varchar2(100) NOT NULL, " +		// 영화 제목 
-			"    movie_kind varchar2(30) NOT NULL, " +			// 영화 장르(' , '로 구분) 
+			"    movie_kind varchar2(50) NOT NULL, " +			// 영화 장르(' , '로 구분) 
 			"    movie_directer varchar2(30) NOT NULL, " +		// 영화 감독 
 			"    movie_actor varchar2(200) NOT NULL, " +		// 주연 배우(' , '로 구분) 
 			"    movie_grade varchar2(10) NOT NULL, " +			// 상영 등급 
 			"    movie_time number(5) NOT NULL, " +				// 상영 시간(분) 
-			"    movie_date date NOT NULL, " +					// 영화 개봉일 
-			"    movie_youtube_url varchar2(100) NOT NULL, " +	// 유튜브 링크 
-			"    movie_naver_url varchar2(100) NOT NULL, " +	// 네이버 링크 
+			"    movie_date varchar2(10) NOT NULL, " +			// 영화 개봉일 
+			"    movie_youtube_url varchar2(200) NOT NULL, " +	// 유튜브 링크 
+			"    movie_naver_url varchar2(200) NOT NULL, " +	// 네이버 링크 
 			"    movie_indate date default sysdate, " +			// 영화 게시일 
-			"    movie_content varchar2(500) NOT NULL" +		// 영화 줄거리 
+			"    movie_content varchar2(1000) NOT NULL" +		// 영화 줄거리 
 			")",
 			
 			"create table favorite (" +							// 찜한 영화  (장세진) ajax 구현 
@@ -105,13 +124,17 @@ public class DBVersionManager {
 			"    ASSESS_EST_REGDATE date default sysdate" +		// 등록일자 
 			")",
 			
-			"create or replace view ASSESSMENT_view " + 	// assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
+			"create or replace view ASSESSMENT_VIEW " +   	// assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
 			"as " + 
-			"select a.ASSESS_id, a.MEMBER_number, a.MOVIE_number, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, el.est_l as likes, ed.est_d as hates" + 
-			"from ASSESSMENT a," + 
-			"     (select count(ASSESS_EST) as est_l, ASSESS_id from ASSESSMENT_EST where ASSESS_EST = 'L' group by ASSESS_id) el, " + 
-			"     (select count(ASSESS_EST) as est_d, ASSESS_id from ASSESSMENT_EST where ASSESS_EST = 'D' group by ASSESS_id) ed" + 
-			"where a.ASSESS_id = el.ASSESS_id and a.ASSESS_id = ed.ASSESS_id",
+			"select a.ASSESS_ID assess_id, a.MEMBER_NUMBER, m.MEMBER_NICKNAME, a.MOVIE_NUMBER, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, nvl(l.est_l, 0) likes, nvl(d.est_d, 0) hates " + 
+			"from ASSESSMENT a " + 
+			"join MEMBER m " + 
+			"on a.MEMBER_NUMBER = m.MEMBER_NUMBER " + 
+			"left outer join (select ASSESS_id, count(ASSESS_EST) est_l from ASSESSMENT_EST where ASSESS_EST = 'L' group by ASSESS_id, ASSESS_EST) l " + 
+			"on a.ASSESS_ID = l.ASSESS_ID " + 
+			"left outer join (select ASSESS_id, count(ASSESS_EST) est_d from ASSESSMENT_EST where ASSESS_EST = 'D' group by ASSESS_id, ASSESS_EST) d " + 
+			"on a.ASSESS_ID = d.ASSESS_ID " + 
+			"group by a.ASSESS_ID",
 			
 			"create table tag (" + 							// 태그  (최원준)
 			"    tag_content varchar2(60) primary key, " +	// 태그 내용 
@@ -141,15 +164,15 @@ public class DBVersionManager {
 			")"
 	};
 	
-	String[] creSeqSql = { // 시퀀스 생성 sql
-			"CREATE SEQUENCE MEMBER_SEQ INCREMENT BY 1 START WITH 1 NOCYCLE", // 회원 시퀀스
-			"create sequence movie_seq start with 1 increment by 1", // 영화 시퀀스
-			"create sequence faq_seq start with 1 increment by 1", // faq 시퀀스
-			"create sequence notice_seq start with 1 increment by 1" // 공지사항 시퀀스
+	private String[] creSeqSql = { // 시퀀스 생성 sql
+			"create sequence MEMBER_SEQ increment by 1 start with 1 NOCYCLE", // 회원 시퀀스
+			"create sequence MOVIE_SEQ increment by 1 start with 1 NOCYCLE", // 영화 시퀀스
+			"create sequence FAQ_SEQ increment by 1 start with 1 NOCYCLE", // faq 시퀀스
+			"create sequence NOTICE_SEQ increment by 1 start with 1 NOCYCLE" // 공지사항 시퀀스
 	};
 	
 	// --- 이하 테스트 데이터 입력 sql ---
-	String[] memberTDBSql = { // 회원 테스트 데이터
+	private String[] memberTDBSql = { // 회원 테스트 데이터
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " + 	// 1
 			"'admin@gmail.com', " +
@@ -226,10 +249,10 @@ public class DBVersionManager {
 			")"
 	};
 	
-	String[] movieTDBSql = { // 영화 테스트 데이터
+	private String[] movieTDBSql = { // 영화 테스트 데이터
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://youtu.be/eOTbdg56eW0', " + 
 			"    '아이 엠 어 히어로', " + 
 			"    '액션, 모험, 좀비', " + 
@@ -245,8 +268,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=FMxbzIThWNA', " + 
 			"    '존 윅', " + 
 			"    '액션, 모험', " + 
@@ -267,8 +290,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=QY4o16w6XuU&list=PL3m5qREasgOp-uoO7nbS281lzMqmyJVFN', " + 
 			"    '킹스 맨', " + 
 			"    '액션, 모험, 드라마', " + 
@@ -284,8 +307,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=mFoCCX39rS4', " + 
 			"    '메카닉', " + 
 			"    '액션, 모험', " + 
@@ -301,8 +324,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=Brl96EVxixI', " + 
 			"    '괴물의 아이', " + 
 			"    '액션, 모험, 애니메이션', " + 
@@ -321,8 +344,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=daObnmlsn9g', " + 
 			"    '초능력자', " + 
 			"    '드라마', " + 
@@ -341,13 +364,13 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=wthJe50uFU4', " + 
 			"    '부산행', " + 
 			"    '액션, 모험, 드라마', " + 
 			"    '연상호', " + 
-			"    '공유, 정유미, 마동석, 김수안,김의성, 최우식, 안소희, 최귀화', " + 
+			"    '공유, 정유미, 마동석, 김수안,김의성', " + 
 			"    '15', " + 
 			"    118, " + 
 			"    '2016 년', " + 
@@ -358,8 +381,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=jRCow6UeRZU', " + 
 			"    '워 크래프트', " + 
 			"    '액션, 모험', " + 
@@ -375,8 +398,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=wxYAg7to52A', " + 
 			"    '황해', " + 
 			"    '범죄, 미스테리, 서스펜스', " + 
@@ -394,8 +417,8 @@ public class DBVersionManager {
 			" )",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=eIyDOXc1fS4', " + 
 			"    '존 윅 2', " + 
 			"    '액션, 모험, 범죄', " + 
@@ -415,8 +438,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=2M3tvUeQAVA', " + 
 			"    '시카리오', " + 
 			"    '미스테리, 서스펜스, 스릴러', " + 
@@ -434,8 +457,8 @@ public class DBVersionManager {
 			")",
 			
 			"INSERT INTO MOVIE VALUES( " + 
-			"    MEMBER_SEQ.CURRVAL, " + 
-			"    concat(concat('mov_poster_', MEMBER_SEQ.NEXTVAL), '.jpg'), " + 
+			"    MOVIE_SEQ.NEXTVAL, " + 
+			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
 			"    'https://www.youtube.com/watch?v=pwYfmrbdkIw', " + 
 			"    '인시던트', " + 
 			"    '공상과학, 스릴러', " + 
@@ -457,7 +480,7 @@ public class DBVersionManager {
 			")"
 	};
 	
-	String[] favrTDBSql = { // 찜하기 테스트 데이터
+	private String[] favrTDBSql = { // 찜하기 테스트 데이터
 			"INSERT INTO FAVORITE VALUES(" + // user01@gmail.com 데이터
 			"    '21'," + 
 			"    2," + 
@@ -478,25 +501,31 @@ public class DBVersionManager {
 			")"
 	};
 	
-	String[] asseTDBSql = { // 평점 테스트 데이터
+	private String[] asseTDBSql = { // 평점 테스트 데이터
 			"INSERT INTO ASSESSMENT values('21', 2, 1, '재밌었습니다.', 10, default)",
 			"INSERT INTO ASSESSMENT values('22', 2, 2, '별로...', 2, default)",
 			"INSERT INTO ASSESSMENT values('23', 2, 3, '제 스타일은 아니지만...', 7, default)"
 	};
 	
-	String[] asesTDBSql = { // 평점 좋아요 테스트 데이터
+	private String[] asesTDBSql = { // 평점 좋아요 테스트 데이터
 			"INSERT INTO ASSESSMENT_EST VALUES('321', 3, '21', 'L', DEFAULT)",
 			"INSERT INTO ASSESSMENT_EST VALUES('322', 3, '22', 'D', DEFAULT)",
-			"INSERT INTO ASSESSMENT_EST VALUES('323', 3, '23', 'L', DEFAULT)"
+			"INSERT INTO ASSESSMENT_EST VALUES('323', 3, '23', 'L', DEFAULT)",
+			"INSERT INTO ASSESSMENT_EST VALUES('421', 4, '21', 'L', DEFAULT)",
+			"INSERT INTO ASSESSMENT_EST VALUES('422', 4, '22', 'D', DEFAULT)",
+			"INSERT INTO ASSESSMENT_EST VALUES('423', 4, '23', 'L', DEFAULT)",
+			"INSERT INTO ASSESSMENT_EST VALUES('521', 5, '21', 'L', DEFAULT)",
+			"INSERT INTO ASSESSMENT_EST VALUES('522', 5, '22', 'D', DEFAULT)",
+			"INSERT INTO ASSESSMENT_EST VALUES('523', 5, '23', 'D', DEFAULT)"
 	};
 	
-	String[] faqTDBSql = { // FAQ 테스트 데이터
+	private String[] faqTDBSql = { // FAQ 테스트 데이터
 			"INSERT INTO FAQ VALUES(faq_seq.NEXTVAL, 1, 'TEST FAQ TITLE 1', '1번 항목 테스트 내용입니다.', DEFAULT)",
 			"INSERT INTO FAQ VALUES(faq_seq.NEXTVAL, 1, 'TEST FAQ TITLE 2', '2번 항목 테스트 내용입니다.', DEFAULT)",
 			"INSERT INTO FAQ VALUES(faq_seq.NEXTVAL, 1, 'TEST FAQ TITLE 3', '3번 항목 테스트 내용입니다.', DEFAULT)"
 	};
 	
-	String[] noticeTDBSql = { // 공지사항 테스트 데이터
+	private String[] noticeTDBSql = { // 공지사항 테스트 데이터
 			"INSERT INTO NOTICE VALUES(" + 
 			"    notice_seq.NEXTVAL, " + 
 			"    1, " + 
@@ -523,8 +552,99 @@ public class DBVersionManager {
 			")"
 	};
 	
-	// 버전 체크 
-	// 버전 테이블 없을경우 생성 후 현재 버전 대입 후 생성 메서드
-	// 다를경우 삭제 후 테이블 생성, 시퀀스 생성, 테스트 데이터 입력
+	private Connection conn = null;
+	private PreparedStatement stmt = null;
+	private ResultSet rs = null;
+	
+	// 이하 메서드 //
+	
+	// 최신 버전 가져오기
+	public String getCurVer() {
+		return THIS_VERSION;
+	}
+	// 현재 설치 버전 정보 가져오기
+	public String getNowVer() {
+		String nowVer = "";
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(chkVerTblSql);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt("result") == 0) {
+					nowVer = "None";
+				} else {
+					stmt = conn.prepareStatement(verSelSql);
+					rs = stmt.executeQuery();
+					if(rs.next()) {
+						nowVer = rs.getString("current_version");
+					}
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+			nowVer = "NotRuning";
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return nowVer;
+	}
+	
+	public void setupDatabase() {
+		try {
+			conn = JDBCUtil.getConnection();
+			Arrays.stream(drpSql).forEach(sql -> {	// drop tables Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(creTblSql).forEach(sql -> {	// create tables Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(creSeqSql).forEach(sql -> {	// create seq Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(memberTDBSql).forEach(sql -> {	// insert memberDB Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(movieTDBSql).forEach(sql -> {	// insert movieDB Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(favrTDBSql).forEach(sql -> {	// insert favoriteDB Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(asseTDBSql).forEach(sql -> {	// insert assess Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(asesTDBSql).forEach(sql -> {	// insert assess_est Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(faqTDBSql).forEach(sql -> {	// insert faq Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			Arrays.stream(noticeTDBSql).forEach(sql -> {	// insert notice Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			
+			stmt = conn.prepareStatement(verInsertSql);
+			stmt.setString(1, THIS_VERSION);
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+	}
+	
+	public void dropDatabase() {
+		try {
+			conn = JDBCUtil.getConnection();
+			Arrays.stream(drpSql).forEach(sql -> {	// drop tables Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+	}
 	
 }

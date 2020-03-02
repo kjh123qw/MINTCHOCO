@@ -1,24 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%
 /*
 	담당 : 천세문
-	
-	기본 화면 완성
-	
 */
 %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 영화 내용 상세 </title>
-
+<title> MINT CHOCO </title>
 <script src="./js/jquery.2.1.3.min.js"></script>
 <script src="./js/jquery-ui.min.js"></script>
 <script src="./js/jquery.easing.1.3.js"></script>
@@ -27,23 +22,16 @@
 <link rel="stylesheet" href="./css/public.css">
 
 <!-- 담당자 js/css -->
-
-<link rel="stylesheet" href="./css/mov_public.css">
 <link rel="stylesheet" href="./css/mov_detail.css">
 
 </head>
-
-<header>
-	<jsp:include page="./_header.jsp"></jsp:include>
-</header>
-
 <body>
 
 <div id="mov_detail">
 
 	<hr>
 	
-	<h1> 영화 내용 상세 </h1>
+	<h1> 영화 내용 상세 test </h1>
 	
 	<hr>
 	
@@ -53,7 +41,7 @@
     	<table border="1">
 	        <!-- ${movie_poster}, ${movie_title}, ${movie_kind}, ${movie_content}, ${movie_directer}, ${movie_actor}, ${movie_yutube_url}, ${movie_naver_url} && <a> ${tag_name} <a>를 forEach로 돌림 -->
 			<tr>
-			    <td rowspan="6"><a onclick="location.href='mov_list.jsp'"><img src="./images/mov_poster/mov_poster_1.jpg" alt="I_Am_a_Hero"></a></td>
+			    <td rowspan="6"><a onclick="location.href='mov_list.jsp'"><img src="./images/mov_poster/1.jpg" alt="I_Am_a_Hero"></a></td>
 			    <td width="25%"><h3> 아이 엠 어 히어로 </h3></td>
 			    <td><h4> 줄거리 </h4></td>
 			</tr>
@@ -151,9 +139,4 @@
 </div>
 
 </body>
-
-<footer>
-	<jsp:include page="./_footer.jsp"></jsp:include>
-</footer>
-
 </html>

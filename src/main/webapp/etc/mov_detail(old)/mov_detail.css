@@ -2,12 +2,14 @@
 
 	담당 : 천세문
 	
-	디자인 수정 예정...
+	디자인 수정중...
 
  -->
-
-<!-- 화면 기본 -->
-
+ 
+body{
+	background-color: #565656; 
+}
+ 
 #mov_detail{
 	margin: 0; 
 	padding: 0; 
@@ -17,23 +19,17 @@
 	position: relative;
 	overflow: hidden;
 	text-align: center;
+	background-color: #565656; 
 }
 
-h1{
-    width: 100%;
-    color: #ff5365;
-    background-color:  #00d7c5;
-    border-top: 5px solid #ff5365;
-    border-bottom: 5px solid #ff5365;
+#mov_detail h1{
+	margin: 0 auto;
+	text-align: center;
 }
-
-<!-- 영화 관련 -->
 
 .movie{
 	text-align: center;
 }
-
-<!-- 평가 관련 -->
 
 .rating table{
     width: 100%;

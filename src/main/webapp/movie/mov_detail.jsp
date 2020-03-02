@@ -33,7 +33,7 @@
 
 </head>
 
-<jsp:include page="${ contextPath }/_header.jsp"></jsp:include>
+<jsp:include page="../_header.jsp"></jsp:include>
 
 <body>
 
@@ -47,7 +47,7 @@
     	<table border="1">
 	        <!-- ${movie_poster}, ${movie_title}, ${movie_kind}, ${movie_content}, ${movie_directer}, ${movie_actor}, ${movie_yutube_url}, ${movie_naver_url} && <a> ${tag_name} <a>를 forEach로 돌림 -->
 			<tr>
-			    <td rowspan="6"><a onclick="location.href='mov_list.do'"><img src="/${ contextPath }/images/mov_poster/mov_poster_1.jpg" alt="I_Am_a_Hero"></a></td>
+			    <td rowspan="6"><a onclick="location.href='mov_list.do'"><img src="${ contextPath }/images/mov_poster/mov_poster_1.jpg" alt="I_Am_a_Hero"></a></td>
 			    <td width="25%"><h3> 아이 엠 어 히어로 </h3></td>
 			    <td><h4> 줄거리 </h4></td>
 			</tr>
@@ -96,49 +96,7 @@
 
 	<hr>
 
-	<div class="rating">
-	
-	    <!-- <tr> <td> Best or 일반 </td>, <td> ${rating_mincho} </td>, <td> ${rating_comment} </td>, <td> ${user_name} </td> </tr> 를 forEach로 돌림 -->
-		<table border="1">
-			<tr>
-				<td style="width: 15%;"> Best Comment </td>
-				<td style="width: 15%;"> <img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"> </td>
-				<td style="width: 60%;"> 꼭 봐라 </td>
-				<td style="width: 10%;"> 김정메 </td>
-			</tr>
-			<tr>
-				<td style="width: 15%;"> Standard </td>
-				<td style="width: 15%;"> <img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"> </td>
-				<td style="width: 60%;"> 그냥 볼만했는데요? </td>
-				<td style="width: 10%;"> 최원준 </td>
-			</tr>
-			<tr>
-				<td style="width: 15%;"> Standard </td>
-				<td style="width: 15%;"> <img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"> </td>
-				<td style="width: 60%;"> 이런걸 누가봐요~ </td>
-				<td style="width: 10%;"> 유지상 </td>
-			</tr>
-			<tr>
-				<td style="width: 15%;"> Standard </td>
-				<td style="width: 15%;"> <img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"> </td>
-				<td style="width: 60%;"> 개망작 </td>
-				<td style="width: 10%;"> 박찬영 </td>
-			</tr>
-			<tr>
-				<td style="width: 15%;"> Standard </td>
-				<td style="width: 15%;"> <img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"><img src="./images/mincho/mincho.jpg" alt="mincho"></td>
-				<td style="width: 60%;"> 좀비는 추천 </td>
-				<td style="width: 10%;"> OOO </td>
-			</tr>
-			<tr>
-				<td style="width: 15%;"> Worst Comment </td>
-				<td style="width: 15%;"> <img src="./images/mincho/mincho.jpg" alt="mincho"> </td>
-				<td style="width: 60%;"> 동물이 안나오잖아 </td>
-				<td style="width: 10%;"> 장XX </td>
-			</tr>
-		</table>
-	
-	</div>
+<jsp:include page="../_rating.jsp"></jsp:include>
 
 	<hr>
 
@@ -146,6 +104,6 @@
 
 </body>
 
-<jsp:include page="${ contextPath }/_footer.jsp"></jsp:include>
+<jsp:include page="../_footer.jsp"></jsp:include>
 
 </html>

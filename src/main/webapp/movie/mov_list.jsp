@@ -34,7 +34,7 @@
 </head>
 
 <header>
-	<jsp:include page="${ contextPath }/_header.jsp"></jsp:include>
+	<jsp:include page="../_header.jsp"></jsp:include>
 </header>
 
 <body>
@@ -87,7 +87,7 @@
 </body>
 
 <footer>
-	<jsp:include page="${ contextPath }/_footer.jsp"></jsp:include>
+	<jsp:include page="../_footer.jsp"></jsp:include>
 </footer>
 
 </html>

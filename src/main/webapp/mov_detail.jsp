@@ -28,7 +28,6 @@
 
 <!-- 담당자 js/css -->
 
-<link rel="stylesheet" href="./css/mov_public.css">
 <link rel="stylesheet" href="./css/mov_detail.css">
 
 </head>
@@ -41,11 +40,7 @@
 
 <div id="mov_detail">
 
-	<hr>
-	
 	<h1> 영화 내용 상세 </h1>
-	
-	<hr>
 	
 	<!-- 영화 정보 -->
 	<div class="movie">

@@ -28,7 +28,6 @@
 
 <!-- 담당자 js/css -->
 
-<link rel="stylesheet" href="./css/mov_public.css">
 <link rel="stylesheet" href="./css/mov_list.css">
 
 </head>
@@ -50,8 +49,8 @@
             <div class="movie">
                 <a href="mov_detail.jsp">
                     <img src="./images/mov_poster/mov_poster_1.jpg" alt="I_am_A_Hero">
+                    <p> 아이 엠 어 히어로 </p>
                 </a>
-                <p> 아이 엠 어 히어로 </p>
             </div>
             <div class="movie">
                 <a href="mov_detail.jsp">

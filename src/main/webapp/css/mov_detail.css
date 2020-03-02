@@ -1,12 +1,16 @@
-<!-- 
+/* 
 
 	담당 : 천세문
 	
 	디자인 수정 예정...
 
- -->
+*/
 
-<!-- 화면 기본 -->
+/* 화면 기본 */
+
+body{
+    background-color: #00ac9a;
+}
 
 #mov_detail{
 	margin: 0; 
@@ -25,15 +29,20 @@ h1{
     background-color:  #00d7c5;
     border-top: 5px solid #ff5365;
     border-bottom: 5px solid #ff5365;
+    text-align: center;
 }
 
-<!-- 영화 관련 -->
+/* 영화 관련 */
 
 .movie{
 	text-align: center;
 }
 
-<!-- 평가 관련 -->
+.movie table{
+	width: 100%;
+}
+
+/* 평가 관련 */
 
 .rating table{
     width: 100%;

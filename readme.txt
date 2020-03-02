@@ -7,10 +7,12 @@ KOSMO7-fin Project
  - H2 ver 1.4.200 (설치 필요, jar는 프로젝트에 구축되어 있음)
  - jquery ver 2.1.3 (js 파일에 있음)
 
-::: DB 셋팅 방법 :::
-1. GIT clone으로 워크스페이스에 프로젝트 다운
-2. 서버에 프로젝트(MINTCHOCO)ADD 후 서버 구동
-3. /mintchoco/db.do 접속 후 설치
+::: 셋팅 방법 :::
+1. STS로 워크스페이스 확보
+2. HTML, CSS, JSP encoding UTF-8로 변경
+3. GIT clone으로 확보된 워크스페이스에 프로젝트 다운
+4. 서버에 프로젝트(MINTCHOCO)ADD 후 서버 구동
+5. /mintchoco/db.do 접속 후 설치
 
 ::: COMMIT 주의 사항 :::
   - target\m2e-wtp\web-resources\META-INF\maven\com.kosmo\mintchoco\pom.properties

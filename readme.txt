@@ -12,6 +12,12 @@ KOSMO7-fin Project
 2. 서버에 프로젝트(MINTCHOCO)ADD 후 서버 구동
 3. /mintchoco/db.do 접속 후 설치
 
+::: COMMIT 주의 사항 :::
+  - target\m2e-wtp\web-resources\META-INF\maven\com.kosmo\mintchoco\pom.properties
+  - target\m2e-wtp\web-resources\META-INF\MANIFEST.MF
+1. 위 두 파일을 항상 체크 해제 후에 COMMIT 해야함
+2. 설정 파일이라 계속 자동으로 내용이 PC 마다 바뀌고 IGNORE도 안먹힘
+
 ::: 프로젝트 안내 :::
 1. 조원 6명
   - 김정호, 박찬영, 유지상, 장세진, 천세문, 최원준

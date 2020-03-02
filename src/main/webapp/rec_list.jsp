@@ -1,42 +1,32 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%
 /*
-	담당 : 천세문
-	
-	기본 화면 완성
-	
+	담당자 : 천세문
 */
 %>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 전체 영화 목록 </title>
-
+<title>FILE_NAME.JSP</title>
 <script src="./js/jquery.2.1.3.min.js"></script>
 <script src="./js/jquery-ui.min.js"></script>
 <script src="./js/jquery.easing.1.3.js"></script>
 <script src="./js/jquery.mousewheel.min.js"></script>
-<script src="./js/public.js"></script>
 <link rel="stylesheet" href="./css/public.css">
-
-<!-- 담당자 js/css -->
+<!-- 담당자 js, css -->
 
 <link rel="stylesheet" href="./css/mov_list.css">
 
+<!-- //담당자 js, css -->
 </head>
-
-<header>
-	<jsp:include page="./_header.jsp"></jsp:include>
-</header>
-
 <body>
+<%@ include file="./_header.jsp" %>
+<!-- 담당자 내용 -->
 
     <h1> 전체 영화 목록 </h1>
 
@@ -83,10 +73,7 @@
         </table>
     </div>
 
+<!-- 담당자 내용 -->
+<%@ include file="./_footer.jsp" %>
 </body>
-
-<footer>
-	<jsp:include page="./_footer.jsp"></jsp:include>
-</footer>
-
 </html>

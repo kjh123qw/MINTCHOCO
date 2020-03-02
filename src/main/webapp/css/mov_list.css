@@ -69,14 +69,16 @@ h1{
 }
 
 .movie a{
-    text-decoration: none;
-}
-
-.movie img{
 	margin: 0 auto;
 	height: 400px;
 	width: 280px;
 	display: block;
+    text-decoration: none;
+}
+
+.movie img{
+	height: 400px;
+	width: 280px;
     cursor: pointer;
     border: 1px solid #008a7b;
 }

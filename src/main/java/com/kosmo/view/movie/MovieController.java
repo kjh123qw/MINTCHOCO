@@ -21,11 +21,11 @@ public class MovieController {
 	public String rank() {
 		return "mov_rank.jsp";
 	}
-	@RequestMapping("/mov_list.do")
+	@RequestMapping("/recommand.do")
 	public String movieList(MovieDAO movieDAO, Model model) {
 		model.addAttribute("movieList", movieDAO.selectMovieList());
 		
-		return "mov_list.jsp";
+		return "rec_list.jsp";
 	}
 	
 }

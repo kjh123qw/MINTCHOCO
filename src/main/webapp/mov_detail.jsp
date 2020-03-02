@@ -32,9 +32,7 @@
 
 </head>
 
-<header>
-	<jsp:include page="./_header.jsp"></jsp:include>
-</header>
+<jsp:include page="./_header.jsp"></jsp:include>
 
 <body>
 
@@ -147,8 +145,6 @@
 
 </body>
 
-<footer>
-	<jsp:include page="./_footer.jsp"></jsp:include>
-</footer>
+<jsp:include page="./_footer.jsp"></jsp:include>
 
 </html>

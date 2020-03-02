@@ -19,7 +19,7 @@
 <script src="./js/jquery.easing.1.3.js"></script>
 <script src="./js/jquery.mousewheel.min.js"></script>
 <script src="./js/public.js"></script>
-<link rel="./css/public.css">
+<link rel="stylesheet" href="./css/public.css">
 <!-- 담당자 js, css -->
 
 <!-- //담당자 js, css -->
@@ -28,7 +28,11 @@
 <%@ include file="./_header.jsp" %>
 <!-- 담당자 내용 -->
 
-
+<h1 class="error-header">Oops! Wrong url!</h1>
+<hr>
+<p class="error-msg">
+	존재하지 않는 주소입니다.
+</p>
 
 <!-- 담당자 내용 -->
 <%@ include file="./_footer.jsp" %>

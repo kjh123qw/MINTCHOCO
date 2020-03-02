@@ -10,7 +10,7 @@
 <% request.setCharacterEncoding("UTF-8"); %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 <header>
-	<ul class="nav-list">
+	<ul id="navList">
 		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
 		<li><a href="${ contextPath }/service.do">서비스 안내</a></li>
 		<li><a href="${ contextPath }/movie-list.do">영화목록</a></li>

@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.kosmo.mintchoco.movie.MovieDAO;
+import com.kosmo.mintchoco.movie.MovieVO;
 
 /*
  * 담당자 : 천세문, 김정호
@@ -20,7 +21,7 @@ public class MovieController {
 	public String rank() {
 		return "mov_rank.jsp";
 	}
-	@RequestMapping("/movie-list.do")
+	@RequestMapping("/mov_list.do")
 	public String movieList(MovieDAO movieDAO, Model model) {
 		model.addAttribute("movieList", movieDAO.selectMovieList());
 		

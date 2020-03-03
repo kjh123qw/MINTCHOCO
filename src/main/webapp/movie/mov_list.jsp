@@ -29,6 +29,7 @@
 
 <!-- 담당자 js/css -->
 
+<script src="${ contextPath }/js/mov_list.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/mov_list.css">
 
 </head>

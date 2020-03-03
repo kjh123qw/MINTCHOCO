@@ -19,10 +19,6 @@
 	html {
 		background-color: #eee;
 	}
-	* {
-		text-align: center;
-		box-sizing: border-box;
-	}
 	table {
 		width: 800px;
 		margin: 0 auto;

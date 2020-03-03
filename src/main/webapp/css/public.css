@@ -1,8 +1,13 @@
+/* 기본 CSS를 작성합니다. (세로모드 모바일 디바이스)
+  기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
+  가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
+
 /* This is Common CSS file. */
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Noto Sans KR', sans-serif; }
 ol, ul { list-style: none; }
 a { outline: 0; text-decoration: none !important; color: #555; cursor: pointer; }
 img { border: 0; }
+
 
 /* ERROR PAGE */
 .error-header {
@@ -41,3 +46,55 @@ header {
     font-size: 24px;
     color: #fff;
 }
+
+footer {
+	width: 100%;
+	height: 500px;
+	background-color: #008a7b;
+	color: white;
+	font-size: 64px;
+	text-align: center;
+	line-height: 500px;
+	
+}
+
+#ratingWrap {
+	width: 100%;
+	height: 400px;
+	background-color: #353535;
+	color: white;
+	font-size: 46px;
+	text-align: center;
+	line-height: 400px;
+}
+
+
+/* 커스텀 태그 */
+.cst-chkbox {
+	width: 25px;
+	height: 25px;
+	cursor: pointer;
+}
+.cst-chkbox-dark {
+	
+}
+
+/* 가로 해상도가 576px 보다 큰 화면에 적용 */
+@media screen and (min-width: 576px) {
+      
+}
+
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
+@media screen and (min-width: 768px) {
+    
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+
+}
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+    
+}
+

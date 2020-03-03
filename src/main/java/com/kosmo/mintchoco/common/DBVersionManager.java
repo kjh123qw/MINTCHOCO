@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.0.1";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.0.2";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -253,7 +253,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://youtu.be/eOTbdg56eW0', " + 
+			"    'eOTbdg56eW0', " + 
 			"    '아이 엠 어 히어로', " + 
 			"    '액션, 모험, 좀비', " + 
 			"    '사토 신스케', " + 
@@ -270,7 +270,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=FMxbzIThWNA', " + 
+			"    'FMxbzIThWNA', " + 
 			"    '존 윅', " + 
 			"    '액션, 모험', " + 
 			"    '데이빗 레이치', " + 
@@ -292,7 +292,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=QY4o16w6XuU&list=PL3m5qREasgOp-uoO7nbS281lzMqmyJVFN', " + 
+			"    'QY4o16w6XuU', " + 
 			"    '킹스 맨', " + 
 			"    '액션, 모험, 드라마', " + 
 			"    'Matthew Vaughn', " + 
@@ -309,7 +309,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=mFoCCX39rS4', " + 
+			"    'mFoCCX39rS4', " + 
 			"    '메카닉', " + 
 			"    '액션, 모험', " + 
 			"    '사이먼 웨스트', " + 
@@ -326,7 +326,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=Brl96EVxixI', " + 
+			"    'Brl96EVxixI', " + 
 			"    '괴물의 아이', " + 
 			"    '액션, 모험, 애니메이션', " + 
 			"    '호소다 마모루', " + 
@@ -346,7 +346,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=daObnmlsn9g', " + 
+			"    'daObnmlsn9g', " + 
 			"    '초능력자', " + 
 			"    '드라마', " + 
 			"    '김민석', " + 
@@ -366,7 +366,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=wthJe50uFU4', " + 
+			"    'wthJe50uFU4', " + 
 			"    '부산행', " + 
 			"    '액션, 모험, 드라마', " + 
 			"    '연상호', " + 
@@ -383,7 +383,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=jRCow6UeRZU', " + 
+			"    'jRCow6UeRZU', " + 
 			"    '워 크래프트', " + 
 			"    '액션, 모험', " + 
 			"    '던칸 존스', " + 
@@ -400,7 +400,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=wxYAg7to52A', " + 
+			"    'wxYAg7to52A', " + 
 			"    '황해', " + 
 			"    '범죄, 미스테리, 서스펜스', " + 
 			"    '나홍진', " + 
@@ -419,7 +419,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=eIyDOXc1fS4', " + 
+			"    'eIyDOXc1fS4', " + 
 			"    '존 윅 2', " + 
 			"    '액션, 모험, 범죄', " + 
 			"    '데이빗 레이치', " + 
@@ -440,7 +440,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=2M3tvUeQAVA', " + 
+			"    '2M3tvUeQAVA', " + 
 			"    '시카리오', " + 
 			"    '미스테리, 서스펜스, 스릴러', " + 
 			"    '드니 빌뇌브', " + 
@@ -459,7 +459,7 @@ public class DBVersionManager {
 			"INSERT INTO MOVIE VALUES( " + 
 			"    MOVIE_SEQ.NEXTVAL, " + 
 			"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
-			"    'https://www.youtube.com/watch?v=pwYfmrbdkIw', " + 
+			"    'pwYfmrbdkIw', " + 
 			"    '인시던트', " + 
 			"    '공상과학, 스릴러', " + 
 			"    '아이작 에즈반', " + 

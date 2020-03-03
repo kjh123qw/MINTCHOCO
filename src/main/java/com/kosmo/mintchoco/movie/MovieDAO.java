@@ -20,6 +20,7 @@ public class MovieDAO {
 	
 	// 쿼리
 	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
+	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
 	
 	// 메소드
 	public List<MovieVO> selectMovieList() {
@@ -54,5 +55,42 @@ public class MovieDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 		return movieList;
+	}
+	
+	// 메소드
+	public MovieVO selectOneMovie(String movieNuber) {
+		
+		MovieVO movieVO = new MovieVO();
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(SELECT_MOVIE_ONE);
+			stmt.setString(1, movieNuber);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				
+				movieVO.setMovieNumber(rs.getInt("movie_number"));
+				movieVO.setMoviePoster(rs.getString("movie_poster"));
+				movieVO.setMovieTeaser(rs.getString("movie_teaser"));
+				movieVO.setMovieTitle(rs.getString("movie_title"));
+				movieVO.setMovieKind(rs.getString("movie_kind"));
+				movieVO.setMovieDirector(rs.getString("movie_director"));
+				movieVO.setMovieActor(rs.getString("movie_actor"));
+				movieVO.setMovieGrade(rs.getString("movie_grade"));
+				movieVO.setMovieTime(rs.getString("movie_time"));
+				movieVO.setMovieDate(rs.getString("movie_date"));
+				movieVO.setMovieYoutubeUrl(rs.getString("movie_youtube_url"));
+				movieVO.setMovieNaverUrl(rs.getString("movie_naver_url"));
+				movieVO.setMovieIndate(rs.getString("movie_indate"));
+				movieVO.setMovieContent(rs.getString("movie_content"));
+			}
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return movieVO;
 	}
 }

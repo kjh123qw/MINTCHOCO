@@ -8,7 +8,5 @@
 %>
 
 <footer>
-	<div id="footer">
-		
-	</div>
+	Footer가 들어갈 곳입니다.
 </footer>

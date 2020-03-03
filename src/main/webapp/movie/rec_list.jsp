@@ -22,7 +22,8 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
-<link rel="stylesheet" href="${ contextPath }/css/mov_list.css">
+<script src="${ contextPath }/js/rec_list.js"></script>
+<link rel="stylesheet" href="${ contextPath }/css/rec_list.css">
 
 <!-- //담당자 js, css -->
 </head>

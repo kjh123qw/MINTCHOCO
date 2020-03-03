@@ -1,0 +1,572 @@
+/* 
+
+	담당 : 천세문
+	
+	디자인 수정 예정...
+
+*/
+
+/* 화면 기본 */
+
+body{
+    background-color: #00ac9a;
+}
+
+#mov_list{
+    position: relative;
+    width: 100%;
+    height: 480px;
+    overflow-x: hidden;
+    background-color: #00ac9a;
+}
+
+h1{
+    width: 100%;
+    color: #ff5365;
+    background-color:  #00d7c5;
+    border-top: 5px solid #ff5365;
+    border-bottom: 5px solid #ff5365;
+    text-align: center;
+}
+
+/* 영화 목록 바탕 */
+
+.bg {
+    width: 6000px;
+    overflow: hidden;
+    background-color: #000;
+}
+
+/* 좌우 이동 버튼 */
+
+#l_button, #r_button {
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    top: 175px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #593e36;
+}
+
+#l_button{
+    left: 40px;
+}
+
+ #r_button{
+    right: 40px;
+}
+
+/* 영화 관련 */
+
+.movie{
+    height: 450px;
+    width: 480px;
+    float: left;
+    overflow: hidden;
+    background-color: #565656;
+    border: 1px solid #00ac9a;
+}
+
+.movie a{
+	margin: 0 auto;
+	height: 400px;
+	width: 280px;
+	display: block;
+    text-decoration: none;
+}
+
+.movie img{
+	height: 400px;
+	width: 280px;
+    cursor: pointer;
+    border: 1px solid #008a7b;
+}
+
+.movie p{
+	height: 50px;
+	width: 480px;
+    cursor: pointer;
+    border: 1px solid #565656;
+    background-color: #008a7b;
+    color: #00d7cb;
+    font-size: 30px;
+    text-align: center;
+}
+
+/* 밑 부분 버튼 */
+
+.mov_button{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    background-color: #00ac9a;
+}
+
+.mov_button a{
+    margin: 30px;
+    height: 80px;
+    width: 400px;
+    float: left;    
+    font-size: 50px;
+    text-decoration: none;
+    background-color: #593e36;
+    border: 5px solid #6b5047;
+    color: #8b6254;
+}
+
+/* 가로 해상도가 576px 보다 큰 화면에 적용 */
+@media screen and (min-width: 576px) {
+	
+/* 화면 기본 */
+
+	body{
+	    background-color: #00ac9a;
+	}
+	
+	#mov_list{
+	    position: relative;
+	    width: 100%;
+	    height: 480px;
+	    overflow-x: hidden;
+	    background-color: #00ac9a;
+	}
+	
+	h1{
+	    width: 100%;
+	    color: #ff5365;
+	    background-color:  #00d7c5;
+	    border-top: 5px solid #ff5365;
+	    border-bottom: 5px solid #ff5365;
+	    text-align: center;
+	}
+	
+	/* 영화 목록 바탕 */
+	
+	.bg {
+	    width: 6000px;
+	    overflow: hidden;
+	    background-color: #000;
+	}
+	
+	/* 좌우 이동 버튼 */
+	
+	#l_button, #r_button {
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 175px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #593e36;
+	}
+	
+	#l_button{
+	    left: 40px;
+	}
+	
+	 #r_button{
+	    right: 40px;
+	}
+	
+	/* 영화 관련 */
+	
+	.movie{
+	    height: 450px;
+	    width: 480px;
+	    float: left;
+	    overflow: hidden;
+	    background-color: #565656;
+	    border: 1px solid #00ac9a;
+	}
+	
+	.movie a{
+		margin: 0 auto;
+		height: 400px;
+		width: 280px;
+		display: block;
+	    text-decoration: none;
+	}
+	
+	.movie img{
+		height: 400px;
+		width: 280px;
+	    cursor: pointer;
+	    border: 1px solid #008a7b;
+	}
+	
+	.movie p{
+		height: 50px;
+		width: 480px;
+	    cursor: pointer;
+	    border: 1px solid #565656;
+	    background-color: #008a7b;
+	    color: #00d7cb;
+	    font-size: 30px;
+	    text-align: center;
+	}
+	
+	/* 밑 부분 버튼 */
+	
+	.mov_button{
+	    width: 100%;
+	    margin: 0 auto;
+	    text-align: center;
+	    background-color: #00ac9a;
+	}
+	
+	.mov_button a{
+	    margin: 30px;
+	    height: 80px;
+	    width: 400px;
+	    float: left;    
+	    font-size: 50px;
+	    text-decoration: none;
+	    background-color: #593e36;
+	    border: 5px solid #6b5047;
+	    color: #8b6254;
+	}
+      
+}
+
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
+@media screen and (min-width: 768px) {
+
+	/* 화면 기본 */
+	
+	body{
+	    background-color: #00ac9a;
+	}
+	
+	#mov_list{
+	    position: relative;
+	    width: 100%;
+	    height: 480px;
+	    overflow-x: hidden;
+	    background-color: #00ac9a;
+	}
+	
+	h1{
+	    width: 100%;
+	    color: #ff5365;
+	    background-color:  #00d7c5;
+	    border-top: 5px solid #ff5365;
+	    border-bottom: 5px solid #ff5365;
+	    text-align: center;
+	}
+	
+	/* 영화 목록 바탕 */
+	
+	.bg {
+	    width: 6000px;
+	    overflow: hidden;
+	    background-color: #000;
+	}
+	
+	/* 좌우 이동 버튼 */
+	
+	#l_button, #r_button {
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 175px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #593e36;
+	}
+	
+	#l_button{
+	    left: 40px;
+	}
+	
+	 #r_button{
+	    right: 40px;
+	}
+	
+	/* 영화 관련 */
+	
+	.movie{
+	    height: 450px;
+	    width: 480px;
+	    float: left;
+	    overflow: hidden;
+	    background-color: #565656;
+	    border: 1px solid #00ac9a;
+	}
+	
+	.movie a{
+		margin: 0 auto;
+		height: 400px;
+		width: 280px;
+		display: block;
+	    text-decoration: none;
+	}
+	
+	.movie img{
+		height: 400px;
+		width: 280px;
+	    cursor: pointer;
+	    border: 1px solid #008a7b;
+	}
+	
+	.movie p{
+		height: 50px;
+		width: 480px;
+	    cursor: pointer;
+	    border: 1px solid #565656;
+	    background-color: #008a7b;
+	    color: #00d7cb;
+	    font-size: 30px;
+	    text-align: center;
+	}
+	
+	/* 밑 부분 버튼 */
+	
+	.mov_button{
+	    width: 100%;
+	    margin: 0 auto;
+	    text-align: center;
+	    background-color: #00ac9a;
+	}
+	
+	.mov_button a{
+	    margin: 30px;
+	    height: 80px;
+	    width: 400px;
+	    float: left;    
+	    font-size: 50px;
+	    text-decoration: none;
+	    background-color: #593e36;
+	    border: 5px solid #6b5047;
+	    color: #8b6254;
+	}
+		
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+	
+	/* 화면 기본 */
+	
+	body{
+	    background-color: #00ac9a;
+	}
+	
+	#mov_list{
+	    position: relative;
+	    width: 100%;
+	    height: 480px;
+	    overflow-x: hidden;
+	    background-color: #00ac9a;
+	}
+	
+	h1{
+	    width: 100%;
+	    color: #ff5365;
+	    background-color:  #00d7c5;
+	    border-top: 5px solid #ff5365;
+	    border-bottom: 5px solid #ff5365;
+	    text-align: center;
+	}
+	
+	/* 영화 목록 바탕 */
+	
+	.bg {
+	    width: 6000px;
+	    overflow: hidden;
+	    background-color: #000;
+	}
+	
+	/* 좌우 이동 버튼 */
+	
+	#l_button, #r_button {
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 175px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #593e36;
+	}
+	
+	#l_button{
+	    left: 40px;
+	}
+	
+	 #r_button{
+	    right: 40px;
+	}
+	
+	/* 영화 관련 */
+	
+	.movie{
+	    height: 450px;
+	    width: 480px;
+	    float: left;
+	    overflow: hidden;
+	    background-color: #565656;
+	    border: 1px solid #00ac9a;
+	}
+	
+	.movie a{
+		margin: 0 auto;
+		height: 400px;
+		width: 280px;
+		display: block;
+	    text-decoration: none;
+	}
+	
+	.movie img{
+		height: 400px;
+		width: 280px;
+	    cursor: pointer;
+	    border: 1px solid #008a7b;
+	}
+	
+	.movie p{
+		height: 50px;
+		width: 480px;
+	    cursor: pointer;
+	    border: 1px solid #565656;
+	    background-color: #008a7b;
+	    color: #00d7cb;
+	    font-size: 30px;
+	    text-align: center;
+	}
+	
+	/* 밑 부분 버튼 */
+	
+	.mov_button{
+	    width: 100%;
+	    margin: 0 auto;
+	    text-align: center;
+	    background-color: #00ac9a;
+	}
+	
+	.mov_button a{
+	    margin: 30px;
+	    height: 80px;
+	    width: 400px;
+	    float: left;    
+	    font-size: 50px;
+	    text-decoration: none;
+	    background-color: #593e36;
+	    border: 5px solid #6b5047;
+	    color: #8b6254;
+	}
+
+}
+
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+	
+	/* 화면 기본 */
+	
+	body{
+	    background-color: #00ac9a;
+	}
+	
+	#mov_list{
+	    position: relative;
+	    width: 100%;
+	    height: 480px;
+	    overflow-x: hidden;
+	    background-color: #00ac9a;
+	}
+	
+	h1{
+	    width: 100%;
+	    color: #ff5365;
+	    background-color:  #00d7c5;
+	    border-top: 5px solid #ff5365;
+	    border-bottom: 5px solid #ff5365;
+	    text-align: center;
+	}
+	
+	/* 영화 목록 바탕 */
+	
+	.bg {
+	    width: 6000px;
+	    overflow: hidden;
+	    background-color: #000;
+	}
+	
+	/* 좌우 이동 버튼 */
+	
+	#l_button, #r_button {
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 175px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #593e36;
+	}
+	
+	#l_button{
+	    left: 40px;
+	}
+	
+	 #r_button{
+	    right: 40px;
+	}
+	
+	/* 영화 관련 */
+	
+	.movie{
+	    height: 450px;
+	    width: 480px;
+	    float: left;
+	    overflow: hidden;
+	    background-color: #565656;
+	    border: 1px solid #00ac9a;
+	}
+	
+	.movie a{
+		margin: 0 auto;
+		height: 400px;
+		width: 280px;
+		display: block;
+	    text-decoration: none;
+	}
+	
+	.movie img{
+		height: 400px;
+		width: 280px;
+	    cursor: pointer;
+	    border: 1px solid #008a7b;
+	}
+	
+	.movie p{
+		height: 50px;
+		width: 480px;
+	    cursor: pointer;
+	    border: 1px solid #565656;
+	    background-color: #008a7b;
+	    color: #00d7cb;
+	    font-size: 30px;
+	    text-align: center;
+	}
+	
+	/* 밑 부분 버튼 */
+	
+	.mov_button{
+	    width: 100%;
+	    margin: 0 auto;
+	    text-align: center;
+	    background-color: #00ac9a;
+	}
+	
+	.mov_button a{
+	    margin: 30px;
+	    height: 80px;
+	    width: 400px;
+	    float: left;    
+	    font-size: 50px;
+	    text-decoration: none;
+	    background-color: #593e36;
+	    border: 5px solid #6b5047;
+	    color: #8b6254;
+	}
+    
+}

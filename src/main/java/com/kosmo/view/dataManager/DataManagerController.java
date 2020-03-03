@@ -38,4 +38,9 @@ public class DataManagerController {
 		dbvm.dropDatabase();
 		return "redirect:db.do";
 	}
+	
+	@RequestMapping("/tag.do")
+	public String moveTagPage() {
+		return "_ex_input_tag.jsp";
+	}
 }

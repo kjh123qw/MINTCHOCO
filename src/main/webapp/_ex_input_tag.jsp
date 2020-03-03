@@ -21,6 +21,7 @@
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
 <script src="${ contextPath }/js/jquery.mousewheel.min.js"></script>
 <script src="${ contextPath }/js/public.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 <style>
@@ -34,7 +35,7 @@
 	h1 {
 		text-align: center;
 	}
-	h3 {
+	h2 {
 		text-align: center;
 	}
 	table {
@@ -66,7 +67,7 @@
 </p>
 <hr>
 <div class="ex-tag-wrap">
-	<h3>checkbox</h3>
+	<h2>checkbox</h2>
 	<div class="ex-tag-box">
 		<table border="1" class="tag-table">
 			<tr>
@@ -75,12 +76,12 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="checkbox" class="cst-chkbox-white-exname1">
+					<input type="checkbox" class="cst-chkbox-white-testID1">
 				</td>
 				<td style="text-align: left;" rowspan="2">
 					<table class="tag-explain">
 						<tr>
-							<th>cst-chkbox-</th>
+							<th>cst-chkbox</th>
 							<td>커스텀 체크박스 지정</td>
 						</tr>
 						<tr>
@@ -88,7 +89,7 @@
 							<td>색상<b><i>[dark / white]</i></b></td>
 						</tr>
 						<tr>
-							<th><i>exname1</i></th>
+							<th><i>testID1</i></th>
 							<td>자신이 정한 클래스명</td>
 						</tr>
 					</table>
@@ -96,17 +97,17 @@
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;input type="checkbox" class="cst-chkbox-<i><b>white</b></i>-<i><b>exname1</b></i>"&gt;
+					&lt;input type="checkbox" class="cst-chkbox-<i><b>white</b></i>-<i><b>testID1</b></i>"&gt;
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="checkbox" class="cst-chkbox-dark-exname2">
+					<input type="checkbox" class="cst-chkbox-dark-testID2">
 				</td>
 				<td style="text-align: left;" rowspan="2">
 					<table class="tag-explain">
 						<tr>
-							<th>cst-chkbox-</th>
+							<th>cst-chkbox</th>
 							<td>커스텀 체크박스 지정</td>
 						</tr>
 						<tr>
@@ -114,7 +115,7 @@
 							<td>색상<b><i>[dark / white]</i></b></td>
 						</tr>
 						<tr>
-							<th><i>exname2</i></th>
+							<th><i>testID2</i></th>
 							<td>자신이 정한 클래스명</td>
 						</tr>
 					</table>
@@ -122,35 +123,34 @@
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;input type="checkbox" class="cst-chkbox-<i><b>dark</b></i>-<i><b>exname2</b></i>"&gt;
+					&lt;input type="checkbox" class="cst-chkbox-<i><b>dark</b></i>-<i><b>testID2</b></i>"&gt;
 				</td>
 			</tr>
 			<tr>
 				<td>
-					<input type="checkbox" class="cst-chkbox-dark-exname3">
-					<span class="cst-chktext-150-exname3">누르면 체크박스가 체크 됨</span>
+					<input type="checkbox" class="cst-chkbox-white">
+					<span class="cst-chktext-250-testID3">누르면 체크박스가 체크 됨</span>
 				</td>
 				<td style="text-align: left;" rowspan="2">
 					<table class="tag-explain">
 						<tr>
-							<th>cst-chkbox-</th>
-							<td>커스텀 체크박스 지정</td>
+							<th>cst-chktext</th>
+							<td>커스텀 체크박스 텍스트 지정</td>
 						</tr>
 						<tr>
-							<th><i>150</i></th>
+							<th><i>250</i></th>
 							<td>텍스트의 가로 사이즈</td>
 						</tr>
 						<tr>
-							<th><i>exname3</i></th>
-							<td>자신이 정한 클래스명 체크 박스와 매핑 시켜줘야 함</td>
+							<td colspan="2"><i><b>cst-chktext는 대상 input 바로 밑에 존재해야함</b></i></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;input type="checkbox" class="cst-chkbox-<i><b>white</b></i>-<i><b>exname3</b></i>"&gt;<br>
-					&lt;span class="cst-chktext-<i><b>150</b></i>-<i><b>exname3</b></i>"&gt;
+					&lt;input type="checkbox" class="cst-chkbox-white-testID3"&gt;<br>
+					&lt;span class="<i><b>cst-chktext</b></i>-<i><b>250</b></i>"&gt;누르면 체크박스가 체크 됨&lt;/span&gt;
 				</td>
 			</tr>
 		</table>

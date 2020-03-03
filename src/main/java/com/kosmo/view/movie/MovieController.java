@@ -1,5 +1,7 @@
 package com.kosmo.view.movie;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,8 +30,9 @@ public class MovieController {
 		return "rec_list.jsp";
 	}
 	@RequestMapping("/movie/detail.do")
-	public String movieDetail(MovieDAO movieDAO, Model model) {
-		model.addAttribute("movieDetail", movieDAO.selectMovieList());
+	public String movieDetail(MovieDAO movieDAO, Model model, HttpServletRequest request) {
+		
+		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 		
 		return "mov_detail.jsp";
 	}

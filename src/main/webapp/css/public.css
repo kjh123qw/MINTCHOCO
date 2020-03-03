@@ -50,13 +50,22 @@ header {
 footer {
 	width: 100%;
 	height: 500px;
-	background-color: #565656;
+	background-color: #eee;
+	color: #333;
+	text-size: 34px;
+	text-align: center;
+	line-height: 500px;
+	
 }
 
 #ratingWrap {
 	width: 100%;
-	height: 500px;
-	background-color: #565656;
+	height: 400px;
+	background-color: #353535;
+	color: white;
+	text-size: 34px;
+	text-align: center;
+	line-height: 400px;
 }
 
 

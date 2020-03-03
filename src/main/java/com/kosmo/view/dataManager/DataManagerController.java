@@ -41,7 +41,6 @@ public class DataManagerController {
 	
 	@RequestMapping("/tag.do")
 	public String moveTagPage() {
-		System.out.println("test");
 		return "_ex_input_tag.jsp";
 	}
 }

@@ -27,7 +27,7 @@
 <!-- //담당자 js, css -->
 </head>
 <body>
-<jsp:include page="../_header.jsp"></jsp:include>
+<jsp:include page="./_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
 <h1>커스텀 태그 예제입니다.</h1>
@@ -62,7 +62,7 @@
 							<th><b><i>color</i></b></th>
 							<td>색상선택<br><b><i>dark, white</i></b></td>
 						</tr>
-					</table>`
+					</table>
 				</td>
 			</tr>
 			<tr>
@@ -89,6 +89,6 @@
 </div>
 
 <!-- 담당자 내용 -->
-<jsp:include page="../_footer.jsp"></jsp:include>
+<jsp:include page="./_footer.jsp"></jsp:include>
 </body>
 </html>

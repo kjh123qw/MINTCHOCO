@@ -6,3 +6,7 @@
 	담당자 : 김정호
 */
 %>
+
+<div id="ratingWrap">
+	rating box 입니다.
+</div>

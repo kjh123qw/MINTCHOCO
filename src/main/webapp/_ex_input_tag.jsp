@@ -40,7 +40,7 @@
 	<div class="ex-tag-box">
 		<table>
 			<tr>
-				<th>태그 타입</th>
+				<th>타입</th>
 				<th>클래스 명</th>
 				<th>클래스 명 설명</th>
 				<th>예시</th>
@@ -62,7 +62,7 @@
 							<th><b><i>color</i></b></th>
 							<td>색상선택<br><b><i>dark, white</i></b></td>
 						</tr>
-					</table>
+					</table>`
 				</td>
 			</tr>
 			<tr>

@@ -2,67 +2,220 @@
  *  담당자 : 김정호
  */
 
-$(function(){
-	$("input[class*=cst-chkbox-]").each((index, item) => {
+$(() => {
+	var selectedBg = '#008a7b';
+	var selectedFontColor = '#fff';
+	var normalBg = '#ddd';
+	var normalBorder = '#bbb';
+	var normalFontColor = '#555';
+	
+//	checkbox tag
+	$('div[class*=cst-chkbox-st]').each((index, item) => {
+		var trgClassArr = $(item).attr('class').split('-');
+		var tagStyle = trgClassArr[2];
+		var inputArr = $(item).children('input');
 		
-		var trgClass = $(item).attr("class");
-		var trgClassArr = trgClass.split("-");
-		var trgId = trgClassArr[3];
-		var tagColor = trgClassArr[2];
-		var nextObj = $(item).next();
-		var nextTagClassArr;
-		var divChkBoxTextTag = "";
-		
-		if(nextObj.attr("class") != undefined) {
-			nextTagClassArr = nextObj.attr("class").split("-");
-			if(nextTagClassArr.length > 3) {
-				if(nextTagClassArr[0] + "-" + nextTagClassArr[1] == "cst-chktext") {
-					divChkBoxTextTag = "<div class='cst-chktext' style='width: " + nextTagClassArr[2] + "px'>" + nextObj.html() + "</div>";
-					nextObj.remove();
-				};
-			}
-		}
-		
-		$(item).attr("class", "cst-chkbox-" + tagColor + " " + trgId).attr("style", "display: none");
-		$(item).after("<div class='cst-chkbox-wrap-" + trgId + "'><div class='cst-chkbox-" + tagColor + " cst-chkbox-" + trgId + "'></div>" + divChkBoxTextTag + "</div>");
+		inputArr.each((indexInp, itemInp) => {
+			var textObj = $(itemInp).next();
+			var textClassArr;
+			var textHtml;
 
-		if($(item).is(':checked')) {
-			$(".cst-chkbox-" + trgId).html("<i class='fas fa-check'></i>").css({
-				"background-color":"#008a7b",
-				"border":"1px solid #008a7b"
+			var tagWrap = $('<div />', {
+				'class': 'cst-chkbox-wrap-' + tagStyle
 			});
-		} else {
-			if(tagColor == "dark")
-				$(".cst-chkbox-" + trgId).html("").css({
-					"background-color":"#555",
-					"border":"1px solid #333"
+			
+			var cstBoxHtml = $('<div />', {
+				'class': 'cst-chkbox-box',
+				'click': () => {
+					if($(itemInp).is(':checked')) {
+						$(itemInp).prop('checked', false);
+						$(this).html('').css({
+							'background-color':normalBg,
+							'border':'1px solid ' + normalBorder
+						});
+					} else {
+						$(itemInp).prop('checked', true);
+						$(this).html("<i class='fas fa-check'></i>").css({
+							'background-color':selectedBg,
+							'border':'1px solid ' + selectedBg
+						});
+					}
+				}
+			});
+			
+			if(textObj.prop('tagName') == 'SPAN') {
+				if(textObj.attr('class') != undefined) {
+					textClassArr = textObj.attr('class').split('-');
+					if(textClassArr.length == 2) {
+						textHtml = $('<div />', {
+							'class': 'cst-chkbox-text',
+							'style': 'width: ' + textClassArr[1] + 'px',
+							'text': textObj.html(),
+							'click': () => {
+								if($(itemInp).is(':checked')) {
+									$(itemInp).prop('checked', false);
+									$(cstBoxHtml).html('').css({
+										'background-color':normalBg,
+										'border':'1px solid ' + normalBorder
+									});
+								} else {
+									$(itemInp).prop('checked', true);
+									$(cstBoxHtml).html("<i class='fas fa-check'></i>").css({
+										'background-color':selectedBg,
+										'border':'1px solid ' + selectedBg
+									});
+								}
+							}
+						});
+						textObj.remove();
+					}
+				}
+			}
+			$(itemInp).attr('style', 'display: none');
+			$(item).append(tagWrap);
+			tagWrap.append(cstBoxHtml).append(textHtml);
+			if($(itemInp).is(':checked')) {
+				$(cstBoxHtml).html("<i class='fas fa-check'></i>").css({
+					'background-color':selectedBg,
+					'border':'1px solid ' + selectedBg
 				});
-			else
-				$(".cst-chkbox-" + trgId).html("").css({
-					"background-color":"#ccc",
-					"border":"1px solid #aaa"
-				});
-		}
-		$(".cst-chkbox-wrap-" + trgId).children().bind("click", () => {
-			if($(item).is(':checked')) {
-				$(item).prop('checked', false);
-				if(tagColor == "dark")
-					$(".cst-chkbox-" + trgId).html("").css({
-						"background-color":"#555",
-						"border":"1px solid #333"
-					});
-				else
-					$(".cst-chkbox-" + trgId).html("").css({
-						"background-color":"#ccc",
-						"border":"1px solid #aaa"
-					});
 			} else {
-				$(item).prop('checked', true);
-				$(".cst-chkbox-" + trgId).html("<i class='fas fa-check'></i>").css({
-					"background-color":"#008a7b",
-					"border":"1px solid #008a7b"
+				$(cstBoxHtml).html('').css({
+					'background-color':normalBg,
+					'border':'1px solid ' + normalBorder
 				});
 			}
+		});
+	});
+	
+//	radio tag
+	$('div[class*=cst-radio-st]').each((index, item) => {
+		var trgClassArr = $(item).attr('class').split('-');
+		var tagStyle = trgClassArr[2];
+		var inputArr = $(item).children('input');
+		var width = 0;
+
+		var checkBtn = () => {  // check radio btn
+			inputArr.each((idx, ipt) => {
+				if($(ipt).is(':checked')) {
+					$(ipt.divBox).css({
+						'width':width,
+						'background-color':selectedBg,
+						'border':'1px solid ' + selectedBg,
+						'color':selectedFontColor,
+						'font-weight':'bold'
+					});
+				} else {
+					$(ipt.divBox).css({
+						'width':width,
+						'background-color':normalBg,
+						'border':'',
+						'color':normalFontColor,
+						'font-weight':''
+					});
+				}
+			})
+		}
+		
+		inputArr.each((indexInp, itemInp) => {
+			var textObj = $(itemInp).next();
+			var textClassArr;
+			var textHtml;
+			
+			var cstBoxHtml = $('<div />', {
+				'class': 'cst-radio-box',
+				'click': () => {
+					if(!$(itemInp).is(':checked'))
+						$(itemInp).prop('checked', true);
+					checkBtn();
+				}
+			});
+			
+			itemInp.divBox = cstBoxHtml;
+			
+			if(textObj.prop('tagName') == 'SPAN') {
+				if(textObj.attr('class') != undefined) {
+					textClassArr = textObj.attr('class').split('-');
+					if(textClassArr.length == 2) {
+						cstBoxHtml.append(textObj.html());
+						textObj.remove();
+						width = textClassArr[1]
+					}
+				}
+			}
+			$(itemInp).attr('style', 'display: none');
+			$(item).append(cstBoxHtml);
+			if($(itemInp).is(':checked')) {
+				$(cstBoxHtml).css({
+					'width':width,
+					'background-color':selectedBg,
+					'border':'1px solid ' + selectedBg,
+					'color':selectedFontColor,
+					'font-weight':'bold'
+				});
+			} else {
+				$(cstBoxHtml).css({
+					'width':width,
+					'background-color':normalBg,
+					'border':'',
+					'color':normalFontColor,
+					'font-weight':''
+				});
+			}
+		});
+	});
+
+//	input text, password tag
+	$('div[class*=cst-text-st]').each((index, item) => {
+		var trgClassArr = $(item).attr('class').split('-');
+		var tagStyle = trgClassArr[2];
+		var inputArr = $(item).children('input');
+		
+		inputArr.each((indexInp, itemInp) => {
+			var textObj = $(itemInp).next();
+			var textWidth = $(itemInp).attr('class').split('-')[1];
+			var textClassArr;
+			var textHtml;
+
+			var tagWrap = $('<div />', {
+				'class': 'cst-text-wrap-' + tagStyle
+			});
+			
+			var cstBoxHtml = $('<div />', {
+				'class': 'cst-text-box',
+				'style': 'width: ' + textWidth + 'px'
+			});
+			
+			if(textObj.prop('tagName') == 'SPAN') {
+				if(textObj.attr('class') != undefined) {
+					textClassArr = textObj.attr('class').split('-');
+					if(textClassArr.length == 2) {
+						textHtml = $('<div />', {
+							'class': 'cst-text-label',
+							'style': 'width: ' + textClassArr[1] + 'px',
+							'text': textObj.html(),
+							'click': () => {
+								$(itemInp).focus();
+							}
+						});
+						textObj.remove();
+					}
+				}
+			}
+			$(itemInp).css({'width': textWidth + 'px'});
+			$(item).append(tagWrap);
+			tagWrap.append(textHtml).append(cstBoxHtml);
+			cstBoxHtml.append(itemInp);
+			$(itemInp).focus(() => {
+				$(cstBoxHtml).stop().animate({
+					'background-color': selectedBg
+				}, 200);
+			})
+			$(itemInp).blur(() => {
+				$(cstBoxHtml).stop().animate({
+					'background-color': ''
+				}, 200);
+			});
 		});
 	});
 });

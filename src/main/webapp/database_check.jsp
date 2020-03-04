@@ -23,6 +23,7 @@
 		width: 800px;
 		margin: 0 auto;
 	}
+	h1, h2 { text-align: center; }
 	.infotbl th, .infotbl td {
 		width: 400px;
 		height: 28px;
@@ -74,9 +75,9 @@
 	<hr>
 	<table border="1" class="infotbl">
 		<tr>
-			<td colspan="2">
+			<th colspan="2">
 				현재 사용 DB 는 <b>H2(1.4.200)</b> 입니다.
-			</td>
+			</th>
 		</tr>
 		<tr>
 			<th>드라이버 클래스</th>
@@ -100,7 +101,7 @@
 		<c:choose>
 			<c:when test="${ nowVersion eq 'NotRuning' }">
 				<tr>
-					<td>
+					<td style="text-align: center;">
 						<span>DB를 실행시켜 주세요.</span>
 					</td>
 				</tr>
@@ -111,11 +112,11 @@
 					<th>최신 릴리즈 버전</th>
 				</tr>
 				<tr>
-					<td>${ nowVersion }</td>
-					<td>${ curVersion }</td>
+					<td style="text-align: center;">${ nowVersion }</td>
+					<td style="text-align: center;">${ curVersion }</td>
 				</tr>
 				<tr>
-					<td colspan="2">
+					<td colspan="2" style="text-align: center;">
 						<c:choose>
 							<c:when test="${ nowVersion eq curVersion }">
 								<span>DB가 최신버전입니다.</span>
@@ -129,12 +130,12 @@
 				<tr>
 					<c:choose>
 						<c:when test="${ nowVersion eq 'None' }">
-							<td colspan="2">
+							<td colspan="2" style="text-align: center;">
 								<span>DB가 설치되어 있지 않습니다.</span>
 							</td>
 						</c:when>
 						<c:otherwise>
-							<td colspan="2">
+							<td colspan="2" style="text-align: center;">
 								<input type="button" value="DB 전체 삭제" class="delete" onclick="submitDelete();">
 							</td>
 						</c:otherwise>

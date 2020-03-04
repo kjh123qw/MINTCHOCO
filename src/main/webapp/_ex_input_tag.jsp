@@ -25,28 +25,26 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 <style>
-	html {
-		background-color: #eee;
-	}
-	.ex-tag-wrap {
-		width: 1200px;
-		margin: 0 auto;
-	}
-	h1 {
-		text-align: center;
-	}
-	h2 {
-		text-align: center;
-	}
+	html { background-color: #eee; }
+	.ex-tag-wrap { width: 1200px; margin: 0 auto; }
+	h1, h2 { text-align: center; margin: 10px 0; }
 	table {
-		width: 100%;
+		width: 100%; 
+		border-spacing: 0;
+	    -webkit-border-horizontal-spacing: 0;
+	    -webkit-border-vertical-spacing: 0;
+    }
+	.tag-table > tbody > tr:nth-of-type(1) > th:nth-of-type(1) {
+		width: 6%;
 	}
-	.tag-table > tbody > tr > th:nth-of-type(1), .tag-table > tbody > tr > td:nth-of-type(1) {
-		width: 50%;
-		text-align: center;
+	.tag-table > tbody > tr:nth-of-type(1) > th:nth-of-type(2) {
+		width: 52%;
 	}
-	.tag-table > tbody > tr > th:nth-of-type(2), .tag-table > tbody > tr > td:nth-of-type(2) {
-		width: 50%;
+	.tag-table > tbody > tr:nth-of-type(1) > th:nth-of-type(3) {
+		width: 42%;
+	}
+	.tag-table > tbody > tr > td:nth-of-type(1) {
+		padding: 15px;
 	}
 	.tag-table > tbody > tr > th, .tag-table > tbody > tr > td {
 		padding: 5px;
@@ -54,6 +52,10 @@
 	.tag-explain > tbody > tr > th {
 		width: 120px;
 	}
+	.tag-explain > tbody > tr > th, .tag-explain > tbody > tr > td {
+		padding: 3px 0;
+	}
+	hr { margin: 15px; }
 </style>
 <!-- //담당자 js, css -->
 </head>
@@ -67,90 +69,220 @@
 </p>
 <hr>
 <div class="ex-tag-wrap">
-	<h2>checkbox</h2>
 	<div class="ex-tag-box">
+		<h2>checkbox</h2>
 		<table border="1" class="tag-table">
 			<tr>
+				<th>번호</th>
 				<th>스타일 예시 / 적용 태그</th>
 				<th>클래스 명 설명</th>
 			</tr>
 			<tr>
-				<td>
-					<input type="checkbox" class="cst-chkbox-white-testID1">
+				<th rowspan="2">style1</th>
+				<td style="padding: 20px; background-color: #fff;">
+					<div class="cst-chkbox-st1">
+						<input type="checkbox">
+						<span class="text-250">세로로 쌓이는 스타일 입니다.</span>
+						<input type="checkbox">
+						<span class="text-60">짧은1!</span>
+						<input type="checkbox">
+						<span class="text-60">짧은2!</span>
+					</div>
 				</td>
 				<td style="text-align: left;" rowspan="2">
 					<table class="tag-explain">
+						<tr>
+							<th>스타일 설명</th>
+							<td>세로로 쌓이는 스타일</td>
+						</tr>
 						<tr>
 							<th>cst-chkbox</th>
 							<td>커스텀 체크박스 지정</td>
 						</tr>
 						<tr>
-							<th><i>white</i></th>
-							<td>색상<b><i>[dark / white]</i></b></td>
+							<th>st1</th>
+							<td>스타일 1번<b><i> [1|2] </i></b></td>
 						</tr>
 						<tr>
-							<th><i>testID1</i></th>
-							<td>자신이 정한 클래스명</td>
+							<th>text-250</th>
+							<td>텍스트 박스의 가로 사이즈</td>
+						</tr>
+						<tr>
+							<td colspan="2"><b>:: span 태그는 대상 input 바로 밑에 존재해야함</b></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;input type="checkbox" class="cst-chkbox-<i><b>white</b></i>-<i><b>testID1</b></i>"&gt;
+					&lt;div class="<b>cst-chkbox-st1</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-250</b>"&gt;세로로 쌓이는 스타일 입니다.&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-60</b>"&gt;짧은1!&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-60</b>"&gt;짧은2!&lt;/span&gt;<br>
+					&lt;/div&gt;
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<input type="checkbox" class="cst-chkbox-dark-testID2">
+				<th rowspan="2">style2</th>
+				<td style="padding: 20px; background-color: #fff;">
+					<div class="cst-chkbox-st2">
+						<input type="checkbox">
+						<span class="text-60">가로로</span>
+						<input type="checkbox">
+						<span class="text-60">쌓이는</span>
+						<input type="checkbox">
+						<span class="text-60">스타일!</span>
+					</div>
 				</td>
 				<td style="text-align: left;" rowspan="2">
 					<table class="tag-explain">
+						<tr>
+							<th>스타일 설명</th>
+							<td>세로로 쌓이는 스타일</td>
+						</tr>
 						<tr>
 							<th>cst-chkbox</th>
 							<td>커스텀 체크박스 지정</td>
 						</tr>
 						<tr>
-							<th><i>dark</i></th>
-							<td>색상<b><i>[dark / white]</i></b></td>
+							<th>st1</th>
+							<td>스타일 1번<b><i> [1|2] </i></b></td>
 						</tr>
 						<tr>
-							<th><i>testID2</i></th>
-							<td>자신이 정한 클래스명</td>
+							<th>text-250</th>
+							<td>텍스트 박스의 가로 사이즈</td>
+						</tr>
+						<tr>
+							<td colspan="2"><b>:: span 태그는 대상 input 바로 밑에 존재해야함</b></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;input type="checkbox" class="cst-chkbox-<i><b>dark</b></i>-<i><b>testID2</b></i>"&gt;
+					&lt;div class="<b>cst-chkbox-st1</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-60</b>"&gt;가로로&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-60</b>"&gt;쌓이는&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-60</b>"&gt;스타일!&lt;/span&gt;<br>
+					&lt;/div&gt;
 				</td>
 			</tr>
+		</table>
+		<hr>
+		<h2>radio</h2>
+		<table border="1" class="tag-table">
 			<tr>
-				<td>
-					<input type="checkbox" class="cst-chkbox-white">
-					<span class="cst-chktext-250-testID3">누르면 체크박스가 체크 됨</span>
+				<th>번호</th>
+				<th>스타일 예시 / 적용 태그</th>
+				<th>클래스 명 설명</th>
+			</tr>
+			<tr>
+				<th rowspan="2">style1</th>
+				<td style="padding: 20px; background-color: #fff;">
+					<div class="cst-radio-st1">
+						<input type="radio" name="exRadio1">
+						<span class="text-100">항목1</span>
+						<input type="radio" name="exRadio1">
+						<span class="text-100">항목2</span>
+						<input type="radio" name="exRadio1">
+						<span class="text-100">항목3</span>
+					</div>
 				</td>
 				<td style="text-align: left;" rowspan="2">
 					<table class="tag-explain">
 						<tr>
-							<th>cst-chktext</th>
-							<td>커스텀 체크박스 텍스트 지정</td>
+							<th>스타일 설명</th>
+							<td>기본 스타일 라디오 버튼</td>
 						</tr>
 						<tr>
-							<th><i>250</i></th>
-							<td>텍스트의 가로 사이즈</td>
+							<th>cst-radio</th>
+							<td>커스텀 라디오 버튼 지정</td>
 						</tr>
 						<tr>
-							<td colspan="2"><i><b>cst-chktext는 대상 input 바로 밑에 존재해야함</b></i></td>
+							<th>st1</th>
+							<td>스타일 1번<b><i> [1] </i></b></td>
+						</tr>
+						<tr>
+							<th>text-100</th>
+							<td>텍스트 박스의 가로 사이즈</td>
+						</tr>
+						<tr>
+							<td colspan="2"><b>:: span 태그는 대상 input 바로 밑에 존재해야함</b></td>
 						</tr>
 					</table>
 				</td>
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;input type="checkbox" class="cst-chkbox-white-testID3"&gt;<br>
-					&lt;span class="<i><b>cst-chktext</b></i>-<i><b>250</b></i>"&gt;누르면 체크박스가 체크 됨&lt;/span&gt;
+					&lt;div class="<b>cst-radio-st1</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목1&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목2&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목3&lt;/span&gt;<br>
+					&lt;/div&gt;
+				</td>
+			</tr>
+		</table>
+		<hr>
+		<h2>text and password box</h2>
+		<table border="1" class="tag-table">
+			<tr>
+				<th>번호</th>
+				<th>스타일 예시 / 적용 태그</th>
+				<th>클래스 명 설명</th>
+			</tr>
+			<tr>
+				<th rowspan="2">style1</th>
+				<td style="padding: 20px; background-color: #fff;">
+					<div class="cst-text-st1">
+						<input type="text" class="text-200">
+						<span class="label-80">아이디</span>
+						<input type="password" class="text-200">
+						<span class="label-80">비밀번호</span>
+					</div>
+				</td>
+				<td style="text-align: left;" rowspan="2">
+					<table class="tag-explain">
+						<tr>
+							<th>스타일 설명</th>
+							<td>기본 스타일 라디오 버튼</td>
+						</tr>
+						<tr>
+							<th>cst-radio</th>
+							<td>커스텀 라디오 버튼 지정</td>
+						</tr>
+						<tr>
+							<th>st1</th>
+							<td>스타일 1번<b><i> [1] </i></b></td>
+						</tr>
+						<tr>
+							<th>text-100</th>
+							<td>텍스트 박스의 가로 사이즈</td>
+						</tr>
+						<tr>
+							<td colspan="2"><b>:: span 태그는 대상 input 바로 밑에 존재해야함</b></td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: left;">
+					&lt;div class="<b>cst-radio-st1</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목1&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목2&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목3&lt;/span&gt;<br>
+					&lt;/div&gt;
 				</td>
 			</tr>
 		</table>

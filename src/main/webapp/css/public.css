@@ -115,6 +115,9 @@ div[class *= cst-radio-box] {
 	border-bottom: 1px solid #bbb;
 	cursor: pointer;
 }
+div[class *= cst-radio-box]:last-child {
+	border: 1px solid #bbb;
+}
 div[class *= cst-text-wrap-st1] {
 	overflow: hidden;
 	padding: 5px;
@@ -144,11 +147,52 @@ div[class *= cst-text-label] {
 	line-height: 32px;
 	text-align: center;
 }
-
-
-div[class *= cst-radio-box]:last-child {
-	border: 1px solid #bbb;
+div[class *= cst-btn] {
+	overflow: hidden;
+	padding: 5px;
 }
+div[class *= cst-btn-wrap-st] {
+	position: relation;
+	padding: 5px;
+	float: left;
+}
+div[class *= cst-btn-wrap-st1] > div:nth-of-type(1) {
+	background-color: #009b8b;
+}
+div[class *= cst-btn-wrap-st2] > div:nth-of-type(1) {
+	background-color: #ff6a79;
+}
+div[class *= cst-btn-wrap-st3] > div:nth-of-type(1) {
+	background-color: #6e6e6e;
+}
+div[class *= cst-btn-wrap-st1] > div:nth-of-type(2) {
+	background-color: #008a7b;
+}
+div[class *= cst-btn-wrap-st2] > div:nth-of-type(2) {
+	background-color: #ff5365;
+}
+div[class *= cst-btn-wrap-st3] > div:nth-of-type(2) {
+	background-color: #565656;
+}
+div[class *= cst-btn-wrap-st] > input {
+	position: absolute;
+	z-index: 10;
+  	font-size:1.5em;
+	border: 0;
+	outline: none;
+	background-color: rgba(0,0,0,0);
+	cursor: pointer;
+}
+div[class *= cst-btn-wrap-st1] > input {
+	color: #fff;
+}
+div[class *= cst-btn-wrap-st2] > input {
+	color: #fff;
+}
+div[class *= cst-btn-wrap-st3] > input {
+	color: #fff;
+}
+
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {

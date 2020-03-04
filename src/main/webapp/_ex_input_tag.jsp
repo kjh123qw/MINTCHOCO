@@ -79,7 +79,7 @@
 <hr>
 <div class="ex-tag-wrap">
 	<div class="ex-tag-box">
-		<h2>checkbox</h2>
+		<h2>1. checkbox</h2>
 		<table border="1" class="tag-table">
 			<tr>
 				<th>번호</th>
@@ -184,7 +184,7 @@
 			</tr>
 		</table>
 		<hr>
-		<h2>radio</h2>
+		<h2>2. radio</h2>
 		<table border="1" class="tag-table">
 			<tr>
 				<th>번호</th>
@@ -241,7 +241,7 @@
 			</tr>
 		</table>
 		<hr>
-		<h2>text and password box</h2>
+		<h2>3. text and password box</h2>
 		<table border="1" class="tag-table">
 			<tr>
 				<th>번호</th>
@@ -265,7 +265,7 @@
 							<td>기본 스타일 텍스트 박스</td>
 						</tr>
 						<tr>
-							<th>ccst-text</th>
+							<th>cst-text</th>
 							<td>커스텀 텍스트 박스 지정</td>
 						</tr>
 						<tr>
@@ -297,8 +297,57 @@
 				</td>
 			</tr>
 		</table>
+		<hr>
+		<h2>4. submit or button</h2>
+		<table border="1" class="tag-table">
+			<tr>
+				<th>번호</th>
+				<th>스타일 예시 / 적용 태그</th>
+				<th>클래스 명 설명</th>
+			</tr>
+			<tr>
+				<th rowspan="2">style1</th>
+				<td style="padding: 20px; background-color: #fff;">
+					<div class="cst-btn">
+						<input type="submit" value="확인" class="st1-150-50">
+						<input type="button" value="다시" class="st2-150-50">
+						<input type="button" value="취소" class="st3-150-50">
+					</div>
+				</td>
+				<td style="text-align: left;" rowspan="2">
+					<table class="tag-explain">
+						<tr>
+							<th>스타일 설명</th>
+							<td>기본 스타일 버튼</td>
+						</tr>
+						<tr>
+							<th>cst-btn</th>
+							<td>커스텀 버튼 박스 지정</td>
+						</tr>
+						<tr>
+							<th>st1</th>
+							<td>스타일 1번<b><i> [1|2|3] </i></b></td>
+						</tr>
+						<tr>
+							<th>st1-150-50</th>
+							<td>1번 스타일 가로폭: 150px, 세로폭: 50px</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<tr>
+				<td style="text-align: left;">
+					&lt;div class="<b>cst-btn</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="submit" value="확인" class="<b>st1-150-50</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="button" value="다시" class="<b>st2-150-50</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="button" value="취소" class="<b>st3-150-50</b>"&gt;<br>
+					&lt;/div&gt;
+				</td>
+			</tr>
+		</table>
 	</div>
 </div>
+<div style="height: 100px;"></div>
 
 <!-- 담당자 내용 -->
 <jsp:include page="./_footer.jsp"></jsp:include>

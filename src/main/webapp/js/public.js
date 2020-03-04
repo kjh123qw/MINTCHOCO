@@ -11,11 +11,9 @@ $(function() {
 	
 //	checkbox tag
 	$('div[class*=cst-chkbox-st]').each((index, item) => {
-		var trgClassArr = $(item).attr('class').split('-');
-		var tagStyle = trgClassArr[2];
-		var inputArr = $(item).children('input');
+		var tagStyle = $(item).attr('class').split('-')[2];
 		
-		inputArr.each((indexInp, itemInp) => {
+		$(item).children('input').each((indexInp, itemInp) => {
 			var textObj = $(itemInp).next();
 			var textClassArr;
 			var textHtml;
@@ -90,13 +88,12 @@ $(function() {
 	
 //	radio tag
 	$('div[class*=cst-radio-st]').each((index, item) => {
-		var trgClassArr = $(item).attr('class').split('-');
-		var tagStyle = trgClassArr[2];
+		var tagStyle = $(item).attr('class').split('-')[2];
 		var inputArr = $(item).children('input');
 		var width = 0;
 
-		var checkBtn = () => {  // check radio btn
-			inputArr.each((idx, ipt) => {
+		var checkBtn = function() {  // check radio btn
+			$(inputArr).each((idx, ipt) => {
 				if($(ipt).is(':checked')) {
 					$(ipt.divBox).css({
 						'width':width,
@@ -117,7 +114,7 @@ $(function() {
 			})
 		}
 		
-		inputArr.each((indexInp, itemInp) => {
+		$(inputArr).each((indexInp, itemInp) => {
 			var textObj = $(itemInp).next();
 			var textClassArr;
 			var textHtml;
@@ -167,11 +164,9 @@ $(function() {
 
 //	input text, password tag
 	$('div[class*=cst-text-st]').each((index, item) => {
-		var trgClassArr = $(item).attr('class').split('-');
-		var tagStyle = trgClassArr[2];
-		var inputArr = $(item).children('input');
+		var tagStyle = $(item).attr('class').split('-')[2];
 		
-		inputArr.each((indexInp, itemInp) => {
+		$(item).children('input').each((indexInp, itemInp) => {
 			var textObj = $(itemInp).next();
 			var textWidth = $(itemInp).attr('class').split('-')[1];
 			var textClassArr;
@@ -217,6 +212,49 @@ $(function() {
 				$(cstBoxHtml).children('div').stop().animate({
 					'background-color': '#666',
 					'height': '1px'
+				}, 150);
+			});
+		});
+	});
+
+//	submit or button
+	$('div[class*=cst-btn]').each((index, item) => {
+		$(item).children('input').each((indexInp, itemInp) => {
+			var trgClassArr = $(itemInp).attr('class').split('-');
+			var tagStyle = trgClassArr[0];
+			var tagWidth = parseInt(trgClassArr[1]);
+			var tagHeight = parseInt(trgClassArr[2]);
+			var textVal = $(itemInp).val();
+
+			var tagWrap = $('<div />', {
+				'class': 'cst-btn-wrap-' + tagStyle,
+				'style': 'width: ' + (tagWidth + 10) + 'px; height: ' + (tagHeight + 10) + 'px;'
+			});
+			var firstBg = $('<div />', {
+				'style': 'width: ' + tagWidth + 'px; height: 0px;'
+			});
+			var secondBg = $('<div />', {
+				'style': 'width: ' + tagWidth + 'px; height: ' + tagHeight + 'px;'
+			});
+			
+			$(itemInp).css({'width':tagWidth + 'px', 'height':tagHeight + 'px'});
+			$(item).append(tagWrap);
+			$(tagWrap).append(itemInp).append(firstBg).append(secondBg);
+			
+			$(itemInp).mouseover(function() {
+				$(tagWrap).children('div:first-of-type').stop().animate({
+					'height': tagHeight + 'px'
+				}, 150);
+				$(tagWrap).children('div:last-of-type').stop().animate({
+					'height': '0px'
+				}, 150);
+			});
+			$(itemInp).mouseout(function() {
+				$(tagWrap).children('div:first-of-type').stop().animate({
+					'height': '0px'
+				}, 150);
+				$(tagWrap).children('div:last-of-type').stop().animate({
+					'height': tagHeight + 'px'
 				}, 150);
 			});
 		});

@@ -56,6 +56,12 @@
 		padding: 3px 0;
 	}
 	hr { margin: 15px; }
+	ul {
+		 width: 960px;
+		 margin: 0 auto;
+		 padding: 20px 130px;
+		 border: 1px dotted #444;
+	}
 </style>
 <!-- //담당자 js, css -->
 </head>
@@ -63,10 +69,13 @@
 <jsp:include page="./_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-<h1>커스텀 태그 예제입니다.</h1>
-<p>
-	
-</p>
+<h1>커스텀 태그 입니다.</h1>
+<ul>
+	<li><b>이하 3가지가 필요합니다.</b></li>
+	<li>&nbsp;&nbsp; - &lt;script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"&gt;&lt;/script&gt;</li>
+	<li>&nbsp;&nbsp; - &lt;script src="./js/public.js"&gt;&lt;/script&gt;</li>
+	<li>&nbsp;&nbsp; - &lt;link rel="stylesheet" href="./css/public.css"&gt;</li>
+</ul>
 <hr>
 <div class="ex-tag-wrap">
 	<div class="ex-tag-box">

@@ -148,11 +148,11 @@
 							<td>커스텀 체크박스 지정</td>
 						</tr>
 						<tr>
-							<th>st1</th>
-							<td>스타일 1번<b><i> [1|2] </i></b></td>
+							<th>st2</th>
+							<td>스타일 2번<b><i> [1|2] </i></b></td>
 						</tr>
 						<tr>
-							<th>text-250</th>
+							<th>text-60</th>
 							<td>텍스트 박스의 가로 사이즈</td>
 						</tr>
 						<tr>
@@ -163,7 +163,7 @@
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;div class="<b>cst-chkbox-st1</b>"&gt;<br>
+					&lt;div class="<b>cst-chkbox-st2</b>"&gt;<br>
 						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
 						&nbsp;&nbsp;&lt;span class="<b>text-60</b>"&gt;가로로&lt;/span&gt;<br>
 						&nbsp;&nbsp;&lt;input type="checkbox"&gt;<br>
@@ -253,19 +253,23 @@
 					<table class="tag-explain">
 						<tr>
 							<th>스타일 설명</th>
-							<td>기본 스타일 라디오 버튼</td>
+							<td>기본 스타일 텍스트 박스</td>
 						</tr>
 						<tr>
-							<th>cst-radio</th>
-							<td>커스텀 라디오 버튼 지정</td>
+							<th>ccst-text</th>
+							<td>커스텀 텍스트 박스 지정</td>
 						</tr>
 						<tr>
 							<th>st1</th>
 							<td>스타일 1번<b><i> [1] </i></b></td>
 						</tr>
 						<tr>
-							<th>text-100</th>
+							<th>text-200</th>
 							<td>텍스트 박스의 가로 사이즈</td>
+						</tr>
+						<tr>
+							<th>label-80</th>
+							<td>레이블 가로 사이즈</td>
 						</tr>
 						<tr>
 							<td colspan="2"><b>:: span 태그는 대상 input 바로 밑에 존재해야함</b></td>
@@ -275,13 +279,11 @@
 			</tr>
 			<tr>
 				<td style="text-align: left;">
-					&lt;div class="<b>cst-radio-st1</b>"&gt;<br>
-						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
-						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목1&lt;/span&gt;<br>
-						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
-						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목2&lt;/span&gt;<br>
-						&nbsp;&nbsp;&lt;input type="radio" name="exRadio1"&gt;<br>
-						&nbsp;&nbsp;&lt;span class="<b>text-100</b>"&gt;항목3&lt;/span&gt;<br>
+					&lt;div class="<b>cst-text-st1</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="text" class="<b>text-200</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>label-80</b>"&gt;아이디&lt;/span&gt;<br>
+						&nbsp;&nbsp;&lt;input type="password" class="<b>text-200</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;span class="<b>label-80</b>"&gt;비밀번호&lt;/span&gt;<br>
 					&lt;/div&gt;
 				</td>
 			</tr>

@@ -2,12 +2,12 @@
  *  담당자 : 김정호
  */
 
-$(() => {
+$(function() {
 	var selectedBg = '#008a7b';
 	var selectedFontColor = '#fff';
 	var normalBg = '#ddd';
 	var normalBorder = '#bbb';
-	var normalFontColor = '#555';
+	var normalFontColor = '#666';
 	
 //	checkbox tag
 	$('div[class*=cst-chkbox-st]').each((index, item) => {
@@ -26,7 +26,7 @@ $(() => {
 			
 			var cstBoxHtml = $('<div />', {
 				'class': 'cst-chkbox-box',
-				'click': () => {
+				'click': function() {
 					if($(itemInp).is(':checked')) {
 						$(itemInp).prop('checked', false);
 						$(this).html('').css({
@@ -51,7 +51,7 @@ $(() => {
 							'class': 'cst-chkbox-text',
 							'style': 'width: ' + textClassArr[1] + 'px',
 							'text': textObj.html(),
-							'click': () => {
+							'click': function() {
 								if($(itemInp).is(':checked')) {
 									$(itemInp).prop('checked', false);
 									$(cstBoxHtml).html('').css({
@@ -194,7 +194,7 @@ $(() => {
 							'class': 'cst-text-label',
 							'style': 'width: ' + textClassArr[1] + 'px',
 							'text': textObj.html(),
-							'click': () => {
+							'click': function() {
 								$(itemInp).focus();
 							}
 						});
@@ -206,15 +206,18 @@ $(() => {
 			$(item).append(tagWrap);
 			tagWrap.append(textHtml).append(cstBoxHtml);
 			cstBoxHtml.append(itemInp);
-			$(itemInp).focus(() => {
-				$(cstBoxHtml).stop().animate({
-					'background-color': selectedBg
-				}, 200);
+			cstBoxHtml.append('<div></div>')
+			$(itemInp).focus(function() {
+				$(cstBoxHtml).children('div').stop().animate({
+					'background-color': selectedBg,
+					'height': '4px'
+				}, 150);
 			})
-			$(itemInp).blur(() => {
-				$(cstBoxHtml).stop().animate({
-					'background-color': ''
-				}, 200);
+			$(itemInp).blur(function() {
+				$(cstBoxHtml).children('div').stop().animate({
+					'background-color': '#666',
+					'height': '1px'
+				}, 150);
 			});
 		});
 	});

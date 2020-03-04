@@ -120,24 +120,28 @@ div[class *= cst-text-wrap-st1] {
 	padding: 5px;
 }
 div[class *= cst-text-box] {
-	display: inline-block;
-	height: 30px;
-	font-size: 14px;
+	height: 40px;
+	float: left;
+	font-size: 16px;
 	line-height: 26px;
-	border-bottom: 1px solid #777; 
 }
 div[class *= cst-text-box] > input {
-	height: 27px;
+	display: block;
+	height: 35px;
 	padding: 2px 5px;
 	font-size: 16px;
 	border: 0px;
 }
+div[class *= cst-text-box] > div {
+	height: 1px;
+	background-color: #666;
+}
 div[class *= cst-text-label] {
-	display: inline-block;
-	height: 30px;
-	font-size: 14px;
-	color: #555;
-	line-height: 22px;
+	float: left;
+	height: 40px;
+	font-size: 16px;
+	color: #333;
+	line-height: 32px;
 	text-align: center;
 }
 

@@ -1,0 +1,401 @@
+  /* 320
+  576
+  768
+  992
+  1200 */
+
+  /* 
+  #d0c6bc
+  #6b6350
+  #39313b
+  #70ad92
+  #aadac5
+  #d1ebd9 
+  */
+
+
+/* 스크롤 숨기기 */
+html{
+	   -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+html::-webkit-scrollbar {
+    display: none; /* Chrome, Safari, Opera*/
+}
+/* 스크롤 숨기기 */
+
+
+/* 화면 상단 title과 메뉴버튼 */
+#headDiv{
+	/* width: 1200px; */
+	width:100%;
+	margin: 0 auto;
+	border-bottom:3px solid #39313b;
+ 	position: relative; 
+	z-index: 100;
+}
+
+#menuCheck{
+	display: none;
+}
+
+#mainTitle{
+	margin-top: 10px;
+	margin-bottom: 10px;
+	margin-left: 15px;
+	color:#39313b;
+	display: inline-block;
+	cursor: pointer;
+	font-size: 40px;
+}
+
+#menuBtn{
+  position: absolute;
+  top: 10px;
+  right:15px;
+  width: 30px;
+  height: 30px;
+  background: transparent;
+  text-align: center;
+  outline: 0;
+  border: 0;
+  cursor: pointer;
+  margin-top: 15px;
+}
+/* 화면 상단 title과 메뉴버튼 */
+
+
+/* 메뉴 버튼 클릭시 x 모양일때 */
+span#bar.xxx::after{
+  transform: rotate(45deg);
+  transition: 0.5s all ease;
+  bottom: 0;
+  background-color: #70ad92;
+}
+
+span#bar.xxx::before{
+  transform: rotate(315deg);
+  transition: 0.5s all ease;
+  top: 0;
+  background-color: #70ad92;
+}
+
+span#bar.xxx{
+  background-color: transparent;
+} 
+/* 메뉴 버튼 클릭시 x 모양일때 */
+
+
+/* 메뉴 버튼 클릭시 x 모양이 아닐때 */
+span#bar.ooo::after{
+  transform: rotate(180deg);
+  transition: 0.5s all ease;
+  bottom: -7px;
+}
+
+span#bar.ooo::before{
+  transform: rotate(180deg);
+  transition: 0.5s all ease;
+  top: -7px;
+}
+/* 메뉴 버튼 클릭시 x 모양이 아닐때 */
+
+/* 메뉴 버튼 마우스오버 */
+#menuBtn:hover > #bar{
+  width: 22px;
+  transition: all 0.3s ease-in-out;
+}
+/* 메뉴 버튼 마우스오버 */
+
+/* 메뉴버튼 */
+#bar{
+  position: absolute;
+  width: 16px;
+  height: 4px;
+  background-color: #39313b;
+  display: block;
+  right: 3px; 
+  transition: all 0.3s ease-in-out;
+}
+
+ #bar::after{
+  position: absolute;
+  content: ' ';
+  width: 22px;
+  height: 4px;
+  /* width: 80px;
+  height: 15px; */
+  background-color: #39313b;
+  display: block;
+  /* bottom: -5px; */
+  right: 0; 
+}
+
+#bar::before{
+  position: absolute;
+  width: 22px;
+  height: 4px;
+  /* width: 80px;
+  height: 15px; */
+  background-color: #39313b;
+  content: ' ';
+  /* top:-5px; */
+  display: block;
+  right: 0;
+} 
+/* 메뉴버튼 */
+
+
+/* 메뉴 클릭시 내려오는 Div */
+#menuDiv{
+  width: 100%;
+  height: 100%;
+  background-color: #6b6350;
+  position: absolute;
+  top: -100%;
+}
+
+#menuList{
+	position: relative;
+	width: 100%;
+	height: 60%;
+	border: 3px solid #39313b;
+	top:20%;
+	margin: 0 auto;
+}
+
+#menuList > a{
+	color: white;
+	font-size: 40px;
+	width: 100%;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	margin: 10px 0 10px 0;
+}
+
+#menuList > p{
+	margin-top:30px;
+	color: white;
+	font-size: 20px;
+	font-weight: bold;
+	text-align: center;
+}
+
+#snsBox{
+	text-align: center;
+	margin-top:30px; 
+}
+
+#snsBox > a{
+	color: white;
+	font-size: 25px;
+	font-weight: bold;
+	margin: 0 10px 0 10px;
+}
+/* 메뉴 클릭시 내려오는 Div */
+
+/* 메인영화검색 Div */ 
+#searchDiv{
+	/* width: 1200px; */
+	width:100%;
+ 	margin: 0 auto;
+	border-bottom: 3px solid #39313b;
+}
+
+#searchDiv > form{
+	width:100%;
+	display: block;
+	/* margin: 50px 118px 50px 78px; */
+	margin:50px auto;
+}
+
+#searchText{
+	width: 100%;
+	height: 80px;
+	margin: 0 auto;
+	border: 2px solid #39313b;
+	outline: none;
+	padding-left: 20px;
+	
+	font-weight: bold;
+	color: #39313b;
+	
+	font-size: 30px;
+}
+
+::placeholder {
+  color: #39313b;
+  font-weight: bold;
+}
+
+
+#searchBtn{
+	position: absolute;
+	width: 80px;
+	height: 80px;
+	margin-left: -80px;
+	background:white;
+    text-align: center;
+    outline: 0;
+    border: 0;
+    cursor: pointer;
+    border-top: 2px solid #39313b;
+    border-right: 2px solid #39313b;
+    border-bottom: 2px solid #39313b;
+    
+    font-size: 40px;
+}
+/* 메인영화검색 Div */
+
+/*  ~님에게 추천하는영화 */
+#pushDiv1{
+	/* width:1200px; */
+	width:100%;
+	border-bottom: 3px solid #39313b;
+	margin: 40px auto 0 auto;
+	padding-bottom: 50px;
+}
+
+#pushDiv1_title , #pushDiv2_title{
+	margin: 20px 0 20px 20px;
+}
+
+#pushDiv1_title > a , #pushDiv2_title > a{
+	color: #70ad92;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+#pushDiv1_title > h3 , #pushDiv2_title > h3{
+	display: inline-block;
+	font-size: 20px;
+}
+
+.mainMovie{
+	position:relative;
+	/* width: 24%; */
+	width:100%;
+	height: 600px;
+	/* margin-left:6px;
+	margin-bottom:6px; */
+	margin:10px auto;
+	display: inline-block;
+	border: 2px solid #39313b;
+	overflow: hidden;
+}
+
+.mainMovie:hover{
+	cursor: pointer;
+}
+
+.movieInfo{
+	position:absolute;
+	width:100%;
+	height: 200px;
+	background: #70ad92;
+	bottom: -200px;
+}
+
+#pushDiv2{
+	/* width:1200px; */
+	width:100%;
+	border-bottom: 3px solid #39313b;
+	margin: 40px auto 50px auto;
+	padding-bottom: 50px;
+}
+/*  ~님에게 추천하는영화 */
+
+
+/* 슬라이드 설정 */
+#pushDiv3{
+	display: none;
+	margin:0 auto;
+}
+
+.slideMovieList{
+	border: 2px solid #39313b;
+	margin: 10px 10px;
+}
+
+.slick-slide{
+	height: 500px!important;
+} 
+
+.slick-slide:hover{
+	cursor: pointer;
+}
+/* 슬라이드 설정 */
+
+#upBtn{
+	position:fixed;
+	bottom: 30px;
+	right: 30px;
+	border-bottom:3px solid black;
+	font-size: 50px;
+}
+
+#upBtn:hover{
+	cursor: pointer;
+}
+
+/* 가로 해상도가 576px 보다 큰 화면에 적용 */
+@media screen and (min-width: 576px) {
+
+}
+
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
+@media screen and (min-width: 768px) {
+	
+.mainMovie{
+	width:48%;
+	height: 500px;
+	margin:10px 0 10px 10px;
+}
+    
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+
+.mainMovie{
+	width:24%;
+	height: 400px;
+	margin:0 auto;
+	margin-left:5px;
+}
+
+#pushDiv3{
+	display: block;
+	
+}
+
+#snsBox{
+	margin-top: 60px;
+}
+
+#menuList > a{
+	width: 24%;
+	font-weight: bold;
+	display: inline-block;
+	text-align: center;
+	margin: 100px 0 100px 5px;
+}
+	
+}
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+	
+.mainMovie{
+	width:24%;
+	height: 400px;
+	margin:10px 0 10px 7px;
+}
+
+#headDiv,#searchDiv,#pushDiv1,#pushDiv2,#pushDiv3,#menuList{
+	 width: 1200px;
+}
+
+    
+}

@@ -20,14 +20,122 @@
 <script src="./js/jquery.mousewheel.min.js"></script>
 <script src="./js/public.js"></script>
 <link rel="stylesheet" href="./css/public.css">
+
 <!-- 담당자 js/css -->
+
+<script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
+
+<script src="./js/main/main.js"></script>
+<link rel="stylesheet" href="./css/main/main.css">
+
+<!-- <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script> -->
+<script src="./js/main/slick.min.js"></script>
+<link rel="stylesheet" href="./css/main/slick.css">
+<link rel="stylesheet" href="./css/main/slick-theme.css">
 
 
 <!-- //담당자 js, css -->
+
 </head>
 <body>
-<%@ include file="./_header.jsp" %>
+<%-- <%@ include file="./_header.jsp" %> --%>
 <!-- 담당자 내용 -->
+
+	<div id = "headDiv">
+		<h2 id = "mainTitle">MINTCHOCO</h2>
+		<button id = "menuBtn" onclick="menuOpen();">
+        	<span id = "bar" class = "ooo"></span>
+    	</button>
+    	<input type = "checkbox" id = "menuCheck"/>
+	</div>
+
+	<div id = "searchDiv">
+		<form name = "searchBar" id = "searchBar" action = "mainSearchMovie.do" method="get">
+			<input type = "text" placeholder="Search" id = "searchText" name = "searchText"/>
+			<button type="submit" form="searchBar" id = "searchBtn"><i class="fas fa-search"></i></button>
+		</form>
+	</div>
+	
+	<div id = "pushDiv1">
+		 <div id = "pushDiv1_title">&nbsp;<a>유지상</a>&nbsp;<h3>님에게 추천하는 영화입니다.</h3></div>
+		 
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie">
+		 	<div class = "movieInfo"></div>
+		 </div>
+
+		 
+		 
+	</div>
+	<div id = "pushDiv2">
+		<div id = "pushDiv2_title">&nbsp;<a>MIKNTCHOCO</a>&nbsp;<h3>에서 인기많은 영화입니다.</h3></div>
+		
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie"></div>
+		 <div class = "mainMovie">
+		 	<div class = "movieInfo"></div>
+		 </div>
+	</div>
+	
+	
+	
+	
+	<div id = "pushDiv3">
+		<div class = "slideMovie">
+			<div class = "slideMovieList">1</div>
+			<div class = "slideMovieList">2</div>
+			<div class = "slideMovieList">3</div>
+			<div class = "slideMovieList">4</div>
+			<div class = "slideMovieList">5</div>
+			<div class = "slideMovieList">6</div>
+			<div class = "slideMovieList">7</div>
+		</div>
+	</div>
+	
+	
+
+	
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div id = "menuDiv">
+		<div id = "menuList">
+			<a>MYPAGE</a>
+			<a>menu2</a>
+			<a>menu3</a>
+			<a>LOGOUT</a>
+			<div id = "snsBox">
+				<a href = "#"  onclick = "snsEvent();"><i class="fab fa-twitter-square"></i></a>
+				<a href = "#"  onclick = "snsEvent();"><i class="fab fa-facebook-square"></i></a>
+				<a href = "#"  onclick = "snsEvent();"><i class="fab fa-instagram"></i></a>
+				<a href = "#"  onclick = "snsEvent();"><i class="fab fa-youtube-square"></i></a>
+			</div>
+			<p>神奈川県藤沢市辻堂4-1-27レオパレス辻堂アリエッタ / yujisang93@gmail.com</p>
+			<p>ALL RIGHTS RESERVED. © 2020 MINTCHOCO</p>
+		</div>
+	</div>
+	<div id = "upBtn" onclick="goTop()"><i class="fas fa-arrow-up"></i></div>
 
 
 

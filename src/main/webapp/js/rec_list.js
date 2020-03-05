@@ -5,7 +5,29 @@
 $(function () {
 
 var set = 0;
+	
+	$("#r_button").mouseover(function() {
+		$("#r_button").css("color", "snow");
+		$("#r_button").css("top", "125px");
+		$("#r_button").css("font-size", "7em");
+	});
+	$("#r_button").mouseout(function() {
+		$("#r_button").css("color", "#00d7cb");
+		$("#r_button").css("top", "175px");
+		$("#r_button").css("font-size", "50px");
+	});
 
+	$("#l_button").mouseover(function() {
+		$("#l_button").css("color", "snow");
+		$("#l_button").css("top", "125px");
+		$("#l_button").css("font-size", "7em");
+	});
+	$("#l_button").mouseout(function() {
+		$("#l_button").css("color", "#00d7cb");
+		$("#l_button").css("top", "175px");
+		$("#l_button").css("font-size", "50px");
+	});
+	
 	$("#r_button").click(function() {
 		
 		if(set >= 8){

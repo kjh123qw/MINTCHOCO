@@ -500,15 +500,15 @@ h1{
 	    top: 175px;
 	    font-size: 50px;
 	    cursor: pointer;
-	    color: #593e36;
+	    color: #00d7cb;
 	}
 	
 	#l_button{
-	    left: 40px;
+	    left: 20px;
 	}
 	
 	 #r_button{
-	    right: 40px;
+	    right: 20px;
 	}
 	
 	/* 영화 관련 */

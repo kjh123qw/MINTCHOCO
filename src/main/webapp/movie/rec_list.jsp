@@ -42,7 +42,7 @@
 	        <c:forEach var="movie" items="${movieList}">
 	        
 	            <div class="movie">
-	                <a href="mov_detail.do?movieNumber=${ movie.movieNumber }">
+	                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
 	                    <img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
 	                </a>
 	                    <p> ${ movie.movieTitle } </p>

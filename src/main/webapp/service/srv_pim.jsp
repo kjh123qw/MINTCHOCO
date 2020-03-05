@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 /*
-	:: 서비스 소개 ::
+	:: 개인정보 처리방침 ::
 	담당자 : 박찬영, 김정호
 */
 %>
@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>SRV_INTRO</title>
+<title>SRV_PIM.JSP</title>
 <script src="./js/jquery.2.1.3.min.js"></script>
 <script src="./js/jquery-ui.min.js"></script>
 <script src="./js/jquery.easing.1.3.js"></script>
@@ -26,12 +26,12 @@
 <!-- //담당자 js, css -->
 </head>
 <body>
-<%@ include file="./_header.jsp" %>
+<%@ include file="../_header.jsp" %>
 <!-- 담당자 내용 -->
 
 
 
 <!-- 담당자 내용 -->
-<%@ include file="./_footer.jsp" %>
+<%@ include file="../_footer.jsp" %>
 </body>
 </html>

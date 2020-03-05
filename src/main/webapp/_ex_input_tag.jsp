@@ -71,9 +71,10 @@
 
 <h1>커스텀 태그 입니다.</h1>
 <ul>
-	<li><b>이하 3가지가 필요합니다.</b></li>
+	<li><b>이하 4가지가 필요합니다.</b></li>
 	<li>&nbsp;&nbsp; - &lt;script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"&gt;&lt;/script&gt;</li>
 	<li>&nbsp;&nbsp; - &lt;script src="./js/public.js"&gt;&lt;/script&gt;</li>
+	<li>&nbsp;&nbsp; - &lt;script src="./js/jquery.2.1.3.min.js"&gt;&lt;/script&gt;</li>
 	<li>&nbsp;&nbsp; - &lt;link rel="stylesheet" href="./css/public.css"&gt;</li>
 </ul>
 <hr>
@@ -252,9 +253,9 @@
 				<th rowspan="2">style1</th>
 				<td style="padding: 20px; background-color: #fff;">
 					<div class="cst-text-st1">
-						<input type="text" class="text-200">
+						<input type="text" class="text-200" placeholder="아이디를 입력해주세요">
 						<span class="label-80">아이디</span>
-						<input type="password" class="text-200">
+						<input type="password" class="text-200" placeholder="비밀번호를 입력해주세요">
 						<span class="label-80">비밀번호</span>
 					</div>
 				</td>

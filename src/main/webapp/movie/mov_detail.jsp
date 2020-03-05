@@ -44,7 +44,7 @@
 	<!-- 영화 정보 -->
 	<div class="movie">
 	
-    	<table border="1">
+    	<table border="1px">
 	        <!-- ${movie_poster}, ${movie_title}, ${movie_kind}, ${movie_content}, ${movie_directer}, ${movie_actor}, ${movie_yutube_url}, ${movie_naver_url} && <a> ${tag_name} <a>를 forEach로 돌림 -->
 			<tr>
 			    <td rowspan="6"><a onclick="window.history.go(-1);"><img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a></td>

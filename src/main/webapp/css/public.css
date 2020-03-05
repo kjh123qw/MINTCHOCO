@@ -68,7 +68,20 @@ footer {
 	line-height: 400px;
 }
 
-
+/* 검색 폼 */
+.search-form-wrap {
+	overflow: hidden;
+	width: 500px;
+	padding: 5px;
+}
+.search-form-textbox {
+	width: 250px;
+	float: left;
+}
+.search-form-text {
+	width: 110px;
+	float: left;
+}
 /* 커스텀 태그 */
 input:focus { outline: none; }
 div[class *= cst-chkbox-st1] {
@@ -149,7 +162,6 @@ div[class *= cst-text-label] {
 }
 div[class *= cst-btn] {
 	overflow: hidden;
-	padding: 5px;
 }
 div[class *= cst-btn-wrap-st] {
 	position: relation;
@@ -177,7 +189,7 @@ div[class *= cst-btn-wrap-st3] > div:nth-of-type(2) {
 div[class *= cst-btn-wrap-st] > input {
 	position: absolute;
 	z-index: 10;
-  	font-size:1.5em;
+  	font-size:1.2em;
 	border: 0;
 	outline: none;
 	background-color: rgba(0,0,0,0);

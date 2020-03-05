@@ -19,6 +19,7 @@
 <script src="./js/jquery.easing.1.3.js"></script>
 <script src="./js/jquery.mousewheel.min.js"></script>
 <script src="./js/public.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
 <link rel="stylesheet" href="./css/public.css">
 <!-- 담당자 js, css -->
 
@@ -33,7 +34,22 @@
 <p class="error-msg">
 	존재하지 않는 주소입니다.
 </p>
-
+<article>
+	<h1>검색 테스트</h1>
+	<%@ include file="./_search_form.jsp" %>
+	<hr>
+	<h3>커스텀 태그 테스트</h3>
+	<div class="cst-chkbox-st1">
+		<input type="checkbox" value="1" name="a">
+		<span class="label-300">테스트 체크박스 입니다.1</span>
+		<input type="checkbox" value="2" name="b">
+		<span class="label-300">테스트 체크박스 입니다.2</span>
+		<input type="checkbox" value="3" name="c">
+		<span class="label-300">테스트 체크박스 입니다.3</span>
+		<input type="checkbox" value="4" name="d">
+		<span class="label-300">테스트 체크박스 입니다.4</span>
+	</div>
+</article>
 <!-- 담당자 내용 -->
 <%@ include file="./_footer.jsp" %>
 

@@ -3,9 +3,14 @@
 <%
 /*
 	:: 검색창 ::
-	담당자 : 최원준
+	담당자 : 김정호
 */
 %>
-<div style="width: 100px; height: 60px; border: 1px solid black;">
-검색창 박스
+<div class="search-form-wrap">
+	<div class="cst-text-st1 search-form-textbox">
+		<input type="text" class="text-250" placeholder="검색어 입력">
+	</div>
+	<div class="cst-btn search-form-text">
+		<input type="submit" value="검색" class="st1-100-40">
+	</div>
 </div>

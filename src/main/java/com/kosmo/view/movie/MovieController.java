@@ -15,16 +15,17 @@ import com.kosmo.mintchoco.movie.MovieVO;
 @Controller
 public class MovieController {
 
-	@RequestMapping("/main.do")
+	@RequestMapping("/movie/main.do")
 	public String main() {
 		return "main.jsp";
 	}
-	@RequestMapping("/rank.do")
+	@RequestMapping("/movie/rank.do")
 	public String rank() {
 		return "mov_rank.jsp";
 	}
 	@RequestMapping("/movie/recommand.do")
 	public String movieList(MovieDAO movieDAO, Model model) {
+		
 		model.addAttribute("movieList", movieDAO.selectMovieList());
 		
 		return "rec_list.jsp";

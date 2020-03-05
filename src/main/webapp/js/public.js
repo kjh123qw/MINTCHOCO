@@ -205,7 +205,7 @@ $(function() {
 			$(itemInp).focus(function() {
 				$(cstBoxHtml).children('div').stop().animate({
 					'background-color': selectedBg,
-					'height': '4px'
+					'height': '5px'
 				}, 150);
 			})
 			$(itemInp).blur(function() {

@@ -122,8 +122,8 @@
 	<div id = "menuDiv">
 		<div id = "menuList">
 			<a>MYPAGE</a>
-			<a>menu2</a>
-			<a>menu3</a>
+			<a>MOVICE</a> <!-- 주제별 영화목록 -->
+			<a>NOTICE</a> <!-- 공지사항 -->
 			<a>LOGOUT</a>
 			<div id = "snsBox">
 				<a href = "#"  onclick = "snsEvent();"><i class="fab fa-twitter-square"></i></a>

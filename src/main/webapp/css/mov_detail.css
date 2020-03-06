@@ -270,7 +270,7 @@
     /* 화면 기본 */
 
 	body{
-	    background-color: #00ac9a;
+	    background-color: #565656;
 	}
 	
 	#mov_detail{
@@ -300,10 +300,20 @@
 	}
 	
 	.movie table{
+		border: 1px solid #00ac9a;;
 		width: 100%;
 	}
 	
+	.movie table tr{
+		border: 1px solid #00ac9a;;
+	}
+	
+	.movie table tr td{
+		border: 1px solid #00ac9a;;
+	}
+	
 	.teaser{
+		border: 1px solid #00ac9a;;
 		margin: 0 auto;
 		height: 900px;
 	}

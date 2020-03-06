@@ -8,9 +8,5 @@ import org.springframework.web.bind.annotation.RequestMapping;
  */
 @Controller
 public class NoticeController {
-	@RequestMapping("/movie/search.do")
-	public String search() {
-		
-		return "search_list.jsp;";
-	}
+	
 }

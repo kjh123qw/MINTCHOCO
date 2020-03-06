@@ -1,0 +1,217 @@
+/* 기본 CSS를 작성합니다. (세로모드 모바일 디바이스)
+  기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
+  가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
+
+
+.con_conf_checkPW_wrap {
+	margin: 0 auto;
+	border: 1px solid  #00D7C0;
+	margin-top: 20px;
+	width: 400px;
+	height: 200px;
+	padding: 30px;
+}
+.con_conf_checkPW_subject {
+	color: #00D7C0;
+	font-size: 40px;
+	margin-bottom: 10px;
+}
+.con_conf_wrap {
+	margin: 0 auto;
+	width: 960px;
+}
+
+.con_conf_float {
+	float: left;
+}
+.con_conf {
+	width:480px;
+	height: 360px;
+}
+.con_conf_bg {
+	margin: 0 auto;
+	margin-top: 40px;
+	border: 1px solid #00D7C0;
+	background-color: rgba(0,0,0,0.3);
+	width: 400px;
+	height: 280px;
+}
+.con_conf_subject_wrap {
+	padding: 15px;
+	height:80px;
+}
+.con_conf_subject {
+	float: left;
+	height: 80px;
+	width: 290px;
+	color: #00D7C0;
+	line-height: 80px;
+	font-size: 30px;
+}
+.con_conf_content {
+	font-size: 20px;
+}
+.con_conf_img_wrap img {
+	float: left;
+	width: 80px;
+}
+
+.con_conf_bg:hover {
+	transition-duration: 0.2s;
+	background: rgba(0,75,75,0.7);
+}
+
+.con_conf_ul { overflow: hidden; }
+.con_conf_ul > li { float: left; }
+.con_conf_ul > li label {
+    background-color: white;
+    display: block;
+    padding: 5px 12px;   
+    color: black;
+    font-size: 14px;    
+    transition-duration: 0.2s;
+}
+.con_conf_ul input {
+	display: none;
+}
+.con_conf_ul input:checked + label{
+	background-color: #00D7C0;
+	font-weight: bold;
+	color: white;
+}
+
+#con_conf_submit {
+	display: none;
+}
+#con_conf_cancel {
+	display: none;
+}
+.con_conf_submit_btn {
+	margin: 0 auto;
+	background-color: #00D7C0;
+	color: white;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	padding-left : 15px;
+	padding-right : 15px;
+	font-size: 20px;
+	transition-duration: 0.2s;
+}
+.checkPW_btn {
+	width: 200px;
+	margin: 0 auto;
+	margin-top: 40px;
+}
+.checkPW_btn_cancel {
+	margin-left: 30px;
+}
+.con_conf_submit_btn:hover {
+	background-color: brown;
+}
+.con_conf_table {
+	margin-bottom:30px;
+}
+.con_conf_table th {
+	width: 140px;
+	text-align: left;
+}
+
+.con_conf_horizontalCenter {
+	border: 1px solid #777;
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+  	background: #E8E8E8;
+  	color: black !important;
+  	z-index:9;
+}
+.con_conf_hidden {
+	display: none;
+}
+.con_conf_x {
+	position: absolute;
+	top: 30px;
+	right: 30px;
+}
+
+.con_conf_modifyINF_wrap {
+	width: 500px;
+	height: 500px;
+}
+.con_conf_modifyPW_content {
+	height: 240px;
+}
+.conf_detail_subject {
+	margin-left: 20px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	font-size: 40px;
+}
+.conf_detail_content {
+	background: white;
+	padding:20px;
+	font-size: 18px;
+}
+.conf_detail_content p {	
+	line-height: 28px;
+}
+.con_conf_modifyINF_content {
+	height: 364px;
+}
+.con_conf_text {
+	background: transparent;
+  	font-size: 20px;
+  	width: 360px;
+  	height: auto;
+  	line-height : normal;
+  	padding: .2em .2em;
+  	border-top: none;
+  	border-left: none;
+  	border-right: none;
+  	border-style:none;
+  	border-bottom: 1px solid #00D7C0;
+  	border-radius: 0;
+  	outline-style: none;
+  	-webkit-appearance: none;
+  	-moz-appearance: none;
+  	appearance: none;
+  	margin-top: 10px;
+}
+.con_modal_bg {
+	position: fixed; 
+	overflow-y: scroll;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.8);
+	display: none;
+}
+.con_conf_modifyINF_wrap, .con_conf_modifyPW_wrap,
+.con_conf_confirmed_ok, .con_conf_confirmed_failed {
+	display: none;
+}
+
+.icon_config_wrap {
+	border-bottom: 5px solid #00D7C0;
+}
+
+/* 가로 해상도가 576px 보다 큰 화면에 적용 */
+@media screen and (min-width: 576px) {
+      
+}
+
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
+@media screen and (min-width: 768px) {
+    
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+
+}
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+    
+}

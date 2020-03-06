@@ -102,15 +102,15 @@ public class DBVersionManager {
 			
 			"create table favorite (" +							// 찜한 영화  (장세진) ajax 구현 
 			"    favorite_id varchar2(20) primary key, " +		// 번호 MEMBER_number + MOVIE_Number
-			"    MEMBER_number NUMBER(10) REFERENCES MEMBER(MEMBER_number), " + // 추가한 회원번호
-			"    MOVIE_Number NUMBER(10) REFERENCES Movie(movie_number), " + // 영화번호 
+			"    MEMBER_number NUMBER(10) REFERENCES MEMBER(MEMBER_number) on delete cascade, " + // 추가한 회원번호
+			"    MOVIE_Number NUMBER(10) REFERENCES Movie(movie_number) on delete cascade, " + // 영화번호 
 			"    favorite_REGDATE date default sysdate" +		// 등록일자 
 			")",
 			
 			"create table ASSESSMENT (" + 						// 평점 (장세진)
 			"    ASSESS_id VARCHAR2(20) primary key, " +		// 번호 MEMBER_number + MOVIE_number 
-			"    MEMBER_number NUMBER(10)  REFERENCES MEMBER(MEMBER_number), " + // 추가한 회원번호 
-			"    MOVIE_number number(10) REFERENCES Movie(movie_number), " + // 영화 제목 
+			"    MEMBER_number NUMBER(10)  REFERENCES MEMBER(MEMBER_number) on delete cascade, " + // 추가한 회원번호 
+			"    MOVIE_number number(10) REFERENCES Movie(movie_number) on delete cascade, " + // 영화 제목 
 			"    ASSESS_CONTENT varchar2(100) not null, " + 	// 내용
 			"    ASSESS_STARS NUMBER(2) not null, " +			// 별점 
 			"    ASSESS_REGDATE date default sysdate" +			// 등록일자 
@@ -118,8 +118,8 @@ public class DBVersionManager {
 			
 			"create table ASSESSMENT_EST (" + 					// 평가한 영화의 좋아요/싫어요(장세진)
 			"    ASSESS_EST_id varchar2(20) primary key, " + 	// 번호 MEMBER_number + ASSESS_number
-			"    MEMBER_number NUMBER(10) REFERENCES MEMBER(MEMBER_number), " + // 추가한 회원번호 
-			"    ASSESS_id VARCHAR2(20) REFERENCES assessment(ASSESS_id), " + // 한줄평 번호 
+			"    MEMBER_number NUMBER(10) REFERENCES MEMBER(MEMBER_number) on delete cascade, " + // 추가한 회원번호 
+			"    ASSESS_id VARCHAR2(20) REFERENCES assessment(ASSESS_id) on delete cascade, " + // 한줄평 번호 
 			"    ASSESS_EST CHAR(1) CHECK (ASSESS_EST IN ('L','D')), " + // 좋아요L 싫어요D 
 			"    ASSESS_EST_REGDATE date default sysdate" +		// 등록일자 
 			")",
@@ -163,13 +163,13 @@ public class DBVersionManager {
 			")",
 			
 			"create table tag_mapping (" + 					// 태그맵핑  (최원준)
-			"    tag_content varchar2(60) REFERENCES TAG(tag_content), " + // 태그 번호 
-			"    MOVIE_number NUMBER(10) REFERENCES MOVIE(MOVIE_number)" + // 영화 번호 
+			"    tag_content varchar2(60) REFERENCES TAG(tag_content) on delete cascade, " + // 태그 번호 
+			"    MOVIE_number NUMBER(10) REFERENCES MOVIE(MOVIE_number) on delete cascade" + // 영화 번호 
 			")",
 			
 			"create table faq (" + 							// FAQ  (박찬영)
 			"faq_number number(10) primary key, " + 		// 번호
-			"    MEMBER_number NUMBER(10)  REFERENCES MEMBER(MEMBER_number), " + // 추가한 회원번호 
+			"    MEMBER_number NUMBER(10)  REFERENCES MEMBER(MEMBER_number) on delete cascade, " + // 추가한 회원번호 
 			"    faq_subject  VARCHAR2(60) NOT NULL, " + 	// FAQ 제목
 			"    faq_content  VARCHAR2(2000) NOT NULL, " + 	// FAQ 내용
 			"    faq_REGDATE date default sysdate" +		// 등록일자 
@@ -177,7 +177,7 @@ public class DBVersionManager {
 			
 			"create table notice (" + 						// 공지사항  (박찬영)
 			"    notice_number number(10) primary key, " +	// 번호 
-			"    MEMBER_number NUMBER(10)  REFERENCES MEMBER(MEMBER_number), " + // 추가한 회원번호
+			"    MEMBER_number NUMBER(10)  REFERENCES MEMBER(MEMBER_number) on delete cascade, " + // 추가한 회원번호
 			"    notice_title  VARCHAR2(60) NOT NULL, " + 	// 공지사항 제목
 			"    notice_content  VARCHAR2(2000) NOT NULL, " + // 공지사항 내용 
 			"    notice_cnt  number(10) default 0, " +		// 공지사항 조회수 

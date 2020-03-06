@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.0.2";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.0.3";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -124,17 +124,38 @@ public class DBVersionManager {
 			"    ASSESS_EST_REGDATE date default sysdate" +		// 등록일자 
 			")",
 			
-			"create or replace view ASSESSMENT_VIEW " +   	// assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
+//			"create or replace view ASSESSMENT_VIEW " +   	// assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
+//			"as " + 
+//			"select a.ASSESS_ID assess_id, a.MEMBER_NUMBER, m.MEMBER_NICKNAME, a.MOVIE_NUMBER, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, nvl(l.est_l, 0) likes, nvl(d.est_d, 0) hates " + 
+//			"from ASSESSMENT a " + 
+//			"join MEMBER m " + 
+//			"on a.MEMBER_NUMBER = m.MEMBER_NUMBER " + 
+//			"left outer join (select ASSESS_id, count(ASSESS_EST) est_l from ASSESSMENT_EST where ASSESS_EST = 'L' group by ASSESS_id, ASSESS_EST) l " + 
+//			"on a.ASSESS_ID = l.ASSESS_ID " + 
+//			"left outer join (select ASSESS_id, count(ASSESS_EST) est_d from ASSESSMENT_EST where ASSESS_EST = 'D' group by ASSESS_id, ASSESS_EST) d " + 
+//			"on a.ASSESS_ID = d.ASSESS_ID " + 
+//			"group by a.ASSESS_ID",
+			
+			"create or replace view ASSESSMENT_VIEW " + // assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
 			"as " + 
-			"select a.ASSESS_ID assess_id, a.MEMBER_NUMBER, m.MEMBER_NICKNAME, a.MOVIE_NUMBER, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, nvl(l.est_l, 0) likes, nvl(d.est_d, 0) hates " + 
+			"select a.ASSESS_ID assess_id, a.MEMBER_NUMBER, mb.MEMBER_NICKNAME, a.MOVIE_NUMBER, mv.MOVIE_POSTER, mv.MOVIE_TITLE, mv.MOVIE_KIND, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, nvl(l.est_l, 0) likes, nvl(d.est_d, 0) hates " + 
 			"from ASSESSMENT a " + 
-			"join MEMBER m " + 
-			"on a.MEMBER_NUMBER = m.MEMBER_NUMBER " + 
+			"join MEMBER mb " + 
+			"on a.MEMBER_NUMBER = mb.MEMBER_NUMBER " + 
 			"left outer join (select ASSESS_id, count(ASSESS_EST) est_l from ASSESSMENT_EST where ASSESS_EST = 'L' group by ASSESS_id, ASSESS_EST) l " + 
 			"on a.ASSESS_ID = l.ASSESS_ID " + 
 			"left outer join (select ASSESS_id, count(ASSESS_EST) est_d from ASSESSMENT_EST where ASSESS_EST = 'D' group by ASSESS_id, ASSESS_EST) d " + 
 			"on a.ASSESS_ID = d.ASSESS_ID " + 
+			"join MOVIE mv " + 
+			"on a.MOVIE_NUMBER = mv.MOVIE_NUMBER " + 
 			"group by a.ASSESS_ID",
+			
+			"create or replace view FAVORITE_VIEW " + 	// favorite view 영화 정보 더해짐(마이페이지 찜목록 용)
+			"as " + 
+			"select f.FAVORITE_ID, f.MEMBER_NUMBER, f.MOVIE_NUMBER, f.FAVORITE_REGDATE, mv.MOVIE_POSTER, mv.MOVIE_TITLE, mv.MOVIE_KIND, mv.MOVIE_GRADE, mv.MOVIE_TIME " + 
+			"from FAVORITE f " + 
+			"join MOVIE mv " + 
+			"on f.MOVIE_NUMBER = mv.MOVIE_NUMBER",
 			
 			"create table tag (" + 							// 태그  (최원준)
 			"    tag_content varchar2(60) primary key, " +	// 태그 내용 

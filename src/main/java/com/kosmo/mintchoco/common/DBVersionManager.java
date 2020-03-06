@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.0.3";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.0.4";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -26,6 +26,7 @@ public class DBVersionManager {
 			"drop view ASSESSMENT_view",
 			"drop table ASSESSMENT_EST",
 			"drop table ASSESSMENT",
+			"drop view FAVORITE_VIEW",
 			"drop table favorite",
 			"drop table MOVIE",
 			"drop table MEMBER",

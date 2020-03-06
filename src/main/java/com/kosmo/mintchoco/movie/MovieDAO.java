@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.ui.Model;
+
 import com.kosmo.mintchoco.common.JDBCUtil;
 
 /*
@@ -22,7 +24,8 @@ public class MovieDAO {
 	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
 	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
 	
-	final private String INSERT_MOVIE = "";
+	// 영화 번호, 포스터 주소, 	티저 링크, 영화 제목, 영화 분류, 영화 감독, 영화 배우, 상영 등급, 상영 시간, 개봉 일자, 유튜브 링크, 네이버 링크, 	게시일, 	줄거리
+	final private String INSERT_MOVIE = "INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?)";
 	final private String DELETE_MOVIE = "update movie set MOVIE_POSTER = '_', MOVIE_TEASER = '_', MOVIE_TITLE = '_', MOVIE_KIND = '_', MOVIE_DIRECTOR = '_', MOVIE_ACTOR = '_', MOVIE_GRADE = '_', MOVIE_TIME = 0, MOVIE_DATE = '_', MOVIE_YOUTUBE_URL = '_', MOVIE_NAVER_URL = '_', MOVIE_CONTENT = '_' where  MOVIE_NUMBER = ?";
 	
 	// 메소드
@@ -58,6 +61,36 @@ public class MovieDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 		return movieList;
+	}
+	
+	// 메소드
+	public void insertMovie(MovieVO movieVO) {
+		
+		try {
+			
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(INSERT_MOVIE);
+			stmt.setString(1, movieVO.getMovieTeaser());
+			stmt.setString(2, movieVO.getMovieTitle());
+			stmt.setString(3, movieVO.getMovieKind());
+			stmt.setString(4, movieVO.getMovieDirector());
+			stmt.setString(5, movieVO.getMovieActor());
+			stmt.setString(6, movieVO.getMovieGrade());
+			stmt.setString(7, movieVO.getMovieTime());
+			stmt.setString(8, movieVO.getMovieDate());
+			stmt.setString(9, movieVO.getMovieYoutubeUrl());
+			stmt.setString(10, movieVO.getMovieNaverUrl());
+			stmt.setString(11, movieVO.getMovieContent());
+			
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		
 	}
 	
 	// 메소드
@@ -104,6 +137,7 @@ public class MovieDAO {
 				movieVO.setMovieNaverUrl(rs.getString("movie_naver_url"));
 				movieVO.setMovieIndate(rs.getString("movie_indate"));
 				movieVO.setMovieContent(rs.getString("movie_content"));
+				
 			}
 			
 		} catch(Exception e) {

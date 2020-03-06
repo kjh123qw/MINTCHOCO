@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>FILE_NAME.JSP</title>
+<title> 주제별 영화 목록 </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -31,7 +31,7 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-    <h1> 전체 영화 목록 </h1>
+    <h1> 주제별 영화 목록 </h1>
 
     <div id="mov_list">
 

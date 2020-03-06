@@ -52,7 +52,7 @@
 			    <td><h4> 줄거리 </h4></td>
 			</tr>
 			<tr>
-			    <td> 장르 : Zombie</td>
+			    <td> 장르 : ${ movie.movieKind }</td>
 			    <td rowspan="4" width="50%">
 					${ movie.movieContent }
 			    </td>

@@ -36,8 +36,13 @@
 
 <body>
 
-    <h1>{ 검색어 } 검색 결과 입니다.</h1>
+    <h1>${ searchKeyWord } 검색 결과 입니다.</h1>
 	<hr>
+	<c:forEach var="movieVO" items="${ searchMovieList }">
+		<div class="search-movie-box">
+			${ movieVO.movieTitle }
+		</div>
+	</c:forEach>
 
 </body>
 

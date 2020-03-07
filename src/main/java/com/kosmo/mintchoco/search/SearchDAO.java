@@ -19,16 +19,50 @@ public class SearchDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	
-	// 검색용 쿼리
-	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
-	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
+	// 검색용 쿼리(기본)
+	private String SEARCH_MOVIE_LIST = "SELECT * FROM MOVIE WHERE";
+	
 	
 	// 전체 리스트 부르는 메소드
-	public List<MovieVO> selectMovieList() {
+	public List<MovieVO> searchMovieList(String searchKeyWord) {
 		List<MovieVO> movieList = new ArrayList<MovieVO>();
+		String[] searchKeyWordArr = searchKeyWord.split(" ");
+		char[] searchTitleArr = searchKeyWord.toCharArray();
+		String movieTitle = "";
+		String movieKind = "";
+		String movieDirector = ""; 
+		String movieActor = "";
+		String movieContent = "";
+		String orExpr = "";
+		boolean firstTitleCond = true;
+		if(searchKeyWordArr.length == 0) {
+			return null;
+		} else {
+			for(char titleLetter : searchTitleArr) {
+				if(titleLetter != ' ') {
+					System.out.println("titleLetter ==>" + titleLetter);
+					if(firstTitleCond) {
+						movieTitle = " MOVIE_TITLE LIKE '" + titleLetter + "%'";
+						firstTitleCond = false;
+					} else {
+						movieTitle += " AND MOVIE_TITLE LIKE '%" + titleLetter + "%'";
+					}
+				}
+			}
+			for(String keyWord : searchKeyWordArr) {
+				movieKind += orExpr + " MOVIE_KIND LIKE '%" + keyWord + "%'";
+				movieDirector += orExpr + " MOVIE_DIRECTOR LIKE '%" + keyWord + "%'";
+				movieActor += orExpr + " MOVIE_ACTOR LIKE '%" + keyWord + "%'";
+				movieContent += orExpr + " MOVIE_CONTENT LIKE '%" + keyWord + "%'";
+				orExpr = " OR";
+			}
+		}
+		SEARCH_MOVIE_LIST += movieTitle + " OR" + movieKind + " OR" + movieDirector + " OR" + movieActor + " OR" + movieContent;
+
+		System.out.println(":::::::::: SEARCH_MOVIE_LIST : " + SEARCH_MOVIE_LIST);
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(SELECT_MOVIE_LIST);
+			stmt = conn.prepareStatement(SEARCH_MOVIE_LIST);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
 				MovieVO movieVO = new MovieVO();
@@ -50,7 +84,7 @@ public class SearchDAO {
 			}
 			
 		} catch(Exception e) {
-			System.out.println("Error - selectMovieList()\n");
+			System.out.println("Error - searchMovieList()\n");
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(rs, stmt, conn);

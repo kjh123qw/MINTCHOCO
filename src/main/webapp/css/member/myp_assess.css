@@ -1,0 +1,206 @@
+/* 기본 CSS를 작성합니다. (세로모드 모바일 디바이스)
+  기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
+  가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
+
+
+.con_assess {
+	margin: 0 auto;
+	padding-top : 10px;
+	padding-bottom : 10px;
+	padding-left : 10px;
+	padding-right : 10px;
+	border: 2px solid #00D7C0;
+	max-width: 980px;
+	margin-bottom: 30px;
+	background-attachment:fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.con_assess_bg {
+	background: rgba(0,0,0,0.7);
+}
+.con_assess:hover .con_assess_bg{
+	transition-duration: 0.2s;
+	background: rgba(0,0,75,0.7);
+}
+.con_chkbox:checked + .con_assess_bg{
+	transition-duration: 0.2s;
+	background: rgba(75,0,0,0.7);
+}
+
+#assess_list_delete {
+	display: none;
+}
+.con_chkbox:checked +div img{
+	transition-duration: 0.2s;
+	opacity: 0.5;
+}
+
+.con_assess_img_wrap {
+	margin-top: 10px;
+	margin-right: 20px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+}
+.con_assess_img_poster {
+	width: 167px;
+	height: 250px;
+}
+.con_assess_stars_date {
+	margin-right: 10px;
+}
+.con_assess_img_stars {
+	position: relative;
+	font-size: 60px;
+	background-color: #008080;
+	color: white;
+	height: 127px;
+}
+
+
+.con_assess_img_stars_score {
+	font-family: 'Orbitron', sans-serif;
+	display: table-cell;
+	width: 116px;
+	vertical-align: middle;
+	text-align: center;
+	height: 127px;
+}
+.con_assess_mintchoco {
+	position: absolute;
+	right: -10px;
+	top: -20px;
+	width: 60px;
+}
+.con_assess_float {
+	float:left;
+}
+.con_assess_float_right {
+	float: right;
+}
+
+.con_assess_cont_subject {
+	white-space: nowrap;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+}
+.con_assess_cont_genre {
+	white-space: nowrap;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+}
+
+.con_assess_cont_line_content p {
+  	position: relative;
+  	max-height: calc(16 * 1.5 * 2 * 1px);
+  	font-size: 16px;
+  	line-height: 1.5;
+  	word-break: break-all;
+  	overflow: hidden;
+}
+.con_assess_cont_line_content p::before,
+.con_assess_cont_line_content p::after {
+  	position: absolute;
+}
+.con_assess_cont_line_content p::before {
+  	content: '...';
+  	top: calc(16 * 1.5 * (2 - 1) * 1px);
+  	right: 0;
+  	width: 1em;
+}
+.con_assess_cont_line_content p::after {
+  	content: '';
+  	width: 100%;
+  	height: 100%;
+}
+
+.con_assess_cont_subject {
+	font-size: 40px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+.con_assess_btn {
+	display: inline-block;
+	margin-bottom: 5px;
+	margin-right: 5px;
+	background-color: #008080;
+	color: white;
+	padding-top : 5px;
+	padding-bottom : 5px;
+	padding-left : 10px;
+	padding-right : 10px;
+	border-radius: 10px;
+}
+.con_assess_cont_line_wrap {
+	width: 620px;
+	background-color: rgba(10,50,50,0.7);
+	padding: 10px;
+	border: 1px solid #555;
+	height: 105px;
+}
+.con_assess_cont_line {
+	margin-left: 0px;
+}
+.con_assess_cont_line_content {
+	width: 595px;
+	height: 50px;
+	padding: 10px;
+	margin-top: 5px;
+	border: 1px dashed #999;
+}
+.con_assess_cont_genre {
+	margin-bottom: 20px;
+}
+.con_assess_cont_tag {
+	margin-bottom: 20px;
+}
+
+.con_assess_cont_wrap {
+	margin-top: 10px;
+	width: 770px;
+}
+
+.con_assess_cont_right_wrap {
+	width: 500px;
+}
+.con_assess_stars_wrap {
+	width: 70px;
+	margin-top: 5px;
+	
+}
+.con_assess_stars {
+	color: white;
+	font-size: 20px;
+	margin-left: 0px;
+}
+.con_assess_stars {
+	font-size: 28px;
+}
+.con_assess_stars_like {
+	font-size: 20px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.icon_assess_wrap {
+	border-bottom: 5px solid #00D7C0;
+}
+
+/* 가로 해상도가 576px 보다 큰 화면에 적용 */
+@media screen and (min-width: 576px) {
+      
+}
+
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
+@media screen and (min-width: 768px) {
+    
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+
+}
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+    
+}

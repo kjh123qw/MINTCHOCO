@@ -160,3 +160,98 @@ function modal(element){
 		bg.style.display = 'none';
 	}
 }
+
+function checkModify(){
+	var btn = document.getElementsByClassName('st1-80-50')[0];
+	var modifyINF = document.getElementsByClassName('con_conf_modifyINF_wrap')[0];
+	var sfmodal = document.getElementsByClassName('con_modal_bg_check')[0];
+	var successWindow = document.getElementsByClassName('con_conf_confirmed_ok')[0];
+	var failWindow = document.getElementsByClassName('con_conf_confirmed_failed')[0];
+	var nickname = document.getElementsByClassName('conf_modify_nickname')[0];
+	var male = document.getElementsByClassName('conf_modify_male')[0];
+	var female = document.getElementsByClassName('conf_modify_female')[0];
+	var age = document.getElementsByClassName('conf_modify_age')[0];
+	var text = document.getElementsByClassName('con_conf_status')[0];
+	if(nickname.value==""){
+		btn.disabled = true;
+		sfmodal.style.display = 'block';
+		failWindow.style.display = 'block';
+		nickname.focus();
+		text.innerText = "별명이 입력되지 않았습니다."; 
+		hide('fail');
+		return false;
+	} else if(!male.checked && !female.checked){
+		sfmodal.style.display = 'block';
+		failWindow.style.display = 'block';
+		text.innerText = "성별이 선택되지 않았습니다.";
+		hide('fail');
+		return false;
+	} else if(age.value==""){
+		sfmodal.style.display = 'block';
+		failWindow.style.display = 'block';
+		age.focus();
+		text.innerText = "나이가 입력되지 않았습니다."; 
+		hide('fail');
+		return false;
+	} else {
+		successWindow.style.display = 'block'; 
+		hide('success');
+		return true;
+	} 
+}
+function hide(element){
+	var btn = document.getElementsByClassName('st1-80-50')[0];
+	var sfmodal = document.getElementsByClassName('con_modal_bg_check')[0];
+	var e = element;
+	var result;
+	if (e == 'fail') {
+		result = document.getElementsByClassName('con_conf_confirmed_failed')[0]
+	} else if (e == 'success') {
+		result = document.getElementsByClassName('con_conf_confirmed_ok')[0]
+	}
+	setTimeout(function() {
+		result.style.display = 'none';
+		sfmodal.style.display = 'none';
+		btn.disabled = false;
+	},2000);
+}
+function age_count(element){
+	var e = element;
+	var age = document.getElementsByClassName('conf_modify_age')[0];
+	if(e=='m') {
+		age.value--;
+		if (age.value <= 0) {
+			age.value ='';
+		}
+	} else if (e=='p') {
+		if (age.value <= 150) {
+			age.value++;
+		}
+	}
+}
+
+function checkDigit2() {
+	var age = document.getElementsByClassName('conf_modify_age')[0];
+	if (age.value >150) {
+		age.value='';
+	}
+}
+function checkDigit(event){
+	event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( (keyID >= 48 && keyID <= 57) || (keyID >= 96 && keyID <= 105) || keyID == 8 || keyID == 46 || keyID == 37 || keyID == 39 ) { 
+        return;
+    } else {
+    	return false;
+    }
+}
+
+function rmInput(event){
+	event = event || window.event;
+    var keyID = (event.which) ? event.which : event.keyCode;
+    if ( keyID==8 || keyID==46 || keyID==37 || keyID==39 ) {
+    	return;	
+    } else {
+        event.target.value = event.target.value.replace(/[^0-9]/g, "");
+    }
+}

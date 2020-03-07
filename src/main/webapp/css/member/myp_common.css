@@ -12,7 +12,7 @@
 	font-family: 'Malgun Gothic', sans-serif;
 }
 .myp article, .myp div {
-	box-sizing: unset;
+	box-sizing: content-box;
 }
 .myp a{
 	color: white;

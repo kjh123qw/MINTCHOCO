@@ -18,8 +18,8 @@
 <!-- 계정설정 -->
 	<form class="myp_con_conf" method="post" action="" onsubmit="return ;">
 		<center class="con_conf_wrap">
-			<article class="con_conf con_conf1 con_conf_float" onclick="modal('INF');">
-				<div class="con_conf_bg">			
+			<article class="con_conf con_conf1 con_conf_float">
+				<div class="con_conf_bg" onclick="modal('INF');">			
 					<div class="con_conf_img_wrap">
 						<div class="con_conf_subject_wrap">
 							<img src="../images/member/icons_privacy.svg">
@@ -35,9 +35,9 @@
 				</div>
 			</article>
 			
-			<article class="con_conf con_conf2 con_conf_float" onclick="modal('PWD');">
+			<article class="con_conf con_conf2 con_conf_float">
 				<div class="con_conf_bg">			
-					<div class="con_conf_img_wrap">
+					<div class="con_conf_img_wrap" onclick="modal('PWD');">
 					<div class="con_conf_subject_wrap">
 						<img src="../images/member/icons_pass.svg">
 						<!-- 140x200 -->
@@ -115,29 +115,46 @@
 		</center>
 	</form>
 	<div class="myp_con_conf_modifyINF">
-		<article class="con_conf_modifyINF_wrap con_conf_horizontalCenter">
+		<article class="con_conf_modifyINF_wrap con_conf_horizontalCenter">	
+			<div class="con_modal_bg_check"></div>
 			<div class="con_conf_x" onclick="modal('X');"><img src="../images/member/del_back.png"></div>
 			<div class="con_conf_modifyINF">
 				<div class="con_conf_modifyINF_subject conf_detail_subject">개인정보 변경</div>
-				<div class="con_conf_modifyINF_content conf_detail_content">
+				<form class="con_conf_modifyINF_content conf_detail_content" onsubmit="return checkModify();">
 					<p>변경하실 정보를 입력해주세요.</p>
-					<input type="text" class="con_conf_text" placeholder="별명">
-					<input type="text" class="con_conf_text" placeholder="성별">
-					<input type="text" class="con_conf_text" placeholder="나이">
-					<input type="text" class="con_conf_text" placeholder="자기소개">
-					<p class="con_conf_statusBar">&nbsp;</p>
-					<div class="checkPW_btn">
-						<input type="submit" id="con_conf_submit">
-						<label for="con_conf_submit" class="con_conf_submit_btn">확 인</label>
-						<input type="button" id="con_conf_cancel">
-						<label for="con_conf_cancel" class="con_conf_submit_btn checkPW_btn_cancel">취 소</label>
+					<div class="cst-text-st1">
+						<input type="text" class="text-200 conf_modify_nickname" placeholder="별명">
+						<span class="label-80">별명</span>
 					</div>
-				</div>
-			</div>			
+					<div class="cst-radio-st1 cst-text-wrap-st1">
+					  <input type="radio" name="exRadio1" class="conf_modify_male">
+					  <span class="text-70">남성</span>
+					  <input type="radio" name="exRadio1" class="conf_modify_female">
+					  <span class="text-70">여성</span>
+					  <div class=cst-text-label style="width: 80px;">성별</div>
+					</div>
+					<div class="con_conf_age_wrap">					
+						<label class="con_conf_age_label" for="con_conf_age">나이</label>
+						<img src="../images/member/plus.png" onclick="age_count('p');">
+						<input type="text" placeholder="나이" id="con_conf_age" class="conf_modify_age" onkeydown='return checkDigit(event);' onkeypress='checkDigit2();' onkeyup="rmInput(event);">
+						<img src="../images/member/minus.png" onclick="age_count('m');">
+					</div>
+					<div class="cst-text-st1 con_conf_intro_wrap">
+						<textarea class="con_conf_intro" cols="35" rows="4" wrap="hard" placeholder=""></textarea>
+						<div class=cst-text-label style="width: 80px;">자기소개</div>
+					</div>					
+					<div class="cst-btn">
+					  <input type="submit" value="확인" class="st1-80-50">
+					  <input type="reset" value="다시" class="st2-80-50">
+					  <input type="button" value="취소" class="st3-80-50">
+					</div>
+				</form>
+			</div>	
 		</article>
 	</div>
 	<div class="myp_con_conf_modifyPW">
 		<article class="con_conf_modifyPW_wrap con_conf_horizontalCenter">
+			<div class="con_modal_bg_check"></div>
 			<div class="con_conf_x" onclick="modal('X');"><img src="../images/member/del_back.png"></div>
 			<div class="con_conf_modifyPW">
 				<div class="con_conf_modifyPW_subject conf_detail_subject">비밀번호 변경</div>
@@ -170,7 +187,7 @@
 				<span class="icon_confirmed_wrap"><img src="../images/member/failed.svg" class="icon_confirmed"></span>
 				<span>Failed</span>
 			</div>
-			<div class="con_conf_confirmed conf_detail_content">입력하신 정보가 올바르지 않거나,<br>시스템 오류가 발생했습니다.</div>
+			<div class="con_conf_confirmed con_conf_status conf_detail_content">입력하신 정보가 올바르지 않거나,<br>시스템 오류가 발생했습니다.</div>
 		</article>
 	</div>
 <!-- //서브메뉴 이하 담당자 내용 -->

@@ -165,7 +165,7 @@ div[class *= cst-btn] {
 }
 div[class *= cst-btn-wrap-st] {
 	position: relation;
-	padding: 5px;
+	padding: 0;
 	float: left;
 }
 div[class *= cst-btn-wrap-st1] > div:nth-of-type(1) {

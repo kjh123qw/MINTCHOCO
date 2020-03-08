@@ -228,7 +228,7 @@ $(function() {
 
 			var tagWrap = $('<div />', {
 				'class': 'cst-btn-wrap-' + tagStyle,
-				'style': 'width: ' + (tagWidth + 10) + 'px; height: ' + (tagHeight + 10) + 'px;'
+				'style': 'width: ' + tagWidth + 'px; height: ' + tagHeight + 'px;'
 			});
 			var firstBg = $('<div />', {
 				'style': 'width: ' + tagWidth + 'px; height: 0px;'

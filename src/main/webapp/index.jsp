@@ -47,11 +47,11 @@
 		</div>
 		
 		<div id = "mainDiv2">
-			
+			<button onclick = "test();">test</button>
 			<div id ="loginDiv">
 				<h1 class = "title">MINTCHOCO</h1>
 				
-				<form action = "login.do" method="POST" name = "loginForm" class = "loginForm">
+				<form action = "login.do" method="POST" name = "loginForm" class = "loginForm" onsubmit = "return loginCheck()";>
 
 					<div class="cst-text-st1">
   						<input type="text" name = "email" class="text-200" placeholder="EMAIL">
@@ -59,7 +59,7 @@
 					</div>
 					
 					<div class="cst-chkbox-st2">
-  						<input type="checkbox">
+  						<input type="checkbox" name = "rememberCheck">
   						<span class="text-250">REMEMBER ME</span>
 					</div>
 

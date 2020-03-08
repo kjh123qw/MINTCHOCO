@@ -175,3 +175,23 @@ function findPassword(){
 	})
 }
 
+
+function loginCheck(){
+	alert("로그인")
+	
+}
+
+function test(){
+	  $.ajax({
+	        url:"login.do",
+	        type:'GET',
+	        dataType : "text",
+	        success:function(data){
+	            alert("완료!");
+	        },
+	        error:function(){
+	            alert("에러 발생~~ \n");
+	        }
+	    });
+}
+

@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> Delete Form </title>
+<title> 기존 영화 삭제 </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>

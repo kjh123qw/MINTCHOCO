@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> Insert Form </title>
+<title> 영화 정보 입력 </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -44,15 +44,7 @@
 			
 				<tr>
 					<td colspan="2">
-						최대한 자세하게 정보를 입력해주세요.
-					</td>
-				</tr>
-				<tr>
-					<td>
-						표지 주소
-					</td>
-					<td>
-						<input type="text" name="moviePoster">
+						정보를 하나도 빠짐 없이 입력해주세요.
 					</td>
 				</tr>
 				<tr>

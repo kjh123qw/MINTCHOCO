@@ -61,7 +61,9 @@ public class MovieController {
 	
 	// 영화 정보 수정
 	@RequestMapping(value = "/movie/update.do", method = RequestMethod.POST)
-	public String update(MovieDAO movieDAO, Model model, HttpServletRequest request) {
+	public String update(MovieVO movieVO, MovieDAO movieDAO, HttpServletRequest request) {
+		
+		movieDAO.updateMovie(movieVO);
 		
 		return "redirect:/movie/recommand.do";
 
@@ -71,13 +73,13 @@ public class MovieController {
 	@RequestMapping(value = "/movie/delete.do", method = RequestMethod.POST)
 	public String delete(MovieDAO movieDAO, Model model, HttpServletRequest request) {
 
-		if(request.getParameter("movieNumber") != "")
+		if(request.getParameter("movieNumber").equals(""))
 			movieDAO.deleteMovie1(request.getParameter("movieNumber"));
-		if(request.getParameter("movieTitle") != "")
+		if(request.getParameter("movieTitle").equals(""))
 			movieDAO.deleteMovie2(request.getParameter("movieTitle"));
-		if(request.getParameter("movieDirector") != "")
+		if(request.getParameter("movieDirector").equals(""))
 			movieDAO.deleteMovie3(request.getParameter("movieDirector"));
-		if(request.getParameter("movieActor") != "")
+		if(request.getParameter("movieActor").equals(""))
 			movieDAO.deleteMovie4(request.getParameter("movieActor"));
 
 		return "redirect:/movie/recommand.do";

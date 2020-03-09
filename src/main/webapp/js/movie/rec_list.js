@@ -7,23 +7,23 @@ $(function () {
 var set = 0;
 	
 	$("#rButton").mouseover(function() {
-		$("#rButton").css("color", "snow");
+		$("#rButton").css("color", "#F5FFFA");
 		$("#rButton").css("top", "125px");
 		$("#rButton").css("font-size", "7em");
 	});
 	$("#rButton").mouseout(function() {
-		$("#rButton").css("color", "#00d7cb");
+		$("#rButton").css("color", "#F5FFFA");
 		$("#rButton").css("top", "175px");
 		$("#rButton").css("font-size", "50px");
 	});
 
 	$("#lButton").mouseover(function() {
-		$("#lButton").css("color", "snow");
+		$("#lButton").css("color", "#F5FFFA");
 		$("#lButton").css("top", "125px");
 		$("#lButton").css("font-size", "7em");
 	});
 	$("#lButton").mouseout(function() {
-		$("#lButton").css("color", "#00d7cb");
+		$("#lButton").css("color", "#F5FFFA");
 		$("#lButton").css("top", "175px");
 		$("#lButton").css("font-size", "50px");
 	});

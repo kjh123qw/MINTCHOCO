@@ -53,13 +53,6 @@
 
     </div>
 
-	<div class="delete-movie">
-		<form action="delete.do" method="post">
-			<input type="text" value="삭제하실 영화의 제목을 정확하게 입력해주세요.">
-			<input type="button" value="입력 완료">
-		</form>
-	</div>
-
     <div class="mov-button">
         <table>
             <tr>

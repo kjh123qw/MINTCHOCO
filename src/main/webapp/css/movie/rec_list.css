@@ -12,7 +12,7 @@ body{
     background-color: #00ac9a;
 }
 
-#mov_list{
+#movRec{
     position: relative;
     width: 100%;
     height: 480px;
@@ -39,7 +39,7 @@ h1{
 
 /* 좌우 이동 버튼 */
 
-#l_button, #r_button {
+#lButton, #rButton {
     position: absolute;
     width: 75px;
     height: 75px;
@@ -49,11 +49,11 @@ h1{
     color: #593e36;
 }
 
-#l_button{
+#lButton{
     left: 40px;
 }
 
- #r_button{
+ #rButton{
     right: 40px;
 }
 
@@ -96,14 +96,14 @@ h1{
 
 /* 밑 부분 버튼 */
 
-.mov_button{
+.mov-button{
     width: 100%;
     margin: 0 auto;
     text-align: center;
     background-color: #00ac9a;
 }
 
-.mov_button a{
+.mov-button a{
     margin: 30px;
     height: 80px;
     width: 400px;
@@ -124,7 +124,7 @@ h1{
 	    background-color: #00ac9a;
 	}
 	
-	#mov_list{
+	#movRec{
 	    position: relative;
 	    width: 100%;
 	    height: 480px;
@@ -151,7 +151,7 @@ h1{
 	
 	/* 좌우 이동 버튼 */
 	
-	#l_button, #r_button {
+	#lButton, #rButton {
 	    position: absolute;
 	    width: 75px;
 	    height: 75px;
@@ -161,11 +161,11 @@ h1{
 	    color: #593e36;
 	}
 	
-	#l_button{
+	#lButton{
 	    left: 40px;
 	}
 	
-	 #r_button{
+	 #rButton{
 	    right: 40px;
 	}
 	
@@ -208,14 +208,14 @@ h1{
 	
 	/* 밑 부분 버튼 */
 	
-	.mov_button{
+	.mov-button{
 	    width: 100%;
 	    margin: 0 auto;
 	    text-align: center;
 	    background-color: #00ac9a;
 	}
 	
-	.mov_button a{
+	.mov-button a{
 	    margin: 30px;
 	    height: 80px;
 	    width: 400px;
@@ -238,7 +238,7 @@ h1{
 	    background-color: #00ac9a;
 	}
 	
-	#mov_list{
+	#movRec{
 	    position: relative;
 	    width: 100%;
 	    height: 480px;
@@ -265,7 +265,7 @@ h1{
 	
 	/* 좌우 이동 버튼 */
 	
-	#l_button, #r_button {
+	#lButton, #rButton {
 	    position: absolute;
 	    width: 75px;
 	    height: 75px;
@@ -275,11 +275,11 @@ h1{
 	    color: #593e36;
 	}
 	
-	#l_button{
+	#lButton{
 	    left: 40px;
 	}
 	
-	 #r_button{
+	 #rButton{
 	    right: 40px;
 	}
 	
@@ -322,14 +322,14 @@ h1{
 	
 	/* 밑 부분 버튼 */
 	
-	.mov_button{
+	.mov-button{
 	    width: 100%;
 	    margin: 0 auto;
 	    text-align: center;
 	    background-color: #00ac9a;
 	}
 	
-	.mov_button a{
+	.mov-button a{
 	    margin: 30px;
 	    height: 80px;
 	    width: 400px;
@@ -352,7 +352,7 @@ h1{
 	    background-color: #00ac9a;
 	}
 	
-	#mov_list{
+	#movRec{
 	    position: relative;
 	    width: 100%;
 	    height: 480px;
@@ -379,7 +379,7 @@ h1{
 	
 	/* 좌우 이동 버튼 */
 	
-	#l_button, #r_button {
+	#lButton, #rButton {
 	    position: absolute;
 	    width: 75px;
 	    height: 75px;
@@ -389,11 +389,11 @@ h1{
 	    color: #593e36;
 	}
 	
-	#l_button{
+	#lButton{
 	    left: 40px;
 	}
 	
-	 #r_button{
+	 #rButton{
 	    right: 40px;
 	}
 	
@@ -436,14 +436,14 @@ h1{
 	
 	/* 밑 부분 버튼 */
 	
-	.mov_button{
+	.mov-button{
 	    width: 100%;
 	    margin: 0 auto;
 	    text-align: center;
 	    background-color: #00ac9a;
 	}
 	
-	.mov_button a{
+	.mov-button a{
 	    margin: 30px;
 	    height: 80px;
 	    width: 400px;
@@ -466,7 +466,7 @@ h1{
 	    background-color: #00ac9a;
 	}
 	
-	#mov_list{
+	#movRec{
 	    position: relative;
 	    width: 100%;
 	    height: 480px;
@@ -493,7 +493,7 @@ h1{
 	
 	/* 좌우 이동 버튼 */
 	
-	#l_button, #r_button {
+	#lButton, #rButton {
 	    position: absolute;
 	    width: 75px;
 	    height: 75px;
@@ -503,11 +503,11 @@ h1{
 	    color: #00d7cb;
 	}
 	
-	#l_button{
+	#lButton{
 	    left: 20px;
 	}
 	
-	 #r_button{
+	 #rButton{
 	    right: 20px;
 	}
 	
@@ -550,14 +550,14 @@ h1{
 	
 	/* 밑 부분 버튼 */
 	
-	.mov_button{
+	.mov-button{
 	    width: 100%;
 	    margin: 0 auto;
 	    text-align: center;
 	    background-color: #00ac9a;
 	}
 	
-	.mov_button a{
+	.mov-button a{
 	    margin: 30px;
 	    height: 80px;
 	    width: 400px;

@@ -36,18 +36,6 @@ MOVIE_CONTENT
 @Controller
 public class MovieController {
 
-	@RequestMapping("/movie/main.do")
-	public String main() {
-		return "main.jsp";
-	}
-	@RequestMapping("/movie/rank.do")
-	public String rank() {
-		return "mov_rank.jsp";
-	}
-	@RequestMapping("/movie/insert.do")
-	public String admin() {
-		return "mov_admin.jsp";
-	}
 	@RequestMapping(value = "/movie/insert.do", method = RequestMethod.POST)
 	public String insert(MovieVO movieVO, MovieDAO movieDAO, Model model, HttpServletRequest request) {
 		
@@ -55,26 +43,34 @@ public class MovieController {
 		
 		return "redirect:/movie/recommand.do";
 	}
-	@RequestMapping(value = "/movie/update.do", method = RequestMethod.POST)
-	public String update(HttpServletRequest request) {
-
-		return "redirect:/movie/recommand.do";
-
-	}
+	
 	@RequestMapping("/movie/recommand.do")
 	public String movieList(MovieDAO movieDAO, Model model) {
 		model.addAttribute("movieList", movieDAO.selectMovieList());
-		return "rec_list.jsp";
-	}
-	@RequestMapping("/movie/delete.do")
-	public String movieDelete(MovieDAO movieDAO, Model model, HttpServletRequest request) {
-		movieDAO.deleteMovie(request.getParameter("movieNumber"));
 		return "rec_list.jsp";
 	}
 	@RequestMapping("/movie/detail.do")
 	public String movieDetail(MovieDAO movieDAO, Model model, HttpServletRequest request) {
 		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 		return "mov_detail.jsp";
+	}
+	
+	@RequestMapping(value = "/movie/update.do", method = RequestMethod.POST)
+	public String update(HttpServletRequest request) {
+
+		return "redirect:/movie/recommand.do";
+
+	}
+	@RequestMapping(value = "/movie/delete.do", method = RequestMethod.POST)
+	public String delete(HttpServletRequest request) {
+
+		return "redirect:/movie/recommand.do";
+
+	}
+	
+	@RequestMapping("/movie/rank.do")
+	public String rank() {
+		return "mov_rank.jsp";
 	}
 	
 }

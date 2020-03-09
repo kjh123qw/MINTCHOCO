@@ -29,6 +29,36 @@ public class MovieDAO {
 	final private String DELETE_MOVIE = "update movie set MOVIE_POSTER = '_', MOVIE_TEASER = '_', MOVIE_TITLE = '_', MOVIE_KIND = '_', MOVIE_DIRECTOR = '_', MOVIE_ACTOR = '_', MOVIE_GRADE = '_', MOVIE_TIME = 0, MOVIE_DATE = '_', MOVIE_YOUTUBE_URL = '_', MOVIE_NAVER_URL = '_', MOVIE_CONTENT = '_' where  MOVIE_NUMBER = ?";
 	
 	// 메소드
+	public void insertMovie(MovieVO movieVO) {
+		
+		try {
+			
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(INSERT_MOVIE);
+			stmt.setString(1, movieVO.getMovieTeaser());
+			stmt.setString(2, movieVO.getMovieTitle());
+			stmt.setString(3, movieVO.getMovieKind());
+			stmt.setString(4, movieVO.getMovieDirector());
+			stmt.setString(5, movieVO.getMovieActor());
+			stmt.setString(6, movieVO.getMovieGrade());
+			stmt.setString(7, movieVO.getMovieTime());
+			stmt.setString(8, movieVO.getMovieDate());
+			stmt.setString(9, movieVO.getMovieYoutubeUrl());
+			stmt.setString(10, movieVO.getMovieNaverUrl());
+			stmt.setString(11, movieVO.getMovieContent());
+			
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		
+	}
+	
+	// 메소드
 	public List<MovieVO> selectMovieList() {
 		List<MovieVO> movieList = new ArrayList<MovieVO>();
 		try {
@@ -63,54 +93,6 @@ public class MovieDAO {
 		return movieList;
 	}
 	
-	// 메소드
-	public void insertMovie(MovieVO movieVO) {
-		
-		try {
-			
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(INSERT_MOVIE);
-			stmt.setString(1, movieVO.getMovieTeaser());
-			stmt.setString(2, movieVO.getMovieTitle());
-			stmt.setString(3, movieVO.getMovieKind());
-			stmt.setString(4, movieVO.getMovieDirector());
-			stmt.setString(5, movieVO.getMovieActor());
-			stmt.setString(6, movieVO.getMovieGrade());
-			stmt.setString(7, movieVO.getMovieTime());
-			stmt.setString(8, movieVO.getMovieDate());
-			stmt.setString(9, movieVO.getMovieYoutubeUrl());
-			stmt.setString(10, movieVO.getMovieNaverUrl());
-			stmt.setString(11, movieVO.getMovieContent());
-			
-			stmt.executeUpdate();
-			
-		} catch(Exception e) {
-			System.out.println("Error - selectMovieList()\n");
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		
-	}
-	
-	// 메소드
-	public void deleteMovie(String movieNumber) {
-		
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(DELETE_MOVIE);
-			stmt.setString(1, movieNumber);
-			stmt.executeUpdate();
-			
-		} catch(Exception e) {
-			System.out.println("Error - selectMovieList()\n");
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(stmt, conn);
-		}
-
-	}
-
 	// 메소드
 	public MovieVO selectOneMovie(String movieNuber) {
 		
@@ -148,4 +130,23 @@ public class MovieDAO {
 		}
 		return movieVO;
 	}
+	
+	// 메소드
+	public void deleteMovie(String movieNumber) {
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(DELETE_MOVIE);
+			stmt.setString(1, movieNumber);
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+
+	}
+
 }

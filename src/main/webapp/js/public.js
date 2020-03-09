@@ -13,14 +13,14 @@ $(function() {
 		$('#mobSearchWrap').show();
 		$('#mobSearchWrap input[type=text]').focus();
 	});
-	$('#mobSearchWrap input[type=submit]').click(function() {
-		console.log('click!');
-	});
-	$('#mobSearchWrap input[type=text]').focus(function() {
-		console.log('focus!');
-	});
-	$('#mobSearchWrap input[type=text]').blur(function() {
+	$('#blackBackGround').click(function() {
 		$('#mobSearchWrap').hide();
+	});
+	$('#mobMenuBtn').click(function() {
+		$('#mobMenuWrap').show();
+	});
+	$('#mobMenuWrap > div > div').click(function() {
+		$('#mobMenuWrap').hide();
 	});
 //	checkbox tag
 	$('div[class*=cst-chkbox-st]').each(function(index, item) {
@@ -219,11 +219,19 @@ $(function() {
 					'background-color': 'rgba(0, 50, 50, 0.9)',
 					'width': '100%'
 				}, 150);
+				$(cstBoxHtml).children('input').stop().animate({
+					'background-color': 'rgba(255, 255, 255, 1)',
+					'width': '100%'
+				}, 150);
 			})
 			$(itemInp).blur(function() {
 				$(cstBoxHtml).children('div').stop().animate({
 					'background-color': '#000',
 					'width': '0'
+				}, 150);
+				$(cstBoxHtml).children('input').stop().animate({
+					'background-color': 'rgba(230, 230, 230, 0.7)',
+					'width': '100%'
 				}, 150);
 			});
 		});

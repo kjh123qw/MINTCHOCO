@@ -16,9 +16,9 @@ import com.kosmo.mintchoco.search.SearchDAO;
 public class SearchController {
 	@RequestMapping("/movie/search.do")
 	public String search(SearchDAO searchDAO, MovieDAO movieDAO, Model model, HttpServletRequest request) {
-		if(request.getParameter("searchKeyWord") == null) {
+		if(request.getParameter("searchKeyWord") == null || request.getParameter("searchKeyWord").equals("")) {
 			model.addAttribute("searchKeyWord", "전체 영화");
-			model.addAttribute("searchMovieList", movieDAO.selectMovieList());
+			model.addAttribute("allMovieList", movieDAO.selectMovieList());
 		} else {
 			model.addAttribute("searchKeyWord", request.getParameter("searchKeyWord"));
 			model.addAttribute("searchMovieList", searchDAO.searchMovieList(request.getParameter("searchKeyWord")));

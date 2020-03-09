@@ -310,9 +310,10 @@
 				<th rowspan="2">style1</th>
 				<td style="padding: 20px; background-color: #fff;">
 					<div class="cst-btn">
-						<input type="submit" value="확인" class="st1-150-50">
-						<input type="button" value="다시" class="st2-150-50">
-						<input type="button" value="취소" class="st3-150-50">
+						<input type="submit" value="확인" class="st1-110-50">
+						<input type="button" value="다시" class="st2-110-50">
+						<input type="button" value="취소" class="st3-110-50">
+						<input type="button" value="확인" class="st4-110-50">
 					</div>
 				</td>
 				<td style="text-align: left;" rowspan="2">
@@ -327,7 +328,7 @@
 						</tr>
 						<tr>
 							<th>st1</th>
-							<td>스타일 1번<b><i> [1|2|3] </i></b></td>
+							<td>스타일 1번<b><i> [1|2|3|4] </i></b></td>
 						</tr>
 						<tr>
 							<th>st1-150-50</th>
@@ -339,9 +340,10 @@
 			<tr>
 				<td style="text-align: left;">
 					&lt;div class="<b>cst-btn</b>"&gt;<br>
-						&nbsp;&nbsp;&lt;input type="submit" value="확인" class="<b>st1-150-50</b>"&gt;<br>
-						&nbsp;&nbsp;&lt;input type="button" value="다시" class="<b>st2-150-50</b>"&gt;<br>
-						&nbsp;&nbsp;&lt;input type="button" value="취소" class="<b>st3-150-50</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="submit" value="확인" class="<b>st1-110-50</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="button" value="다시" class="<b>st2-110-50</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="button" value="취소" class="<b>st3-110-50</b>"&gt;<br>
+						&nbsp;&nbsp;&lt;input type="button" value="취소" class="<b>st4-110-50</b>"&gt;<br>
 					&lt;/div&gt;
 				</td>
 			</tr>

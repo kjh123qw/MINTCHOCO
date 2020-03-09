@@ -47,7 +47,6 @@
 		</div>
 		
 		<div id = "mainDiv2">
-			<button onclick = "test();">test</button>
 			<div id ="loginDiv">
 				<h1 class = "title">MINTCHOCO</h1>
 				
@@ -94,25 +93,25 @@
   					<input type="password" name = "pwdCheck" class="text-200" placeholder = "PASSWORD CHECK">
   					<input type="text" name = "name" class="text-200" placeholder="NAME">
   					<input type="text" name = "nickname" class="text-200" placeholder="NICKNAME">
-  					<input type="number" name = "age" class="text-200" placeholder="AGE">
+  					<input type="number" name = "age" class="text-200" placeholder="AGE" min="0" max="100">
 				</div>
 				
 				<div class="cst-radio-st1">
-				  <input type="radio" name="exRadio1">
+				  <input type="radio" name="gender" value = "M">
 				  <span class="text-100">남자</span>
-				  <input type="radio" name="exRadio1">
+				  <input type="radio" name="gender" value = "F">
 				  <span class="text-100">여자</span>
 				</div>
 				
 				<hr id = "joinHr">
 				
 				<div class="cst-chkbox-st2">
-  					<input type="checkbox">
+  					<input type="checkbox" name = "serviceCheck">
   					<span class="text-200">서비스이용약관에동의합니다.</span>
 				</div>
 				
 				<div class="cst-btn">
-  					<input type="submit" value="JOIN" class="st1-150-50">
+  					<input type="button" value="JOIN" class="st1-150-50" onclick = "join();">
 				</div>
 			
 			</form>

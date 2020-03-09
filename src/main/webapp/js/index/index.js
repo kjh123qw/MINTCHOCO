@@ -108,6 +108,8 @@ $(function(){
 		}
 		
 	})
+	
+	
 
 	
 })
@@ -142,19 +144,7 @@ function joinMember(){
 		$("#upBtn").removeClass('heightArrow').addClass('widthArrow');
 	})
 	
-	
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 }
 
@@ -177,21 +167,109 @@ function findPassword(){
 
 
 function loginCheck(){
-	alert("로그인")
+	
+	 $.ajax({
+	        url:"login.do",
+	        type:'post',
+	        datatype:'text',
+	        success:function(msg){
+	        	
+	        	alert("성공")
+	        	$(".cst-btn").effect( "bounce", {times:3}, 1000 );
+
+
+	        },
+	        error:function(){
+	        	alert("실패")
+	        	$(".cst-btn").effect( "shake", {times:3}, 1000 );
+	        }
+	    });
+	 
+	 
+	 return false;
+
 	
 }
 
-function test(){
-	  $.ajax({
-	        url:"login.do",
-	        type:'GET',
-	        dataType : "text",
-	        success:function(data){
-	            alert("완료!");
-	        },
-	        error:function(){
-	            alert("에러 발생~~ \n");
-	        }
-	    });
+function join(){
+	var email = joinForm.email.value;
+	var pwd1 = joinForm.pwd.value;
+	var pwd2 = joinForm.pwdCheck.value;
+	var name = joinForm.name.value;
+	var nickname = joinForm.nickname.value;
+	var age = joinForm.age.value;
+	var gender = joinForm.gender.value; //공백 or M or F
+	var serviceCheck = $("input:checkbox[name='serviceCheck']").is(":checked"); //false or true
+	
+	/*공백확인*/
+//	if(email == "" || pwd1 == "" || pwd2 == "" || name == "" || nickname == "" || age == "" || gender == ""){
+//		alert("입력란의 빈칸을 확인해주세요")
+//		return false;
+//	}
+	/*공백확인*/
+	
+	
+	/*정규표현식*/
+	
+	var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	if(!emailCheck.test(email)){
+		alert("이메일를 확인해주세요")
+		return false;
+	}
+	
+	var pwdCheck = /^[A-Za-z0-9]{6,18}$/;
+
+	if(!pwdCheck.test(pwd1) || !pwdCheck.test(pwd2)){
+		alert("비밀번호는 한글,영어 6글자에서 18글자로 작성해주세요")
+		return false;
+	}
+	
+	if(pwd1 != pwd2){
+		alert("비밀번호를 동일하게 작성해주세요")
+		return false;
+	}
+	
+	var nameCheck = /^[가-힣]{2,4}$/;
+	
+	if(!nameCheck.test(name)){
+		alert("이름은 한글 2글자에서 4글자로 작성해주세요")
+		return false;
+	}
+	
+	var nickNameCheck = /^[A-Za-z0-9가-힣]{2,18}$/;
+	
+	if(!nickNameCheck.test(nickname)){
+		alert("별명은 2글자에서 18글자로 작성해주세요")
+		return false;
+	}
+
+	
+	/*정규표현식*/
+	
+	
+	/*약관동의*/
+	if(!serviceCheck){
+		alert("서비스약관에 동의해주세요")
+		return false;
+	}
+	/*약관동의*/
+	
+	var allData = { "email": email, "nickname": nickname };
+	
+	$.ajax({
+        url:"joinCheck.do",
+        type:'post',
+        data: allData,
+        success:function(data){
+        	alert('성공')
+        },
+        error:function(){
+        	alert('실패')
+        }
+    });
+	
+/*document.joinForm.submit();*/
+	return false;
 }
+
 

@@ -22,8 +22,8 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
-<script src="${ contextPath }/js/rec_list.js"></script>
-<link rel="stylesheet" href="${ contextPath }/css/rec_list.css">
+<script src="${ contextPath }/js/movie/rec_list.js"></script>
+<link rel="stylesheet" href="${ contextPath }/css/movie/rec_list.css">
 
 <!-- //담당자 js, css -->
 </head>
@@ -33,10 +33,10 @@
 
     <h1> 주제별 영화 목록 </h1>
 
-    <div id="mov_list">
+    <div id="movRec">
 
-        <div id="l_button">◀</div>
-        <div id="r_button">▶</div>
+        <div id="lButton">◀</div>
+        <div id="rButton">▶</div>
         
         <div class="bg">
 	        <c:forEach var="movie" items="${movieList}">
@@ -53,14 +53,7 @@
 
     </div>
 
-	<div class="delete_movie">
-		<form action="delete.do" method="post">
-			<input type="text" value="삭제하실 영화의 제목을 정확하게 입력해주세요.">
-			<input type="button" value="입력 완료">
-		</form>
-	</div>
-
-    <div class="mov_button">
+    <div class="mov-button">
         <table>
             <tr>
                 <td><a href="#">민초 추천</a></td>

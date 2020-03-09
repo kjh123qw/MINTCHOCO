@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 영화 정보 입력 </title>
+<title> 영화 정보 수정 </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -25,8 +25,8 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
-<script src="${ contextPath }/js/movie/mov_insert.js"></script>
-<link rel="stylesheet" href="${ contextPath }/css/movie/mov_insert.css">
+<script src="${ contextPath }/js/movie/mov_update.js"></script>
+<link rel="stylesheet" href="${ contextPath }/css/movie/mov_update.css">
 
 <!-- //담당자 js, css -->
 </head>
@@ -34,17 +34,25 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-	<h1> 영화 정보 입력 </h1>
+	<h1> 영화 정보 수정 </h1>
 
-	<div id="movInsert">
+	<div id="movUpdate">
 
-		<form action="insert.do" method="post">
+		<form action="update.do" method="post">
 		
 			<table>
 			
 				<tr>
 					<td colspan="2">
-						정보를 하나도 빠짐 없이 입력해주세요.
+						삭제할 영화의 번호를 입력하고 최대한 자세하게 정보를 입력해주세요.
+					</td>
+				</tr>
+				<tr>
+					<td>
+						영화 번호
+					</td>
+					<td>
+						<input type="text" name="movieNumber">
 					</td>
 				</tr>
 				<tr>

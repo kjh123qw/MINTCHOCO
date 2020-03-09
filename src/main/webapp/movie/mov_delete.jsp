@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> 영화 정보 입력 </title>
+<title> 기존 영화 삭제 </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -25,8 +25,8 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
-<script src="${ contextPath }/js/movie/mov_insert.js"></script>
-<link rel="stylesheet" href="${ contextPath }/css/movie/mov_insert.css">
+<script src="${ contextPath }/js/movie/mov_delete.js"></script>
+<link rel="stylesheet" href="${ contextPath }/css/movie/mov_delete.css">
 
 <!-- //담당자 js, css -->
 </head>
@@ -34,25 +34,25 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-	<h1> 영화 정보 입력 </h1>
+	<h1> 기존 영화 삭제 </h1>
 
-	<div id="movInsert">
-
-		<form action="insert.do" method="post">
+	<div id="mov-admin">
+	
+		<form action="delete.do" method="post">
 		
 			<table>
 			
 				<tr>
 					<td colspan="2">
-						정보를 하나도 빠짐 없이 입력해주세요.
+						삭제할 영화의 정보를 하나 이상 입력해주세요.
 					</td>
 				</tr>
 				<tr>
 					<td>
-						티저 링크
+						영화 번호
 					</td>
 					<td>
-						<input type="text" name="movieTeaser">
+						<input type="text" name="movieNumber">
 					</td>
 				</tr>
 				<tr>
@@ -61,14 +61,6 @@
 					</td>
 					<td>
 						<input type="text" name="movieTitle">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						영화 분류
-					</td>
-					<td>
-						<input type="text" name="movieKind">
 					</td>
 				</tr>
 				<tr>
@@ -85,54 +77,6 @@
 					</td>
 					<td>
 						<input type="text" name="movieActor">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						상영 등급
-					</td>
-					<td>
-						<input type="text" name="movieGrade">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						상영 시간
-					</td>
-					<td>
-						<input type="text" name="movieTime">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						개봉 일자
-					</td>
-					<td>
-						<input type="text" name="movieDate">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						유튜브 링크
-					</td>
-					<td>
-						<input type="text" name="movieYoutubeUrl">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						네이버 링크
-					</td>
-					<td>
-						<input type="text" name="movieNaverUrl">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						영화 내용
-					</td>
-					<td>
-						<input type="text" name="movieContent">
 					</td>
 				</tr>
 				<tr>

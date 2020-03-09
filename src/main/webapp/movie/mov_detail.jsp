@@ -29,7 +29,7 @@
 
 <!-- 담당자 js/css -->
 
-<link rel="stylesheet" href="${ contextPath }/css/mov_detail.css">
+<link rel="stylesheet" href="${ contextPath }/css/movie/mov_detail.css">
 
 </head>
 
@@ -37,7 +37,7 @@
 
 <body>
 
-<div id="mov_detail">
+<div id="movDetail">
 
 	<h1> 영화 내용 상세 </h1>
 	

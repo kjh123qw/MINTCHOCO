@@ -10,10 +10,10 @@ $(function() {
 	var normalFontColor = '#666';
 	
 //	checkbox tag
-	$('div[class*=cst-chkbox-st]').each((index, item) => {
+	$('div[class*=cst-chkbox-st]').each(function(index, item) {
 		var tagStyle = $(item).attr('class').split('-')[2];
 		
-		$(item).children('input').each((indexInp, itemInp) => {
+		$(item).children('input').each(function(indexInp, itemInp) {
 			var textObj = $(itemInp).next();
 			var textClassArr;
 			var textHtml;
@@ -87,13 +87,13 @@ $(function() {
 	});
 	
 //	radio tag
-	$('div[class*=cst-radio-st]').each((index, item) => {
+	$('div[class*=cst-radio-st]').each(function(index, item) {
 		var tagStyle = $(item).attr('class').split('-')[2];
 		var inputArr = $(item).children('input');
 		var width = 0;
 
 		var checkBtn = function() {  // check radio btn
-			$(inputArr).each((idx, ipt) => {
+			$(inputArr).each(function(idx, ipt) {
 				if($(ipt).is(':checked')) {
 					$(ipt.divBox).css({
 						'width':width,
@@ -114,14 +114,14 @@ $(function() {
 			})
 		}
 		
-		$(inputArr).each((indexInp, itemInp) => {
+		$(inputArr).each(function(indexInp, itemInp) {
 			var textObj = $(itemInp).next();
 			var textClassArr;
 			var textHtml;
 			
 			var cstBoxHtml = $('<div />', {
 				'class': 'cst-radio-box',
-				'click': () => {
+				'click': function() {
 					if(!$(itemInp).is(':checked'))
 						$(itemInp).prop('checked', true);
 					checkBtn();
@@ -163,10 +163,10 @@ $(function() {
 	});
 
 //	input text, password tag
-	$('div[class*=cst-text-st]').each((index, item) => {
+	$('div[class*=cst-text-st]').each(function(index, item) {
 		var tagStyle = $(item).attr('class').split('-')[2];
 		
-		$(item).children('input').each((indexInp, itemInp) => {
+		$(item).children('input').each(function(indexInp, itemInp) {
 			var textObj = $(itemInp).next();
 			var textWidth = $(itemInp).attr('class').split('-')[1];
 			var textClassArr;
@@ -218,8 +218,8 @@ $(function() {
 	});
 
 //	submit or button
-	$('div[class*=cst-btn]').each((index, item) => {
-		$(item).children('input').each((indexInp, itemInp) => {
+	$('div[class*=cst-btn]').each(function(index, item) {
+		$(item).children('input').each(function(indexInp, itemInp) {
 			var trgClassArr = $(itemInp).attr('class').split('-');
 			var tagStyle = trgClassArr[0];
 			var tagWidth = parseInt(trgClassArr[1]);

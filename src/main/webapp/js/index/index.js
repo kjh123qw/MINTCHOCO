@@ -202,10 +202,10 @@ function join(){
 	var serviceCheck = $("input:checkbox[name='serviceCheck']").is(":checked"); //false or true
 	
 	/*공백확인*/
-//	if(email == "" || pwd1 == "" || pwd2 == "" || name == "" || nickname == "" || age == "" || gender == ""){
-//		alert("입력란의 빈칸을 확인해주세요")
-//		return false;
-//	}
+	if(email == "" || pwd1 == "" || pwd2 == "" || name == "" || nickname == "" || age == "" || gender == ""){
+		alert("입력란의 빈칸을 확인해주세요")
+		return false;
+	}
 	/*공백확인*/
 	
 	
@@ -246,6 +246,11 @@ function join(){
 	
 	/*정규표현식*/
 	
+	if(age < 0 || age > 100){
+		alert("나이를 확인해주세요")
+		return false;
+	}
+	
 	
 	/*약관동의*/
 	if(!serviceCheck){
@@ -261,15 +266,58 @@ function join(){
         type:'post',
         data: allData,
         success:function(data){
-        	alert('성공')
+        	if(data == 'overlapEmail'){
+        		alert("중복되는 이메일입니다.")
+        		$("input[name='email']").effect( "shake", {times:3}, 1000 );
+        		return false;
+        	}else if(data == 'overlapNickname'){
+        		alert("중복되는 닉네임입니다.")
+        		$("input[name='nickname']").effect( "shake", {times:3}, 1000 );
+        		return false;
+        	}else{        
+
+        		var joinData = { "email": email, "pwd": pwd1,"gender": gender,
+        						"name": name,"nickname": nickname ,  "age": age,};
+        		
+        		 $.ajax({
+        		        url:"join.do",
+        		        
+        		        type:'post',
+        		        data: joinData,
+        		        datatype:'text',
+        		        success:function(msg){
+        		        	alert(msg)
+        		        	
+        		        	var width = returnWidth();     		    		
+        		    			
+        		    			$('#joinDiv').stop().delay(200).animate({left:"100%"},500)
+        		    			$('#findDiv').stop().delay(200).animate({left:"100%"},500,function(){
+        		    				$("#joinDiv").hide();
+        		    				$("#findDiv").hide();
+        		    				$("#loginDiv").show();
+        		    				
+        		    				if(width >= 992){
+        		    					$('#loginDiv').stop().delay(300).animate({left:"60%"},500);	
+        		    				}else{
+        		    					$('#loginDiv').stop().delay(300).animate({left:"0"},500);			
+        		    				}
+        		    				
+        		    				$("#upBtn").stop().css({'transform': 'rotate(0deg)'},1000);			
+        		    				$("#upBtn").removeClass('widthArrow').addClass('heightArrow');
+        		    			})
+        		        	
+        		        },
+        		        error:function(request,status,error){
+        		            alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);}
+
+        		    });
+        		
+        	}
         },
         error:function(){
         	alert('실패')
         }
     });
-	
-/*document.joinForm.submit();*/
-	return false;
 }
 
 

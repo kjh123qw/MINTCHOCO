@@ -17,7 +17,9 @@ public class MemberDAO {
 	private ResultSet rs = null;
 	
 	private final String MEMBER_INSERT = "INSERT INTO MEMBER VALUES (MEMBER_SEQ.NEXTVAL,?,?,?,?,?,?,DEFAULT, DEFAULT, DEFAULT, DEFAULT, DEFAULT);";
-
+	private final String MEMBER_CHECKEMAIL = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_EMAIL = ?";
+	private final String MEMBER_CHECKNICKNAME = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_NICKNAME = ?";
+	
 	public void joinMember(MemberVO vo) { //회원가입
 		
 		try {
@@ -38,6 +40,54 @@ public class MemberDAO {
 			JDBCUtil.close(stmt, conn);
 		}
 		
+	}
+
+	public int checkEmail(String email) {
+		
+		int result = 0;
+		
+		try {
+			
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(MEMBER_CHECKEMAIL);
+			stmt.setString(1, email);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getInt("COUNT(*)");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		
+		
+		return result;
+	}
+
+	public int checkNickname(String nickname) {
+		
+		int result = 0;
+		
+		try {
+			
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(MEMBER_CHECKNICKNAME);
+			stmt.setString(1, nickname);
+			rs = stmt.executeQuery();
+			
+			while(rs.next()) {
+				result = rs.getInt("COUNT(*)");
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		
+		return result;
 	}
 
 }

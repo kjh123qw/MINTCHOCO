@@ -1,5 +1,7 @@
 package com.kosmo.view.member;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
@@ -21,8 +23,10 @@ public class MemberController {
 	SecurityUtil security = new SecurityUtil();
 	MemberDAO dao = new MemberDAO();
 	
+	@ResponseBody
 	@RequestMapping(value = "/join.do", method = RequestMethod.POST)
 	public String joinMember(HttpServletRequest request) {
+		
 		
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("pwd");
@@ -31,6 +35,7 @@ public class MemberController {
 		String nickname = request.getParameter("nickname");
 		int age = Integer.parseInt(request.getParameter("age"));
 		String gender = request.getParameter("gender");
+		
 		
 		MemberVO vo = new MemberVO();
 		vo.setEmail(email);
@@ -41,22 +46,29 @@ public class MemberController {
 		vo.setGender(gender);
 		
 		dao.joinMember(vo);
-		
-		return "index.jsp";
+
+		return "Congratulations";
 	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/joinCheck.do", method = RequestMethod.POST)
-	public String joinCheck(HttpServletRequest request) throws Exception {
+	public String joinCheck(HttpServletRequest request){
 		
 		String email = request.getParameter("email");
 		String nickname = request.getParameter("nickname");
 		
-		System.out.println(email);
-		System.out.println(nickname);
+		int checkEmail = dao.checkEmail(email);
+		int checkNickname = dao.checkNickname(nickname);
+		
+		if(checkEmail > 0) {
+			return "overlapEmail";
+		}else if(checkNickname > 0) {
+			return "overlapNickname";
+		}else {
+			return "checkInfo";
+		}
 		
 		
-		return null;
 	}
 
 	@ResponseBody

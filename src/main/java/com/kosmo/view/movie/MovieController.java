@@ -36,38 +36,55 @@ MOVIE_CONTENT
 @Controller
 public class MovieController {
 
+	// 영화 정보 입력
 	@RequestMapping(value = "/movie/insert.do", method = RequestMethod.POST)
-	public String insert(MovieVO movieVO, MovieDAO movieDAO, Model model, HttpServletRequest request) {
+	public String insert(MovieVO movieVO, MovieDAO movieDAO, HttpServletRequest request) {
 		
 		movieDAO.insertMovie(movieVO);
 		
 		return "redirect:/movie/recommand.do";
 	}
 	
+	// 주제별 영화 목록
 	@RequestMapping("/movie/recommand.do")
 	public String movieList(MovieDAO movieDAO, Model model) {
 		model.addAttribute("movieList", movieDAO.selectMovieList());
 		return "rec_list.jsp";
 	}
+	
+	// 영화 상세 정보
 	@RequestMapping("/movie/detail.do")
 	public String movieDetail(MovieDAO movieDAO, Model model, HttpServletRequest request) {
 		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 		return "mov_detail.jsp";
 	}
 	
+	// 영화 정보 수정
 	@RequestMapping(value = "/movie/update.do", method = RequestMethod.POST)
-	public String update(HttpServletRequest request) {
-
+	public String update(MovieDAO movieDAO, Model model, HttpServletRequest request) {
+		
 		return "redirect:/movie/recommand.do";
 
 	}
+	
+	// 기존 영화 삭제
 	@RequestMapping(value = "/movie/delete.do", method = RequestMethod.POST)
-	public String delete(HttpServletRequest request) {
+	public String delete(MovieDAO movieDAO, Model model, HttpServletRequest request) {
+
+		if(request.getParameter("movieNumber") != "")
+			movieDAO.deleteMovie1(request.getParameter("movieNumber"));
+		if(request.getParameter("movieTitle") != "")
+			movieDAO.deleteMovie2(request.getParameter("movieTitle"));
+		if(request.getParameter("movieDirector") != "")
+			movieDAO.deleteMovie3(request.getParameter("movieDirector"));
+		if(request.getParameter("movieActor") != "")
+			movieDAO.deleteMovie4(request.getParameter("movieActor"));
 
 		return "redirect:/movie/recommand.do";
 
 	}
 	
+	// 영화 순위
 	@RequestMapping("/movie/rank.do")
 	public String rank() {
 		return "mov_rank.jsp";

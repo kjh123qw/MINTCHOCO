@@ -49,6 +49,14 @@
 				</tr>
 				<tr>
 					<td>
+						영화 번호
+					</td>
+					<td>
+						<input type="text" name="movieNumber">
+					</td>
+				</tr>
+				<tr>
+					<td>
 						영화 제목
 					</td>
 					<td>
@@ -69,14 +77,6 @@
 					</td>
 					<td>
 						<input type="text" name="movieActor">
-					</td>
-				</tr>
-				<tr>
-					<td>
-						개봉 일자
-					</td>
-					<td>
-						<input type="text" name="movieDate">
 					</td>
 				</tr>
 				<tr>

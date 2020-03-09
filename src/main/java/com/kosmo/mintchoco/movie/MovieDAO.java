@@ -26,9 +26,12 @@ public class MovieDAO {
 	
 	// 영화 번호, 포스터 주소, 	티저 링크, 영화 제목, 영화 분류, 영화 감독, 영화 배우, 상영 등급, 상영 시간, 개봉 일자, 유튜브 링크, 네이버 링크, 	게시일, 	줄거리
 	final private String INSERT_MOVIE = "INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?)";
-	final private String DELETE_MOVIE = "update movie set MOVIE_POSTER = '_', MOVIE_TEASER = '_', MOVIE_TITLE = '_', MOVIE_KIND = '_', MOVIE_DIRECTOR = '_', MOVIE_ACTOR = '_', MOVIE_GRADE = '_', MOVIE_TIME = 0, MOVIE_DATE = '_', MOVIE_YOUTUBE_URL = '_', MOVIE_NAVER_URL = '_', MOVIE_CONTENT = '_' where  MOVIE_NUMBER = ?";
+	final private String DELETE_MOVIE_NUM = "DELETE FROM MOVIE WHERE MOVIE_NUMBER = ?";
+	final private String DELETE_MOVIE_TITLE = "DELETE FROM MOVIE WHERE MOVIE_TITLE = ?";
+	final private String DELETE_MOVIE_DIRECTOR = "DELETE FROM MOVIE WHERE MOVIE_DIRECTOR = ?";
+	final private String DELETE_MOVIE_ACTOR = "DELETE FROM MOVIE WHERE MOVIE_ACTOR = ?";
 	
-	// 메소드
+	// 영화 정보 입력
 	public void insertMovie(MovieVO movieVO) {
 		
 		try {
@@ -58,7 +61,7 @@ public class MovieDAO {
 		
 	}
 	
-	// 메소드
+	// 전체 영화 목록
 	public List<MovieVO> selectMovieList() {
 		List<MovieVO> movieList = new ArrayList<MovieVO>();
 		try {
@@ -93,7 +96,7 @@ public class MovieDAO {
 		return movieList;
 	}
 	
-	// 메소드
+	// 영화 내용 상세
 	public MovieVO selectOneMovie(String movieNuber) {
 		
 		MovieVO movieVO = new MovieVO();
@@ -131,13 +134,68 @@ public class MovieDAO {
 		return movieVO;
 	}
 	
-	// 메소드
-	public void deleteMovie(String movieNumber) {
+	// 기존 영화 삭제
+	// 영화 번호
+	public void deleteMovie1(String movieNumber) {
 		
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(DELETE_MOVIE);
+			stmt = conn.prepareStatement(DELETE_MOVIE_NUM);
 			stmt.setString(1, movieNumber);
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+
+	}
+	
+	// 영화 제목
+	public void deleteMovie2(String movieTitle) {
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(DELETE_MOVIE_TITLE);
+			stmt.setString(1, movieTitle);
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+
+	}
+	
+	// 감독 이름
+	public void deleteMovie3(String movieDirector) {
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(DELETE_MOVIE_DIRECTOR);
+			stmt.setString(1, movieDirector);
+			stmt.executeUpdate();
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+
+	}
+	
+	// 주연 배우
+	public void deleteMovie4(String movieActor) {
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(DELETE_MOVIE_ACTOR);
+			stmt.setString(1, movieActor);
 			stmt.executeUpdate();
 			
 		} catch(Exception e) {

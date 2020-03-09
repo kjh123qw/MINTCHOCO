@@ -15,7 +15,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title> Insert Form </title>
+<title> update Form </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -25,8 +25,8 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
-<script src="${ contextPath }/js/movie/mov_insert.js"></script>
-<link rel="stylesheet" href="${ contextPath }/css/movie/mov_insert.css">
+<script src="${ contextPath }/js/movie/mov_update.js"></script>
+<link rel="stylesheet" href="${ contextPath }/css/movie/mov_update.css">
 
 <!-- //담당자 js, css -->
 </head>
@@ -36,9 +36,9 @@
 
 	<h1> 영화 정보 입력 </h1>
 
-	<div id="movInsert">
+	<div id="movUpdate">
 
-		<form action="insert.do" method="post">
+		<form action="update.do" method="post">
 		
 			<table>
 			

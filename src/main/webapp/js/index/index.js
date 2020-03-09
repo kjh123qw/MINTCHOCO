@@ -102,11 +102,10 @@ $(function(){
 			$("#mainDiv2").stop().animate({top:"100%"},1000,function(){
 				$('#loginDiv').stop().delay(300).animate({left:"100%"},500);
 				$("#loginDiv").hide();
-				inputReset();
 				
 			})
 		}
-		
+		inputReset();
 	})
 	
 	
@@ -318,6 +317,89 @@ function join(){
         	alert('실패')
         }
     });
+}
+
+function find(){
+	var email = findForm.email.value;
+	var name = findForm.name.value;
+	
+	/*공백확인*/
+	if(email == "" || name == "" ){
+		alert("입력란의 빈칸을 확인해주세요")
+		return false;
+	}
+	/*공백확인*/
+	
+	
+	/*정규표현식*/
+	
+	var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	if(!emailCheck.test(email)){
+		alert("이메일를 확인해주세요")
+		return false;
+	}
+	
+	var nameCheck = /^[가-힣]{2,4}$/;
+	
+	if(!nameCheck.test(name)){
+		alert("이름은 한글 2글자에서 4글자로 작성해주세요")
+		return false;
+	}
+	
+	/*정규표현식*/
+	
+	var findData = { "email": email, "name": name};
+
+$.ajax({
+    url:"findCheck.do",
+    type:'post',
+    data: findData,
+    datatype:'text',
+    success:function(data){
+    	if(data == "null"){
+    		alert("이메일과 이름을 확인해주세요")
+    		$(".cst-btn").effect( "shake", {times:3}, 1000 );
+    		return false;
+    	}else{
+    		
+    		$.ajax({
+    			url:"sendMail.do",
+    			type:"post",
+    			data:{"email":email, "name":name},
+    			success:function(data){
+    				alert("입력하신 이메일로 임시 비밀번호를 보내드립니다.")
+    				
+    				var width = returnWidth();     		    		
+        		    			
+        		    			$('#joinDiv').stop().delay(200).animate({left:"100%"},500)
+        		    			$('#findDiv').stop().delay(200).animate({left:"100%"},500,function(){
+        		    				$("#joinDiv").hide();
+        		    				$("#findDiv").hide();
+        		    				$("#loginDiv").show();
+        		    				
+        		    				if(width >= 992){
+        		    					$('#loginDiv').stop().delay(300).animate({left:"60%"},500);	
+        		    				}else{
+        		    					$('#loginDiv').stop().delay(300).animate({left:"0"},500);			
+        		    				}
+        		    				
+        		    				$("#upBtn").stop().css({'transform': 'rotate(0deg)'},1000);			
+        		    				$("#upBtn").removeClass('widthArrow').addClass('heightArrow');
+        		    			})
+    				
+    			},
+    			error:function(){
+    				alert("실패")
+    			}
+    		})
+    		
+    	}
+    },
+    error:function(request,status,error){
+    	alert("실패")
+    }
+	});
+return false;
 }
 
 

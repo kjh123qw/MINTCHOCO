@@ -130,7 +130,7 @@
 				</div>
 				
 				<div class="cst-btn">
-  					<input type="submit" value="확인" class="st1-150-50">
+  					<input type="button" value="확인" class="st1-150-50" onclick = "find();">
 				</div>
         	</form>
         </div>

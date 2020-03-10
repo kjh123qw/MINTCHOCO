@@ -139,7 +139,7 @@ public class DBVersionManager {
 			
 			"create or replace view ASSESSMENT_VIEW " + // assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
 			"as " + 
-			"select a.ASSESS_ID assess_id, a.MEMBER_NUMBER, mb.MEMBER_NICKNAME, a.MOVIE_NUMBER, mv.MOVIE_POSTER, mv.MOVIE_TITLE, mv.MOVIE_KIND, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, nvl(l.est_l, 0) likes, nvl(d.est_d, 0) hates " + 
+			"select a.ASSESS_ID assess_id, a.MEMBER_NUMBER, mb.MEMBER_NICKNAME, a.MOVIE_NUMBER, mv.MOVIE_POSTER, mv.MOVIE_TITLE, NVL(av.AVGSTAR, 0) STARS, mv.MOVIE_KIND, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE, a.ASSESS_CONTENT, a.ASSESS_STARS, a.ASSESS_REGDATE, nvl(l.est_l, 0) likes, nvl(d.est_d, 0) hates " + 
 			"from ASSESSMENT a " + 
 			"join MEMBER mb " + 
 			"on a.MEMBER_NUMBER = mb.MEMBER_NUMBER " + 
@@ -148,7 +148,9 @@ public class DBVersionManager {
 			"left outer join (select ASSESS_id, count(ASSESS_EST) est_d from ASSESSMENT_EST where ASSESS_EST = 'D' group by ASSESS_id, ASSESS_EST) d " + 
 			"on a.ASSESS_ID = d.ASSESS_ID " + 
 			"join MOVIE mv " + 
-			"on a.MOVIE_NUMBER = mv.MOVIE_NUMBER " + 
+			"on a.MOVIE_NUMBER = mv.MOVIE_NUMBER " +
+			"left outer join (select MOVIE_NUMBER ,avg(ASSESS_STARS) AVGSTAR from ASSESSMENT group by MOVIE_NUMBER) av " + 
+			"on mv.MOVIE_NUMBER = av.MOVIE_NUMBER " + 
 			"group by a.ASSESS_ID",
 			
 			"create or replace view FAVORITE_VIEW " + 	// favorite view 영화 정보 더해짐(마이페이지 찜목록 용)
@@ -526,7 +528,10 @@ public class DBVersionManager {
 	private String[] asseTDBSql = { // 평점 테스트 데이터
 			"INSERT INTO ASSESSMENT values('21', 2, 1, '재밌었습니다.', 10, default)",
 			"INSERT INTO ASSESSMENT values('22', 2, 2, '별로...', 2, default)",
-			"INSERT INTO ASSESSMENT values('23', 2, 3, '제 스타일은 아니지만...', 7, default)"
+			"INSERT INTO ASSESSMENT values('23', 2, 3, '제 스타일은 아니지만...', 7, default)",
+			"INSERT INTO ASSESSMENT values('31', 3, 1, '전 8점정도..', 8, default)",
+			"INSERT INTO ASSESSMENT values('32', 3, 2, '전 5점정도..', 5, default)",
+			"INSERT INTO ASSESSMENT values('33', 3, 3, '전 4점정도..', 4, default)"
 	};
 	
 	private String[] asesTDBSql = { // 평점 좋아요 테스트 데이터

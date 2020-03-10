@@ -12,21 +12,45 @@
 
 <header>
 	<ul id="navList">
-		<li><%@ include file="./_search_form.jsp" %></li>
+		<li>
+			<div id="searchWrap">
+				<form name="searchForm" action="${ contextPath }/movie/search.do">
+					<div class="cst-text-st1 search-form-textbox">
+						<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
+					</div>
+					<div id="searchBtn" onclick="document.searchForm.submit();">
+						<i class="fas fa-search"></i>
+					</div>
+				</form>
+			</div>
+			<div id="showSearchBtn">
+				<i class="fas fa-search"></i>
+			</div>
+		</li>
 		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
 		<li><a href="${ contextPath }/movie/recommand.do">영화목록</a></li>
 		<li><a href="${ contextPath }/service.do">서비스 안내</a></li>
 		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
+		<li></li>
 	</ul>
 	<div id="mobMenuBtn">
 		<i class="fas fa-bars"></i>
 	</div>
-	<div id="mobSearchBtn">
+	<div id="mobShowSearchBtn">
 		<i class="fas fa-search"></i>
 	</div>
 </header>
 <div id="mobSearchWrap">
-	<%@ include file="./_search_form.jsp" %>
+	<form name="mobSearchForm" action="${ contextPath }/movie/search.do">
+		<div class="search-form-wrap">
+			<div class="cst-text-st1 search-form-textbox">
+				<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
+			</div>
+			<div id="mobSearchBtn" onclick="document.searchForm.submit();">
+				<i class="fas fa-search"></i>
+			</div>
+		</div>
+	</form>
 	<div id="blackBackGround"></div>
 </div>
 <div id="mobMenuWrap">

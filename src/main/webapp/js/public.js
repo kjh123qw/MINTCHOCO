@@ -8,8 +8,14 @@ $(function() {
 	var normalBg = '#ddd';
 	var normalBorder = '#bbb';
 	var normalFontColor = '#666';
-	
-	$('#mobSearchBtn').click(function() {
+	var clearSearchFormTime;
+
+    $(window).resize(function(){
+		$('#mobMenuWrap').hide();
+		$('#mobSearchWrap').hide();
+    })
+    
+	$('#mobShowSearchBtn').click(function() {
 		$('#mobSearchWrap').show();
 		$('#mobSearchWrap input[type=text]').focus();
 	});
@@ -22,6 +28,22 @@ $(function() {
 	$('#mobMenuWrap > div > div').click(function() {
 		$('#mobMenuWrap').hide();
 	});
+	$('#showSearchBtn').click(function() {
+		$('#showSearchBtn').hide();
+		$('#searchWrap').show();
+		$('#searchWrap input[type=text]').focus();
+	});
+	$('#searchWrap input[type=text]').blur(function() {
+		clearSearchFormTime = setTimeout(function() {
+			$('#searchWrap').hide();
+			$('#showSearchBtn').show();
+		}, 800);
+	});
+	$('#searchWrap input[type=text]').focus(function() {
+		clearTimeout(clearSearchFormTime);
+	});
+	
+	
 //	checkbox tag
 	$('div[class*=cst-chkbox-st]').each(function(index, item) {
 		var tagStyle = $(item).attr('class').split('-')[2];

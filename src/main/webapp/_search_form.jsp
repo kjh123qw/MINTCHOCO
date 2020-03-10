@@ -11,12 +11,12 @@
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 
 <form action="${ contextPath }/movie/search.do">
-	<div class="search-form-wrap mob-search-form-wrap">
+	<div class="search-form-wrap">
 		<div class="cst-text-st1 search-form-textbox">
 			<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
 		</div>
-		<div class="cst-btn search-form-text">
-			<input type="submit" value="검색" class="st4-70-40">
+		<div id="searchBtn">
+			<i class="fas fa-search"></i>
 		</div>
 	</div>
 </form>

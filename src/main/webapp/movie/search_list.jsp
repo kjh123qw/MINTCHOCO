@@ -33,34 +33,50 @@
 <!-- 담당자 js/css -->
 </head>
 
+<body>
 
 <jsp:include page="../_header.jsp"></jsp:include>
 
-
-<body>
-
-    <h1>${ searchKeyWord } 검색 결과 입니다.</h1>
-	<hr>
-	<c:choose>
-		<c:when test="${ not empty searchMovieList }">
-			<c:forEach var="searchVO" items="${ searchMovieList }">
-				<div class="search-movie-box">
-					${ searchVO.movieIndex }. ${ searchVO.movieTitle }
-				</div>
-			</c:forEach>
-		</c:when>
-		<c:otherwise>
-			<c:forEach var="movieVO" items="${ allMovieList }">
-				<div class="search-movie-box">
-					${ movieVO.movieTitle }
-				</div>
-			</c:forEach>
-		</c:otherwise>
-	</c:choose>
-
-</body>
-
+	<div id="searchListWrap">
+	    <p><b>${ searchKeyWord }</b> 검색 결과 입니다.</p>
+		<hr>
+		<c:choose>
+			<c:when test="${ not empty searchMovieList }">
+				<c:forEach var="searchVO" items="${ searchMovieList }">
+					<div class="search-movie-box">
+						<div class="search-movie-innerbox">
+							<div class="search-movie-image">
+								<img src="${ contextPath }/images/mov_poster/${ searchVO.moviePoster }" alt="${ searchVO.movieTitle } 포스터">
+							</div>
+							<div class="search-info-box">
+								<div class="searselect * from ASSESSMENT_VIEW ch-info-ele title">
+									${ searchVO.movieTitle }
+								</div>
+								<div class="search-info-ele">
+									${ searchVO.movieDate } | ${ searchVO.movieTime } 분 | ${ searchVO.movieGrade }
+								</div>
+								<div class="search-info-ele">
+									${ searchVO.movieKind }
+								</div>
+								<div class="search-info-ele actor">
+									${ searchVO.movieActor }
+								</div>
+							</div>
+						</div>
+					</div>
+				</c:forEach>
+			</c:when>
+			<c:otherwise>
+				<c:forEach var="movieVO" items="${ allMovieList }">
+					<div class="search-movie-box">
+						${ movieVO.movieTitle }
+					</div>
+				</c:forEach>
+			</c:otherwise>
+		</c:choose>
+	</div>
 <jsp:include page="../_footer.jsp"></jsp:include>
 
+</body>
 
 </html>

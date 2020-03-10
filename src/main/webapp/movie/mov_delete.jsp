@@ -60,7 +60,7 @@
 						티저 링크
 					</td>
 					<td>
-						<input type="text" name="movieTeaser" value="${ movie.movieTeaser }">
+						<input type="text" name="movieTeaser" value="${ movie.movieTeaser }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@
 						영화 제목
 					</td>
 					<td>
-						<input type="text" name="movieTitle" value="${ movie.movieTitle }">
+						<input type="text" name="movieTitle" value="${ movie.movieTitle }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -76,7 +76,7 @@
 						영화 분류
 					</td>
 					<td>
-						<input type="text" name="movieKind" value="${ movie.movieKind }">
+						<input type="text" name="movieKind" value="${ movie.movieKind }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +84,7 @@
 						감독 이름
 					</td>
 					<td>
-						<input type="text" name="movieDirector" value="${ movie.movieDirector }">
+						<input type="text" name="movieDirector" value="${ movie.movieDirector }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -92,7 +92,7 @@
 						주연 배우
 					</td>
 					<td>
-						<input type="text" name="movieActor" value="${ movie.movieActor }">
+						<input type="text" name="movieActor" value="${ movie.movieActor }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -100,7 +100,7 @@
 						상영 등급
 					</td>
 					<td>
-						<input type="text" name="movieGrade" value="${ movie.movieGrade }">
+						<input type="text" name="movieGrade" value="${ movie.movieGrade }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -108,7 +108,7 @@
 						상영 시간
 					</td>
 					<td>
-						<input type="text" name="movieTime" value="${ movie.movieTime }">
+						<input type="text" name="movieTime" value="${ movie.movieTime }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +116,7 @@
 						개봉 연도
 					</td>
 					<td>
-						<input type="text" name="movieDate" value="${ movie.movieDate }">
+						<input type="text" name="movieDate" value="${ movie.movieDate }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -124,7 +124,7 @@
 						유튜브 링크
 					</td>
 					<td>
-						<input type="text" name="movieYoutubeUrl" value="${ movie.movieYoutubeUrl }">
+						<input type="text" name="movieYoutubeUrl" value="${ movie.movieYoutubeUrl }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -132,7 +132,7 @@
 						네이버 링크
 					</td>
 					<td>
-						<input type="text" name="movieNaverUrl" value="${ movie.movieNaverUrl }">
+						<input type="text" name="movieNaverUrl" value="${ movie.movieNaverUrl }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>
@@ -140,7 +140,7 @@
 						영화 내용
 					</td>
 					<td>
-						<input type="text" name="movieContent" value="${ movie.movieContent }">
+						<input type="text" name="movieContent" value="${ movie.movieContent }" readonly="readonly">
 					</td>
 				</tr>
 				<tr>

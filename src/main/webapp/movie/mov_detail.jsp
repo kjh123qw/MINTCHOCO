@@ -26,11 +26,12 @@
 <script src="${ contextPath }/js/jquery.mousewheel.min.js"></script>
 <script src="${ contextPath }/js/public.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
-
 <!-- 담당자 js/css -->
 
+<script src="${ contextPath }/js/movie/mov_detail.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/movie/mov_detail.css">
 
+<!-- //담당자 js/css -->
 </head>
 
 <jsp:include page="../_header.jsp"></jsp:include>
@@ -98,7 +99,7 @@
 	
 	</div>
 
-<jsp:include page="../_rating.jsp"></jsp:include>
+	<jsp:include page="../_rating.jsp"></jsp:include>
 
 </div>
 

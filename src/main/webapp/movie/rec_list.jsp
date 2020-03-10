@@ -19,6 +19,7 @@
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
 <script src="${ contextPath }/js/jquery.mousewheel.min.js"></script>
+<script src="${ contextPath }/js/public.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
@@ -27,6 +28,7 @@
 
 <!-- //담당자 js, css -->
 </head>
+
 <body>
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
@@ -79,4 +81,5 @@
 <!-- 담당자 내용 -->
 <jsp:include page="../_footer.jsp"></jsp:include>
 </body>
+
 </html>

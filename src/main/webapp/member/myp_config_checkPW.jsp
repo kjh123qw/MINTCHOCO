@@ -16,27 +16,27 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 패스워드 확인 -->
-	<form class="myp_con_conf_checkPW">
-		<article class="con_conf_checkPW_wrap">
-			<div class="con_conf_checkPW_subject">패스워드 확인</div>
-			<div class="con_conf_checkPW_content">개인정보 보호를 위해 현재 패스워드를 확인합니다.</div>
-			<input type="text" class="con_conf_text" placeholder="기존 패스워드 입력">			
+	<form class="myp-con-conf-checkPW">
+		<article class="con-conf-checkPW-wrap">
+			<div class="con-conf-checkPW-subject">패스워드 확인</div>
+			<div class="con-conf-checkPW-content">개인정보 보호를 위해 현재 패스워드를 확인합니다.</div>
+			<input type="text" class="con-conf-text" placeholder="기존 패스워드 입력">			
 			<br>
-			<div class="checkPW_btn">
-				<input type="submit" id="con_conf_submit">
-				<label for="con_conf_submit" class="con_conf_submit_btn">확 인</label>
-				<input type="button" id="con_conf_cancel">
-				<label for="con_conf_cancel" class="con_conf_submit_btn checkPW_btn_cancel">취 소</label>
+			<div class="checkPW-btn">
+				<input type="submit" id="con-conf-submit">
+				<label for="con-conf-submit" class="con-conf-submit-btn">확 인</label>
+				<input type="button" id="con-conf-cancel">
+				<label for="con-conf-cancel" class="con-conf-submit-btn checkPW-btn-cancel">취 소</label>
 			</div>			
 		</article>
 	</form>
-	<div class="con_conf_confirmed">
-		<article class="con_conf_confirmed_ok con_conf_horizontalCenter">
-			<div class="conf_confirmed_subject conf_detail_subject">
-				<span class="icon_confirmed_wrap"><img src="../images/member/confirmed.svg" class="icon_confirmed"></span>
+	<div class="con-conf-confirmed">
+		<article class="con-conf-confirmed-ok con-conf-horizontalCenter">
+			<div class="conf-confirmed-subject conf-detail-subject">
+				<span class="icon-confirmed-wrap"><img src="../images/member/confirmed.svg" class="icon-confirmed"></span>
 				<span>Confirm </span>
 			</div>
-			<div class="con_conf_confirmed conf_detail_content">패스워드 확인에 성공했습니다.</div>
+			<div class="con-conf-confirmed conf-detail-content">패스워드 확인에 성공했습니다.</div>
 		</article>
 	</div>
 <!-- //서브메뉴 이하 담당자 내용 -->

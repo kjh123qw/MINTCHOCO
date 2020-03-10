@@ -17,98 +17,103 @@
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 평가 목록 -->
 	<!-- 평가 목록 편집 메뉴 -->
-	<form class="myp_con_assess" method="post" action="" onsubmit="return chk_cnt();">
-		<div class="con_assess_wrap">
-			<nav class="con_menu">
-				<div class="con_menu_modifyoff con_menu_dropdown_rel">
-					<div class="con_menu_sub">SEZI 님이 작성한 한줄평</div>
-					<ul class="con_menu_list">
+	<form class="myp-con-assess" method="post" action="" onsubmit="return chk_cnt();">
+		<div class="con-assess-wrap">
+			<nav class="con-menu">
+				<div class="con-menu-modifyoff con-menu-dropdown-rel">
+					<div class="con-menu-sub">${detail_info.nickName}님이 작성한 한줄평</div>
+					<ul class="con-menu-list">
 						<li><a onclick="searchbar('on');">검색</a></li>
-						<li class="con_menu_dropdown_rel con_menu_dropdown_here">
-							<a class="con_menu_dropdown_a">목록정렬</a>
-							<div class="con_menu_dropdown_wrap">
-						        <ul class="con_menu_dropdown">
-						            <li><a onmouseenter="textAlign('reg')">등록 순</a></li>
-						            <li><a onmouseenter="textAlign('rel')">개봉 순</a></li>
-						            <li><a onmouseenter="textAlign('sub')">제목 순</a></li>
+						<li class="con-menu-dropdown-rel con-menu-dropdown-here">
+							<a class="con-menu-dropdown-a">목록정렬</a>
+							<div class="con-menu-dropdown-wrap">
+						        <ul class="con-menu-dropdown">
+						            <li><a onmouseenter="textAlign('reg')" onclick="sorting('reg');">등록 순</a></li>
+						            <li><a onmouseenter="textAlign('star')" onclick="sorting('star');">평점 순</a></li>
+						            <li><a onmouseenter="textAlign('sub')" onclick="sorting('sub');">제목 순</a></li>
 						        </ul>
-						         <div class="menu_description">
-						     		<p class="menu_description_subject">항목 정렬을 설정합니다.</p>
+						        <div class="menu-description">
+						     		<p class="menu-description-subject">항목 정렬을 설정합니다.</p>
 						     	</div>
 						     </div>						   
 						</li>
 						<li><a onclick="modifyOn();">편집</a></li>						
 					</ul>
-					<input type="text" class="con_menu_input"  placeholder="검색하실 영화제목을 입력하세요."  onkeyup="search();">
-					<div class="con_menu_search" onclick="searchbar('off');"><img src="../images/member/back.png"></div>
+					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요."  onkeyup="search();">
+					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
-				<div class="con_menu_modifyon">
-					<div class="con_menu_sub">
-						<span class="con_chkbox_cnt">0</span>
+				<div class="con-menu-modifyon">
+					<div class="con-menu-sub">
+						<span class="con-chkbox-cnt">0</span>
 						<span>개 선택</span>
 					</div>
-					<ul class="con_menu_list">
+					<ul class="con-menu-list">
 						<li><a onclick="allcheck();">전체선택</a></li>
 						<li><a onclick="modifyOff();">취소</a></li>
-						<li><a><input type="submit" id="assess_list_delete"><label for="assess_list_delete">삭제</label></a></li>
+						<li><a><input type="submit" id="assess-list-delete"><label for="assess-list-delete">삭제</label></a></li>
 					</ul>
 				</div>
 			</nav>
 			<!-- // 평가 목록 편집 메뉴 -->
 			
 			<!-- 평가 틀 -->
-			<article class="con_assess" style="background-image: url(../images/member/poster1.jpg);" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_assess_bg">			
-				<div class="con_assess_img_wrap con_assess_float">
-					<img class="con_assess_img_poster" src="../images/member/poster1.jpg">
+			<c:forEach items="${assessList}" var="assess">
+			<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.poster});" onclick="chk_enable(this);">
+			<input class="con-chkbox" type="checkbox" name="chkbox">
+			<div class="con-assess-bg">			
+				<div class="con-assess-img-wrap con-assess-float">
+					<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.poster}">
 					<!-- 140x200 -->
 				</div>
-				<div class="con_assess_cont_wrap con_assess_float">
-					<div class="con_assess_cont_right_wrap con_assess_float">
-						<div class="con_search_target con_assess_cont_subject">뺑반</div>
-						<div class="con_assess_cont_genre">범죄, 액션 | 2019.01.30. 개봉 | 133분 | 한국 | 15세 관람가</div>
+				<div class="con-assess-cont-wrap con-assess-float">
+					<div class="con-assess-cont-right-wrap con-assess-float">
+						<div class="con-search-target con-assess-cont-subject">${assess.movieTitle}</div>
+						<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
 					</div>
-					<table class="con_assess_stars con_assess_float_right">
+					<table class="con-assess-stars con-assess-float-right">
 						<tr>
-							<td class="con_th_mintcho"><img src="../images/member/mintchoco.png"></td>
-							<td class="con_th_mintcho"><img src="../images/member/mintchoco.png"></td>
-							<td class="con_th_mintcho"><img src="../images/member/mintchoco.png"></td>
-							<td class="con_th_mintcho"><img src="../images/member/mintchoco.png"></td>
-							<td class="con_th_mintcho"><img src="../images/member/mintchoco.png"></td>
-							<td>10.0</td>
+							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+							<td>${assess.stars}</td>
 						</tr>
 					</table>
 					<div class="clear"></div>					
 				</div>
-					<div class="con_assess_float">	
-						<div class="con_assess_cont_line_wrap con_assess_float">
-							<div class="con_assess_cont_line_contents_wrap con_assess_float">
-								<div class="con_line_th con_th con_th_mint con_assess_float">
-									<span><img src="../images/member/est_good.png"></span>
-									<span>200</span>
-									<span class="con_th2"><img src="../images/member/est_bad.png"></span>
-									<span>12</span>
-									<div class="con_assess_stars_date con_assess_float_right">
-										<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
+					<div class="con-assess-float">	
+						<div class="con-assess-cont-line-wrap con-assess-float">
+							<div class="con-assess-cont-line-contents-wrap con-assess-float">
+								<div class="con-line-th con-th con-th-mint con-assess-float">
+									<span><img src="${ contextPath }/images/member/est_good.png"></span>
+									<span class="con-assess-like">${assess.likes}</span>
+									<span class="con_th2"><img src="${ contextPath }/images/member/est_bad.png"></span>
+									<span>${assess.hates}</span>
+									<div class="con-assess-stars-date con-assess-float-right">
+										<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
 									</div>
 								</div>
 								<div class="clear"></div>
-								<div class="con_assess_cont_line_content"><p>재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.재밌었습니다.</p></div>
+								<div class="con-assess-cont-line-content"><p>${assess.aContent}</p></div>
 							</div>
 						</div>
-						<div class="con_assess_img_stars con_assess_float">							
-							<img src="../images/member/mintchoco.png" class="con_assess_mintchoco">
-							<div class="con_assess_img_stars_score">10</div>							
+						<div class="con-assess-img-stars con-assess-float">							
+							<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
+							<div class="con-assess-img-stars-score">${assess.astars}</div>							
 						</div>
 					</div>
 				<div class="clear"></div>
 				</div>
 			</article>
+			</c:forEach>
 			<!-- //평가 틀 -->
 			
 		</div>
 		<div class="clear"></div>
+	</form>
+	<form class="con-sortList" name="alignForm" method="POST" action="sortAssessList.do">
+		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->
 </div>

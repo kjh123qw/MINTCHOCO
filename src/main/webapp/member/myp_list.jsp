@@ -16,223 +16,68 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 찜한 목록 -->
-	<form class="myp_con_fav" method="post" action="" onsubmit="return  chk_cnt();">
-		<div class="con_fav_wrap">
-			<nav class="con_menu">
-				<div class="con_menu_modifyoff  con_menu_dropdown_rel"">
-					<div class="con_menu_sub">SEZI 님의 관심영화목록</div>
-					<ul class="con_menu_list con_menu_dropdown_rel">
+	<form class="myp-con-fav" method="post" action="" onsubmit="return  chk_cnt();">
+		<div class="con-fav-wrap">
+			<nav class="con-menu">
+				<div class="con-menu-modifyoff  con-menu-dropdown-rel"">
+					<div class="con-menu-sub">${detail_info.nickName}님의 관심영화목록</div>
+					<ul class="con-menu-list con-menu-dropdown-rel">
 						<li><a onclick="searchbar('on');">검색</a></li>
-						<li class="con_menu_dropdown_rel con_menu_dropdown_here">
-							<a class="con_menu_dropdown_a">목록정렬</a>
-							<div class="con_menu_dropdown_wrap">
-						        <ul class="con_menu_dropdown">
-						            <li><a onmouseenter="textAlign('reg')">등록 순</a></li>
-						            <li><a onmouseenter="textAlign('rel')">개봉 순</a></li>
-						            <li><a onmouseenter="textAlign('sub')">제목 순</a></li>
-						        </ul>
-						         <div class="menu_description">
-						     		<p class="menu_description_subject">항목 정렬을 설정합니다.</p>
-						     	</div>
+						<li class="con-menu-dropdown-rel con-menu-dropdown-here">
+							<a class="con-menu-dropdown-a">목록정렬</a>
+							<div class="con-menu-dropdown-wrap">
+						        <ul class="con-menu-dropdown">
+						            <li><a onmouseenter="textAlign('reg');" onclick="sorting('reg');">등록 순</a></li>
+						            <li><a onmouseenter="textAlign('rel');" onclick="sorting('rel');">개봉 순</a></li>
+						            <li><a onmouseenter="textAlign('sub');" onclick="sorting('sub');">제목 순</a></li>
+						        </ul>						        
+						         <div class="menu-description">
+						     		<p class="menu-description-subject">항목 정렬을 설정합니다.</p>
+						     	</div>						     	
 						     </div>						   
 						</li>
 						<li><a onclick="modifyOn();">편집</a></li>
 					</ul>
-					<input type="text" class="con_menu_input"  placeholder="검색하실 영화제목을 입력하세요." onkeyup="search();">
-					<div class="con_menu_search" onclick="searchbar('off');"><img src="../images/member/back.png"></div>
+					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요." onkeyup="search();">
+					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
-				<div class="con_menu_modifyon">
-					<div class="con_menu_sub">
-						<span class="con_chkbox_cnt">0</span>
+				<div class="con-menu-modifyon">
+					<div class="con-menu-sub">
+						<span class="con-chkbox-cnt">0</span>
 						<span>개 선택</span>
 					</div>
-					<ul class="con_menu_list">
+					<ul class="con-menu-list">
 						<li><a onclick="allcheck();">전체선택</a></li>
 						<li><a onclick="modifyOff();">취소</a></li>
-						<li><a><input type="submit" id="fav_list_delete"><label for="fav_list_delete">삭제</label></a></li>
+						<li><a><input type="submit" id="fav-list-delete"><label for="fav-list-delete">삭제</label></a></li>
 					</ul>
 				</div>
 			</nav>
 			<div class="clear"></div>
 			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
-			
-			<article class="con_fav con_fav_float" onclick="chk_enable(this);">
-			<input class="con_chkbox" type="checkbox" name="chkbox">
-			<div class="con_fav_bg">			
-				<div class="con_fav_img_wrap">
-					<img class="con_fav_poster" src="../images/member/poster1.jpg">
-					<!-- 140x200 -->
-					<center class="con_fav_contents_wrap">
-						<div class="con_search_target con_th_mint">뺑반</div>
-						<div>범죄, 액션, 133분</div>
-						<div class="con_th_gray">한국, 15세 관람가</div>
-						<div class="con_th_gray"><img src="../images/member/cal.png" class="con_fav_cal">&nbsp;2020-02-27</div>
-					</center>
-				</div>				
-			</div>
-			</article>
+			<c:forEach items="${favoriteList}" var="favorite">
+				<article class="con-fav con-fav-float" onclick="chk_enable(this);">
+				<input class="con-chkbox" type="checkbox" name="chkbox" value="${favorite.favNum}">
+				<div class="con-fav-bg">			
+					<div class="con-fav-img-wrap">
+						<img class="con-fav-poster" src="${ contextPath }/images/mov_poster/${favorite.poster}">
+						<!-- 140x200 -->
+						<center class="con-fav-contents-wrap">
+							<div class="con-search-target con-th-mint">${favorite.movieTitle}</div>
+							<div>${favorite.kind}</div>
+							<div class="con-th-gray">${favorite.playtime}분, ${favorite.grade}세 관람가</div>
+							<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${favorite.favIndate}</div>
+						</center>
+					</div>				
+				</div>
+				</article>
+			</c:forEach>
 			
 			<div class="clear"></div>
 		</div>
+	</form>
+	<form class="con-sortList" name="alignForm" method="POST" action="sortFavList.do">
+		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->
 </div>

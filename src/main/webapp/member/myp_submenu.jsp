@@ -31,21 +31,21 @@
 <!-- 담당자 내용 -->
 <div class="clear"></div>
 <div class="myp">
-	<div class="myp_hd">
-		<div class="hd_stbar_wrap">
-			<div class="hd_stbar_nick">NickName</div>
-			<div class="hd_stbar_introduce">NickName님의 마이페이지입니다.</div>
+	<div class="myp-hd">
+		<div class="hd-stbar-wrap">
+			<div class="hd-stbar-nick">${detail_info.nickName}</div>
+			<div class="hd-stbar-introduce">${detail_info.nickName}님의 마이페이지입니다.</div>
 			<div class="clear"></div>
-			<div class="hd_stbar_an">평가 작성 10건</div>
+			<div class="hd-stbar-an">평가 작성 ${assess_cnt}건</div>
 		</div>
 		<div class="clear"></div>
-		<div class="hd_menu_wrap">
-			<nav class="hd_menu">
-				<ul class="hd_menu_list">
-					<li><a class="icon_privacy_wrap" href="./myp_inform.jsp"><img src="../images/member/privacy.png" class="icon_privacy"><span>&nbsp;정보</span></a></li>
-					<li><a class="icon_fav_wrap" href="./myp_list.jsp"><img src="../images/member/fav.png" class="icon_fav"><span>&nbsp;찜한목록</span></a></li>
-					<li><a class="icon_assess_wrap" href="./myp_assess_list.jsp"><img src="../images/member/assess1.png" class="icon_assess1"><img src="../images/member/assess2.png" class="icon_assess2"><span>&nbsp;평가목록</span></a></li>
-					<li><a class="icon_config_wrap" href="./myp_config.jsp"><img src="../images/member/config.png" class="icon_config"><span>&nbsp;계정설정</span></a></li>					
+		<div class="hd-menu-wrap">
+			<nav class="hd-menu">
+				<ul class="hd-menu-list">
+					<li><a class="icon-privacy-wrap" href="my_page.do"><img src="${ contextPath }/images/member/privacy.png" class="icon-privacy"><span>&nbsp;정보</span></a></li>
+					<li><a class="icon-fav-wrap" href="favorite.do"><img src="${ contextPath }/images/member/fav.png" class="icon-fav"><span>&nbsp;찜한목록</span></a></li>
+					<li><a class="icon-assess-wrap" href="assessment.do"><img src="${ contextPath }/images/member/assess1.png" class="icon-assess1"><img src="${ contextPath }/images/member/assess2.png" class="icon-assess2"><span>&nbsp;평가목록</span></a></li>
+					<li><a class="icon-config-wrap" href="config.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"><span>&nbsp;계정설정</span></a></li>					
 				</ul>
 			</nav>
 		</div>

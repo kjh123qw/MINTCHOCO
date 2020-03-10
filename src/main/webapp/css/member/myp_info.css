@@ -3,22 +3,22 @@
   가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
 
 
-.con_info_wrap {
+.con-info-wrap {
 	padding: 30px;
 	border-top:1px solid #00D7C0;
 }
-.con_info_subject {
+.con-info-subject {
 	color: #00D7C0;
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 25px;
 }
 
-.con_info_table th {
+.con-info-table th {
 	text-align: left;
 	width: 150px;
 }
-.con_info_table td {
+.con-info-table td {
 	height: 35px;
 }
 
@@ -34,7 +34,7 @@
     width: 250px;
     height: 400px;
 }
-.icon_info_wrap {
+.icon-info-wrap {
 	border-bottom: 5px solid #00D7C0;
 }
 

@@ -14,8 +14,8 @@
 <!-- 슬라이더 플러그인 js/css -->
 <!-- <link rel="stylesheet" href="https://unpkg.com/swiper/css/swiper.min.css">
 <script src="https://unpkg.com/swiper/js/swiper.min.js"></script> -->
-<link rel="stylesheet" href="./swiper/swiper.min.css">
-<script src="./swiper/swiper.min.js"></script>
+<link rel="stylesheet" href="${ contextPath }/member/swiper/swiper.min.css">
+<script src="${ contextPath }/member/swiper/swiper.min.js"></script>
 <!-- //슬라이더 플러그인 js/css -->
 <link rel="stylesheet" href="${ contextPath }/css/member/myp_info.css">
 
@@ -23,47 +23,49 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 개인정보 -->
-	<form class="myp_con_info" method="post" action="" onsubmit="return ;">
-		<article class="con_info">
-			<div class="con_info_intro con_info_wrap">			
-				<div class="con_info_subject">최근 추가한 목록</div>
+	<form class="myp-con-info" method="post" action="" onsubmit="return ;">
+		<article class="con-info">
+			<div class="con-info-intro con-info-wrap">			
+				<div class="con-info-subject">최근 추가한 목록</div>
 				<div class="swiper-container">
 			    <div class="swiper-wrapper">
-			      <div class="swiper-slide" style="background-image:url(../images/member/poster1.jpg)"></div>
-			      <div class="swiper-slide" style="background-image:url(../images/member/poster2.jpg)"></div>
-			      <div class="swiper-slide" style="background-image:url(../images/member/poster3.jpg)"></div>
-			      <div class="swiper-slide" style="background-image:url(../images/member/poster4.jpg)"></div>
-			      <div class="swiper-slide" style="background-image:url(../images/member/poster5.jpg)"></div>
+			    	<c:forEach items="${favorite_five}" var="favorite5">
+			      		<div class="swiper-slide" style="background-image:url(${ contextPath }/images/mov_poster/${favorite5.poster})"></div>
+			    	</c:forEach>
 			    </div>
 			    <!-- Add Pagination -->
 			    <div class="swiper-pagination"></div>
 			  </div>
 			</div>
-			<div class="con_info_intro con_info_wrap">			
-				<div class="con_info_subject">소개</div>
-				<div class="con_info_content">
-					안녕하십니까. 저는 누구입니다.<br>
-					잘부탁드립니다.
+			<div class="con-info-intro con-info-wrap">			
+				<div class="con-info-subject">소개</div>
+				<div class="con-info-content">
+					${detail_info.introduce}
 				</div>
 			</div>
-			<div class="con_info_detail con_info_wrap">			
-				<div class="con_info_subject">정보</div>
-				<table class="con_info_table">
+			<div class="con-info-detail con-info-wrap">			
+				<div class="con-info-subject">정보</div>
+				<table class="con-info-table">
 					<tr>
 						<th>성별</th>
-						<td>남</td>						
+						<c:if test="${detail_info.gender == 'M'}">
+							<td>남자</td>
+						</c:if>
+						<c:if test="${detail_info.gender == 'F'}">
+							<td>여자</td>
+						</c:if>			
 					</tr>
 					<tr>
 						<th>이메일 주소</th>
-						<td>wkdtpwls@haha.com</td>						
+						<td>${detail_info.email}</td>						
 					</tr>
 					<tr>
 						<th>평가</th>
-						<td>10건</td>						
+						<td>${assess_cnt}</td>						
 					</tr>
 					<tr>
 						<th>가입일</th>
-						<td>2020.02.27.</td>						
+						<td>${detail_info.indate}</td>						
 					</tr>
 				</table>
 			</div>

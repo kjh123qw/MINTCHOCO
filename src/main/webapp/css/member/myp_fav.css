@@ -4,48 +4,48 @@
 
 
 
-#fav_list_delete {
+#fav-list-delete {
 	display: none;
 }
 
-.con_fav {
+.con-fav {
 	margin-left: 25px;
 	margin-right: 25px;
 	margin-bottom: 25px;
 }
-.con_fav_img_wrap {
+.con-fav-img-wrap {
 	font-size: 15px;
 }
-.con_fav_poster {
+.con-fav-poster {
 	width: 140px;
 	height: 200px;
 }
-.con_fav_float {
+.con-fav-float {
 	float:left;
 }
-.con_fav_contents_wrap {
+.con-fav-contents-wrap {
 	margin-top: 5px;
 	margin-bottom: 10px;
 }
-.con_fav_cal {
+.con-fav-cal {
 }
-.con_fav_bg {
+.con-fav-bg {
 	height: 290px;
 }
-.con_fav:hover .con_fav_bg{
+.con-fav:hover .con-fav-bg{
 	transition-duration: 0.2s;
 	background: rgba(0,0,75,0.7);
 }
-.con_chkbox:checked + .con_fav_bg{
+.con-chkbox:checked + .con-fav-bg{
 	transition-duration: 0.2s;
 	background: rgba(75,0,0,0.7);
 }
-.con_fav:hover img{
+.con-fav:hover img{
 	transition-duration: 0.2s;
 	opacity: 0.5;
 }
 
-.icon_fav_wrap {
+.icon-fav-wrap {
 	border-bottom: 5px solid #00D7C0;
 }
 

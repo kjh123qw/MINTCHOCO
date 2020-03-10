@@ -60,9 +60,13 @@ body, html, #contentBox{
   position: absolute;
   width: 100%;
   height: 100%;
-  background-image: url('../../images/index/mainImage.jpg');
+  background-image: url('../../images/index/introImage.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+#mainDiv2 > video{
+	z-index: -100;
 }
 
 #upBtn{

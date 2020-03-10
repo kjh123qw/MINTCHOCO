@@ -39,7 +39,7 @@
 		<div id="mainDiv1">
 			<video id="video" width="100%" height="100%" preload="auto"
 				autoplay="true" loop="loop" muted="muted" volume="0">
-				<source src="./images/index/mainAction.mp4">
+				<source src="./images/index/indexIntro.mp4">
 			</video>
 			<h2 id="skipBtn1">
 				Skip <span id="skipBtn2">→</span>

@@ -5,6 +5,7 @@
 */
 
 /* 화면 기본 */
+
 body{
     background-color: #00ac9a;
 }
@@ -26,6 +27,28 @@ h1{
     text-align: center;
 }
 
+h3{
+    width: 100%;
+    color: #00FA9A;
+    text-align: center;
+}
+
+/* 관리자 메뉴 */
+
+#updateMenu{
+	width: 100%;
+	height: 25px;
+	background-color: #00FA9A;
+}
+
+#updateMenu input{
+	padding: 1px;
+	vertical-align: middle;
+	background-color: #0DEEC9;
+	border: 1px solid #3ABAB5;
+	color: #F5FFFA;
+}
+
 /* 영화 관련 */
 
 .movie{
@@ -34,12 +57,17 @@ h1{
 
 .movie table{
 	width: 100%;
-	background-color: #ADCECE;
+	background-color: #37B5BE;
 	color: #F5FFFA;
+	border: 1px solid #0DEEC9;
+}
+
+.movie table img{
+	border: 1px solid #0DEEC9;
 }
 
 .movie table a{
-	color: #3ABAB5;
+	color: #00FA9A;
 }
 
 .teaser{

@@ -41,6 +41,14 @@
 
 	<h1> 영화 내용 상세 </h1>
 	
+	<div id="updateMenu" style="text-align: center;">
+	
+		<input type="button" value="영화 정보 입력" onclick="location.href='${ contextPath }/movie/insertForm.do'">
+		<input type="button" value="영화 정보 수정" onclick="location.href='${ contextPath }/movie/updateForm.do?movieNumber=${ movie.movieNumber }'">
+		<input type="button" value="기존 영화 삭제" onclick="location.href='${ contextPath }/movie/deleteForm.do?movieNumber=${ movie.movieNumber }'">
+	
+	</div>
+	
 	<!-- 영화 정보 -->
 	<div class="movie">
 	
@@ -49,7 +57,7 @@
 			<tr>
 			    <td rowspan="6"><a onclick="window.history.go(-1);"><img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a></td>
 			    <td width="25%"><h3> ${ movie.movieTitle } </h3></td>
-			    <td><h4> 줄거리 </h4></td>
+			    <td><h3> 줄거리 </h3></td>
 			</tr>
 			<tr>
 			    <td> 장르 : ${ movie.movieKind }</td>

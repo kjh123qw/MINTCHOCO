@@ -44,7 +44,7 @@
 			
 				<tr>
 					<td colspan="2">
-						정보를 하나도 빠짐 없이 입력해주세요.
+						<h3>영화 정보를 하나도 빠짐 없이 입력 해주시기 바랍니다.</h3>
 					</td>
 				</tr>
 				<tr>
@@ -52,7 +52,7 @@
 						티저 링크
 					</td>
 					<td>
-						<input type="text" name="movieTeaser">
+						<input type="text" name="movieTeaser" value="예시) https://youtu.be/TtD7xcruYAk 의 경우  'TtD7xcruYAk' 부분만 입력 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -60,7 +60,7 @@
 						영화 제목
 					</td>
 					<td>
-						<input type="text" name="movieTitle">
+						<input type="text" name="movieTitle" value="주의) 띄어쓰기에 주의하며 한글로만 입력 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@
 						영화 분류
 					</td>
 					<td>
-						<input type="text" name="movieKind">
+						<input type="text" name="movieKind" value="주의) 장르가 여러 개일 경우에는 ','로 구분 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -76,7 +76,7 @@
 						감독 이름
 					</td>
 					<td>
-						<input type="text" name="movieDirector">
+						<input type="text" name="movieDirector" value="주의) 감독이 여러 명일 경우에는 ','로 구분 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +84,7 @@
 						주연 배우
 					</td>
 					<td>
-						<input type="text" name="movieActor">
+						<input type="text" name="movieActor" value="주의) 배우가 여러 명일 경우에는 ','로 구분 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -92,7 +92,7 @@
 						상영 등급
 					</td>
 					<td>
-						<input type="text" name="movieGrade">
+						<input type="text" name="movieGrade" value="예시) 국내 기준에 맞추어 ALL, 12, 15, 19 중 하나만 입력 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -100,15 +100,15 @@
 						상영 시간
 					</td>
 					<td>
-						<input type="text" name="movieTime">
+						<input type="text" name="movieTime" value="주의) 상영시간은 분 단위, 반올림으로 입력 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						개봉 일자
+						개봉 연도
 					</td>
 					<td>
-						<input type="text" name="movieDate">
+						<input type="text" name="movieDate" value="예시) 개봉 연도는 '20XX 년'으로 숫자와 글자 사이에 띄어쓰기를 주의하며 입력 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +116,7 @@
 						유튜브 링크
 					</td>
 					<td>
-						<input type="text" name="movieYoutubeUrl">
+						<input type="text" name="movieYoutubeUrl" value="예시) https://youtu.be/6yZWJPndzLs 의 경우 'https://youtu.be/6yZWJPndzLs' 전체를 입력 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -124,7 +124,7 @@
 						네이버 링크
 					</td>
 					<td>
-						<input type="text" name="movieNaverUrl">
+						<input type="text" name="movieNaverUrl" value="주의) 위와 동일합니다. 다시 한번 확인 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -132,13 +132,14 @@
 						영화 내용
 					</td>
 					<td>
-						<input type="text" name="movieContent">
+						<input type="text" name="movieContent" value="주의) 지나치게 개인적인 의견은 삼가 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
 						<input type="submit" value="입력 완료">
 					</td>
+					
 				</tr>
 				
 			</table>

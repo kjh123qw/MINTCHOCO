@@ -44,15 +44,15 @@
 			
 				<tr>
 					<td colspan="2">
-						삭제할 영화의 번호를 입력하고 최대한 자세하게 정보를 입력해주세요.
+						<h3>최대한 신중하게 정보를 수정해주세요.</h3>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						영화 번호
+						
 					</td>
 					<td>
-						<input type="text" name="movieNumber">
+						<input type="text" name="movieNumber" value="${ movie.movieNumber }" hidden="hidden">
 					</td>
 				</tr>
 				<tr>
@@ -60,7 +60,7 @@
 						티저 링크
 					</td>
 					<td>
-						<input type="text" name="movieTeaser">
+						<input type="text" name="movieTeaser" value="${ movie.movieTeaser }">
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +68,7 @@
 						영화 제목
 					</td>
 					<td>
-						<input type="text" name="movieTitle">
+						<input type="text" name="movieTitle" value="${ movie.movieTitle }">
 					</td>
 				</tr>
 				<tr>
@@ -76,7 +76,7 @@
 						영화 분류
 					</td>
 					<td>
-						<input type="text" name="movieKind">
+						<input type="text" name="movieKind" value="${ movie.movieKind }">
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +84,7 @@
 						감독 이름
 					</td>
 					<td>
-						<input type="text" name="movieDirector">
+						<input type="text" name="movieDirector" value="${ movie.movieDirector }">
 					</td>
 				</tr>
 				<tr>
@@ -92,7 +92,7 @@
 						주연 배우
 					</td>
 					<td>
-						<input type="text" name="movieActor">
+						<input type="text" name="movieActor" value="${ movie.movieActor }">
 					</td>
 				</tr>
 				<tr>
@@ -100,7 +100,7 @@
 						상영 등급
 					</td>
 					<td>
-						<input type="text" name="movieGrade">
+						<input type="text" name="movieGrade" value="${ movie.movieGrade }">
 					</td>
 				</tr>
 				<tr>
@@ -108,15 +108,15 @@
 						상영 시간
 					</td>
 					<td>
-						<input type="text" name="movieTime">
+						<input type="text" name="movieTime" value="${ movie.movieTime }">
 					</td>
 				</tr>
 				<tr>
 					<td>
-						개봉 일자
+						개봉 연도
 					</td>
 					<td>
-						<input type="text" name="movieDate">
+						<input type="text" name="movieDate" value="${ movie.movieDate }">
 					</td>
 				</tr>
 				<tr>
@@ -124,7 +124,7 @@
 						유튜브 링크
 					</td>
 					<td>
-						<input type="text" name="movieYoutubeUrl">
+						<input type="text" name="movieYoutubeUrl" value="${ movie.movieYoutubeUrl }">
 					</td>
 				</tr>
 				<tr>
@@ -132,7 +132,7 @@
 						네이버 링크
 					</td>
 					<td>
-						<input type="text" name="movieNaverUrl">
+						<input type="text" name="movieNaverUrl" value="${ movie.movieNaverUrl }">
 					</td>
 				</tr>
 				<tr>
@@ -140,12 +140,12 @@
 						영화 내용
 					</td>
 					<td>
-						<input type="text" name="movieContent">
+						<input type="text" name="movieContent" value="${ movie.movieContent }">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="submit" value="입력 완료">
+						<input type="submit" value="수정 완료">
 					</td>
 				</tr>
 				

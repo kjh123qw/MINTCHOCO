@@ -36,23 +36,31 @@
 
 	<h1> 기존 영화 삭제 </h1>
 
-	<div id="mov-admin">
+	<div id="movDelete">
 	
-		<form action="delete.do" method="post">
+		<form action="delete.do?movieNumber=${ movie.movieNumber }" method="post">
 		
 			<table>
 			
 				<tr>
 					<td colspan="2">
-						삭제할 영화의 정보를 하나 이상 입력해주세요.
+						<h3>정말로 삭제하실 영화가 맞는지 확인 해주시기 바랍니다.</h3>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						영화 번호
+						
 					</td>
 					<td>
-						<input type="text" name="movieNumber">
+						<input type="text" name="movieNumber" value="${ movie.movieNumber }" hidden="hidden">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						티저 링크
+					</td>
+					<td>
+						<input type="text" name="movieTeaser" value="${ movie.movieTeaser }">
 					</td>
 				</tr>
 				<tr>
@@ -60,7 +68,15 @@
 						영화 제목
 					</td>
 					<td>
-						<input type="text" name="movieTitle">
+						<input type="text" name="movieTitle" value="${ movie.movieTitle }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						영화 분류
+					</td>
+					<td>
+						<input type="text" name="movieKind" value="${ movie.movieKind }">
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +84,7 @@
 						감독 이름
 					</td>
 					<td>
-						<input type="text" name="movieDirector">
+						<input type="text" name="movieDirector" value="${ movie.movieDirector }">
 					</td>
 				</tr>
 				<tr>
@@ -76,12 +92,60 @@
 						주연 배우
 					</td>
 					<td>
-						<input type="text" name="movieActor">
+						<input type="text" name="movieActor" value="${ movie.movieActor }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						상영 등급
+					</td>
+					<td>
+						<input type="text" name="movieGrade" value="${ movie.movieGrade }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						상영 시간
+					</td>
+					<td>
+						<input type="text" name="movieTime" value="${ movie.movieTime }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						개봉 연도
+					</td>
+					<td>
+						<input type="text" name="movieDate" value="${ movie.movieDate }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						유튜브 링크
+					</td>
+					<td>
+						<input type="text" name="movieYoutubeUrl" value="${ movie.movieYoutubeUrl }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						네이버 링크
+					</td>
+					<td>
+						<input type="text" name="movieNaverUrl" value="${ movie.movieNaverUrl }">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						영화 내용
+					</td>
+					<td>
+						<input type="text" name="movieContent" value="${ movie.movieContent }">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="submit" value="입력 완료">
+						<input type="submit" value="삭제 완료">
 					</td>
 				</tr>
 				

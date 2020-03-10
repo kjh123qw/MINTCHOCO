@@ -33,9 +33,6 @@ public class MovieDAO {
 	
 	// 삭제
 	final private String DELETE_MOVIE_NUM = "DELETE FROM MOVIE WHERE MOVIE_NUMBER = ?";
-	final private String DELETE_MOVIE_TITLE = "DELETE FROM MOVIE WHERE MOVIE_TITLE = ?";
-	final private String DELETE_MOVIE_DIRECTOR = "DELETE FROM MOVIE WHERE MOVIE_DIRECTOR = ?";
-	final private String DELETE_MOVIE_ACTOR = "DELETE FROM MOVIE WHERE MOVIE_ACTOR = ?";
 	
 	// 영화 정보 입력
 	public void insertMovie(MovieVO movieVO) {
@@ -171,67 +168,12 @@ public class MovieDAO {
 	}
 	
 	// 기존 영화 삭제
-	// 영화 번호
-	public void deleteMovie1(String movieNumber) {
+	public void deleteMovie(String movieNumber) {
 		
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(DELETE_MOVIE_NUM);
 			stmt.setString(1, movieNumber);
-			stmt.executeUpdate();
-			
-		} catch(Exception e) {
-			System.out.println("Error - selectMovieList()\n");
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(stmt, conn);
-		}
-
-	}
-	
-	// 영화 제목
-	public void deleteMovie2(String movieTitle) {
-		
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(DELETE_MOVIE_TITLE);
-			stmt.setString(1, movieTitle);
-			stmt.executeUpdate();
-			
-		} catch(Exception e) {
-			System.out.println("Error - selectMovieList()\n");
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(stmt, conn);
-		}
-
-	}
-	
-	// 감독 이름
-	public void deleteMovie3(String movieDirector) {
-		
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(DELETE_MOVIE_DIRECTOR);
-			stmt.setString(1, movieDirector);
-			stmt.executeUpdate();
-			
-		} catch(Exception e) {
-			System.out.println("Error - selectMovieList()\n");
-			e.printStackTrace();
-		} finally {
-			JDBCUtil.close(stmt, conn);
-		}
-
-	}
-	
-	// 주연 배우
-	public void deleteMovie4(String movieActor) {
-		
-		try {
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(DELETE_MOVIE_ACTOR);
-			stmt.setString(1, movieActor);
 			stmt.executeUpdate();
 			
 		} catch(Exception e) {

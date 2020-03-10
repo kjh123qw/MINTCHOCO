@@ -1,32 +1,5 @@
 $(function(){
 	
-	$(window).resize(function (){
-		  // width값을 가져오기
-		  var width_size = window.outerWidth;
-		  
-		  
-		  console.log(width_size);
-
-		  if(width_size <=320){
-			  
-		  }else if(width_size <=576){
-
-			  
-			  
-		  }else if(width_size <=768){
-
-			  
-		  }else if(width_size <=992){
-			  
-		  }else if(width_size <=1200){
-
-			  
-		  }else{
-			  
-		  }
-		  
-		})
-	
 	/*스크롤 위치 리턴*/
 	$(window).on('mousewheel',function(e){
 		
@@ -135,4 +108,37 @@ function returnWidth(){
 
 function snsEvent(){
 	alert("준비중입니다.");
+}
+
+function detailMember(number){
+
+	alert("main의 js에 memberDetail 함수있습니다. 수정부탁드립니다. number로 회원번호를 같이 보내드립니다." + number + "번의 회원")
+}
+
+function detailMovie(number){
+	
+	alert("main의 js에 detailMovie 함수있습니다. 수정부탁드립니다. number로 영화 번호를 같이 보내드립니다." + number +"번의 영화")
+	
+}
+
+function goMypage(number){
+	alert("main의 js에 goMypage 함수있습니다. 수정부탁드립니다. number로 회원번호 보내드립니다." + number + "번의 회원입니다.")
+}
+
+function goMovie(){
+	alert("movie 리스트 가는 함수입니다.")
+}
+
+function goNotice(){
+	alert("게시판 가는 함수입니다. 로그인한 사람정보는 세션에 있습니다. ${memberInfo[0].number}")
+}
+
+function goLogout(){
+	
+	var logoutFlag = confirm("로그아웃 하시겠습니까?");
+	
+	if(logoutFlag){
+		location.href = "logout.do";		
+	}
+	
 }

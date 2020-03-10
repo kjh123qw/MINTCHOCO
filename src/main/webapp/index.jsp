@@ -47,25 +47,30 @@
 		</div>
 		
 		<div id = "mainDiv2">
+		
+			<!-- 로그인 Div -->
 			<div id ="loginDiv">
 				<h1 class = "title">MINTCHOCO</h1>
-				
-				<form action = "login.do" method="POST" name = "loginForm" class = "loginForm" onsubmit = "return loginCheck()";>
+				<form action = "login.do" method="POST" name = "loginForm" class = "loginForm">
 
 					<div class="cst-text-st1">
-  						<input type="text" name = "email" class="text-200" placeholder="EMAIL">
+  						<input type="text" name = "email" class="text-200" placeholder="EMAIL" value = "${rememberEmail }">
   						<input type="password" name = "pwd" class="text-200" placeholder = "PASSWORD">
 					</div>
 					
 					<div class="cst-chkbox-st2">
-  						<input type="checkbox" name = "rememberCheck">
+						<c:if test="${rememberEmail == null}">
+  							<input type="checkbox" name = "rememberCheck">
+  						</c:if>
+  						<c:if test = "${rememberEmail != null }">
+  							<input type="checkbox" name = "rememberCheck" checked >
+  						</c:if>
   						<span class="text-250">REMEMBER ME</span>
 					</div>
 
 					<div class="cst-btn">
-  						<input type="submit" value="확인" class="st1-150-50">
+  						<input type="button" value="확인" class="st1-150-50" onclick = "loginCheck();">
 					</div>
-
 
                 </form>
                 
@@ -74,14 +79,15 @@
          	        <span>&nbsp;&nbsp;/&nbsp;&nbsp;</span>
         	        <a onclick = "findPassword();">비밀번호 찾기</a>
                 </div>
-                
-                
+                              
 			</div>
 			
-			
 			<div id = "upBtn" class = "heightArrow"><i class="fas fa-arrow-up"></i></div>
+		<!-- 로그인 Div -->
 		</div>
 		
+		
+		<!-- 회원가입 div -->
 		<div id ="joinDiv">
 			<h1 class = "title">JOIN</h1>
 			
@@ -117,8 +123,9 @@
 			</form>
 		
 		</div>
-		
-		
+		<!-- 회원가입 div -->
+
+		<!-- 비밀번호 찾기 div -->
         <div id = "findDiv">
         	<h1 class = "title">FORGOT YOUR PASSWORD</h1>
         	<h3 id = "findDivSubTitle">임시비밀번호를 보내드립니다.</h3>
@@ -134,60 +141,7 @@
 				</div>
         	</form>
         </div>
-		
-		
-		
-		
-		<!-- 메인 동영상 -->
-        <!-- <div id = "mainDiv1">
-            <video id="video" width="100%" height="100%" preload="auto" autoplay="true" loop="loop" muted="muted" volume="0">
-                <source src="./images/index/mainAction.mp4">
-            </video>
-            <h2 id = "skipBtn1">Skip
-                <span id = "skipBtn2">→</span>
-            </h2>
-        </div>
-        //메인 동영상
-        
-        로그인화면
-        <div id = "mainDiv2">
-            <img id = "mainImg" src="./img/mainImage.jpg" alt="">
-            test
-            <p id = "t3">올라가기</p>
-            <div id ="loginDiv">
-                <h1 ID = "title">MINTCHOCO</h1>
-
-                <form action = "login.do" method="POST" name = "loginForm" class = "loginForm">
-
-                    <table>
-                        <tr>
-                            <td><label for = "id">ID</label></td>
-                            <td><input type = "text" id = "id" name = "id" placeholder="ID"/></td>
-                        </tr>
-                        <tr>
-                            <td><label for = "pwd">PASSWORD</label></td>
-                            <td><input type = "password" id = "pwd" name = "pwd" placeholder="****"/></td>
-                        </tr>
-                    </table>
-
-                    <input type = "text" id = "id" name = "id" placeholder="ID"/>
-                    <input type = "password" id = "pwd" name = "pwd" placeholder="PASSWORD"/>
-
-                </form>
-                <button id = "joinBtn">join</button>
-                <button id = "findBtn">find</button>
-                
-
-            </div>
-            <div id ="joinDiv"><button class = "goLogin">회원가입 완료</button></div>
-            <div id = "findDiv"><button class = "goLogin">비전 찾기 완료</button></div>
-
-            <div id = "upBtn"><i class="fas fa-arrow-up"></i></div>
-            <div id = "upBtn"><i class="fas fa-arrow-up"></i></div>
-
-        </div>
-        //로그인화면 -->
-        
+        <!-- 비밀번호 찾기 div -->
 </div>
 
 <!-- 담당자 내용 -->

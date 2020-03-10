@@ -1,10 +1,13 @@
 package com.kosmo.view.member;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -14,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kosmo.mintchoco.common.SecurityUtil;
 import com.kosmo.mintchoco.member.MemberDAO;
 import com.kosmo.mintchoco.member.MemberVO;
+import com.kosmo.mintchoco.movie.MovieVO;
 
 /*
  * 담당자 : 유지상
@@ -147,32 +152,78 @@ public class MemberController {
 		
 		
 	}
-
+	
 	@ResponseBody
-	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(String email, String pwd, String rememberCheck) throws Exception {
+	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
+	public String loginCheck(HttpServletRequest request) throws Exception {
 		
-		/*
-		 * System.out.println("-------------------"); System.out.println(email);
-		 * System.out.println(pwd); System.out.println(rememberCheck); // on or null
-		 * System.out.println("-------------------");
-		 * 
-		 * SecurityUtil security = new SecurityUtil();
-		 * 
-		 * String testPwd = security.encryptSHA256("awrefnawruj12424");
-		 * System.out.println(testPwd);
-		 */
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("pwd");
+		String rememberCheck = request.getParameter("rememberCheck"); //true or false
 		
-		String msg = "1";
-		String msg2 = "2";
+		SecurityUtil security = new SecurityUtil();
+		String newPwd = security.encryptSHA256(pwd);
 		
-		if(msg == "1") {
-			throw new Exception();
-			
+		int loginCheck = dao.loginCheck(email, newPwd);
+		
+		if(loginCheck == 1) {
+			return "loginCheck";
 		}else {
-			return msg2;
-			
+			throw new Exception();
 		}
+
+	}
+	
+	@RequestMapping(value = "/logout.do")
+	public String logout(HttpSession session) {
+		
+		session.removeAttribute("memberInfo");
+		
+		return "index.jsp";
+	}
+
+
+	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
+	public ModelAndView login(HttpServletRequest request) throws Exception {
+		
+		
+		String email = request.getParameter("email");
+		String pwd = request.getParameter("pwd");
+		
+		SecurityUtil security = new SecurityUtil();
+		String newPwd = security.encryptSHA256(pwd);
+		
+		String rememberCheck; // on or null
+		
+
+		if(request.getParameter("rememberCheck") == null) {
+			rememberCheck = "null";
+		}else {
+			rememberCheck = request.getParameter("rememberCheck");
+		}
+		
+		HttpSession session = request.getSession();
+		
+		if(rememberCheck.equals("on")) {
+			session.setAttribute("rememberEmail", email);
+		}else {
+			session.removeAttribute("rememberEmail");
+		}
+		
+		List<MemberVO> memberInfo = new ArrayList<MemberVO>();
+		List<MovieVO> movieInfo = new ArrayList<MovieVO>();
+		
+		//맴버정보
+		memberInfo = dao.loginMember(email, newPwd);
+		//최신영화정보 10개
+		movieInfo = dao.movieList();
+		
+		ModelAndView mv = new ModelAndView();
+		mv.addObject("memberInfo", memberInfo);
+		mv.addObject("movieInfo", movieInfo); //최신영화
+		mv.setViewName("main.jsp");
+		
+		return mv;
 		
 	}
 	

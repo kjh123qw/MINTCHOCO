@@ -108,9 +108,6 @@ $(function(){
 		inputReset();
 	})
 	
-	
-
-	
 })
 
 
@@ -167,26 +164,36 @@ function findPassword(){
 
 function loginCheck(){
 	
-	 $.ajax({
-	        url:"login.do",
-	        type:'post',
-	        datatype:'text',
-	        success:function(msg){
-	        	
-	        	alert("성공")
-	        	$(".cst-btn").effect( "bounce", {times:3}, 1000 );
+	var email = loginForm.email.value;
+	var pwd = loginForm.pwd.value;rememberCheck
+	var rememberCheck = loginForm.rememberCheck.checked;
 
-
-	        },
-	        error:function(){
-	        	alert("실패")
-	        	$(".cst-btn").effect( "shake", {times:3}, 1000 );
-	        }
-	    });
-	 
-	 
-	 return false;
-
+	if(email == ""){
+		alert("이메일을 확인해주세요");
+		return false;
+	}
+	
+	if(pwd == ""){
+		alert("비밀번호를 확인해주세요")
+		return false;
+	}
+	
+	var allData = {"email" : email , "pwd" : pwd , "rememberCheck" : rememberCheck};
+	
+	$.ajax({
+		url:"loginCheck.do",
+		type:"post",
+		datatype:'text',
+		data:allData,
+		success:function(data){
+			alert("로그인 되었습니다.")
+			loginForm.submit();
+		},
+		error:function(){
+			alert("개인정보를 확인해주세요")
+			$(".cst-btn").effect( "shake", {times:3}, 1000 );
+		}
+	})
 	
 }
 
@@ -399,7 +406,7 @@ $.ajax({
     	alert("실패")
     }
 	});
-return false;
+
 }
 
 

@@ -170,9 +170,15 @@ public class DBVersionManager {
 			"left outer join (select MOVIE_NUMBER ,avg(ASSESS_STARS) AVGSTAR from ASSESSMENT group by MOVIE_NUMBER) av " + 
 			"on mv.MOVIE_NUMBER = av.MOVIE_NUMBER",
 			
-			"create table tag (" + 							// 태그  (최원준)
-			"    tag_content varchar2(60) primary key, " +	// 태그 내용 
-			"    MOVIE_number varchar2(60) NOT NULL" +		// 영화번호 
+//			"create table tag (" + 							// 태그  (최원준)
+//			"    tag_content varchar2(60) primary key, " +	// 태그 내용 
+//			"    MOVIE_number varchar2(60) NOT NULL" +		// 영화번호 
+//			")",
+			
+			"create table tag ( " + 						// 태그  (최원준)
+			"tag_content varchar2(60) primary key, " + 		// 태그 내용 
+			"MOVIE_number varchar2(60) NOT NULL, " + 		// 영화번호 
+			"cnt number default 1" + 
 			")",
 			
 			"create table tag_mapping (" + 					// 태그맵핑  (최원준)

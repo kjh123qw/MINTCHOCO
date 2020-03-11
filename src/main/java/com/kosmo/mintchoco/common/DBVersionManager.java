@@ -177,7 +177,7 @@ public class DBVersionManager {
 			
 			"create table tag ( " + 						// 태그  (최원준)
 			"tag_content varchar2(60) primary key, " + 		// 태그 내용 
-			"MOVIE_number varchar2(60) NOT NULL, " + 		// 영화번호 
+			"MOVIE_number number(10) NOT NULL, " + 		// 영화번호 
 			"cnt number default 1" + 
 			")",
 			

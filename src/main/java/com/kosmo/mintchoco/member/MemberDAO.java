@@ -247,7 +247,7 @@ int result = 0;
 				vo.setMovieTeaser(rs.getString("MOVIE_TEASER"));
 				vo.setMovieTitle(rs.getString("MOVIE_TITLE"));
 				vo.setMovieKind(rs.getString("MOVIE_KIND"));
-				vo.setMovieDirector(rs.getString("MOVIE_DIRECTER"));
+				vo.setMovieDirector(rs.getString("MOVIE_DIRECTOR"));
 				vo.setMovieActor(rs.getString("MOVIE_ACTOR"));
 				vo.setMovieGrade(rs.getString("MOVIE_GRADE"));
 				vo.setMovieTime(rs.getString("MOVIE_TIME"));

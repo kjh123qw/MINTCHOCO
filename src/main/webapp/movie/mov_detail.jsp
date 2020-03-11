@@ -40,11 +40,11 @@
 
 <div id="movDetail">
 
-	<h1> 영화 내용 상세 </h1>
+	<h1><a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }"> 영화 내용 상세 </a></h1>
 	
+	<!-- 관리자일 경우에만 보이는 메뉴 -->
 	<div id="updateMenu" style="text-align: center;">
-	
-		<input type="button" value="영화 정보 입력" onclick="location.href='${ contextPath }/movie/insertForm.do'">
+
 		<input type="button" value="영화 정보 수정" onclick="location.href='${ contextPath }/movie/updateForm.do?movieNumber=${ movie.movieNumber }'">
 		<input type="button" value="기존 영화 삭제" onclick="location.href='${ contextPath }/movie/deleteForm.do?movieNumber=${ movie.movieNumber }'">
 	

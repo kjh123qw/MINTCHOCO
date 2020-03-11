@@ -34,7 +34,7 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-	<h1> 기존 영화 삭제 </h1>
+	<h1><a href="${ contextPath }/movie/deleteForm.do?movieNumber=${ movie.movieNumber }"> 기존 영화 삭제 </a></h1>
 
 	<div id="movDelete">
 	
@@ -145,7 +145,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="submit" value="삭제 완료">
+						<input id="submit" type="submit" value="삭제 완료">
 					</td>
 				</tr>
 				

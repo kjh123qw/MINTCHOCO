@@ -34,12 +34,12 @@ public class MovieController {
 		
 		movieDAO.insertMovie(movieVO);
 		
-		return "redirect:/movie/recommand.do";
+		return "redirect:/movie/recommend.do";
 	}
 	
 	// 주제별 영화 목록
 	
-	@RequestMapping("/movie/recommand.do")
+	@RequestMapping("/movie/recommend.do")
 	public String movieList(MovieDAO movieDAO, Model model) {
 		model.addAttribute("movieList", movieDAO.selectMovieList());
 		return "rec_list.jsp";
@@ -68,7 +68,7 @@ public class MovieController {
 		
 		movieDAO.updateMovie(movieVO);
 		
-		return "redirect:/movie/recommand.do";
+		return "redirect:/movie/recommend.do";
 
 	}
 	
@@ -87,7 +87,7 @@ public class MovieController {
 
 		movieDAO.deleteMovie(request.getParameter("movieNumber"));
 
-		return "redirect:/movie/recommand.do";
+		return "redirect:/movie/recommend.do";
 
 	}
 	

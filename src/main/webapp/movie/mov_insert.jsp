@@ -34,7 +34,7 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-	<h1> 영화 정보 입력 </h1>
+	<h1><a href="${ contextPath }/movie/insertForm.do"> 영화 정보 입력 </a></h1>
 
 	<div id="movInsert">
 
@@ -137,7 +137,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input type="submit" value="입력 완료">
+						<input id="submit" type="submit" value="입력 완료">
 					</td>
 					
 				</tr>

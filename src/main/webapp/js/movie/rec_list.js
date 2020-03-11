@@ -3,32 +3,35 @@
  */
 
 $(function () {
-
-var set = 0;
 	
-	$("#rButton").mouseover(function() {
-		$("#rButton").css("color", "#F5FFFA");
-		$("#rButton").css("top", "125px");
-		$("#rButton").css("font-size", "7em");
+	/* 좌우 버튼 관련*/
+	
+	/* 1번 */
+	var set = 0;
+	
+	$(".r-button1").mouseover(function() {
+		$(".r-button1").css("color", "#F5FFFA");
+		$(".r-button1").css("top", "150px");
+		$(".r-button1").css("font-size", "7em");
 	});
-	$("#rButton").mouseout(function() {
-		$("#rButton").css("color", "#F5FFFA");
-		$("#rButton").css("top", "175px");
-		$("#rButton").css("font-size", "50px");
+	$(".r-button1").mouseout(function() {
+		$(".r-button1").css("color", "#F5FFFA");
+		$(".r-button1").css("top", "200px");
+		$(".r-button1").css("font-size", "50px");
 	});
 
-	$("#lButton").mouseover(function() {
-		$("#lButton").css("color", "#F5FFFA");
-		$("#lButton").css("top", "125px");
-		$("#lButton").css("font-size", "7em");
+	$(".l-button1").mouseover(function() {
+		$(".l-button1").css("color", "#F5FFFA");
+		$(".l-button1").css("top", "150px");
+		$(".l-button1").css("font-size", "7em");
 	});
-	$("#lButton").mouseout(function() {
-		$("#lButton").css("color", "#F5FFFA");
-		$("#lButton").css("top", "175px");
-		$("#lButton").css("font-size", "50px");
+	$(".l-button1").mouseout(function() {
+		$(".l-button1").css("color", "#F5FFFA");
+		$(".l-button1").css("top", "200px");
+		$(".l-button1").css("font-size", "50px");
 	});
 	
-	$("#rButton").click(function() {
+	$(".r-button1").click(function() {
 		
 		if(set >= 8){
 			alert('가장 뒤 입니다.')
@@ -45,7 +48,7 @@ var set = 0;
 		
 	});
 
-	$("#lButton").click(function() {
+	$(".l-button1").click(function() {
 		
 		if(set <= 0){
 			alert('가장 앞 입니다.')

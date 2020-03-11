@@ -33,49 +33,105 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-    <h1> 주제별 영화 목록 </h1>
+    <h1><a href="${ contextPath }/movie/recommend.do"> 추천 영화 목록 </a></h1>
+
+	<!-- 관리자일 경우에만 보이는 메뉴 -->
+	<div id="updateMenu" style="text-align: center;">
+	
+		<input type="button" value="영화 정보 입력" onclick="location.href='${ contextPath }/movie/insertForm.do'">
+	
+	</div>
 
     <div id="movRec">
 
-        <div id="lButton">◀</div>
-        <div id="rButton">▶</div>
+		<div class="l-button1" >◀</div>
+		<div class="r-button1">▶</div>
+
+		<h3>액션</h3>
+		
+		<div class="bg">
+		
+	        <c:forEach var="movie" items="${movieList}">
+	        
+	        	<c:if test="${movie.movieKind.contains('액션')}">
+	        
+		            <div id="action" class="movie">
+		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
+		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                </a>
+		                <p>
+		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
+		                </p>
+		            </div>
+	        
+	        	</c:if>
+	        
+	        </c:forEach>
+        </div>
+		
+		<h3>드라마</h3>
+		
+		<div class="bg">
+	        <c:forEach var="movie" items="${movieList}">
+	        
+	        	<c:if test="${movie.movieKind.contains('드라마')}">
+	        
+		            <div class="movie">
+		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
+		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                </a>
+		                <p>
+		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
+		                </p>
+		            </div>
+	        
+	        	</c:if>
+	        
+	        </c:forEach>
+        </div>
+        
+        <h3>스릴러</h3>
         
         <div class="bg">
 	        <c:forEach var="movie" items="${movieList}">
 	        
-	            <div class="movie">
-	                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
-	                    <img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
-	                </a>
-	                    <p> ${ movie.movieTitle } </p>
-	            </div>
+	        	<c:if test="${movie.movieKind.contains('스릴러')}">
+	        
+		            <div class="movie">
+		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
+		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                </a>
+		                <p>
+		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
+		                </p>
+		            </div>
+	        
+	        	</c:if>
 	        
 	        </c:forEach>
         </div>
 
-    </div>
+        <h3>애니메이션</h3>
+        
+        <div class="bg">
+	        <c:forEach var="movie" items="${movieList}">
+	        
+	        	<c:if test="${movie.movieKind.contains('애니메이션')}">
+	        
+		            <div class="movie">
+		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
+		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                </a>
+		                <p>
+		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
+		                </p>
+		            </div>
+	        
+	        	</c:if>
+	        
+        	</c:forEach>
+        </div>
 
-    <div class="mov-button">
-        <table>
-            <tr>
-                <td><a href="#">민초 추천</a></td>
-                <td><a href="#">민초의 난</a></td>
-                <td><a href="#">최고 인기</a></td>
-                <td><a href="#">최근 인기 </a></td>
-            </tr>
-            <tr>
-                <td><a href="#">선호 추천</a></td>
-                <td><a href="#">장르 추천</a></td>
-                <td><a href="#">친구 추천</a></td>
-                <td><a href="#">추가 예정</a></td>
-            </tr>
-            <tr>
-                <td><a href="#">ABC 순</a></td>
-                <td><a href="#">가나다 순</a></td>
-                <td><a href="#">상영등급 순</a></td>
-                <td><a href="#">추가 예정</a></td>
-            </tr>
-        </table>
     </div>
 
 <!-- 담당자 내용 -->

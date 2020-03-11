@@ -16,7 +16,7 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 찜한 목록 -->
-	<form class="myp-con-fav" method="post" action="" onsubmit="return  chk_cnt();">
+	<form class="myp-con-fav" method="post" action="favorite.do" onsubmit="return chk_cnt();">
 		<div class="con-fav-wrap">
 			<nav class="con-menu">
 				<div class="con-menu-modifyoff  con-menu-dropdown-rel"">
@@ -36,22 +36,26 @@
 						     	</div>						     	
 						     </div>						   
 						</li>
-						<li><a onclick="modifyOn();">편집</a></li>
+						<c:if test="${memberInfo[0].number==detail_info.number}">
+							<li><a onclick="modifyOn();">편집</a></li>
+						</c:if>
 					</ul>
 					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요." onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
-				<div class="con-menu-modifyon">
-					<div class="con-menu-sub">
-						<span class="con-chkbox-cnt">0</span>
-						<span>개 선택</span>
+				<c:if test="${memberInfo[0].number==detail_info.number}">
+					<div class="con-menu-modifyon">
+						<div class="con-menu-sub">
+							<span class="con-chkbox-cnt">0</span>
+							<span>개 선택</span>
+						</div>
+						<ul class="con-menu-list">
+							<li><a onclick="allcheck();">전체선택</a></li>
+							<li><a onclick="modifyOff();">취소</a></li>
+							<li><a><input type="submit" id="fav-list-delete" class="con-list-delete"><label for="fav-list-delete">삭제</label></a></li>
+						</ul>
 					</div>
-					<ul class="con-menu-list">
-						<li><a onclick="allcheck();">전체선택</a></li>
-						<li><a onclick="modifyOff();">취소</a></li>
-						<li><a><input type="submit" id="fav-list-delete"><label for="fav-list-delete">삭제</label></a></li>
-					</ul>
-				</div>
+				</c:if>
 			</nav>
 			<div class="clear"></div>
 			
@@ -71,12 +75,12 @@
 					</div>				
 				</div>
 				</article>
-			</c:forEach>
-			
+			</c:forEach>			
 			<div class="clear"></div>
 		</div>
 	</form>
-	<form class="con-sortList" name="alignForm" method="POST" action="sortFavList.do">
+	<form class="con-sortList" name="alignForm" method="POST" action="favorite.do">
+		<input type="hidden" name="chkbox" value="none">
 		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->

@@ -25,6 +25,7 @@ public class FavoriteDAO {
 	private final String FAV_BY_RELEASE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY MOVIE_TIME DESC";
 	private final String FAV_BY_INDATE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY FAVORITE_ID ASC";
 	private final String FAVORITE_INSERT = "INSERT INTO FAVORITE(MEMBER_NUMBER, MOVIE_NUMBER) values(?,?)";
+	private final String FAVORITE_DELETE = "DELETE FROM FAVORITE WHERE FAVORITE_ID in (?)";
 	private final String LATEST_FAV = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY FAVORITE_REGDATE DESC LIMIT 5";
 	private final String FAV_COUNT = "SELECT COUNT(*) FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=?";
 	
@@ -183,7 +184,7 @@ public class FavoriteDAO {
 			return favoriteList;
 		}
 	
-	// 찜하기 버튼
+	// 찜목록에 추가
 	public void insertFavorite(MemberVO member, MovieVO movie) {
 		System.out.println("===> JDBC로 insertFavorite()");
 		try {
@@ -198,6 +199,21 @@ public class FavoriteDAO {
 			JDBCUtil.close(stmt, conn);
 		}
 	}
+	
+	// 찜목록에서 제거
+		public void deleteFavorite(String chkbox) {
+			System.out.println("===> JDBC로 deleteFavorite()");
+			try {
+				conn = JDBCUtil.getConnection();
+				stmt = conn.prepareStatement(FAVORITE_DELETE);			
+				stmt.setString(1, chkbox);
+				stmt.executeUpdate();
+			} catch(Exception e) {
+				System.out.println("deleteFavorite() + e");
+			} finally {
+				JDBCUtil.close(stmt, conn);
+			}
+		}
 	
 	// 몇 건 찜했는지
 		public int getFavoriteCnt(String memberNum) {

@@ -22,7 +22,7 @@ public class AssessmentMDAO {
 	private final String ASSESSMENT_BY_TITLE = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=? ORDER BY MOVIE_TITLE DESC";
 	private final String ASSESSMENT_BY_INDATE = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=? ORDER BY ASSESS_ID DESC";
 	private final String ASSESSMENT_BY_STARS = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=? ORDER BY ASSESS_STARS DESC, STARS DESC";
-	
+	private final String ASSESSMENT_DELETE = "DELETE FROM ASSESSMENT WHERE ASSESS_ID in (?)";
 	// 평가목록 가져오기
 		public List<AssessmentMVO> getAssessmentList(String memberNum) {
 			// TODO Auto-generated method stub
@@ -167,5 +167,20 @@ public class AssessmentMDAO {
 			}
 				return assessList;
 			}
+		
+		// 찜목록에서 제거
+		public void deleteAssessment(String chkbox) {
+			System.out.println("===> JDBC로 deleteAssessment()");
+			try {
+				conn = JDBCUtil.getConnection();
+				stmt = conn.prepareStatement(ASSESSMENT_DELETE);			
+				stmt.setString(1, chkbox);
+				stmt.executeUpdate();
+			} catch(Exception e) {
+				System.out.println("deleteAssessment() + e");
+			} finally {
+				JDBCUtil.close(stmt, conn);
+			}
+		}
 	
 }

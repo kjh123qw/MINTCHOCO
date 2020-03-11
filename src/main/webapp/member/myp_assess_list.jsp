@@ -37,29 +37,33 @@
 						     	</div>
 						     </div>						   
 						</li>
-						<li><a onclick="modifyOn();">편집</a></li>						
+						<c:if test="${memberInfo[0].number==detail_info.number}">
+							<li><a onclick="modifyOn();">편집</a></li>
+						</c:if>					
 					</ul>
 					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요."  onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
-				<div class="con-menu-modifyon">
-					<div class="con-menu-sub">
-						<span class="con-chkbox-cnt">0</span>
-						<span>개 선택</span>
+				<c:if test="${memberInfo[0].number==detail_info.number}">
+					<div class="con-menu-modifyon">
+						<div class="con-menu-sub">
+							<span class="con-chkbox-cnt">0</span>
+							<span>개 선택</span>
+						</div>
+						<ul class="con-menu-list">
+							<li><a onclick="allcheck();">전체선택</a></li>
+							<li><a onclick="modifyOff();">취소</a></li>
+							<li><a onclick="selChkbox();"><input type="submit" id="assess-list-delete" class="con-list-delete"><label for="assess-list-delete">삭제</label></a></li>
+						</ul>
 					</div>
-					<ul class="con-menu-list">
-						<li><a onclick="allcheck();">전체선택</a></li>
-						<li><a onclick="modifyOff();">취소</a></li>
-						<li><a><input type="submit" id="assess-list-delete"><label for="assess-list-delete">삭제</label></a></li>
-					</ul>
-				</div>
+				</c:if>	
 			</nav>
 			<!-- // 평가 목록 편집 메뉴 -->
 			
 			<!-- 평가 틀 -->
 			<c:forEach items="${assessList}" var="assess">
 			<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.poster});" onclick="chk_enable(this);">
-			<input class="con-chkbox" type="checkbox" name="chkbox">
+			<input class="con-chkbox" type="checkbox" name="chkbox" value="${assess.assessNum}">
 			<div class="con-assess-bg">			
 				<div class="con-assess-img-wrap con-assess-float">
 					<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.poster}">
@@ -107,12 +111,11 @@
 				</div>
 			</article>
 			</c:forEach>
-			<!-- //평가 틀 -->
-			
+			<!-- //평가 틀 -->			
 		</div>
 		<div class="clear"></div>
 	</form>
-	<form class="con-sortList" name="alignForm" method="POST" action="sortAssessList.do">
+	<form class="con-sortList" name="alignForm" method="POST" action="assessment.do">
 		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->

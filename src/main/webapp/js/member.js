@@ -67,10 +67,10 @@ function modifyOn() {
 function modifyOff() {
 	var modifyon = document.getElementsByClassName('con-menu-modifyon')[0];
 	var modifyoff = document.getElementsByClassName('con-menu-modifyoff')[0];
-	var chkbox = document.getElementsByName("chkbox");
+	var chkbox = document.getElementsByClassName("con-chkbox");
 	var leng = chkbox.length;
     for (i=0; i<leng; i++) {
-    	document.getElementsByName("chkbox")[i].checked = false;
+    	document.getElementsByClassName("con-chkbox")[i].checked = false;
     }
     chkbox_count = 0;
 	modifyoff.style.display = 'block';
@@ -83,24 +83,24 @@ function modifyOff() {
 
 function allcheck() {
 	chkbox_count = 0;
-	var chkbox = document.getElementsByName("chkbox");    
+	var chkbox = document.getElementsByClassName("con-chkbox");    
 	var leng = chkbox.length;    
 	
     for (i=0; i<leng; i++) {
-    	if (document.getElementsByName("chkbox")[i].checked == true) {
+    	if (document.getElementsByClassName("con-chkbox")[i].checked == true) {
     		chkbox_count++;
     	}
     }
     
     if (leng == chkbox_count) {
     	for (i=0; i<leng; i++) {
-    		document.getElementsByName("chkbox")[i].checked = false;
+    		document.getElementsByClassName("con-chkbox")[i].checked = false;
     	}
     	
     	chkbox_count = 0;
     } else {
     	for (i=0; i<leng; i++) {
-    		document.getElementsByName("chkbox")[i].checked = true;
+    		document.getElementsByClassName("con-chkbox")[i].checked = true;
     	}
     	chkbox_count = leng;
     }
@@ -123,12 +123,12 @@ function chk_enable(element) {
 		assess.checked = true;
 	}
 	
-    var display_cnt = document.getElementsByClassName('con_chkbox_cnt')[0];
+    var display_cnt = document.getElementsByClassName('con-chkbox-cnt')[0];
     display_cnt.innerText = chkbox_count;
 }
 
 function chk_cnt() {
-    var chkbox = document.getElementsByName("chkbox");
+    var chkbox = document.getElementsByClassName("con-chkbox");
     var leng = chkbox.length;
     var checked = 0;
     for (i=0; i<leng; i++) {
@@ -136,10 +136,17 @@ function chk_cnt() {
             checked += 1;
         }
     }
+    
     if (checked<1) {
         alert("항목을 1개 이상 선택해주세요.");
         return false;
     }
+    
+    if (confirm(checked+"건의 항목을 삭제하시겠습니까?")) {
+		return true;
+	} else {
+		return false;
+	}
 }
 
 function modal(element){
@@ -272,6 +279,11 @@ function ageCount() {
 }
 
 function sorting(element) {
+	
+	var newchk = document.createElement("input");
+	newchk.setAttribute('name','ckbox');
+	newchk.setAttribute('value','none');
+	
 	var e = element;
 	var sort = document.getElementsByClassName("con-alignInput")[0];
 	var sortForm = document.getElementsByClassName("con-sortList")[0];
@@ -287,5 +299,41 @@ function sorting(element) {
 	} else if (e=="star") {
 		sort.setAttribute('value','star');
 		sortForm.submit();
+	}
+}
+
+function selChkbox() {
+	var submitbtn = document.getElementsByClassName("con-list-delete");
+	var chkbox = document.getElementsByClassName("con-chkbox");
+	var leng = chkbox.length;
+	var chkRow = '';
+	var chkCnt = 0;
+	var chkLast = '';
+	var idVal = '';
+	var cnt = 0;   
+	
+	for(var i=0; i<leng; i++) {
+		if(chkbox[i].checked == true) {
+			chkCnt++;
+			chkLast = i;
+		}
+	} 
+	
+	for(var i=0; i<leng; i++){
+		if(chkbox[i].checked == true){
+			chkRow = chkbox[i].value;
+			if(chkCnt == 1){
+				idVal += "'"+chkRow+"'";
+			} else {
+				if(i == chkLast) {
+					idVal += "'"+chkRow+"'";
+				} else {	
+					idVal += "'"+chkRow+"',"; 			
+				}
+			}
+			cnt++;
+			chkRow = '';
+		}
+	submitbtn.setAttribute('value',idVal);
 	}
 }

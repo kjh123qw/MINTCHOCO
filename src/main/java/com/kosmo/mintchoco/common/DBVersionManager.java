@@ -12,10 +12,12 @@ import java.util.stream.Stream;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.0.4";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.1.0";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
+
+	SecurityUtil security = new SecurityUtil();
 	
 	private String[] drpSql = { // 기존 테이블 및 시퀀스 삭제 sql
 			"drop table VERSION",
@@ -23,6 +25,7 @@ public class DBVersionManager {
 			"drop table FAQ",
 			"drop table tag_mapping",
 			"drop table tag",
+			"drop view SEARCH_VIEW",
 			"drop view ASSESSMENT_view",
 			"drop table ASSESSMENT_EST",
 			"drop table ASSESSMENT",
@@ -72,7 +75,7 @@ public class DBVersionManager {
 			"CREATE TABLE MEMBER(" +							// 회원 (유지상) 
 			"    MEMBER_NUMBER NUMBER(10) PRIMARY KEY, " +		// 시퀀스 회원 번호 // 구분 용도, 세션 저장 
 			"    MEMBER_EMAIL VARCHAR2(60) UNIQUE, " +			// 회원 이메일 // 로그인용 
-			"    MEMBER_PWD VARCHAR2(60) NOT NULL, " +			// 회원 비밀번호 
+			"    MEMBER_PWD VARCHAR2(200) NOT NULL, " +			// 회원 비밀번호 
 			"    MEMBER_NAME VARCHAR2(30) NOT NULL, " +			// 회원 이름 
 			"    MEMBER_NICKNAME VARCHAR2(30) UNIQUE, " +		// 회원 별명 // 별명 
 			"    MEMBER_AGE NUMBER(3) NOT NULL, " +				// 회원 나이 
@@ -155,10 +158,17 @@ public class DBVersionManager {
 			
 			"create or replace view FAVORITE_VIEW " + 	// favorite view 영화 정보 더해짐(마이페이지 찜목록 용)
 			"as " + 
-			"select f.FAVORITE_ID, f.MEMBER_NUMBER, f.MOVIE_NUMBER, f.FAVORITE_REGDATE, mv.MOVIE_POSTER, mv.MOVIE_TITLE, mv.MOVIE_KIND, mv.MOVIE_GRADE, mv.MOVIE_TIME " + 
+			"select f.FAVORITE_ID, f.MEMBER_NUMBER, f.MOVIE_NUMBER, f.FAVORITE_REGDATE, mv.MOVIE_POSTER, mv.MOVIE_TITLE, mv.MOVIE_KIND, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE " + 
 			"from FAVORITE f " + 
 			"join MOVIE mv " + 
 			"on f.MOVIE_NUMBER = mv.MOVIE_NUMBER",
+			
+			"create or replace view SEARCH_VIEW " + 
+			"as " + 
+			"select mv.MOVIE_NUMBER, mv.MOVIE_POSTER, mv.MOVIE_TITLE, NVL(av.AVGSTAR, 0) STARS, mv.MOVIE_KIND, mv.MOVIE_DIRECTOR, mv.MOVIE_ACTOR, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE " + 
+			"from MOVIE mv " + 
+			"left outer join (select MOVIE_NUMBER ,avg(ASSESS_STARS) AVGSTAR from ASSESSMENT group by MOVIE_NUMBER) av " + 
+			"on mv.MOVIE_NUMBER = av.MOVIE_NUMBER",
 			
 			"create table tag (" + 							// 태그  (최원준)
 			"    tag_content varchar2(60) primary key, " +	// 태그 내용 
@@ -200,7 +210,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " + 	// 1
 			"'admin@gmail.com', " +
-			"'admin1234', " +
+			"'" + security.encryptSHA256("admin1234") + "', " +
 			"'관리자', " +
 			"'관리자', " +
 			"32, " +
@@ -215,7 +225,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +	// 2
 			"'user01@gmail.com', " +
-			"'user1234', " +
+			"'" + security.encryptSHA256("user1234") + "', " +
 			"'유저01', " +
 			"'유저01 별명', " +
 			"22, " +
@@ -230,7 +240,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user02@gmail.com', " +
-			"'user1234', " +
+			"'" + security.encryptSHA256("user1234") + "', " +
 			"'유저02', " +
 			"'유저02 별명', " +
 			"26, " +
@@ -245,7 +255,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user03@gmail.com', " +
-			"'user1234', " +
+			"'" + security.encryptSHA256("user1234") + "', " +
 			"'유저03', " +
 			"'유저03 별명', " +
 			"21, " +
@@ -260,7 +270,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user04@gmail.com', " +
-			"'user1234', " +
+			"'" + security.encryptSHA256("user1234") + "', " +
 			"'유저04', " +
 			"'유저04 별명', " +
 			"29, " +

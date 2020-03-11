@@ -217,9 +217,10 @@ public class MemberController {
 		memberInfo = dao.loginMember(email, newPwd);
 		//최신영화정보 10개
 		movieInfo = dao.movieList();
+
+		session.setAttribute("memberInfo", memberInfo);
 		
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("memberInfo", memberInfo);
 		mv.addObject("movieInfo", movieInfo); //최신영화
 		mv.setViewName("main.jsp");
 		

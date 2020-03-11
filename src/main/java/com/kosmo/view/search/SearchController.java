@@ -1,13 +1,21 @@
 package com.kosmo.view.search;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kosmo.mintchoco.movie.MovieDAO;
 import com.kosmo.mintchoco.search.SearchDAO;
+import com.kosmo.mintchoco.search.SearchVO;
 
 /*
  * 담당자 : 김정호
@@ -25,4 +33,17 @@ public class SearchController {
 		}
 		return "search_list.jsp";
 	}
+	
+	@RequestMapping("/movie/nextpage.do")
+	@ResponseBody
+	public List<Map<String, Object>> nextPage(@RequestParam Map<String, Object> params, HttpServletRequest request){
+	    List<Map<String, Object>> result = new ArrayList<Map<String, Object>>();        
+	    List<SearchVO> searchList = new ArrayList<SearchVO>();
+	    if(request.getAttribute("searchMovieList") != null) {
+	    	request.getAttribute("searchMovieList");
+	    }
+//	    result = testService.selectData(params);
+	    return result;
+	}
+
 }

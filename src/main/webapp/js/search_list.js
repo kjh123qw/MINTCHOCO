@@ -4,15 +4,34 @@
 
 $(function() {
 	$('#testBtn').click(function() {
+	    $.ajax({
+	        url :"nextpage.do",
+	        type :"POST",
+	        data :{ pageNum: '한글1' },
+	        dataType: 'json',
+	        contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	        success :function(data){
+	        	
+	        	console.log(data[0]);
+//	            var html ="";
+//	            for(var i=0; i<response.length; i++){
+//	                html +="<option value='"+response[i].versionInfo+"' label='"+response[i].versionInfo+"'/>";
+//	            }
+//	            $("#pushVersion").html(html);
+//	            $("#pushVersion").selectpicker("refresh");
+	        }
+	    });
+
+
 //		$.ajax("nextpage.do").done(function() { alert("성공"); }).fail(function() { alert("실패"); }).always(function() { alert("완료"); });
-        $.ajax({
-            url:'/movie/test.ajax',
-            type:'get',
-            data:{pageNum:1},
-            success:function(data){
-                console.log(data);
-            }
-        })
+//        $.ajax({
+//            url:'nextpage.do',
+//            type:'get',
+//            data:{pageNum:1},
+//            success:function(data){
+//                console.log(data);
+//            }
+//        })
 
 		
 //		$.ajax({ 

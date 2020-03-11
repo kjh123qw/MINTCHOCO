@@ -1,7 +1,10 @@
 package com.kosmo.view.movie;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.kosmo.mintchoco.movie.MovieDAO;
 import com.kosmo.mintchoco.movie.MovieVO;
+import com.kosmo.mintchoco.rank.Crawling;
 
 /*
  * 담당자 : 천세문, 김정호
@@ -88,9 +92,22 @@ public class MovieController {
 	}
 	
 	// 영화 순위
-	@RequestMapping("/movie/rank.do")
-	public String rank() {
-		return "mov_rank.jsp";
+	@RequestMapping("/rank.do")
+	public String rank(Model model) {
+		
+		HashMap<Integer, String[]> RankList = Crawling.MegaBoxMovieRank();
+		List<MovieVO> movieList = new ArrayList<MovieVO>();
+		
+		for(Integer key : RankList.keySet())
+		{
+			MovieVO movie = new MovieVO();
+			movie.setMovieTitle(RankList.get(key)[0]);
+			movie.setMoviePoster(RankList.get(key)[1]);
+			movieList.add(movie);
+		}
+		
+		model.addAttribute("movieList", movieList);
+		return "/movie/mov_rank.jsp";
 	}
 	
 }

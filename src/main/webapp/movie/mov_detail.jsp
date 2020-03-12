@@ -25,6 +25,7 @@
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
 <script src="${ contextPath }/js/jquery.mousewheel.min.js"></script>
 <script src="${ contextPath }/js/public.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js/css -->
 
@@ -33,9 +34,7 @@
 
 <!-- //담당자 js/css -->
 </head>
-
 <jsp:include page="../_header.jsp"></jsp:include>
-
 <body>
 
 <div id="movDetail">
@@ -102,9 +101,6 @@
 	<jsp:include page="../_rating.jsp"></jsp:include>
 
 </div>
-
 </body>
-
 <jsp:include page="../_footer.jsp"></jsp:include>
-
 </html>

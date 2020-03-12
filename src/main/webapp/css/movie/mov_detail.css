@@ -6,10 +6,6 @@
 
 /* 화면 기본 */
 
-body{
-    background-color: #00ac9a;
-}
-
 #mov-detail{
     position: relative;
     width: 100%;

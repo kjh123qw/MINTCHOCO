@@ -30,8 +30,8 @@
 
 <!-- //담당자 js, css -->
 </head>
-<body>
 <jsp:include page="../_header.jsp"></jsp:include>
+<body>
 <!-- 담당자 내용 -->
 
 	<h1><a href="${ contextPath }/movie/deleteForm.do?movieNumber=${ movie.movieNumber }"> 기존 영화 삭제 </a></h1>
@@ -165,6 +165,6 @@
 	</div>
 
 <!-- 담당자 내용 -->
-<jsp:include page="../_footer.jsp"></jsp:include>
 </body>
+<jsp:include page="../_footer.jsp"></jsp:include>
 </html>

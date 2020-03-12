@@ -20,6 +20,7 @@
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
 <script src="${ contextPath }/js/jquery.mousewheel.min.js"></script>
 <script src="${ contextPath }/js/public.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js, css -->
 
@@ -28,11 +29,9 @@
 
 <!-- //담당자 js, css -->
 </head>
-
-<body>
 <jsp:include page="../_header.jsp"></jsp:include>
+<body>
 <!-- 담당자 내용 -->
-
     <h1><a href="${ contextPath }/movie/recommend.do"> 추천 영화 목록 </a></h1>
 
 	<!-- 관리자일 경우에만 보이는 메뉴 -->
@@ -133,9 +132,8 @@
         </div>
 
     </div>
-
 <!-- 담당자 내용 -->
-<jsp:include page="../_footer.jsp"></jsp:include>
 </body>
+<jsp:include page="../_footer.jsp"></jsp:include>
 
 </html>

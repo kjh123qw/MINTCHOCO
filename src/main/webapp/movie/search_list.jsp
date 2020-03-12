@@ -42,36 +42,39 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 
 	<div id="searchListWrap">
-	    <p><b>${ searchKeyWord }</b> 검색 결과 입니다. <b>${ searchCount }</b> 건</p>
+	    <p><b>${ searchKeyWord }</b> 검색 결과 입니다. &lt;<b>${ searchCount }</b> 건&gt;</p>
 		<hr>
 		<div id="searchResultBox">
 			<c:if test="${ not empty searchMovieList }">
 				<c:forEach var="searchVO" items="${ searchMovieList }">
 					<div class="search-movie-box">
 						<div class="search-movie-innerbox" onclick="location.href='${ contextPath }/movie/detail.do?movieNumber=${ searchVO.movieNumber }'">
-							<div class="search-movie-image">
-								<img src="${ contextPath }/images/mov_poster/${ searchVO.moviePoster }" alt="${ searchVO.movieTitle } 포스터">
+							<div class="search-title">
+								${ searchVO.movieTitle }
+							</div>
+							<div class="search-score">
+								<div class="score-bg">
+									<div class="score-img" style="width: ${ searchVO.movieStars * 10 }%"></div>
+								</div>
+								<div class="score-text">${ searchVO.movieStars }</div>
 							</div>
 							<div class="search-info-box">
-								<div class="search-info-ele title">
-									<b>${ searchVO.movieTitle }</b>
+								<div class="search-movie-image">
+									<img src="${ contextPath }/images/mov_poster/${ searchVO.moviePoster }" alt="${ searchVO.movieTitle } 포스터">
 								</div>
-								<div class="search-info-ele score">
-									<div class="score-bg ${ searchVO.movieStars }">
-										<div class="score-img"></div>
+								<div class="search-info-ele-box">
+									<div class="search-info-ele">
+										${ searchVO.movieDate } | ${ searchVO.movieTime } 분 | ${ searchVO.movieGrade }
 									</div>
-								</div>
-								<div class="search-info-ele">
-									${ searchVO.movieDate } | ${ searchVO.movieTime } 분 | ${ searchVO.movieGrade }
-								</div>
-								<div class="search-info-ele">
-									${ searchVO.movieKind }
-								</div>
-								<div class="search-info-ele">
-									감독 : ${ searchVO.movieDirector }
-								</div>
-								<div class="search-info-ele actor">
-									${ searchVO.movieActor }
+									<div class="search-info-ele">
+										${ searchVO.movieKind }
+									</div>
+									<div class="search-info-ele">
+										감독 : ${ searchVO.movieDirector }
+									</div>
+									<div class="search-info-ele actor">
+										${ searchVO.movieActor }
+									</div>
 								</div>
 							</div>
 						</div>

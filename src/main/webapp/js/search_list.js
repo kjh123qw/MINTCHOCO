@@ -13,19 +13,36 @@ $(function() {
 	        dataType: 'json',
 	        success :function(data){
 	        	data.forEach(function(item, index) {
+	        		
+					
+					var infoBox1 = $('<div />', {'class': 'search-info-ele', 'text': item.movieDate + ' | ' + item.movieTime + ' 분 | ' +item.movieGrade})
+					var infoBox2 = $('<div />', {'class': 'search-info-ele', 'text': item.movieKind})
+					var infoBox3 = $('<div />', {'class': 'search-info-ele', 'text': '감독 : ' + item.movieDirector})
+					var infoBox4 = $('<div />', {'class': 'search-info-ele actor', 'text': item.movieActor})
+					var searchInfoEleBox = $('<div />', {'class': 'search-info-ele-box'});
+					searchInfoEleBox.append(infoBox1);
+					searchInfoEleBox.append(infoBox2);
+					searchInfoEleBox.append(infoBox3);
+					searchInfoEleBox.append(infoBox4);
+					
 					var searchMovieImageImg = $('<img >', {'src': contextPath + '/images/mov_poster/' + item.moviePoster, 'alt': item.movieTitle + ' 포스터'});
 					var searchMovieImageDiv = $('<div />', {'class': 'search-movie-image'});
 					searchMovieImageDiv.append(searchMovieImageImg);
-					
-					var infoTitleBox = $('<div />', {'class': 'search-info-ele title', 'text': item.movieTitle})
-					var infoBox1 = $('<div />', {'class': 'search-info-ele', 'text': item.movieDate + ' | ' + item.movieTime + ' 분 | ' +item.movieGrade})
-					var infoBox2 = $('<div />', {'class': 'search-info-ele', 'text': item.movieKind})
-					var infoBox3 = $('<div />', {'class': 'search-info-ele', 'text': item.movieActor})
+
 					var searchInfoBox = $('<div />', {'class': 'search-info-box'});
-					searchInfoBox.append(infoTitleBox);
-					searchInfoBox.append(infoBox1);
-					searchInfoBox.append(infoBox2);
-					searchInfoBox.append(infoBox3);
+					searchInfoBox.append(searchMovieImageDiv);
+					searchInfoBox.append(searchInfoEleBox);
+
+					var searchImg = $('<div />', {'class': 'score-img', 'style': 'width: ' + (item.movieStars * 10) + '%'});
+					var searchBg = $('<div />', {'class': 'score-bg'});
+					searchBg.append(searchImg);
+					
+					var searchText = $('<div />', {'class': 'score-text', 'text': item.movieStars});
+					var searchScore = $('<div />', {'class': 'search-score'});
+					searchScore.append(searchBg);
+					searchScore.append(searchText);
+					
+					var searchTitle = $('<div />', {'class': 'search-title', 'text': item.movieTitle});
 					
 					var searchMovieInnerboxDiv = $('<div />', {
 						'class': 'search-movie-innerbox',
@@ -33,7 +50,8 @@ $(function() {
 							location.href = contextPath + '/movie/detail.do?movieNumber=' + item.movieNumber;
 						}
 					});
-					searchMovieInnerboxDiv.append(searchMovieImageDiv);
+					searchMovieInnerboxDiv.append(searchTitle);
+					searchMovieInnerboxDiv.append(searchScore);
 					searchMovieInnerboxDiv.append(searchInfoBox);
 					
 					var searchMovieBoxDiv = $('<div />', {'class': 'search-movie-box'});

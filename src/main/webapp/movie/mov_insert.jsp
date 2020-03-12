@@ -30,8 +30,8 @@
 
 <!-- //담당자 js, css -->
 </head>
-<body>
 <jsp:include page="../_header.jsp"></jsp:include>
+<body>
 <!-- 담당자 내용 -->
 
 	<h1><a href="${ contextPath }/movie/insertForm.do"> 영화 정보 입력 </a></h1>
@@ -41,10 +41,22 @@
 		<form action="insert.do" method="post">
 		
 			<table>
-			
 				<tr>
 					<td colspan="2">
-						<h3>영화 정보를 하나도 빠짐 없이 입력 해주시기 바랍니다.</h3>
+						<h3> 내용을 빠짐없이 입력 해주시기 바랍니다. </h3>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<h4> Ex) 에 표시된 ''의 안과 같이 입력</h4>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						
+					</td>
+					<td>
+						<input type="text" hidden="hidden">
 					</td>
 				</tr>
 				<tr>
@@ -52,7 +64,7 @@
 						티저 링크
 					</td>
 					<td>
-						<input type="text" name="movieTeaser" placeholder="예시) https://youtu.be/TtD7xcruYAk 의 경우  'TtD7xcruYAk' 부분만 입력 해주시기 바랍니다.">
+						<input type="text" name="movieTeaser" placeholder="Ex) Youtube = 'TtD7xcruYAk' only">
 					</td>
 				</tr>
 				<tr>
@@ -60,7 +72,7 @@
 						영화 제목
 					</td>
 					<td>
-						<input type="text" name="movieTitle" placeholder="주의) 띄어쓰기에 주의하며 한글로만 입력 해주시기 바랍니다.">
+						<input type="text" name="movieTitle" placeholder="Ex) '여신전생 페르소나 3' Korean only">
 					</td>
 				</tr>
 				<tr>
@@ -68,7 +80,7 @@
 						영화 분류
 					</td>
 					<td>
-						<input type="text" name="movieKind" placeholder="주의) 장르가 여러 개일 경우에는 ','로 구분 해주시기 바랍니다.">
+						<input type="text" name="movieKind" placeholder="Ex) '공상과학, 스릴러, 좀비, 액션'">
 					</td>
 				</tr>
 				<tr>
@@ -76,7 +88,7 @@
 						감독 이름
 					</td>
 					<td>
-						<input type="text" name="movieDirector" placeholder="주의) 감독이 여러 명일 경우에는 ','로 구분 해주시기 바랍니다.">
+						<input type="text" name="movieDirector" placeholder="Ex) '스티븐 모팻, 프랭크 다라본트'">
 					</td>
 				</tr>
 				<tr>
@@ -84,7 +96,7 @@
 						주연 배우
 					</td>
 					<td>
-						<input type="text" name="movieActor" placeholder="주의) 배우가 여러 명일 경우에는 ','로 구분 해주시기 바랍니다.">
+						<input type="text" name="movieActor" placeholder="Ex) '카토 메구미, 잇시키 이로하'">
 					</td>
 				</tr>
 				<tr>
@@ -92,7 +104,7 @@
 						상영 등급
 					</td>
 					<td>
-						<input type="text" name="movieGrade" placeholder="예시) 국내 기준에 맞추어 ALL, 12, 15, 19 중 하나만 입력 해주시기 바랍니다.">
+						<input type="text" name="movieGrade" placeholder="Ex) 'ALL', '12', '15', '19' only">
 					</td>
 				</tr>
 				<tr>
@@ -100,7 +112,7 @@
 						상영 시간
 					</td>
 					<td>
-						<input type="text" name="movieTime" placeholder="주의) 상영시간은 분 단위, 반올림으로 입력 해주시기 바랍니다.">
+						<input type="text" name="movieTime" placeholder="Ex) '114' minute rounds only">
 					</td>
 				</tr>
 				<tr>
@@ -108,7 +120,7 @@
 						개봉 연도
 					</td>
 					<td>
-						<input type="text" name="movieDate" placeholder="예시) 개봉 연도는 '20XX 년'으로 숫자와 글자 사이에 띄어쓰기를 주의하며 입력 해주시기 바랍니다.">
+						<input type="text" name="movieDate" placeholder="Ex) '2020 년' year + 년 only">
 					</td>
 				</tr>
 				<tr>
@@ -116,7 +128,7 @@
 						유튜브 링크
 					</td>
 					<td>
-						<input type="text" name="movieYoutubeUrl" placeholder="예시) https://youtu.be/6yZWJPndzLs 의 경우 'https://youtu.be/6yZWJPndzLs' 전체를 입력 해주시기 바랍니다.">
+						<input type="text" name="movieYoutubeUrl" placeholder="Ex) 'https://youtu.be/TtD7xcruYAk'">
 					</td>
 				</tr>
 				<tr>
@@ -124,7 +136,7 @@
 						네이버 링크
 					</td>
 					<td>
-						<input type="text" name="movieNaverUrl" placeholder="주의) 위와 동일합니다. 다시 한번 확인 해주시기 바랍니다.">
+						<input type="text" name="movieNaverUrl" placeholder="Ex) 전체 주소를 입력해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
@@ -132,16 +144,19 @@
 						영화 내용
 					</td>
 					<td>
-						<input type="text" name="movieContent" placeholder="주의) 지나치게 개인적인 의견은 삼가 해주시기 바랍니다.">
+						<input type="text" name="movieContent" placeholder="Ex) 개인적인 의견은 삼가 해주시기 바랍니다.">
 					</td>
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input id="submit" type="submit" value="입력 완료">
+						<input class="button" type="submit" value="입력 완료">
 					</td>
-					
 				</tr>
-				
+				<tr>
+					<td colspan="2" align="center">
+						<input class="button" type="button" value="입력 취소" onclick="history.go(-1)">
+					</td>
+				</tr>
 			</table>
 		
 		</form>
@@ -149,6 +164,6 @@
 	</div>
 
 <!-- 담당자 내용 -->
-<jsp:include page="../_footer.jsp"></jsp:include>
 </body>
+<jsp:include page="../_footer.jsp"></jsp:include>
 </html>

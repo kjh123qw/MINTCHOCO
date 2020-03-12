@@ -44,7 +44,12 @@
 			
 				<tr>
 					<td colspan="2">
-						<h3>정말로 삭제하실 영화가 맞는지 확인 해주시기 바랍니다.</h3>
+						<h3> 정말로 이 영화를 삭제하시겠습니까? </h3>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<h4> Ex) 삭제된 영화는 복구되지 않습니다! </h4>
 					</td>
 				</tr>
 				<tr>
@@ -145,10 +150,14 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input id="submit" type="submit" value="삭제 완료">
+						<input class="button" type="submit" value="삭제 완료">
 					</td>
 				</tr>
-				
+				<tr>
+					<td colspan="2" align="center">
+						<input class="button" value="삭제 취소" onclick="history.go(-1)">
+					</td>
+				</tr>
 			</table>
 		
 		</form>

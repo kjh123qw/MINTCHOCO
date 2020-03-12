@@ -47,7 +47,7 @@ public class MovieDAO {
 			stmt.setString(4, movieVO.getMovieDirector());
 			stmt.setString(5, movieVO.getMovieActor());
 			stmt.setString(6, movieVO.getMovieGrade());
-			stmt.setString(7, movieVO.getMovieTime());
+			stmt.setInt(7, Integer.parseInt(movieVO.getMovieTime()));
 			stmt.setString(8, movieVO.getMovieDate());
 			stmt.setString(9, movieVO.getMovieYoutubeUrl());
 			stmt.setString(10, movieVO.getMovieNaverUrl());

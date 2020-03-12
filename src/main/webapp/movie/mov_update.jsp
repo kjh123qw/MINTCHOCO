@@ -41,10 +41,14 @@
 		<form action="update.do" method="post">
 		
 			<table>
-			
 				<tr>
 					<td colspan="2">
-						<h3>최대한 신중하게 정보를 수정해주세요.</h3>
+						<h3> 매우 신중하게 수정 해주시기 바랍니다. </h3>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<h4> Ex) 입력 양식에 주의하며 입력 </h4>
 					</td>
 				</tr>
 				<tr>
@@ -145,10 +149,14 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input id="submit" type="submit" value="수정 완료">
+						<input class="button" type="submit" value="수정 완료">
 					</td>
 				</tr>
-				
+				<tr>
+					<td colspan="2" align="center">
+						<input class="button" type="button" value="수정 취소" onclick="history.go(-1)">
+					</td>
+				</tr>
 			</table>
 		
 		</form>

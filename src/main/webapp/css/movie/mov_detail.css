@@ -32,6 +32,14 @@ h1 a{
 	color: #F5FFFA;
 }
 
+h1:hover{
+    color: #F5FFFA;
+    opacity: 0.9;
+    border-top: 5px solid gold;
+    border-bottom: 5px solid gold;
+    text-align: center;
+}
+
 h3{
     width: 100%;
     color: #00FA9A;
@@ -42,7 +50,7 @@ h3{
 
 #updateMenu{
 	width: 100%;
-	height: 25px;
+	height: 26px;
 	background-color: #00FA9A;
 }
 
@@ -51,13 +59,12 @@ h3{
 	vertical-align: middle;
 	cursor: pointer;
 	background-color: #0DEEC9;
-	border: 1px solid #3ABAB5;
+	border: 2px solid yellow;
 	color: #F5FFFA;
 }
 
 #updateMenu input:hover{
-	border: 2px solid #F5FFFA;
-	color: #F5FFFA;
+	color: yellow;
 }
 
 /* 영화 관련 */

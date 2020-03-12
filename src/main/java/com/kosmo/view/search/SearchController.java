@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -26,40 +29,68 @@ import com.kosmo.mintchoco.movie.MovieVO;
 import com.kosmo.mintchoco.search.SearchDAO;
 import com.kosmo.mintchoco.search.SearchVO;
 
+
 /*
  * 담당자 : 김정호
  */
 @Controller
 public class SearchController {
 	
-	List<SearchVO> trgSearchList = null;
-	List<MovieVO> trgMovieList = null;
+	private List<SearchVO> trgSearchList = null;
+	private int totlaSearchCount = 0;
 	
 	@RequestMapping("/movie/search.do")
-	public String search(SearchDAO searchDAO, MovieDAO movieDAO, Model model, HttpServletRequest request) {
+	public String search(SearchDAO searchDAO, Model model, HttpServletRequest request) {
+		List<SearchVO> outputList = new ArrayList<SearchVO>();
+		int count = 0;
 		if(request.getParameter("searchKeyWord") == null || request.getParameter("searchKeyWord").equals("")) {
-			trgMovieList = movieDAO.selectMovieList();
+			trgSearchList = searchDAO.selectMovieList();
 			model.addAttribute("searchKeyWord", "전체 영화");
-			model.addAttribute("allMovieList", trgMovieList);
 		} else {
 			trgSearchList = searchDAO.searchMovieList(request.getParameter("searchKeyWord"));
 			model.addAttribute("searchKeyWord", request.getParameter("searchKeyWord"));
-			model.addAttribute("searchMovieList", trgSearchList);
 		}
+		totlaSearchCount = trgSearchList.size();
+		model.addAttribute("searchCount", totlaSearchCount);
+		for(int i = 0; i < 5; i++) {
+			if(trgSearchList.size() > 0) {
+				outputList.add(trgSearchList.remove(0));
+			} else {
+				break;
+			}
+		}
+		model.addAttribute("moreSearchCount", trgSearchList.size());
+		model.addAttribute("searchMovieList", outputList);
 		return "search_list.jsp";
 	}
 
-	@RequestMapping(value="/movie/nextpage.do", method=RequestMethod.POST, produces="application/json")
+	@RequestMapping(value="/movie/nextpage.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String nextPage(@RequestParam(required=true) String pageNum, HttpServletResponse response) throws Exception {
-		List<MovieVO> movieList = trgMovieList;
+	public ResponseEntity<String> nextPage(@RequestParam(required=true) String pageNum) throws Exception {
 		ObjectMapper mapper = new ObjectMapper();
-		System.out.println(pageNum);
-//		System.out.println(movieList);
-		String test = mapper.writeValueAsString(movieList);
-//		System.out.println(test);
-
-		System.out.println(test);
-	    return test;
+		HttpHeaders responseHeaders = new HttpHeaders();  //헤더객체를 만들어서 
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8"); //헤더정보 추가
+		List<SearchVO> outputList = new ArrayList<SearchVO>();
+		for(int i = 0; i < 5; i++) {
+			if(trgSearchList.size() > 0) {
+				outputList.add(trgSearchList.remove(0));
+			} else {
+				break;
+			}
+		}
+		String returnString = mapper.writeValueAsString(outputList);
+	    return new ResponseEntity<String>(returnString, responseHeaders, HttpStatus.CREATED);
 	}
+
+	@RequestMapping(value="/movie/nextpagecount.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String nextPageCount() throws Exception {
+		String returnString = 
+				"{\"remainPageCount\"" +
+				": " + Integer.toString(trgSearchList.size()) + ", " +
+				"\"totalSearchCount\"" +
+				": " + totlaSearchCount + "}";
+	    return returnString;
+	}
+	
 }

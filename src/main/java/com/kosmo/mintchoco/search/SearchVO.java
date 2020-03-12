@@ -7,21 +7,16 @@ package com.kosmo.mintchoco.search;
  */
 
 public class SearchVO {
-	
 	private int movieNumber;
 	private String moviePoster;
-	private String movieTeaser;
 	private String movieTitle;
+	private float movieStars;
 	private String movieKind;
 	private String movieDirector;
 	private String movieActor;
 	private String movieGrade;
 	private String movieTime;
 	private String movieDate;
-	private String movieYoutubeUrl;
-	private String movieNaverUrl;
-	private String movieIndate;
-	private String movieContent;
 	private int movieIndex;
 	
 	public int getMovieNumber() {
@@ -36,17 +31,17 @@ public class SearchVO {
 	public void setMoviePoster(String moviePoster) {
 		this.moviePoster = moviePoster;
 	}
-	public String getMovieTeaser() {
-		return movieTeaser;
-	}
-	public void setMovieTeaser(String movieTeaser) {
-		this.movieTeaser = movieTeaser;
-	}
 	public String getMovieTitle() {
 		return movieTitle;
 	}
 	public void setMovieTitle(String movieTitle) {
 		this.movieTitle = movieTitle;
+	}
+	public float getMovieStars() {
+		return movieStars;
+	}
+	public void setMovieStars(float movieStars) {
+		this.movieStars = movieStars;
 	}
 	public String getMovieKind() {
 		return movieKind;
@@ -84,35 +79,10 @@ public class SearchVO {
 	public void setMovieDate(String movieDate) {
 		this.movieDate = movieDate;
 	}
-	public String getMovieYoutubeUrl() {
-		return movieYoutubeUrl;
-	}
-	public void setMovieYoutubeUrl(String movieYoutubeUrl) {
-		this.movieYoutubeUrl = movieYoutubeUrl;
-	}
-	public String getMovieNaverUrl() {
-		return movieNaverUrl;
-	}
-	public void setMovieNaverUrl(String movieNaverUrl) {
-		this.movieNaverUrl = movieNaverUrl;
-	}
-	public String getMovieIndate() {
-		return movieIndate;
-	}
-	public void setMovieIndate(String movieIndate) {
-		this.movieIndate = movieIndate;
-	}
-	public String getMovieContent() {
-		return movieContent;
-	}
-	public void setMovieContent(String movieContent) {
-		this.movieContent = movieContent;
-	}
 	public int getMovieIndex() {
 		return movieIndex;
 	}
 	public void setMovieIndex(int movieIndex) {
 		this.movieIndex = movieIndex;
 	}
-	
 }

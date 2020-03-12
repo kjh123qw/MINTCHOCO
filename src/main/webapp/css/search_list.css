@@ -12,39 +12,42 @@
 .search-movie-box {
 	overflow: hidden;
 	display: block;
-	width: 100%; height: 200px;
-	padding: 2px 2px 0px 2px;
+	width: 100%; height: 190px;
+	padding: 5px;
 }
 .search-movie-innerbox {
-	width: 100%; height: 198px;
+	width: 100%; height: 180px;
 	border: 1px solid #acc;
+	padding: 5px;
+	cursor: pointer;
+}
+.search-movie-innerbox:hover {
+	background-color: #dff;
 }
 .search-movie-image {
 	overflow: hidden;
-	width: 40%; height: 196px;
+	width: 120px; height: 168px;
 	float: left;
-	text-align: center;
 }
 .search-movie-image > img {
-	height: 100%;
+	width: 100%;
 }
 .search-info-box {
 	float: left;
-	width: 60%;
-	padding: 25px 5px;
+	width: 170px;
+	padding: 5px 5px;
 }
 .search-info-ele {
 	height: 24px;
 	font-size: 12px;
 	color: #222;
-	text-align: center;
 	line-height: 24px;
 }
 .search-info-box > .title {
-	height: 30px;
-	font-size: 16px;
+	height: 26px;
+	font-size: 14px;
 	color: #000;
-	line-height: 30px;
+	line-height: 26px;
 }
 .search-info-box > .actor {
 	overflow: hidden;
@@ -58,6 +61,35 @@
 	-webkit-box-orient: vertical;
 	white-space: normal;
 	word-break: break-all;
+}
+.search-info-box > .score {
+	width: 150px; height: 30px;
+}
+/* score */
+.score-bg {
+	width: 100%; height: 30px;
+	background-image: url('../images/mincho/mincho_search_bg.jpg');
+    background-repeat: repeat-x;
+	background-size: 30px;
+}
+.score-img {
+	width: 32%; height: 30px;
+	background-image: url('../images/mincho/mincho_search.jpg');
+    background-repeat: repeat-x;
+	background-size: 30px;
+}
+/* search button */
+#searchMoreBtn {
+	width: 240px; height: 50px;
+	margin: 30px auto;
+	background-color: #008a7b;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
 }
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */

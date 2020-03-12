@@ -18,7 +18,41 @@ public class SearchDAO {
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
-	
+	// 쿼리
+	final private String SELECT_MOVIE_LIST = "SELECT * FROM SEARCH_VIEW";
+
+	// 전체 영화 목록
+	public List<SearchVO> selectMovieList() {
+		List<SearchVO> movieList = new ArrayList<SearchVO>();
+		int movieIndex = 0;
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(SELECT_MOVIE_LIST);
+			rs = stmt.executeQuery();
+			while(rs.next()) {
+				SearchVO searchVO = new SearchVO();
+				searchVO.setMovieNumber(rs.getInt("movie_number"));
+				searchVO.setMoviePoster(rs.getString("movie_poster"));
+				searchVO.setMovieTitle(rs.getString("movie_title"));
+				searchVO.setMovieStars(rs.getFloat("stars"));
+				searchVO.setMovieKind(rs.getString("movie_kind"));
+				searchVO.setMovieDirector(rs.getString("movie_director"));
+				searchVO.setMovieActor(rs.getString("movie_actor"));
+				searchVO.setMovieGrade(rs.getString("movie_grade"));
+				searchVO.setMovieTime(rs.getString("movie_time"));
+				searchVO.setMovieDate(rs.getString("movie_date"));
+				searchVO.setMovieIndex(movieIndex++);
+				movieList.add(searchVO);
+			}
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return movieList;
+	}
 	// 검색 메소드
 	public List<SearchVO> searchMovieList(String searchKeyWord) {
 		// 검색용 쿼리(기본)
@@ -45,7 +79,7 @@ public class SearchDAO {
 					movieTitle += (firstTitleCond?" (MOVIE_TITLE LIKE '":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
 				} else {
 					movieTitle += (firstTitleCond?" (MOVIE_TITLE LIKE '":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
-					movieTitle2 += (firstTitleCond?" (MOVIE_TITLE LIKE '":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
+					movieTitle2 += (firstTitleCond?" (MOVIE_TITLE LIKE '%":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
 				}
 				if(firstTitleCond)
 					firstTitleCond = false;
@@ -76,18 +110,14 @@ public class SearchDAO {
 				SearchVO searchVO = new SearchVO();
 				searchVO.setMovieNumber(rs.getInt("movie_number"));
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
-				searchVO.setMovieTeaser(rs.getString("movie_teaser"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
+				searchVO.setMovieStars(rs.getFloat("stars"));
 				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
-				searchVO.setMovieYoutubeUrl(rs.getString("movie_youtube_url"));
-				searchVO.setMovieNaverUrl(rs.getString("movie_naver_url"));
-				searchVO.setMovieIndate(rs.getString("movie_indate"));
-				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				searchMovieList.add(searchVO);
 			}
@@ -98,18 +128,14 @@ public class SearchDAO {
 				SearchVO searchVO = new SearchVO();
 				searchVO.setMovieNumber(rs.getInt("movie_number"));
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
-				searchVO.setMovieTeaser(rs.getString("movie_teaser"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
+				searchVO.setMovieStars(rs.getFloat("stars"));
 				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
-				searchVO.setMovieYoutubeUrl(rs.getString("movie_youtube_url"));
-				searchVO.setMovieNaverUrl(rs.getString("movie_naver_url"));
-				searchVO.setMovieIndate(rs.getString("movie_indate"));
-				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				searchMovieList.add(searchVO);
 			}
@@ -120,18 +146,14 @@ public class SearchDAO {
 				SearchVO searchVO = new SearchVO();
 				searchVO.setMovieNumber(rs.getInt("movie_number"));
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
-				searchVO.setMovieTeaser(rs.getString("movie_teaser"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
+				searchVO.setMovieStars(rs.getFloat("stars"));
 				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
-				searchVO.setMovieYoutubeUrl(rs.getString("movie_youtube_url"));
-				searchVO.setMovieNaverUrl(rs.getString("movie_naver_url"));
-				searchVO.setMovieIndate(rs.getString("movie_indate"));
-				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				searchMovieList.add(searchVO);
 			}

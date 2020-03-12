@@ -9,6 +9,7 @@ function searchbar(element) {
 	var list = document.getElementsByClassName('con-menu-list')[0];
 	var searchInput = document.getElementsByClassName('con-menu-input')[0];
 	var searchBack = document.getElementsByClassName('con-menu-search')[0];
+	var eos = document.getElementsByClassName("con-search-none")[0];
 	
 	if (element == 'on') {
 		document.getElementsByClassName("con-menu-input")[0].focus();
@@ -18,6 +19,7 @@ function searchbar(element) {
 	} else if (element == 'off') {
 		document.getElementsByClassName("con-menu-input")[0].value = "";
 		search();
+		eos.style.display = "none";
 		searchInput.style.display = 'none';
 		searchBack.style.display = 'none';
 		list.style.display = 'block';
@@ -26,17 +28,20 @@ function searchbar(element) {
 
 function search(){
 
-    var input, search_target, item, i;
+    var input, search_target, item, i, eos;
 
     input = document.getElementsByClassName("con-menu-input")[0].value.toUpperCase();
     item = document.getElementsByTagName("article");
-
+    eos = document.getElementsByClassName("con-search-none")[0];
+    
     for(i=0;i<item.length;i++){
     	search_target = item[i].getElementsByClassName("con-search-target");
 	    if(search_target[0].innerHTML.toUpperCase().indexOf(input) > -1){
 	      item[i].style.display = "flex";
+	      eos.style.display = "block";
 	    } else {
 	      item[i].style.display = "none";
+	      eos.style.display = "block";
 	    }
     }
 }
@@ -153,22 +158,37 @@ function modal(element){
 	var m = element;
 	var inf = document.getElementsByClassName('con-conf-modifyINF-wrap')[0];
 	var pwd = document.getElementsByClassName('con-conf-modifyPW-wrap')[0];
+	var ope = document.getElementsByClassName('con-conf-modifyOPE-wrap')[0];
+	var opeyn = document.getElementsByClassName('con-conf-OPEYN')[0];
 	var bg = document.getElementsByClassName('con-modal-bg')[0];
+	var inputText = document.getElementsByClassName('text-200');
+
 	
 	if (m == 'INF') {
 		inf.style.display = 'block';
 		pwd.style.display = 'none';
+		ope.style.display = 'none';
 		bg.style.display = 'block';
 	} else if(m == 'PWD') {
 		inf.style.display = 'none';
 		pwd.style.display = 'block';
+		ope.style.display = 'none';
 		bg.style.display = 'block';
+	} else if(m == 'OPE') {
+		inf.style.display = 'none';
+		pwd.style.display = 'none';
+		ope.style.display = 'block';
+		bg.style.display = 'block';
+		opeyn.value = "opeyn-y";
 	} else if(m == 'X') {
 		inf.style.display = 'none';
 		pwd.style.display = 'none';	
+		ope.style.display = 'none';
 		bg.style.display = 'none';
+		opeyn.value = null;
 	}
 }
+
 
 function checkModify(){
 	var btn = document.getElementsByClassName('st1-80-50')[0];
@@ -181,32 +201,65 @@ function checkModify(){
 	var female = document.getElementsByClassName('conf-modify-female')[0];
 	var age = document.getElementsByClassName('conf-modify-age')[0];
 	var text = document.getElementsByClassName('con-conf-status')[0];
+	var checkedNN = "";
+	
+	$.ajax({
+        url:"usingNN.do",
+        type:'post',
+        data: "nickname="+nickname.value,
+        async:false,
+        success:function(data){
+        	if(data == 'usingNN'){
+        		checkedNN = "n";
+        	} else {
+        		checkedNN = "y";
+        	}
+        },
+        error:function(){
+        	btn.disabled = true;
+    		sfmodal.style.display = 'block';
+    		failWindow.style.display = 'block';
+    		nickname.focus();
+    		text.innerText = "오류가 발생했습니다."; 
+    		hide('fail');
+    		return false;
+        }
+    });
+	
 	if(nickname.value==""){
-		btn.disabled = true;
+ 		btn.disabled = true;
+ 		sfmodal.style.display = 'block';
+ 		failWindow.style.display = 'block';
+ 		nickname.focus();
+ 		text.innerText = "별명이 입력되지 않았습니다."; 
+ 		hide('fail');
+ 		return false;
+ 	} else if(!male.checked && !female.checked){
+ 		sfmodal.style.display = 'block';
+ 		failWindow.style.display = 'block';
+ 		text.innerText = "성별이 선택되지 않았습니다.";
+ 		hide('fail');
+ 		return false;
+ 	} else if(age.value==""){
+ 		sfmodal.style.display = 'block';
+ 		failWindow.style.display = 'block';
+ 		age.focus();
+ 		text.innerText = "나이가 선택되지 않았습니다."; 
+ 		hide('fail');
+ 		return false;
+ 	} else if(checkedNN == "n") {
+ 		btn.disabled = true;
 		sfmodal.style.display = 'block';
 		failWindow.style.display = 'block';
 		nickname.focus();
-		text.innerText = "별명이 입력되지 않았습니다."; 
+		text.innerText = "이미 사용중인 별명입니다."; 
 		hide('fail');
 		return false;
-	} else if(!male.checked && !female.checked){
-		sfmodal.style.display = 'block';
-		failWindow.style.display = 'block';
-		text.innerText = "성별이 선택되지 않았습니다.";
-		hide('fail');
-		return false;
-	} else if(age.value==""){
-		sfmodal.style.display = 'block';
-		failWindow.style.display = 'block';
-		age.focus();
-		text.innerText = "나이가 선택되지 않았습니다."; 
-		hide('fail');
-		return false;
-	} else {
-		successWindow.style.display = 'block'; 
-		hide('success');
-		return true;
-	} 
+ 	} else {
+ 		successWindow.style.display = 'block'; 
+ 		hide('success');
+ 		return true;
+ 	}
 }
 
 function checkModifyPW(){
@@ -247,11 +300,27 @@ function checkModifyPW(){
 	} 
 }
 
+function checkModifyOPE(){
+	var btn = document.getElementsByClassName('st1-80-50')[2];
+	var modifyOPE = document.getElementsByClassName('con-conf-modifyOPE-wrap')[0];
+	var sfmodal = document.getElementsByClassName('con-modal-bg-check')[2];
+	var successWindow = document.getElementsByClassName('con-conf-confirmed-ok')[0];
+	var failWindow = document.getElementsByClassName('con-conf-confirmed-failed')[0];
+	var text = document.getElementsByClassName('con-conf-status')[0];
+	
+	btn.disabled = true;
+	successWindow.style.display = 'block'; 
+	hide('success');
+	return true;
+}
+
 function hide(element){
 	var btn = document.getElementsByClassName('st1-80-50')[0];
 	var btn1 = document.getElementsByClassName('st1-80-50')[1];
+	var btn2 = document.getElementsByClassName('st1-80-50')[2];
 	var sfmodal = document.getElementsByClassName('con-modal-bg-check')[0];
 	var sfmodal1 = document.getElementsByClassName('con-modal-bg-check')[1];
+	var sfmodal2 = document.getElementsByClassName('con-modal-bg-check')[2];
 	var e = element;
 	var result;
 	if (e == 'fail') {
@@ -263,8 +332,10 @@ function hide(element){
 		result.style.display = 'none';
 		sfmodal.style.display = 'none';
 		sfmodal1.style.display = 'none';
+		sfmodal2.style.display = 'none';
 		btn.disabled = false;
 		btn1.disabled = false;
+		btn2.disabled = false;
 	},2000);
 }
 
@@ -278,12 +349,7 @@ function ageCount() {
 	}
 }
 
-function sorting(element) {
-	
-	var newchk = document.createElement("input");
-	newchk.setAttribute('name','ckbox');
-	newchk.setAttribute('value','none');
-	
+function sorting(element) {	
 	var e = element;
 	var sort = document.getElementsByClassName("con-alignInput")[0];
 	var sortForm = document.getElementsByClassName("con-sortList")[0];
@@ -323,12 +389,12 @@ function selChkbox() {
 		if(chkbox[i].checked == true){
 			chkRow = chkbox[i].value;
 			if(chkCnt == 1){
-				idVal += "'"+chkRow+"'";
+				idVal += ""+chkRow+"";
 			} else {
 				if(i == chkLast) {
-					idVal += "'"+chkRow+"'";
+					idVal += ""+chkRow+"";
 				} else {	
-					idVal += "'"+chkRow+"',"; 			
+					idVal += ""+chkRow+","; 			
 				}
 			}
 			cnt++;

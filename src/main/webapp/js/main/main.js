@@ -122,7 +122,8 @@ function detailMovie(number){
 }
 
 function goMypage(number){
-	alert("main의 js에 goMypage 함수있습니다. 수정부탁드립니다. number로 회원번호 보내드립니다." + number + "번의 회원입니다.")
+	alert("main의 js에 goMypage 함수있습니다. 수정부탁드립니다. number로 회원번호 보내드립니다." + number + "번의 회원입니다.");
+	location.href="my_page.do";
 }
 
 function goMovie(){

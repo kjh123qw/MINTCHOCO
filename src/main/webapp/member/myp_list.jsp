@@ -58,25 +58,38 @@
 				</c:if>
 			</nav>
 			<div class="clear"></div>
+						
+			<c:choose>
+	   			<c:when test="${detail_info.like_flag=='Y'}">
+			   		<c:if test="${fav_cnt == 0}">
+						<div class="con-fav-none">찜한 항목이 없습니다.</div>
+					</c:if>
+					<c:forEach items="${favoriteList}" var="favorite">
+						<article class="con-fav con-fav-float" onclick="chk_enable(this);">
+						<input class="con-chkbox" type="checkbox" name="chkbox" value="${favorite.favNum}">
+						<div class="con-fav-bg">			
+							<div class="con-fav-img-wrap">
+								<img class="con-fav-poster" src="${ contextPath }/images/mov_poster/${favorite.poster}">
+								<!-- 140x200 -->
+								<center class="con-fav-contents-wrap">
+									<div class="con-search-target con-th-mint">${favorite.movieTitle}</div>
+									<div class="con-fav-movie-kind">${favorite.kind}</div>
+									<div class="con-fav-movie-detail con-th-gray">${favorite.playtime}분, ${favorite.grade}세 관람가</div>
+									<div class="con-fav-movie-indate con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${favorite.favIndate}</div>
+								</center>
+							</div>				
+						</div>
+						</article>
+					</c:forEach>			
+					<div class="clear"></div>
+				</c:when>
+				<c:otherwise>
+					<div class="con-fav-none">해당 정보는 비공개되었습니다.</div>
+				</c:otherwise>
+			</c:choose>
+			<!-- 검색결과가 없을때 -->
+			<div class="con-search-none">검색이 완료되었습니다.</div>
 			
-			<c:forEach items="${favoriteList}" var="favorite">
-				<article class="con-fav con-fav-float" onclick="chk_enable(this);">
-				<input class="con-chkbox" type="checkbox" name="chkbox" value="${favorite.favNum}">
-				<div class="con-fav-bg">			
-					<div class="con-fav-img-wrap">
-						<img class="con-fav-poster" src="${ contextPath }/images/mov_poster/${favorite.poster}">
-						<!-- 140x200 -->
-						<center class="con-fav-contents-wrap">
-							<div class="con-search-target con-th-mint">${favorite.movieTitle}</div>
-							<div>${favorite.kind}</div>
-							<div class="con-th-gray">${favorite.playtime}분, ${favorite.grade}세 관람가</div>
-							<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${favorite.favIndate}</div>
-						</center>
-					</div>				
-				</div>
-				</article>
-			</c:forEach>			
-			<div class="clear"></div>
 		</div>
 	</form>
 	<form class="con-sortList" name="alignForm" method="POST" action="favorite.do">

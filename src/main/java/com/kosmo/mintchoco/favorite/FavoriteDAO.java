@@ -25,7 +25,6 @@ public class FavoriteDAO {
 	private final String FAV_BY_RELEASE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY MOVIE_TIME DESC";
 	private final String FAV_BY_INDATE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY FAVORITE_ID ASC";
 	private final String FAVORITE_INSERT = "INSERT INTO FAVORITE(MEMBER_NUMBER, MOVIE_NUMBER) values(?,?)";
-	private final String FAVORITE_DELETE = "DELETE FROM FAVORITE WHERE FAVORITE_ID in (?)";
 	private final String LATEST_FAV = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY FAVORITE_REGDATE DESC LIMIT 5";
 	private final String FAV_COUNT = "SELECT COUNT(*) FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=?";
 	
@@ -201,12 +200,21 @@ public class FavoriteDAO {
 	}
 	
 	// 찜목록에서 제거
-		public void deleteFavorite(String chkbox) {
+		public void deleteFavorite(List<String> chkbox) {			
+			String qr="";
+			for (int i=0; i<chkbox.size(); i++) {
+				qr += "?,";
+			}
+			qr = qr.substring(0, qr.length()-1);
+			
+			String FAVORITE_DELETE = "DELETE FROM FAVORITE WHERE FAVORITE_ID in (" + qr + ")";
 			System.out.println("===> JDBC로 deleteFavorite()");
 			try {
 				conn = JDBCUtil.getConnection();
-				stmt = conn.prepareStatement(FAVORITE_DELETE);			
-				stmt.setString(1, chkbox);
+				stmt = conn.prepareStatement(FAVORITE_DELETE);
+				for (int i=0; i<chkbox.size(); i++) {
+					stmt.setString(i+1, chkbox.get(i));
+				}
 				stmt.executeUpdate();
 			} catch(Exception e) {
 				System.out.println("deleteFavorite() + e");

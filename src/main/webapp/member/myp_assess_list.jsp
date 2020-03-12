@@ -60,58 +60,76 @@
 			</nav>
 			<!-- // 평가 목록 편집 메뉴 -->
 			
-			<!-- 평가 틀 -->
-			<c:forEach items="${assessList}" var="assess">
-			<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.poster});" onclick="chk_enable(this);">
-			<input class="con-chkbox" type="checkbox" name="chkbox" value="${assess.assessNum}">
-			<div class="con-assess-bg">			
-				<div class="con-assess-img-wrap con-assess-float">
-					<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.poster}">
-					<!-- 140x200 -->
-				</div>
-				<div class="con-assess-cont-wrap con-assess-float">
-					<div class="con-assess-cont-right-wrap con-assess-float">
-						<div class="con-search-target con-assess-cont-subject">${assess.movieTitle}</div>
-						<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
-					</div>
-					<table class="con-assess-stars con-assess-float-right">
-						<tr>
-							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-							<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-							<td>${assess.stars}</td>
-						</tr>
-					</table>
-					<div class="clear"></div>					
-				</div>
-					<div class="con-assess-float">	
-						<div class="con-assess-cont-line-wrap con-assess-float">
-							<div class="con-assess-cont-line-contents-wrap con-assess-float">
-								<div class="con-line-th con-th con-th-mint con-assess-float">
-									<span><img src="${ contextPath }/images/member/est_good.png"></span>
-									<span class="con-assess-like">${assess.likes}</span>
-									<span class="con_th2"><img src="${ contextPath }/images/member/est_bad.png"></span>
-									<span>${assess.hates}</span>
-									<div class="con-assess-stars-date con-assess-float-right">
-										<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
+								
+			
+			<c:choose>
+	   			<c:when test="${detail_info.assessment_flag=='Y'}">
+			   		<!-- 평가항목 없을때 -->
+					<c:if test="${assess_cnt == 0}">
+						<div class="con-assess con-assess-none">평가된 항목이 없습니다.</div>
+					</c:if>
+					
+					<!-- 평가 틀 -->
+					<c:forEach items="${assessList}" var="assess">
+					<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.poster});" onclick="chk_enable(this);">
+					<input class="con-chkbox" type="checkbox" name="chkbox" value="${assess.assessNum}">
+					<div class="con-assess-bg">			
+						<div class="con-assess-img-wrap con-assess-float">
+							<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.poster}">
+							<!-- 140x200 -->
+						</div>
+						<div class="con-assess-cont-wrap con-assess-float">
+							<div class="con-assess-cont-right-wrap con-assess-float">
+								<div class="con-search-target con-assess-cont-subject">${assess.movieTitle}</div>
+								<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
+							</div>
+							<table class="con-assess-stars con-assess-float-right">
+								<tr>
+									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
+									<td>${assess.stars}</td>
+								</tr>
+							</table>
+							<div class="clear"></div>					
+						</div>
+							<div class="con-assess-float">	
+								<div class="con-assess-cont-line-wrap con-assess-float">
+									<div class="con-assess-cont-line-contents-wrap con-assess-float">
+										<div class="con-line-th con-th con-th-mint con-assess-float">
+											<span><img src="${ contextPath }/images/member/est_good.png"></span>
+											<span class="con-assess-like">${assess.likes}</span>
+											<span class="con_th2"><img src="${ contextPath }/images/member/est_bad.png"></span>
+											<span>${assess.hates}</span>
+											<div class="con-assess-stars-date con-assess-float-right">
+												<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
+											</div>
+										</div>
+										<div class="clear"></div>
+										<div class="con-assess-cont-line-content"><p>${assess.aContent}</p></div>
 									</div>
 								</div>
-								<div class="clear"></div>
-								<div class="con-assess-cont-line-content"><p>${assess.aContent}</p></div>
+								<div class="con-assess-img-stars con-assess-float">							
+									<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
+									<div class="con-assess-img-stars-score">${assess.astars}</div>							
+								</div>
 							</div>
+						<div class="clear"></div>
 						</div>
-						<div class="con-assess-img-stars con-assess-float">							
-							<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
-							<div class="con-assess-img-stars-score">${assess.astars}</div>							
-						</div>
-					</div>
-				<div class="clear"></div>
-				</div>
-			</article>
-			</c:forEach>
-			<!-- //평가 틀 -->			
+					</article>
+					</c:forEach>
+					<!-- //평가 틀 -->
+				</c:when>
+				<c:otherwise>
+					<div class="con-assess con-assess-none">해당 정보는 비공개되었습니다.</div>
+				</c:otherwise>
+			</c:choose>	
+			
+			<!-- 검색결과가 없을때 -->
+			<div class="con-search-none">검색이 완료되었습니다.</div>
+					
 		</div>
 		<div class="clear"></div>
 	</form>

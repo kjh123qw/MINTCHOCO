@@ -147,7 +147,7 @@ public class MemberController {
 		}else if(checkNickname > 0) {
 			return "overlapNickname";
 		}else {
-			return "checkInfo";
+			return "success";
 		}
 		
 		

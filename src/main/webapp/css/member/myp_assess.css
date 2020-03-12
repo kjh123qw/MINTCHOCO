@@ -28,6 +28,28 @@
 	background: rgba(75,0,0,0.7);
 }
 
+.con-assess-none {
+	height: 200px;
+	text-align: center;
+	line-height: 200px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #888;
+}
+.con-search-none {
+	display: none;
+	margin:0 auto;
+	padding: 10px;
+	max-width: 980px;
+	height: 200px;
+	text-align: center;
+	line-height: 200px;
+	font-size: 40px;
+	font-weight: bold;
+	color: #888;
+	margin-bottom: 30px;
+}
+
 #assess-list-delete {
 	display: none;
 }

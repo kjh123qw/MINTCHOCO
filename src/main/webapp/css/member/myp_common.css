@@ -10,6 +10,7 @@
 	margin: 0 auto;
 	margin-top: 30px;
 	font-family: 'Malgun Gothic', sans-serif;
+	scroll-behavior: smooth;
 }
 .myp article, .myp div {
 	box-sizing: content-box;

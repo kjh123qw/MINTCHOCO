@@ -28,8 +28,9 @@ public class MemberMDAO {
 	private final String UPDATE_MEMBER = "UPDATE MEMBER SET MEMBER_NICKNAME=?, MEMBER_AGE=?, MEMBER_GENDER=?, MEMBER_INTRODUCE=? WHERE MEMBER_NUMBER=?";
 	private final String UPDATE_MEMBERPW = "UPDATE MEMBER SET MEMBER_PWD=? WHERE MEMBER_NUMBER=?";
 	private final String UPDATE_MEMBEROPE = "UPDATE MEMBER SET MEMBER_FAVORITE_FLAG=?, MEMBER_ASSESSMENT_FLAG=?, MEMBER_INFO_FLAG=? WHERE MEMBER_NUMBER=?";
-	private final String MEMBER_INFO_BYNUM = "SELECT * FROM MEMBER WHERE MEMBER_NUMBER = ?";
-	
+	private final String MEMBER_INFO_BYNUM = "SELECT * FROM MEMBER WHERE MEMBER_NUMBER=?";
+	private final String MEMBER_DELETE = "DELETE FROM MEMBER WHERE MEMBER_NUMBER=?";
+	private final String MEMBER_CHECKPW = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_PWD=? AND MEMBER_NUMBER=?";
 	// 계정 정보
 	public MemberVO getDetailInfo(String memberNum) {
 		// TODO Auto-generated method stub
@@ -120,7 +121,8 @@ public class MemberMDAO {
 		}
 			return assess_cnt;
 	}
-
+	
+	// 개인정보 바꾸기
 	public void updateMember(String memberNum, String nickName, String gender, String age, String introduce) {
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 updateMember()");
@@ -134,12 +136,13 @@ public class MemberMDAO {
 			stmt.setString(5, memberNum);
 			stmt.executeUpdate();
 		} catch(Exception e) {
-			System.out.println("updateMember() + e");
+			System.out.println("updateMember()" + e);
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
 	}
 
+	// 비번 바꾸기
 	public void updateMemberPW(String memberNum, String password) {
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 updateMemberPW()");
@@ -150,12 +153,13 @@ public class MemberMDAO {
 			stmt.setString(2, memberNum);
 			stmt.executeUpdate();
 		} catch(Exception e) {
-			System.out.println("updateMemberPW() + e");
+			System.out.println("updateMemberPW()" + e);
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
 	}
 
+	// 공개 여부 설정
 	public void updateMemberOPE(String memberNum, String assessFlag, String favFlag, String infoFlag) {
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 updateMemberOPE()");
@@ -168,10 +172,50 @@ public class MemberMDAO {
 			stmt.setString(4, memberNum);
 			stmt.executeUpdate();
 		} catch(Exception e) {
-			System.out.println("updateMemberOPE() + e");
+			System.out.println("updateMemberOPE()" + e);
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
+	}
+	
+	// 회원 탈퇴
+	public void deleteMember(String memberNum) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 deleteMember()");
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(MEMBER_DELETE);
+			stmt.setString(1, memberNum);
+			stmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("deleteMember()" + e);
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+	}
+	
+	// 비밀번호 확인
+	public int checkPassword(String password, String memberNum) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 checkPassword()");		
+		int result = 0;
+		System.out.println(security.encryptSHA256(password));
+		System.out.println(memberNum);
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(MEMBER_CHECKPW);
+			stmt.setString(1, security.encryptSHA256(password));
+			stmt.setString(2, memberNum);
+			rs = stmt.executeQuery();			
+			while(rs.next()) {
+				result = rs.getInt("COUNT(*)");
+			}			
+		} catch (Exception e) {
+			System.out.println("checkPassword()" + e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}		
+		return result;
 	}	
 	
 }

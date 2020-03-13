@@ -84,13 +84,14 @@
 					<div class="clear"></div>
 				</c:when>
 				<c:otherwise>
-					<div class="con-fav-none">해당 정보는 비공개되었습니다.</div>
+					<div class="con-fav-none">해당 정보가 비공개되어있습니다.</div>
 				</c:otherwise>
 			</c:choose>
 			<!-- 검색결과가 없을때 -->
 			<div class="con-search-none">검색이 완료되었습니다.</div>
 			
 		</div>
+		<div class="clear"></div>
 	</form>
 	<form class="con-sortList" name="alignForm" method="POST" action="favorite.do">
 		<input type="hidden" name="chkbox" value="none">

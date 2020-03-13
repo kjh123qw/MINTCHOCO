@@ -6,7 +6,8 @@
 .con-conf-checkPW-wrap {
 	margin: 0 auto;
 	border: 1px solid  #00D7C0;
-	margin-top: 20px;
+	margin-top: 50px;
+	margin-bottom: 50px;
 	width: 400px;
 	height: 200px;
 	padding: 30px;
@@ -185,10 +186,18 @@
 	height: 255px;
 }
 
+.con-conf-modifyDEL-wrap {
+	height: 268px;
+}
+.con-conf-modifyDEL-content {
+	height: 166px;
+}
+
 
 .con-conf-modifyINF-wrap, .con-conf-modifyPW-wrap,
-.con-conf-modifyOPE-wrap,
-.con-conf-confirmed-ok, .con-conf-confirmed-failed {
+.con-conf-modifyOPE-wrap, .con-conf-modifyDEL-wrap,
+.con-conf-confirmed-ok, .con-conf-confirmed-failed,
+.con-conf-confirmed-bye {
 	display: none;
 }
 
@@ -212,10 +221,17 @@
 	margin-right: 10px;
 	margin-top: 40px;
 	
-}.con-conf-submitbtns-OPE {
+}
+.con-conf-submitbtns-OPE {
 	width: 200px;
 	margin: 0 auto;
 	margin-right: 60px;
+	margin-top: 20px;
+}
+.con-conf-submitbtns-DEL {
+	width: 200px;
+	margin: 0 auto;
+	margin-right: 55px;
 	margin-top: 20px;
 }
 
@@ -297,6 +313,7 @@
   	-moz-appearance: none;
   	appearance: none;
   	margin-top: 10px;
+  	color: white;
 }
 
 .con-modal-bg {
@@ -320,6 +337,18 @@
 }
 .con-modal-bg-check:hover ~ .con-conf-modifyINF {	
 	pointer-events: none;
+}
+.conf-conf-modifyDEL-btn-wrap {
+	width: 210px;
+	margin: 0 auto;	
+	margin-top: 10px;
+}
+.conf-conf-modifyDEL-btn-label {
+	font-size: 16px;
+	color:#333;
+}
+.conf-conf-modifyDEL-btn {
+	margin-bottom: 10px;
 }
 
 .icon-config-wrap {

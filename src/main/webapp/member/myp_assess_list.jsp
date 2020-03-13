@@ -123,7 +123,7 @@
 					<!-- //평가 틀 -->
 				</c:when>
 				<c:otherwise>
-					<div class="con-assess con-assess-none">해당 정보는 비공개되었습니다.</div>
+					<div class="con-assess con-assess-none">해당 정보가 비공개되어있습니다.</div>
 				</c:otherwise>
 			</c:choose>	
 			

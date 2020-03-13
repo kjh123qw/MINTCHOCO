@@ -79,8 +79,8 @@ if(session.getAttribute("memberInfo") == null){
 				</div>
 			</article>
 			
-			<article class="con-conf con-conf4 con-conf-float" onclick="chk-enable(this);">
-				<div class="con-conf-bg">			
+			<article class="con-conf con-conf4 con-conf-float">
+				<div class="con-conf-bg" onclick="modal('DEL');">			
 					<div class="con-conf-img-wrap">
 						<div class="con-conf-subject-wrap">
 							<img src="${ contextPath }/images/member/icons_delete.svg">
@@ -129,7 +129,7 @@ if(session.getAttribute("memberInfo") == null){
 					<div class="cst-btn con-conf-submitbtns con-conf-submitbtns-INF">
 					  <input type="submit" value="확인" class="st1-80-50">
 					  <input type="reset" value="다시" class="st2-80-50">
-					  <input type="button" value="취소" class="st3-80-50">
+					  <input type="button" value="취소" class="st3-80-50" onclick="modal('X');">
 					</div>
 				</form>
 			</div>	
@@ -155,7 +155,7 @@ if(session.getAttribute("memberInfo") == null){
 					<div class="cst-btn con-conf-submitbtns con-conf-submitbtns-PWD">
 					  <input type="submit" value="확인" class="st1-80-50">
 					  <input type="reset" value="다시" class="st2-80-50">
-					  <input type="button" value="취소" class="st3-80-50">
+					  <input type="button" value="취소" class="st3-80-50" onclick="modal('X');">
 					</div>
 				</form>
 			</div>			
@@ -235,7 +235,25 @@ if(session.getAttribute("memberInfo") == null){
 					</div>			
 					<div class="cst-btn con-conf-submitbtns con-conf-submitbtns-OPE">
 					  <input type="submit" value="확인" class="st1-80-50">
-					  <input type="button" value="취소" class="st3-80-50">
+					  <input type="button" value="취소" class="st3-80-50" onclick="modal('X');">
+					</div>
+				</form>
+			</div>	
+		</article>
+	</div>
+	
+	<div class="myp-con-conf-modifyDEL">
+		<article class="con-conf-modifyDEL-wrap con-conf-horizontalCenter">	
+			<div class="con-modal-bg-check"></div>
+			<div class="con-conf-x" onclick="modal('X');"><img src="${ contextPath }/images/member/del_back.png"></div>
+			<div class="con-conf-modifyDEL">
+				<div class="con-conf-modifyDEL-subject conf-detail-subject">회원탈퇴</div>
+				<form class="con-conf-modifyDEL-content conf-detail-content"  method="POST" action="logout.do">
+					<p>회원정보를 삭제합니다.<br>삭제된 정보는 다시 복구할 수 없습니다.</p>	
+					<div class="cst-btn con-conf-submitbtns con-conf-submitbtns-DEL">
+					  <input type="button" value="확인" class="st1-80-50" onclick="checkModifyDEL();">
+					  <input type="button" value="취소" class="st3-80-50" onclick="modal('X');">
+					  <input type="hidden" class="con-conf-del-check">
 					</div>
 				</form>
 			</div>	
@@ -256,6 +274,13 @@ if(session.getAttribute("memberInfo") == null){
 				<span>Failed</span>
 			</div>
 			<div class="con-conf-confirmed con-conf-status conf-detail-content">입력하신 정보가 올바르지 않거나,<br>시스템 오류가 발생했습니다.</div>
+		</article>
+		<article class="con-conf-confirmed-bye con-conf-horizontalCenter">
+			<div class="con-conf-confirmed-subject conf-detail-subject">
+				<span class="icon-confirmed-wrap"><img src="${ contextPath }/images/member/confirmed.svg" class="icon-confirmed"></span>
+				<span>회원탈퇴</span>
+			</div>
+			<div class="con-conf-confirmed con-conf-status conf-detail-content">그동안 이용해주셔서 감사합니다.<br>보다 좋은 서비스 제공을 위하여<br> 노력하겠습니다.</div>
 		</article>
 	</div>
 <!-- //서브메뉴 이하 담당자 내용 -->

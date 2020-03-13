@@ -46,7 +46,9 @@
 					<li><a class="icon-privacy-wrap" href="my_page.do"><img src="${ contextPath }/images/member/privacy.png" class="icon-privacy"><span>&nbsp;정보</span></a></li>
 					<li><a class="icon-fav-wrap" href="favorite.do"><img src="${ contextPath }/images/member/fav.png" class="icon-fav"><span>&nbsp;찜한목록</span></a></li>
 					<li><a class="icon-assess-wrap" href="assessment.do"><img src="${ contextPath }/images/member/assess1.png" class="icon-assess1"><img src="${ contextPath }/images/member/assess2.png" class="icon-assess2"><span>&nbsp;평가목록</span></a></li>
-					<li><a class="icon-config-wrap" href="config.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"><span>&nbsp;계정설정</span></a></li>					
+					<c:if test="${memberInfo[0].number==detail_info.number}">
+						<li><a class="icon-config-wrap" href="config.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"><span>&nbsp;계정설정</span></a></li>
+					</c:if>			
 				</ul>
 			</nav>
 		</div>

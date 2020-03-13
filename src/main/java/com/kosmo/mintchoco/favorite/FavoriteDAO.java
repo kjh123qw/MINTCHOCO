@@ -200,7 +200,7 @@ public class FavoriteDAO {
 	}
 	
 	// 찜목록에서 제거
-		public void deleteFavorite(List<String> chkbox) {			
+	public void deleteFavorite(List<String> chkbox) {			
 			String qr="";
 			for (int i=0; i<chkbox.size(); i++) {
 				qr += "?,";

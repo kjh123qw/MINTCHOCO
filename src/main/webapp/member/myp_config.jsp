@@ -12,9 +12,9 @@
 
 <%
 System.out.println(session.getAttribute("memberInfo"));
-if(session.getAttribute("memberInfo") == null){
+if(session.getAttribute("member_config") == null){
 %>
-<c:redirect url="/index.jsp"/>
+<c:redirect url="config.do"/>
 <%
 }
 %>

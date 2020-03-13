@@ -205,7 +205,7 @@ public class MemberMController {
 	}	
 	
 	// 정보 수정 전 비밀번호 체크 페이지
-	@RequestMapping("/config.do")
+	@RequestMapping("/checkPW.do")
 	public String getCheckPWPage(FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
 		String number = null;
 		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");

@@ -199,8 +199,7 @@ public class MemberMDAO {
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 checkPassword()");		
 		int result = 0;
-		System.out.println(security.encryptSHA256(password));
-		System.out.println(memberNum);
+
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(MEMBER_CHECKPW);

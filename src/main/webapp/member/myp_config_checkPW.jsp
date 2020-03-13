@@ -10,14 +10,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<%
-System.out.println(session.getAttribute("memberInfo"));
-if(session.getAttribute("memberInfo") == null){
-%>
-<c:redirect url="/index.jsp"/>
-<%
-}
-%>
 
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 <!-- 마이페이지 내 페이지별 js/css -->

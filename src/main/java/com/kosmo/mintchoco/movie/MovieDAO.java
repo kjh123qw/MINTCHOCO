@@ -27,6 +27,9 @@ public class MovieDAO {
 	// 선택
 	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
 	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
+	
+	// request
+	final private String SELECT_TAG_MAPPING = "SELECT * FROM TAG_MAPPING where movie_number = ?"; 
 
 	// 수정
 	final private String UPDATE_MOVIE = "UPDATE MOVIE SET MOVIE_TEASER = ?, MOVIE_TITLE = ?, MOVIE_KIND = ?, MOVIE_DIRECTOR = ?, MOVIE_ACTOR = ?, MOVIE_GRADE = ?, MOVIE_TIME = ?, MOVIE_DATE = ?, MOVIE_YOUTUBE_URL = ?, MOVIE_NAVER_URL = ?, MOVIE_CONTENT = ? WHERE MOVIE_NUMBER = ?";
@@ -103,6 +106,7 @@ public class MovieDAO {
 	public MovieVO selectOneMovie(String movieNuber) {
 		
 		MovieVO movieVO = new MovieVO();
+		
 		
 		try {
 			conn = JDBCUtil.getConnection();

@@ -32,6 +32,9 @@
 <script src="${ contextPath }/js/movie/mov_detail.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/movie/mov_detail.css">
 
+<script src="${ contextPath }/js/movie/rating.js"></script>
+<link rel="stylesheet" href="${ contextPath }/css/movie/rating.css">
+
 <!-- //담당자 js/css -->
 </head>
 <jsp:include page="../_header.jsp"></jsp:include>

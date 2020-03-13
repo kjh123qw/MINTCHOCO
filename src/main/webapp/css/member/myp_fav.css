@@ -70,7 +70,7 @@
 
 .con-fav:hover .con-fav-bg{
 	transition-duration: 0.2s;
-	background: rgba(0,0,75,0.7);	
+	background: rgba(0,75,75,0.7);	
 }
 
 .con-chkbox:checked + .con-fav-bg{

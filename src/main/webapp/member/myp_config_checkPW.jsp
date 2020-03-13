@@ -27,7 +27,7 @@
 			<div class="checkPW-btn">
 				<input type="submit" id="con-conf-submit" class="con-conf-checkPW">
 				<label for="con-conf-submit" class="con-conf-submit-btn">확 인</label>
-				<input type="button" id="con-conf-cancel">
+				<input type="button" id="con-conf-cancel" onclick="history.back();">
 				<label for="con-conf-cancel" class="con-conf-submit-btn checkPW-btn-cancel">취 소</label>
 			</div>			
 		</article>
@@ -38,7 +38,7 @@
 				<span class="icon-confirmed-wrap"><img src="${ contextPath }/images/member/confirmed.svg" class="icon-confirmed"></span>
 				<span>Confirm</span>
 			</div>
-			<div class="con-conf-confirmed conf-detail-content">확인 중입니다...</div>
+			<div class="con-conf-confirmed conf-detail-content">입력하신 정보로 확인 중입니다...</div>
 		</article>
 		<article class="con-conf-confirmed-failed  con-conf-horizontalCenter">
 			<div class="con-conf-confirmed-subject conf-detail-subject">

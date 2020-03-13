@@ -15,17 +15,18 @@
 	background-attachment:fixed;
 	background-repeat: no-repeat;
 	background-size: cover;
+	background-color: rgba( 255, 255, 255, 0.5 );
 }
 .con-assess-bg {
-	background: rgba(0,0,0,0.7);
+	background: rgba(0,0,0,0.8);
 }
 .con-assess:hover .con-assess-bg{
 	transition-duration: 0.2s;
-	background: rgba(0,0,75,0.7);
+	background: rgba(0,75,75,0.8);
 }
 .con-chkbox:checked + .con-assess-bg{
 	transition-duration: 0.2s;
-	background: rgba(75,0,0,0.7);
+	background: rgba(75,0,0,0.8);
 }
 
 .con-assess-none {
@@ -194,13 +195,33 @@
 	
 }
 .con-assess-stars {
+	position: relative;
 	color: white;
 	font-size: 20px;
 	margin-left: 0px;
-}
-.con-assess-stars {
 	font-size: 28px;
+	width: 230px;
+	height: 40px;
+	
 }
+
+.con-th-mintcho {
+	position: absolute;
+	width: 200px;
+	height: 40px;
+	background-image: url("../../images/member/mintchoco2.png");
+	background-size: 40px;	
+}
+.con-th-mintcho2 {
+	position: absolute;
+	background-image: url("../../images/member/mintchoco1.png");
+	background-size: 40px;
+	height: 40px;
+}
+.con-th-mintcho-label {
+	width: 20px;
+}
+
 .con-assess-stars-like {
 	font-size: 20px;
 	margin: 0 auto;

@@ -83,16 +83,12 @@
 								<div class="con-search-target con-assess-cont-subject">${assess.movieTitle}</div>
 								<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
 							</div>
-							<table class="con-assess-stars con-assess-float-right">
-								<tr>
-									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-									<td class="con-th-mintcho"><img src="${ contextPath }/images/member/mintchoco.png"></td>
-									<td>${assess.stars}</td>
-								</tr>
-							</table>
+							<div class="con-assess-stars con-assess-float-right">
+								<div class="clear"></div>
+								<div class="con-th-mintcho"></div>
+								<div class="con-th-mintcho2 con-assess-float" style="width: ${20*assess.stars}px;"></div>
+								<div class="con-th-mintcho-label con-assess-float-right">${assess.stars}</div>								
+							</div>
 							<div class="clear"></div>					
 						</div>
 							<div class="con-assess-float">	

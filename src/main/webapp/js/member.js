@@ -341,8 +341,7 @@ function checkModifyDEL(){
 	var check = document.getElementsByClassName('con-conf-del-check')[0]
 	var delForm = document.getElementsByClassName("con-conf-modifyDEL-content")[0];
  	var error = "n";
-	
-	successWindow.style.display = 'block';
+
 	$.ajax({
         url:"deleteMember.do",
         type:'post',
@@ -365,6 +364,8 @@ function checkModifyDEL(){
         }
     });
 	
+	sfmodal.style.display = 'block';
+	successWindow.style.display = 'block';
 	
 	setTimeout(function() {
 		delForm.submit();

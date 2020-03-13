@@ -43,10 +43,10 @@
 
     <div id="movRec">
 
-		<div class="l-button1" >◀</div>
-		<div class="r-button1">▶</div>
-
 		<h3>액션</h3>
+		
+		<div class="l-action-button" >◀</div>
+		<div class="r-action-button">▶</div>
 		
 		<div class="bg">
 		
@@ -54,9 +54,9 @@
 	        
 	        	<c:if test="${movie.movieKind.contains('액션')}">
 	        
-		            <div id="action" class="movie">
+		            <div class="action">
 		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
-		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                    <img class="poster" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
 		                </a>
 		                <p>
 		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
@@ -66,18 +66,22 @@
 	        	</c:if>
 	        
 	        </c:forEach>
+	        
         </div>
 		
 		<h3>드라마</h3>
+		
+		<div class="l-drama-button" >◀</div>
+		<div class="r-drama-button">▶</div>
 		
 		<div class="bg">
 	        <c:forEach var="movie" items="${movieList}">
 	        
 	        	<c:if test="${movie.movieKind.contains('드라마')}">
 	        
-		            <div class="movie">
+		            <div class="drama">
 		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
-		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                    <img class="poster" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
 		                </a>
 		                <p>
 		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
@@ -91,14 +95,17 @@
         
         <h3>스릴러</h3>
         
+        <div class="l-thriller-button" >◀</div>
+		<div class="r-thriller-button">▶</div>
+        
         <div class="bg">
 	        <c:forEach var="movie" items="${movieList}">
 	        
 	        	<c:if test="${movie.movieKind.contains('스릴러')}">
 	        
-		            <div class="movie">
+		            <div class="thriller">
 		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
-		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                    <img class="poster" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
 		                </a>
 		                <p>
 		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>
@@ -112,14 +119,17 @@
 
         <h3>애니메이션</h3>
         
+        <div class="l-animation-button" >◀</div>
+		<div class="r-animation-button">▶</div>
+        
         <div class="bg">
 	        <c:forEach var="movie" items="${movieList}">
 	        
 	        	<c:if test="${movie.movieKind.contains('애니메이션')}">
 	        
-		            <div class="movie">
+		            <div class="animation">
 		                <a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">
-		                    <img class="poster" id="${ movie.movieNumber }" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		                    <img class="poster" src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }">
 		                </a>
 		                <p>
 		                	<a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }">${ movie.movieTitle }</a>

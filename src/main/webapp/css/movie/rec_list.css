@@ -8,7 +8,6 @@
 #movRec{
 	position: relative;
     width: 100%;
-    height: 1978px;
     overflow-x: hidden;
     overflow: hidden;
     background-color: #3ABAB5;
@@ -77,19 +76,49 @@ h3{
 
 /* 좌우 이동 버튼 */
 
-.l-button1{
+.l-action-button, .l-drama-button, .l-thriller-button, .l-animation-button{
     left: 40px;
 }
 
-.r-button1{
+.r-action-button, .r-drama-button, .r-thriller-button, .r-animation-button{
     right: 40px;
 }
 
-.l-button1, .r-button1 {
+.l-action-button, .r-action-button{
     position: absolute;
     width: 75px;
     height: 75px;
-    top: 200px;
+    top: 225px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #F5FFFA;
+}
+
+.l-drama-button, .r-drama-button{
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    top: 725px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #F5FFFA;
+}
+
+.l-thriller-button, .r-thriller-button{
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    top: 1225px;
+    font-size: 50px;
+    cursor: pointer;
+    color: #F5FFFA;
+}
+
+.l-animation-button, .r-animation-button{
+    position: absolute;
+    width: 75px;
+    height: 75px;
+    top: 1725px;
     font-size: 50px;
     cursor: pointer;
     color: #F5FFFA;
@@ -97,7 +126,7 @@ h3{
 
 /* 영화 관련 */
 
-.movie{
+.action, .drama, .thriller, .animation{
     height: 450px;
     width: 480px;
     float: left;
@@ -106,7 +135,7 @@ h3{
     border: 1px solid #0DEEC9;
 }
 
-.movie a{
+.action a, .drama a, .thriller a, .animation a{
 	margin: 0 auto;
 	height: 400px;
 	width: 280px;
@@ -115,19 +144,19 @@ h3{
     
 }
 
-.movie img{
+.action img, .drama img, .thriller img, .animation img{
 	height: 400px;
 	width: 280px;
     cursor: pointer;
     border: 1px solid #0DEEC9;
 }
 
-.movie img:hover{
+.action img:hover, .drama img:hover, .thriller img:hover, .animation img:hover{
 	border: 3px solid #F5FFFA;
 	color: #F5FFFA;
 }
 
-.movie p a{
+.action p a, .drama p a, .thriller p a, .animation p a{
 	height: 50px;
 	width: 480px;
     cursor: pointer;
@@ -138,7 +167,7 @@ h3{
     text-align: center;
 }
 
-.movie p a:hover{
+.action p a:hover, .drama p a:hover, .thriller p a:hover, .animation p a:hover{
 	border-top: 3px solid #F5FFFA;
 	border-left: 3px solid #F5FFFA;
 	border-right: 5px solid #F5FFFA;

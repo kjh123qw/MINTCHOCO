@@ -98,7 +98,7 @@
 	
 	</div>
 
-	<jsp:include page="../_rating.jsp"></jsp:include>
+	<jsp:include page="./_rating.jsp"></jsp:include>
 
 </div>
 </body>

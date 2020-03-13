@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.1.0";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.1.1";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -165,7 +165,7 @@ public class DBVersionManager {
 			
 			"create or replace view SEARCH_VIEW " + 
 			"as " + 
-			"select mv.MOVIE_NUMBER, mv.MOVIE_POSTER, mv.MOVIE_TITLE, NVL(av.AVGSTAR, 0) STARS, mv.MOVIE_KIND, mv.MOVIE_DIRECTOR, mv.MOVIE_ACTOR, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE " + 
+			"select mv.MOVIE_NUMBER, mv.MOVIE_POSTER, mv.MOVIE_TITLE, NVL(av.AVGSTAR, 0) STARS, mv.MOVIE_KIND, mv.MOVIE_DIRECTOR, mv.MOVIE_ACTOR, mv.MOVIE_GRADE, mv.MOVIE_TIME, mv.MOVIE_DATE, mv.MOVIE_CONTENT " + 
 			"from MOVIE mv " + 
 			"left outer join (select MOVIE_NUMBER ,avg(ASSESS_STARS) AVGSTAR from ASSESSMENT group by MOVIE_NUMBER) av " + 
 			"on mv.MOVIE_NUMBER = av.MOVIE_NUMBER",

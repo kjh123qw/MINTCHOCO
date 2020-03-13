@@ -11,28 +11,30 @@
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 
 <header>
-	<ul id="navList">
-		<li>
-			<div id="searchWrap">
-				<form name="searchForm" action="${ contextPath }/movie/search.do">
-					<div class="cst-text-st1 search-form-textbox">
-						<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
-					</div>
-					<div id="searchBtn" onclick="document.searchForm.submit();">
-						<i class="fas fa-search"></i>
-					</div>
-				</form>
-			</div>
-			<div id="showSearchBtn">
-				<i class="fas fa-search"></i>
-			</div>
-		</li>
-		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
-		<li><a href="${ contextPath }/movie/recommand.do">영화목록</a></li>
-		<li><a href="${ contextPath }/service.do">서비스 안내</a></li>
-		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
-		<li></li>
-	</ul>
+	<div id="headerNav">
+		<ul id="navList">
+			<li>
+				<div id="searchWrap">
+					<form name="searchForm" action="${ contextPath }/movie/search.do">
+						<div class="cst-text-st1 search-form-textbox">
+							<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
+						</div>
+						<div id="searchHeaderBtn" onclick="document.searchForm.submit();">
+							<i class="fas fa-search"></i>
+						</div>
+					</form>
+				</div>
+				<div id="showSearchBtn">
+					<i class="fas fa-search"></i>
+				</div>
+			</li>
+			<li><a href="${ contextPath }/rank.do">영화순위</a></li>
+			<li><a href="${ contextPath }/movie/recommend.do">영화목록</a></li>
+			<li><a href="${ contextPath }/notice.do">공지사항</a></li>
+			<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
+			<li></li>
+		</ul>
+	</div>
 	<div id="mobMenuBtn">
 		<i class="fas fa-bars"></i>
 	</div>
@@ -46,7 +48,7 @@
 			<div class="cst-text-st1 search-form-textbox">
 				<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
 			</div>
-			<div id="mobSearchBtn" onclick="document.searchForm.submit();">
+			<div id="mobSearchHeaderBtn" onclick="document.searchForm.submit();">
 				<i class="fas fa-search"></i>
 			</div>
 		</div>
@@ -58,9 +60,10 @@
 		<div><i class="fas fa-times"></i></div>
 	</div>
 	<ul id="mobNavList">
+		<li><a href="${ contextPath }/">홈으로</a></li>
 		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
-		<li><a href="${ contextPath }/movie/recommand.do">영화목록</a></li>
-		<li><a href="${ contextPath }/service.do">서비스 안내</a></li>
+		<li><a href="${ contextPath }/movie/recommend.do">영화목록</a></li>
+		<li><a href="${ contextPath }/notice.do">공지사항</a></li>
 		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
 	</ul>
 </div>

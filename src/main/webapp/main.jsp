@@ -9,6 +9,7 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 
 <%
 System.out.println(session.getAttribute("memberInfo"));
@@ -65,7 +66,7 @@ if(session.getAttribute("memberInfo") == null){
 
 	<!-- 검색Div -->
 	<div id = "searchDiv">
-		<form name = "searchBar" id = "searchBar" action = "mainSearchMovie.do" method="get">
+		<form name = "searchBar" id = "searchBar" action = "${ contextPath }/movie/search.do" method="get">
 			<input type = "text" placeholder="Search" id = "searchText" name = "searchText"/>
 			<button type="submit" form="searchBar" id = "searchBtn"><i class="fas fa-search"></i></button>
 		</form>

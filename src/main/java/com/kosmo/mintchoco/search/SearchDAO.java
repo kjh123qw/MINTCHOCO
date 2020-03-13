@@ -56,9 +56,9 @@ public class SearchDAO {
 	// 검색 메소드
 	public List<SearchVO> searchMovieList(String searchKeyWord) {
 		// 검색용 쿼리(기본)
-		String SEARCH_MOVIE_MAIN_LIST = "SELECT * FROM MOVIE WHERE";
-		String SEARCH_MOVIE_SECOND_LIST = "SELECT * FROM MOVIE WHERE";
-		String SEARCH_MOVIE_THIRD_LIST = "SELECT * FROM MOVIE WHERE";
+		String SEARCH_MOVIE_MAIN_LIST = "SELECT * FROM SEARCH_VIEW WHERE";
+		String SEARCH_MOVIE_SECOND_LIST = "SELECT * FROM SEARCH_VIEW WHERE";
+		String SEARCH_MOVIE_THIRD_LIST = "SELECT * FROM SEARCH_VIEW WHERE";
 		
 		List<SearchVO> searchMovieList = new ArrayList<SearchVO>();
 		int movieIndex = 0;

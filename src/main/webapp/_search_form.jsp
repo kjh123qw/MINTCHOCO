@@ -15,7 +15,7 @@
 		<div class="cst-text-st1 search-form-textbox">
 			<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
 		</div>
-		<div id="searchBtn">
+		<div id="searchHeaderBtn">
 			<i class="fas fa-search"></i>
 		</div>
 	</div>

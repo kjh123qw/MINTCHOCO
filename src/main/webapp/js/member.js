@@ -542,3 +542,35 @@ function selChkbox() {
 	submitbtn.setAttribute('value',idVal);
 	}
 }
+
+var requestParam ="";
+function Request(){		
+	this.getParameter = function(param){
+		 var url = decodeURI(location.href);
+		 var paramArr = (url.substring(url.indexOf("?")+1,url.length)).split("&");
+
+		 for(var i = 0 ; i < paramArr.length ; i++){
+		     var temp = paramArr[i].split("=");		 
+		     if(temp[0].toUpperCase() == param.toUpperCase()){
+			     requestParam = paramArr[i].split("=")[1];
+			     break;
+		     }
+		 }
+		 return requestParam;
+	 }
+}
+
+
+document.addEventListener("DOMContentLoaded", function(){
+	var request = new Request();
+	request.getParameter("nickName");
+	if(requestParam.length==0) {
+		requestParam= null;
+	} else {
+		requestParam = encodeURI(requestParam);
+		document.getElementById('myp-inform-do').setAttribute('href','my_page.do?nickName='+requestParam);
+		document.getElementById('myp-assessment-do').setAttribute('href','assessment.do?nickName='+requestParam);
+		document.getElementById('myp-favorite-do').setAttribute('href','favorite.do?nickName='+requestParam);
+	}	
+});
+

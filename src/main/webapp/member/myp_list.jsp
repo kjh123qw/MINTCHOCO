@@ -94,7 +94,6 @@
 		<div class="clear"></div>
 	</form>
 	<form class="con-sortList" name="alignForm" method="POST" action="favorite.do">
-		<input type="hidden" name="chkbox" value="none">
 		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->

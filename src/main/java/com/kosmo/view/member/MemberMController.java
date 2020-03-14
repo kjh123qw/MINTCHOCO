@@ -1,9 +1,10 @@
 package com.kosmo.view.member;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -12,13 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kosmo.mintchoco.assessment.AssessmentMDAO;
 import com.kosmo.mintchoco.assessment.AssessmentMVO;
 import com.kosmo.mintchoco.favorite.FavoriteDAO;
 import com.kosmo.mintchoco.favorite.FavoriteVO;
-import com.kosmo.mintchoco.member.MemberDAO;
 import com.kosmo.mintchoco.member.MemberMDAO;
 import com.kosmo.mintchoco.member.MemberVO;
 
@@ -30,24 +29,29 @@ public class MemberMController {
 	
 	// 마이페이지 메인
 	@RequestMapping("/my_page.do")	
-	public String getInfo(FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
+	public String getInfo(@RequestParam(value="nickName", required=false) String nickname, FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) throws UnsupportedEncodingException {
 		// 초기화
 		session.removeAttribute("member_config");
-		
 		// 자기번호 불러오기
 		String myNumber = null;
 		String number = null;
+		
 		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
 		if (memberList != null) {
 			MemberVO memberidx = memberList.get(0);
 			myNumber = Integer.toString(memberidx.getNumber());
 		}
-		String memberNum = (String) session.getAttribute("memberNum");
 				
-		if (memberNum == null) {
+		if (nickname == null) {
 			number = myNumber;
 		} else {
-			number = memberNum;
+			nickname = URLDecoder.decode(nickname,"UTF-8");
+			int result = memberDAO.checkNickname(nickname);
+			if(result > 0) {
+				number = memberDAO.getMemberNumber(nickname);
+			} else {			
+				number = myNumber;
+			}			
 		}
 		
 		model.addAttribute("favorite_five", favoriteDAO.getFavInfo(number));
@@ -56,9 +60,9 @@ public class MemberMController {
 		return "member/myp_inform.jsp";
 	}
 	
-	// 마이페이지 > 찜한 목록
-	@RequestMapping("/favorite.do")
-	public String getFavoriteList(FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
+	// 찜한목록 기능
+	@RequestMapping(value="/favorite.do")
+	public String sortFavList(@RequestParam(value="nickName", required=false) String nickname, @RequestParam(value="sort", required=false) String sort, @RequestParam(value="chkbox", required=false) String chkbox,FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) throws UnsupportedEncodingException {
 		// 초기화
 		session.removeAttribute("member_config");
 		
@@ -69,47 +73,24 @@ public class MemberMController {
 		if (memberList != null) {
 			MemberVO memberidx = memberList.get(0);
 			myNumber = Integer.toString(memberidx.getNumber());
-		}	
-		String memberNum = (String) session.getAttribute("memberNum");
-				
-		if (memberNum == null) {
-			number = myNumber;
-		} else {
-			number = memberNum;
 		}
-		
-		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
-		model.addAttribute("assess_cnt", memberDAO.getAssessmentCnt(number));
-		model.addAttribute("fav_cnt", favoriteDAO.getFavoriteCnt(number));
-		model.addAttribute("favoriteList", favoriteDAO.getFavoriteList(number));	
-		return "member/myp_list.jsp";
-	}
-	
-	// 찜한목록 기능
-	@RequestMapping(value="/favorite.do", method=RequestMethod.POST)
-	public String sortFavList(@RequestParam(value="sort", required=false) String sort, @RequestParam(value="chkbox", required=false) String chkbox,FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
-		// 자기번호 불러오기
-		String myNumber = null;
-		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			myNumber = Integer.toString(memberidx.getNumber());
-		}		
-		String memberNum = (String) session.getAttribute("memberNum");
 				
-		if (memberNum == null) {
+		if (nickname == null) {
 			number = myNumber;
 		} else {
-			number = memberNum;
+			nickname = URLDecoder.decode(nickname,"UTF-8");
+			int result = memberDAO.checkNickname(nickname);
+			if(result > 0) {
+				number = memberDAO.getMemberNumber(nickname);
+			} else {			
+				number = myNumber;
+			}	
 		}
 		
 		// 삭제
 		if(chkbox != null) {
 			List<String> chkboxList = Arrays.asList(chkbox.split(","));
 			favoriteDAO.deleteFavorite(chkboxList);
-			model.addAttribute("fav_cnt", favoriteDAO.getFavoriteCnt(number));
-			model.addAttribute("favoriteList", favoriteDAO.getFavoriteList(number));
 		}
 		
 		// 정렬
@@ -126,14 +107,18 @@ public class MemberMController {
 		}
 		
 		// 기본
+		model.addAttribute("favoriteList", favoriteDAO.getFavoriteList(number));
+		model.addAttribute("fav_cnt", favoriteDAO.getFavoriteCnt(number));
 		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
 		model.addAttribute("assess_cnt", memberDAO.getAssessmentCnt(number));
 		return "member/myp_list.jsp";
 	}
 	
-	// 마이페이지 > 평가 목록
-	@RequestMapping("/assessment.do")
-	public String getAssessList(AssessmentMVO vo, AssessmentMDAO assessDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
+	
+	
+	// 평가 목록 기능
+	@RequestMapping(value="/assessment.do")
+	public String sortFavList(@RequestParam(value="nickName", required=false) String nickname, @RequestParam(value="sort", required=false) String sort, @RequestParam(value="chkbox", required=false) String chkbox, AssessmentMVO vo, AssessmentMDAO assessDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) throws UnsupportedEncodingException {
 		// 초기화
 		session.removeAttribute("member_config");
 		
@@ -144,38 +129,18 @@ public class MemberMController {
 		if (memberList != null) {
 			MemberVO memberidx = memberList.get(0);
 			myNumber = Integer.toString(memberidx.getNumber());
-		}	
-		String memberNum = (String) session.getAttribute("memberNum");
-		
-		if (memberNum == null) {
-			number = myNumber;
-		} else {
-			number = memberNum;
 		}
 		
-		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
-		model.addAttribute("assess_cnt", memberDAO.getAssessmentCnt(number));
-		model.addAttribute("assessList", assessDAO.getAssessmentList(number));
-		return "member/myp_assess_list.jsp";
-	}
-	
-	// 평가 목록 기능
-	@RequestMapping(value="/assessment.do", method=RequestMethod.POST)
-	public String sortFavList(@RequestParam(value="sort", required=false) String sort, @RequestParam(value="chkbox", required=false) String chkbox, AssessmentMVO vo, AssessmentMDAO assessDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
-		// 자기번호 불러오기
-		String myNumber = null;
-		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			myNumber = Integer.toString(memberidx.getNumber());
-		}		
-		String memberNum = (String) session.getAttribute("memberNum");
-		
-		if (memberNum == null) {
+		if (nickname == null) {
 			number = myNumber;
 		} else {
-			number = memberNum;
+			nickname = URLDecoder.decode(nickname,"UTF-8");
+			int result = memberDAO.checkNickname(nickname);
+			if(result > 0) {
+				number = memberDAO.getMemberNumber(nickname);
+			} else {			
+				number = myNumber;
+			}	
 		}
 		
 		// 삭제
@@ -201,6 +166,7 @@ public class MemberMController {
 		// 기본
 		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
 		model.addAttribute("assess_cnt", memberDAO.getAssessmentCnt(number));
+		model.addAttribute("assessList", assessDAO.getAssessmentList(number));
 		return "member/myp_assess_list.jsp";
 	}	
 	
@@ -252,7 +218,7 @@ public class MemberMController {
 								@RequestParam(value="info-flag", required=false) String infoFlag,
 								@RequestParam(value="like-flag", required=false) String favFlag,
 								@RequestParam(value="opeyn", required=false) String opeyn,
-								AssessmentMVO vo, AssessmentMDAO assessDAO, MemberVO member, MemberDAO memberDAO,  MemberMDAO membermDAO,Model model, HttpSession session){
+								AssessmentMVO vo, AssessmentMDAO assessDAO, MemberVO member, MemberMDAO membermDAO,Model model, HttpSession session){
 		
 		// 멤버 값 받아오기
 		String number = null;
@@ -289,7 +255,7 @@ public class MemberMController {
 	
 	@ResponseBody
 	@RequestMapping(value="/usingNN.do", method=RequestMethod.POST)
-	public String joinCheck(@RequestParam(value="nickname") String nickname, MemberDAO memberDAO, HttpSession session){
+	public String joinCheck(@RequestParam(value="nickname") String nickname, MemberMDAO memberDAO, HttpSession session){
 		// 별명 중복확인
 		int chkNN = memberDAO.checkNickname(nickname);		
 		if(chkNN > 0) {

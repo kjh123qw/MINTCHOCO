@@ -25,12 +25,15 @@ if(session.getAttribute("memberInfo") == null){
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>MY_MAIN.JSP</title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
 <script src="${ contextPath }/js/jquery.mousewheel.min.js"></script>
 <script src="${ contextPath }/js/public.js"></script>
+<script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js/css -->
 <script src="${ contextPath }/js/member.js"></script>
@@ -53,9 +56,9 @@ if(session.getAttribute("memberInfo") == null){
 		<div class="hd-menu-wrap">
 			<nav class="hd-menu">
 				<ul class="hd-menu-list">
-					<li><a class="icon-privacy-wrap" href="my_page.do"><img src="${ contextPath }/images/member/privacy.png" class="icon-privacy"><span>&nbsp;정보</span></a></li>
-					<li><a class="icon-fav-wrap" href="favorite.do"><img src="${ contextPath }/images/member/fav.png" class="icon-fav"><span>&nbsp;찜한목록</span></a></li>
-					<li><a class="icon-assess-wrap" href="assessment.do"><img src="${ contextPath }/images/member/assess1.png" class="icon-assess1"><img src="${ contextPath }/images/member/assess2.png" class="icon-assess2"><span>&nbsp;평가목록</span></a></li>
+					<li><a id="myp-inform-do" class="icon-privacy-wrap" href="my_page.do"><img src="${ contextPath }/images/member/privacy.png" class="icon-privacy"><span>&nbsp;정보</span></a></li>
+					<li><a id="myp-favorite-do" class="icon-fav-wrap" href="favorite.do"><img src="${ contextPath }/images/member/fav.png" class="icon-fav"><span>&nbsp;찜한목록</span></a></li>
+					<li><a id="myp-assessment-do" class="icon-assess-wrap" href="assessment.do"><img src="${ contextPath }/images/member/assess1.png" class="icon-assess1"><img src="${ contextPath }/images/member/assess2.png" class="icon-assess2"><span>&nbsp;평가목록</span></a></li>
 					<c:if test="${memberInfo[0].number==detail_info.number}">
 						<li><a class="icon-config-wrap" href="checkPW.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"><span>&nbsp;계정설정</span></a></li>
 					</c:if>			

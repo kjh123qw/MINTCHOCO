@@ -23,6 +23,8 @@ public class MemberMDAO {
 	private ResultSet rs = null;
 
 	// 필요SQL
+	private final String MEMBER_BY_NICKNAME = "SELECT * FROM MEMBER WHERE MEMBER_NICKNAME=?";
+	private final String MEMBER_CHECKNN = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_NICKNAME=?";
 	private final String GET_DETAIL = "SELECT * FROM MEMBER WHERE MEMBER_NUMBER=?";
 	private final String ASSESSMENT_COUNT = "SELECT COUNT(*) FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=?";
 	private final String UPDATE_MEMBER = "UPDATE MEMBER SET MEMBER_NICKNAME=?, MEMBER_AGE=?, MEMBER_GENDER=?, MEMBER_INTRODUCE=? WHERE MEMBER_NUMBER=?";
@@ -31,6 +33,51 @@ public class MemberMDAO {
 	private final String MEMBER_INFO_BYNUM = "SELECT * FROM MEMBER WHERE MEMBER_NUMBER=?";
 	private final String MEMBER_DELETE = "DELETE FROM MEMBER WHERE MEMBER_NUMBER=?";
 	private final String MEMBER_CHECKPW = "SELECT COUNT(*) FROM MEMBER WHERE MEMBER_PWD=? AND MEMBER_NUMBER=?";
+	
+	// 회원 번호 받기
+	public String getMemberNumber(String nickname) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 getMemberNumber()");
+		int num = 0;
+		try {					
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(MEMBER_BY_NICKNAME);
+			stmt.setString(1, nickname);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				num = rs.getInt("MEMBER_NUMBER");
+			}
+		} catch(Exception e) {
+			System.out.println("getMemberNumber()" +e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+			String number = Integer.toString(num);
+			return number;
+	}
+	
+	// 닉네임 확인
+	public int checkNickname(String nickName) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 checkNickname()");		
+		int result = 0;
+
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(MEMBER_CHECKNN);
+			stmt.setString(1, nickName);
+			rs = stmt.executeQuery();			
+			while(rs.next()) {
+				result = rs.getInt("COUNT(*)");
+			}			
+		} catch (Exception e) {
+			System.out.println("checkNickname()" + e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}		
+		return result;
+	}	
+	
 	// 계정 정보
 	public MemberVO getDetailInfo(String memberNum) {
 		// TODO Auto-generated method stub

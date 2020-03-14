@@ -56,7 +56,7 @@
 	
 	<!-- 영화 정보 -->
 	<div class="movie">
-		<div class="poster-image"><a onclick="window.history.go(-1);"><img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></div>
+		<div class="poster-image"><a onclick="window.history.go(-1);"><img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a></div>
     	<table border="1">
 	        <!-- ${movie_poster}, ${movie_title}, ${movie_kind}, ${movie_content}, ${movie_directer}, ${movie_actor}, ${movie_yutube_url}, ${movie_naver_url} && <a> ${tag_name} <a>를 forEach로 돌림 -->
 			<tr>

@@ -12,7 +12,7 @@
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 
 <%
-System.out.println(session.getAttribute("memberInfo"));
+System.out.println(session.getAttribute("movieInfo"));
 if(session.getAttribute("memberInfo") == null){
 %>
 <c:redirect url="/index.jsp"/>
@@ -24,6 +24,8 @@ if(session.getAttribute("memberInfo") == null){
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title>MAIN.JSP</title>
 <script src="./js/jquery.2.1.3.min.js"></script>
 <script src="./js/jquery-ui.min.js"></script>
@@ -67,7 +69,7 @@ if(session.getAttribute("memberInfo") == null){
 	<!-- 검색Div -->
 	<div id = "searchDiv">
 		<form name = "searchBar" id = "searchBar" action = "${ contextPath }/movie/search.do" method="get">
-			<input type = "text" placeholder="Search" id = "searchText" name = "searchText"/>
+			<input type = "text" placeholder="Search" id = "searchText" name = "searchKeyWord"/>
 			<button type="submit" form="searchBar" id = "searchBtn"><i class="fas fa-search"></i></button>
 		</form>
 	</div>
@@ -75,7 +77,7 @@ if(session.getAttribute("memberInfo") == null){
 	
 	<!-- 영화 12개 출력 기준 : number desc -->
 	<div id = "pushDiv1">
-		 <div id = "pushDiv1_title">&nbsp;<a onclick = "detailMember('${memberInfo[0].number }');">${memberInfo[0].name }</a>&nbsp;<h3>님에게 추천하는 영화입니다.</h3></div>
+		 <div id = "pushDiv1_title">&nbsp;<a onclick = "detailMember('${memberInfo.number }');">${memberInfo.name }</a>&nbsp;<h3>님에게 추천하는 영화입니다.</h3></div>
 		 
 		<c:forEach var="movie" items="${movieInfo}" varStatus="status">
 			<div class = "mainMovie" onclick = "detailMovie('${movie.movieNumber }');">
@@ -114,7 +116,7 @@ if(session.getAttribute("memberInfo") == null){
 	<!-- 메뉴 Div -->
 	<div id = "menuDiv">
 		<div id = "menuList">
-			<a onclick = "goMypage('${memberInfo[0].number }');">MYPAGE</a>
+			<a onclick = "goMypage('${memberInfo.number }');">MYPAGE</a>
 			<a onclick = "goMovie();">MOVIE</a> <!-- 주제별 영화목록 -->
 			<a onclick = "goNotice();">NOTICE</a> <!-- 공지사항 -->
 			<a onclick = "goLogout();">LOGOUT</a>

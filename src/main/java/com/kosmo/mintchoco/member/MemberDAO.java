@@ -193,10 +193,10 @@ int result = 0;
 		
 	}
 
-	public List<MemberVO> loginMember(String email, String newPwd) {
+	public MemberVO loginMember(String email, String newPwd) {
 		
-		List<MemberVO> list = new ArrayList<MemberVO>();
-		
+
+		MemberVO memberVO = new MemberVO();
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(MEMBER_INFO);	
@@ -204,22 +204,19 @@ int result = 0;
 			stmt.setString(2, newPwd);
 			rs = stmt.executeQuery();
 			
-			while(rs.next()) {
-				MemberVO vo = new MemberVO();
+			if(rs.next()) {
 				
-				vo.setNumber(rs.getInt("MEMBER_NUMBER"));
-				vo.setEmail(rs.getString("MEMBER_EMAIL"));
+				memberVO.setNumber(rs.getInt("MEMBER_NUMBER"));
 				//비번생략
-				vo.setName(rs.getString("MEMBER_NAME"));
-				vo.setNickName(rs.getString("MEMBER_NICKNAME"));
-				vo.setAge(rs.getInt("MEMBER_AGE"));
-				vo.setGender(rs.getString("MEMBER_GENDER"));
-				vo.setIntroduce(rs.getString("MEMBER_INTRODUCE"));
-				vo.setIndate(rs.getDate("MEMBER_INDATE"));
-				vo.setLike_flag(rs.getString("MEMBER_FAVORITE_FLAG"));
-				vo.setAssessment_flag(rs.getString("MEMBER_ASSESSMENT_FLAG"));
-				vo.setInfo_flag(rs.getString("MEMBER_INFO_FLAG"));
-				list.add(vo);
+				memberVO.setName(rs.getString("MEMBER_NAME"));
+				memberVO.setNickName(rs.getString("MEMBER_NICKNAME"));
+				memberVO.setAge(rs.getInt("MEMBER_AGE"));
+				memberVO.setGender(rs.getString("MEMBER_GENDER"));
+				memberVO.setIntroduce(rs.getString("MEMBER_INTRODUCE"));
+				memberVO.setIndate(rs.getDate("MEMBER_INDATE"));
+				memberVO.setLike_flag(rs.getString("MEMBER_FAVORITE_FLAG"));
+				memberVO.setAssessment_flag(rs.getString("MEMBER_ASSESSMENT_FLAG"));
+				memberVO.setInfo_flag(rs.getString("MEMBER_INFO_FLAG"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -227,7 +224,7 @@ int result = 0;
 			JDBCUtil.close(rs, stmt, conn);
 		}
 		
-		return list;
+		return memberVO;
 	}
 
 	public List<MovieVO> movieList() {

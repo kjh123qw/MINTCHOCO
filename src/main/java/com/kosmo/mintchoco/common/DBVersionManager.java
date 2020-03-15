@@ -16,8 +16,6 @@ public class DBVersionManager {
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
-
-	SecurityUtil security = new SecurityUtil();
 	
 	private String[] drpSql = { // 기존 테이블 및 시퀀스 삭제 sql
 			"drop table VERSION",
@@ -117,7 +115,7 @@ public class DBVersionManager {
 			"    MOVIE_number number(10) REFERENCES Movie(movie_number) on delete cascade, " + // 영화 제목 
 			"    ASSESS_CONTENT varchar2(100) not null, " + 	// 내용
 			"    ASSESS_STARS NUMBER(2) not null, " +			// 별점 
-			"    ASSESS_REGDATE date default sysdate" +			// 등록일자 
+			"    ASSESS_REGDATE timestamp default sysdate" +			// 등록일자 
 			")",
 			
 			"create table ASSESSMENT_EST (" + 					// 평가한 영화의 좋아요/싫어요(장세진)
@@ -125,7 +123,7 @@ public class DBVersionManager {
 			"    MEMBER_number NUMBER(10) REFERENCES MEMBER(MEMBER_number) on delete cascade, " + // 추가한 회원번호 
 			"    ASSESS_id VARCHAR2(20) REFERENCES assessment(ASSESS_id) on delete cascade, " + // 한줄평 번호 
 			"    ASSESS_EST CHAR(1) CHECK (ASSESS_EST IN ('L','D')), " + // 좋아요L 싫어요D 
-			"    ASSESS_EST_REGDATE date default sysdate" +		// 등록일자 
+			"    ASSESS_EST_REGDATE timestamp default sysdate" +		// 등록일자 
 			")",
 			
 //			"create or replace view ASSESSMENT_VIEW " +   	// assessment view 좋아요 싫어요 개수가 계산된 view (김정호)
@@ -216,7 +214,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " + 	// 1
 			"'admin@gmail.com', " +
-			"'" + security.encryptSHA256("admin1234") + "', " +
+			"'" + SecurityUtil.encryptSHA256("admin1234") + "', " +
 			"'관리자', " +
 			"'관리자', " +
 			"32, " +
@@ -231,7 +229,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +	// 2
 			"'user01@gmail.com', " +
-			"'" + security.encryptSHA256("user1234") + "', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
 			"'유저01', " +
 			"'유저01 별명', " +
 			"22, " +
@@ -246,7 +244,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user02@gmail.com', " +
-			"'" + security.encryptSHA256("user1234") + "', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
 			"'유저02', " +
 			"'유저02 별명', " +
 			"26, " +
@@ -261,7 +259,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user03@gmail.com', " +
-			"'" + security.encryptSHA256("user1234") + "', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
 			"'유저03', " +
 			"'유저03 별명', " +
 			"21, " +
@@ -276,7 +274,7 @@ public class DBVersionManager {
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user04@gmail.com', " +
-			"'" + security.encryptSHA256("user1234") + "', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
 			"'유저04', " +
 			"'유저04 별명', " +
 			"29, " +

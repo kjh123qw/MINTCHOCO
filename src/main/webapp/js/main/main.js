@@ -122,16 +122,15 @@ function detailMovie(number){
 }
 
 function goMypage(number){
-	alert("main의 js에 goMypage 함수있습니다. 수정부탁드립니다. number로 회원번호 보내드립니다." + number + "번의 회원입니다.");
 	location.href="my_page.do";
 }
 
 function goMovie(){
-	alert("movie 리스트 가는 함수입니다.")
+	location.href="movie/recommend.do";
 }
 
 function goNotice(){
-	alert("게시판 가는 함수입니다. 로그인한 사람정보는 세션에 있습니다. ${memberInfo[0].number}")
+	location.href="service/notice.do";
 }
 
 function goLogout(){

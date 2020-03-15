@@ -7,24 +7,65 @@
 	/*display: none !important;*/
 }
   /* 임시 */
-  
+
+.rating-line { margin: 10px 0 5px 0; }
+.rating-line-bottom { margin: 0 0 10px 0; }
 #ratingWrap {
 	padding: 5px;
 }
-.rating-inner-box {
+.rating-header-wrap { height: 50px; }
+.rating-blank-underline { display: none; }
+.rating-header-comment, .rating-header-named, .rating-header-write {
+	width: 30%; height: 35px;
+	margin-top: 15px;
+	float: left;
+	border: 1px solid #599;
+	font-size: 14px;
+	text-align: center;
+	line-height: 35px;
+	color: #266;
+	cursor: pointer;
+}
+.rating-header-named {
+	border-right: 0;
+	border-left: 0;
+}
+.rating-header-selected {
+	width: 40%; height: 50px;
+	margin-top: 0;
+	line-height: 50px;
+	background-color: #599;
+	font-weight: bold;
+	font-size: 20px;
+	color: #fff;
+}
+.rating-inner-box, #writeCommentBox, #namedCommentBox {
 	border: 1px solid #acc;
 	padding: 5px;
-	margin-bottom: 5px;
+	margin: 5px 0;
+}
+#myCommentBox {
+	padding: 0 5px;
+}
+.my-comment-box{
+	border: 2px solid #7aa;
+	background-color: #eff;
 }
 .rating-top {
 	height: 30px;
 }
 .rating-nick {
-	width: 148px; height: 30px;
+	width: 136px; height: 30px;
 	float: left;
+	padding-left: 5px;
 	font-size: 14px;
 	font-weight: bold;
 	line-height: 30px;
+	cursor: pointer;
+}
+.rating-nick:hover {
+	color: #3aa;
+	text-decoration: underline;
 }
 
 /* score */
@@ -71,8 +112,20 @@
 	font-size: 14px;
 	line-height: 20px;
 }
+.rating-delete {
+	width: 40px; height: 30px;
+	margin-top: 5px;
+	float: left;
+	font-size: 12px;
+	font-weight: bold;
+	line-height: 30px;
+	background-color: red;
+	color: #fff;
+	text-align: center;
+	cursor: pointer;
+}
 .rating-ud {
-	width: 218px;height: 40px;
+	width: 166px;height: 40px;
 	float: right;
 	padding: 5px;
 }
@@ -83,9 +136,65 @@
 	border: 1px solid #ccc;
 	text-align: center;
 	line-height: 28px;
+	cursor: pointer;
 }
 .rating-up-btn { margin-right: 10px; color: red; }
-.raitng-down-btn { color: blue; }
+.raitng-down-btn { color: #666; }
+#ratingPage {
+	height: 30px;
+	text-align: center;
+	line-height: 30px;
+	font-size: 18px;
+	color: #777;
+}
+.page-number-selected {
+	font-weight: bold;
+	color: #000;
+}
+.page-number, .page-arrow {
+	cursor: pointer;
+}
+
+/* write box */
+#writeCommentBox {
+	overflow: hidden;
+	display: none;
+}
+.score-selector {
+	width: 120px; height: 30px;
+	float: right;
+	line-height: 30px;
+	text-align: right;
+}
+.score-selector select {
+	width: 60px; height: 30px;
+	outline: none;
+}
+.comment-text { padding-top: 10px; }
+.comment-text textarea {
+	display: block;
+	width: 100%; height: 100px;
+	padding: 5px;
+	resize: none;
+	outline: none;
+}
+.btn-area { padding: 5px; }
+.cst-btn > div {
+	float: right;
+}
+/* Named Comment Box */
+#namedCommentBox {
+	overflow: hidden;
+	display: none;
+}
+.no-comment {
+	padding: 20px;
+	height: 70px;
+	font-size: 14px;
+	text-align: center;
+	line-height: 30px;
+}
+
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
 	.rating-top {
@@ -128,6 +237,28 @@
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
 @media screen and (min-width: 992px) {
+	.rating-blank-underline {
+		width: 20%; height: 50px;
+		display: block;
+		float: left;
+		border-bottom: 1px solid #599;
+	}
+	.rating-header-comment, .rating-header-named, .rating-header-write {
+		width: 15%;
+	}
+	.rating-header-selected {
+		width: 30%;
+	}
+	.score-selector {
+		width: 150px; height: 40px;
+		float: right;
+		line-height: 40px;
+		text-align: right;
+	}
+	.score-selector select {
+		width: 70px; height: 40px;
+		outline: none;
+	}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
 @media screen and (min-width: 1225px) {

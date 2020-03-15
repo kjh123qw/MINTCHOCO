@@ -117,6 +117,8 @@
 	cursor: pointer;
 }
 
+
+
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
 	.search-title {

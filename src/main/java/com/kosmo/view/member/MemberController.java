@@ -3,6 +3,7 @@ package com.kosmo.view.member;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.mail.internet.MimeMessage;
@@ -13,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -22,6 +24,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.kosmo.mintchoco.common.SecurityUtil;
 import com.kosmo.mintchoco.member.MemberDAO;
 import com.kosmo.mintchoco.member.MemberVO;
+import com.kosmo.mintchoco.movie.MovieDAO;
 import com.kosmo.mintchoco.movie.MovieVO;
 
 /*
@@ -36,6 +39,14 @@ public class MemberController {
 	
 	SecurityUtil security = new SecurityUtil();
 	MemberDAO dao = new MemberDAO();
+
+
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	public String main(MovieDAO movieDAO, Model model) {
+		ModelAndView mv = new ModelAndView();
+		model.addAttribute("movieInfo", movieDAO.selectMovieList()); //최신영화
+		return "main.jsp";
+	}
 	
 	@ResponseBody
 	@RequestMapping(value = "/sendMail.do", method = RequestMethod.POST)
@@ -184,14 +195,13 @@ public class MemberController {
 
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public ModelAndView login(HttpServletRequest request) throws Exception {
+	public String login(HttpServletRequest request, MemberDAO memberDAO) throws Exception {
 		
 		
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("pwd");
 		
-		SecurityUtil security = new SecurityUtil();
-		String newPwd = security.encryptSHA256(pwd);
+		String newPwd = SecurityUtil.encryptSHA256(pwd);
 		
 		String rememberCheck; // on or null
 		
@@ -210,21 +220,13 @@ public class MemberController {
 			session.removeAttribute("rememberEmail");
 		}
 		
-		List<MemberVO> memberInfo = new ArrayList<MemberVO>();
 		List<MovieVO> movieInfo = new ArrayList<MovieVO>();
 		
-		//맴버정보
-		memberInfo = dao.loginMember(email, newPwd);
 		//최신영화정보 10개
-		movieInfo = dao.movieList();
 
-		session.setAttribute("memberInfo", memberInfo);
+		session.setAttribute("memberInfo", memberDAO.loginMember(email, newPwd));
 		
-		ModelAndView mv = new ModelAndView();
-		mv.addObject("movieInfo", movieInfo); //최신영화
-		mv.setViewName("main.jsp");
-		
-		return mv;
+		return "redirect:main.do";
 		
 	}
 	

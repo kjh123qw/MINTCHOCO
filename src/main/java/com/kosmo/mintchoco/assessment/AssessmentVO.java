@@ -1,6 +1,6 @@
 package com.kosmo.mintchoco.assessment;
 
-import java.util.Date;
+import java.sql.Date;
 
 /*
  * 담당자 : 김정호, 천세문

@@ -1,0 +1,135 @@
+/* 기본 CSS를 작성합니다. (세로모드 모바일 디바이스)
+  기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
+  가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
+#noticeWrap {
+	padding: 0 5px;
+}
+#noticeWrap h1 {
+	padding: 5px;
+}
+#noticeWrap hr {
+	margin: 5px 0;
+}
+.notice-table {
+	width: 100%;
+	margin: 10px 0;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+.notice-table tr {
+}
+.notice-table th, .notice-table td {
+	padding: 5px;
+	font-size: 12px;
+	border-bottom: 1px dashed #acc;
+}
+.notice-table th {
+	border-top: 2px solid #8aa;
+	border-bottom: 2px solid #8aa;
+}
+.notice-table th:first-of-type, .notice-table td:first-of-type {
+	width: 40px;
+	text-align: center;
+}
+.notice-table th:nth-of-type, .notice-table td:nth-of-type {
+	width: 60px;
+	text-align: center;
+}
+.notice-table th:last-of-type, .notice-table td:last-of-type {
+	width: 60px;
+	text-align: center;
+}
+.notice-buttons {
+	overflow: hidden;
+	height: 50px;
+	padding: 0 5px 10x 5px;
+}
+.notice-write-btn {
+	float: left;
+}
+.notice-search-form, .notice-search-btn {
+	float: right;
+}
+
+.notice-form {
+	width: 100%;
+	margin: 10px 0;
+	border-collapse: separate;
+	border-spacing: 0;
+}
+.notice-form th:first-of-type {
+	width: 50px;
+	text-align: center;
+}
+.notice-form th, .notice-form td {
+	padding: 5px;
+	font-size: 12px;
+	border-bottom: 1px dashed #acc;
+}
+.notice-form-title > div:first-of-type, .notice-form-title > div:first-of-type > div:first-of-type, .notice-form-title input {
+	width: 100% !important;
+}
+.notice-form-btn {
+	width: 250px;
+	margin: 0 auto;
+}
+.notice-form-btn > div:first-of-type {
+	margin-right: 10px !important;
+}
+#noticeWrap textarea {
+	display: block;
+	width: 100%; height: 250px;
+	padding: 5px;
+	resize: none;
+	outline: none;
+}
+
+
+/* 가로 해상도가 576px 보다 큰 화면에 적용 */
+@media screen and (min-width: 576px) {
+	.notice-form th:first-of-type {
+		width: 70px;
+	}
+}
+
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
+@media screen and (min-width: 768px) {
+	#noticeWrap {
+		padding: 0 10px;
+	}
+	.notice-table th, .notice-table td {
+		padding: 10px;
+		font-size: 14px;
+	}
+	.notice-table th:first-of-type, .notice-table td:first-of-type {
+		width: 80px;
+	}
+	.notice-table th:last-of-type, .notice-table td:last-of-type {
+		width: 130px;
+	}
+	.notice-buttons { height: 55px; padding: 0 30px 15px 30px; }
+	.notice-form th:first-of-type {
+		width: 90px;
+	}
+	#noticeWrap textarea {
+		height: 300px;
+	}
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+	.notice-buttons { height: 55px; padding: 0 50px 15px 50px; }
+	.notice-form th:first-of-type {
+		width: 100px;
+	}
+}
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+    #noticeWrap {
+    	width: 1200px;
+    	margin: 0 auto;
+    }
+	.notice-form th:first-of-type {
+		width: 150px;
+	}
+}

@@ -56,7 +56,7 @@
 		padding: 3px 0;
 	}
 	hr { margin: 15px; }
-	ul {
+	.tag-caution {
 		 width: 960px;
 		 margin: 0 auto;
 		 padding: 20px 130px;
@@ -70,7 +70,7 @@
 <!-- 담당자 내용 -->
 
 <h1>커스텀 태그 입니다.</h1>
-<ul>
+<ul class="tag-caution">
 	<li><b>이하 4가지가 필요합니다.</b></li>
 	<li>&nbsp;&nbsp; - &lt;script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"&gt;&lt;/script&gt;</li>
 	<li>&nbsp;&nbsp; - &lt;script src="./js/public.js"&gt;&lt;/script&gt;</li>

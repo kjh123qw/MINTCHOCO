@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 /*
-	:: 공지사항 목록 ::
+	:: 공지사항 작성 폼 ::
 	담당자 : 박찬영, 김정호
 */
 %>
@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>공지사항</title>
+<title>공지사항 입력 폼</title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -35,37 +35,44 @@
 <body>
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
+
+
 <div id="noticeWrap">
-	<h1>공지사항</h1>
-	<table class="notice-table">
+	<h1>공지사항 입력</h1>
+	<table class="notice-form">
 		<tr>
-			<th>번호</th>
+			<th>작성자</th>
+			<td>
+				<div class="cst-text-st1 notice-form-title">
+					<input type="text" name="memberNumber" value="1" class="text-140" readonly>
+				</div>
+			</td>
+		</tr>
+		<tr>
 			<th>제목</th>
-			<th>조회수</th>
-			<th>작성일</th>
+			<td>
+				<div class="cst-text-st1 notice-form-title">
+					<input type="text" class="text-150">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+				<textarea name="noticeContent"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="cst-btn notice-form-btn">
+					<input type="button" value="취소" class="st2-120-40">
+					<input type="button" value="등록" class="st1-120-40">
+				</div>
+			</td>
 		</tr>
 		
-		<c:forEach var="noticeVO" items="${ noticeList }">
-			<tr>
-				<td>${ noticeVO.noticeNumber }</td>
-				<td>${ noticeVO.noticeTitle }</td>
-				<td>${ noticeVO.noticeRegdate }</td>
-				<td>${ noticeVO.noticeCnt }</td>
-			</tr>
-		</c:forEach>
 		
 	</table>
-	<div class="notice-buttons">
-		<div class="cst-btn notice-write-btn">
-			<input type="button" value="글쓰기" class="st1-60-40" onclick="location.href='${ contextPath }/service/noticeForm.do'">
-		</div>
-		<div class="cst-btn notice-search-btn">
-			<input type="button" value="검색" class="st1-60-40">
-		</div>
-		<div class="cst-text-st1 notice-search-form">
-			<input type="text" class="text-140">
-		</div>
-	</div>
 </div>
 
 <!-- 담당자 내용 -->

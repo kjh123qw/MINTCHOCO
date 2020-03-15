@@ -30,7 +30,7 @@
 			</li>
 			<li><a href="${ contextPath }/rank.do">영화순위</a></li>
 			<li><a href="${ contextPath }/movie/recommend.do">영화목록</a></li>
-			<li><a href="${ contextPath }/notice.do">공지사항</a></li>
+			<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>
 			<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
 			<li></li>
 		</ul>
@@ -63,7 +63,7 @@
 		<li><a href="${ contextPath }/">홈으로</a></li>
 		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
 		<li><a href="${ contextPath }/movie/recommend.do">영화목록</a></li>
-		<li><a href="${ contextPath }/notice.do">공지사항</a></li>
+		<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>
 		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
 	</ul>
 </div>

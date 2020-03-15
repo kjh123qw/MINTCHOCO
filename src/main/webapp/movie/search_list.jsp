@@ -54,9 +54,9 @@
 							</div>
 							<div class="search-score">
 								<div class="score-bg">
-									<div class="score-img" style="width: ${ searchVO.movieStars * 10 }%"></div>
+									<div class="score-img" style="width: <fmt:formatNumber value="${ searchVO.movieStars * 10 }" pattern=".0" />%"></div>
 								</div>
-								<div class="score-text">${ searchVO.movieStars }</div>
+								<div class="score-text"><fmt:formatNumber value="${ searchVO.movieStars }" pattern=".0" /></div>
 							</div>
 							<div class="search-info-box">
 								<div class="search-movie-image">

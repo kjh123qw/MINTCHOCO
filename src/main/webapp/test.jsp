@@ -13,27 +13,26 @@
 		margin: 0;
 		padding: 0;
 		margin: 0 auto;
+		box-sizing: border-box;
 	}
 	#100{
-		float: left;
-		width: 100%;
-	}
-	.50{
-		float: left;
-		width: 50%;
+		width: 1200px;
 	}
 	.25{
 		float: left;
-		width: 25%;
+		width: 300px;
+		height: 500px;
 	}
 	img{
 		float: left;
-		width: 25%;
-		height: 100px;
+		height:400px;
+		width: 300px;
+		background-color: green;
 	}
 	a{
-		float: left;
-		height: 20px;
+		height: 100px;
+		width: 300px;
+		background-color: yellow;
 	}
 </style>
 </head>
@@ -41,32 +40,23 @@
 
 	<div id="100">
 
-		<div class="50">
+		<div class="25">
+			<img alt="포스터" src="">
+			<a>타이틀</a>
+		</div>
+		<div class="25">
+			<img alt="포스터" src="">
+			<a>타이틀</a>
+		</div>
+		<div class="25">
+			<img alt="포스터" src="">
+			<a>타이틀</a>
+		</div>
+		<div class="25">
+			<img alt="포스터" src="">
+			<a>타이틀</a>
+		</div>
 
-			<div class="25">
-				<img alt="포스터" src="">
-				<a>타이틀</a>
-			</div>
-			<div class="25">
-				<img alt="포스터" src="">
-				<a>타이틀</a>
-			</div>
-			
-		</div>
-			
-		<div class="50">
-			
-			<div class="25">
-				<img alt="포스터" src="">
-				<a>타이틀</a>
-			</div>
-			<div class="25">
-				<img alt="포스터" src="">
-				<a>타이틀</a>
-			</div>
-			
-		</div>
-	
 	</div>
 
 </body>

@@ -37,13 +37,11 @@ public class MemberController {
 	private JavaMailSender mailSender;
 	
 	
-	SecurityUtil security = new SecurityUtil();
 	MemberDAO dao = new MemberDAO();
 
 
 	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
 	public String main(MovieDAO movieDAO, Model model) {
-		ModelAndView mv = new ModelAndView();
 		model.addAttribute("movieInfo", movieDAO.selectMovieList()); //최신영화
 		return "main.jsp";
 	}
@@ -67,8 +65,7 @@ public class MemberController {
 		}
 		
 		  String newPwd = buf.toString();
-		  SecurityUtil security = new SecurityUtil();
-		  String securityPwd = security.encryptSHA256(newPwd);
+		  String securityPwd = SecurityUtil.encryptSHA256(newPwd);
 		  
 		  dao.changePwd(email, name, securityPwd);
 		
@@ -123,7 +120,7 @@ public class MemberController {
 		
 		String email = request.getParameter("email");
 		String pwd = request.getParameter("pwd");
-		String securityPwd = security.encryptSHA256(pwd);
+		String securityPwd = SecurityUtil.encryptSHA256(pwd);
 		String name = request.getParameter("name");
 		String nickname = request.getParameter("nickname");
 		int age = Integer.parseInt(request.getParameter("age"));
@@ -172,8 +169,7 @@ public class MemberController {
 		String pwd = request.getParameter("pwd");
 		String rememberCheck = request.getParameter("rememberCheck"); //true or false
 		
-		SecurityUtil security = new SecurityUtil();
-		String newPwd = security.encryptSHA256(pwd);
+		String newPwd = SecurityUtil.encryptSHA256(pwd);
 		
 		int loginCheck = dao.loginCheck(email, newPwd);
 		
@@ -220,7 +216,6 @@ public class MemberController {
 			session.removeAttribute("rememberEmail");
 		}
 		
-		List<MovieVO> movieInfo = new ArrayList<MovieVO>();
 		
 		//최신영화정보 10개
 

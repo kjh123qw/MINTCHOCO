@@ -6,10 +6,13 @@ import java.security.NoSuchAlgorithmException;
 
 
 public class SecurityUtil {
+
 	
 	public SecurityUtil() {
-		
+		super();
+		// TODO Auto-generated constructor stub
 	}
+
 
 	public static String encryptSHA256(String plainText) { // throws NoSuchAlgorithmException, UnsupportedEncodingException {		
 		String sha256 = "";

@@ -1,5 +1,3 @@
-<%@page import="com.kosmo.mintchoco.member.MemberDAO"%>
-<%@page import="com.kosmo.mintchoco.member.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
@@ -7,11 +5,6 @@
 	:: 평점 ::
 	담당자 : 김정호
 */
-/* 임시 로그인 */
-	MemberDAO memberDAO = new MemberDAO();
-	MemberVO memberVO = memberDAO.loginMember("user04@gmail.com", "831c237928e6212bedaa4451a514ace3174562f6761f6a157a2fe5082b36e2fb");
-	HttpSession testSession = request.getSession();
-	testSession.setAttribute("memberInfo", memberVO);
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>

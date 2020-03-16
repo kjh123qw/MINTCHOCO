@@ -29,9 +29,6 @@
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 
 <!-- 담당자 js/css -->
-<script>
-	sessionStorage.setItem('contextPath', '${ contextPath }');
-</script>
 <script src="${ contextPath }/js/search_list.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/search_list.css">
 <!-- 담당자 js/css -->
@@ -54,9 +51,9 @@
 							</div>
 							<div class="search-score">
 								<div class="score-bg">
-									<div class="score-img" style="width: <fmt:formatNumber value="${ searchVO.movieStars * 10 }" pattern=".0" />%"></div>
+									<div class="score-img" style="width: <fmt:formatNumber value="${ searchVO.movieStars * 10 }" pattern="0" />%"></div>
 								</div>
-								<div class="score-text"><fmt:formatNumber value="${ searchVO.movieStars }" pattern=".0" /></div>
+								<div class="score-text"><fmt:formatNumber value="${ searchVO.movieStars }" pattern="0.0" /></div>
 							</div>
 							<div class="search-info-box">
 								<div class="search-movie-image">

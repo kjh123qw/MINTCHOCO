@@ -57,6 +57,61 @@ img { border: 0; }
 	color: #fff;
 	cursor: pointer;
 }
+/* TAG SEARCH */
+#tagWrap, #showTagBtn {
+	display: none;
+}
+/* TAG SEARCH FORM */
+#tagWrap {
+	border-bottom: 1px solid #acc;
+}
+#searchTagListBox {
+	padding: 0 5px;
+	background-color: #cee;
+}
+#searchTagListBox .cst-chkbox-st2, #searchMoreTagListBox .cst-chkbox-st2 {
+	width: 270px;
+	margin: 0 auto;
+}
+#searchMoreTagListBox {
+	padding: 0 5px;
+	background-color: #ecc;
+}
+#serachTagBtn {
+	overflow: hidden;
+	margin: 0 auto;
+	padding: 10px
+}
+#moreTag {
+	width: 40px; height: 40px;
+	float: right;
+	font-size: 34px;
+	color: #f44;
+	line-height: 40px;
+	text-align: center;
+}
+#searchTagText {
+	overflow: hidden;
+	width: 300px; height: 40px;
+	margin: 0 auto 10px;
+	padding: 5px;
+	border: 1px solid #acc;
+	line-height: 30px;
+}
+#serachTagBtn > .cst-btn {
+	width: 160px;
+	margin: 0 auto;
+}
+#mobShowTagBtn {
+	display: block;
+	width: 60px; height: 60px;
+	float: left;
+	font-size: 34px;
+	line-height: 60px;
+	text-align: center;
+	color: #fff;
+	cursor: pointer;
+}
 
 /* HEADER */
 header {
@@ -273,13 +328,29 @@ div[class *= cst-btn-wrap-st4] > input {
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
-	
+	#searchTagListBox .cst-chkbox-st2, #searchMoreTagListBox .cst-chkbox-st2 {
+		width: 540px;
+		margin: 0 auto;
+	}
+	#serachTagBtn {
+		width: 550px;
+		margin: 0 auto;
+	}
+	#searchTagText {
+		width: 370px; height: 40px;
+		margin: 0;
+		float: left;
+	}
+	#serachTagBtn > .cst-btn {
+		width: 160px;
+		float: left;
+	}
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
-	#mobMenuBtn { display: none; }
-	#mobShowSearchBtn { display: none; }
+	#mobMenuBtn, #mobShowSearchBtn, #mobShowTagBtn { display: none; }
+	
 	#headerNav {
 		display: block;
 	    height: 60px;
@@ -324,7 +395,7 @@ div[class *= cst-btn-wrap-st4] > input {
 		color: #fff;
 		cursor: pointer;
 	}
-	#showSearchBtn {
+	#showSearchBtn, #showTagBtn {
 		display: block;
 		width: 60px; height: 60px;
 		float: left;
@@ -334,8 +405,27 @@ div[class *= cst-btn-wrap-st4] > input {
 		color: #ccc;
 		cursor: pointer;
 	}
-	#showSearchBtn:hover {
+	#showSearchBtn:hover, #showTagBtn:hover {
 		color: #fff;
+	}
+	
+	/* TAG SEARCH FORM */
+	#searchTagListBox .cst-chkbox-st2, #searchMoreTagListBox .cst-chkbox-st2 {
+		width: 675px;
+		margin: 0 auto;
+	}
+	#serachTagBtn {
+		width: 700px;
+		margin: 0 auto;
+	}
+	#searchTagText {
+		width: 520px; height: 40px;
+		margin: 0;
+		float: left;
+	}
+	#serachTagBtn > .cst-btn {
+		width: 160px;
+		float: left;
 	}
 }
 
@@ -345,10 +435,28 @@ div[class *= cst-btn-wrap-st4] > input {
 		display: block;
 		width: 70px; height: 60px;
 	}
+	/* TAG SEARCH FORM */
+	#searchTagListBox .cst-chkbox-st2, #searchMoreTagListBox .cst-chkbox-st2 {
+		width: 810px;
+		margin: 0 auto;
+	}
+	#serachTagBtn {
+		width: 750px;
+		margin: 0 auto;
+	}
+	#searchTagText {
+		width: 570px; height: 40px;
+		margin: 0;
+		float: left;
+	}
+	#serachTagBtn > .cst-btn {
+		width: 160px;
+		float: left;
+	}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
 @media screen and (min-width: 1225px) {
-	#headerNav {
+	#headerNav, #tagWrap {
 		width: 1200px;
 		margin: 0 auto;
 	}

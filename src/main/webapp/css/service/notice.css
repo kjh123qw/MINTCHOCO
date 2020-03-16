@@ -31,12 +31,12 @@
 	width: 40px;
 	text-align: center;
 }
-.notice-table th:nth-of-type, .notice-table td:nth-of-type {
-	width: 60px;
+.notice-table th:nth-of-type(3), .notice-table td:nth-of-type(3) {
+	width: 80px;
 	text-align: center;
 }
 .notice-table th:last-of-type, .notice-table td:last-of-type {
-	width: 60px;
+	width: 50px;
 	text-align: center;
 }
 .notice-buttons {
@@ -102,10 +102,16 @@
 		font-size: 14px;
 	}
 	.notice-table th:first-of-type, .notice-table td:first-of-type {
-		width: 80px;
+		width: 70px;
+		text-align: center;
+	}
+	.notice-table th:nth-of-type(3), .notice-table td:nth-of-type(3) {
+		width: 130px;
+		text-align: center;
 	}
 	.notice-table th:last-of-type, .notice-table td:last-of-type {
-		width: 130px;
+		width: 80px;
+		text-align: center;
 	}
 	.notice-buttons { height: 55px; padding: 0 30px 15px 30px; }
 	.notice-form th:first-of-type {

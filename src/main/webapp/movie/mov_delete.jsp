@@ -15,6 +15,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
 <title> 기존 영화 삭제 </title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
@@ -155,7 +157,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" align="center">
-						<input class="button" value="삭제 취소" onclick="history.go(-1)">
+						<input class="button" type="button" value="삭제 취소" onclick="history.go(-1)">
 					</td>
 				</tr>
 			</table>

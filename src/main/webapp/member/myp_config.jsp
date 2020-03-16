@@ -26,6 +26,12 @@ if(session.getAttribute("member_config") == null){
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 계정설정 -->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+	var subject = document.getElementsByClassName("hd-menu-subject")[0];
+	subject.innerHTML = "계정설정&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+});
+</script>
 	<form class="myp-con-conf" method="post" action="" onsubmit="return ;">
 		<center class="con-conf-wrap">
 			<article class="con-conf con-conf1 con-conf-float">
@@ -36,7 +42,7 @@ if(session.getAttribute("member_config") == null){
 							<!-- 140x200 -->
 							<div class="con-conf-subject">&nbsp;개인정보 변경</div>
 						</div>
-						<center class="con-conf-content">
+						<center class="con-conf-content myp-conf-mobile">
 							<br>
 							별명이나 이름, 자기소개와 같은
 							<br>'나'의 정보를 변경할 수 있습니다.
@@ -53,7 +59,7 @@ if(session.getAttribute("member_config") == null){
 						<!-- 140x200 -->
 						<div class="con-conf-subject">&nbsp;비밀번호 변경</div>
 					</div>
-						<center class="con-conf-content">
+						<center class="con-conf-content myp-conf-mobile">
 							<br>
 							비밀번호를 변경할 수 있습니다.
 						</center>
@@ -69,7 +75,7 @@ if(session.getAttribute("member_config") == null){
 							<!-- 140x200 -->
 							<div class="con-conf-subject">&nbsp;정보공개 설정</div>
 						</div>
-						<center class="con-conf-content">
+						<center class="con-conf-content myp-conf-mobile">
 							<br>
 							찜한 목록, 평가한 목록과
 							<br>
@@ -87,7 +93,7 @@ if(session.getAttribute("member_config") == null){
 							<!-- 140x200 -->
 							<div class="con-conf-subject">&nbsp;회원 탈퇴</div>
 						</div>
-						<center class="con-conf-content">
+						<center class="con-conf-content myp-conf-mobile">
 							<br>
 							회원정보를 삭제하고 탈퇴합니다.
 						</center>
@@ -166,13 +172,13 @@ if(session.getAttribute("member_config") == null){
 			<div class="con-modal-bg-check"></div>
 			<div class="con-conf-x" onclick="modal('X');"><img src="${ contextPath }/images/member/del_back.png"></div>
 			<div class="con-conf-modifyOPE">
-				<div class="con-conf-modifyOPE-subject conf-detail-subject">정보공개 설정</div>
+				<div class="con-conf-modifyOPE-subject conf-detail-subject">정보공개</div>
 				<form class="con-conf-modifyOPE-content conf-detail-content"  method="POST" action="config.do" onsubmit="return checkModifyOPE();">
 					<p>정보의 공개여부를 설정해주세요.</p>
 					<input type="hidden" class="con-conf-OPEYN" name="opeyn">				
 					<div class="cst-radio-st1 cst-text-wrap-st1 con-conf-radio">
 						<c:choose>
-                			<c:when test="${memberInfo[0].info_flag=='Y'}">
+                			<c:when test="${memberInfo.info_flag=='Y'}">
 					  			<input type="radio" name="info-flag" class="conf-modify-flagY" value="Y" checked="checked">
 					  		</c:when>
 					  		<c:otherwise>
@@ -181,7 +187,7 @@ if(session.getAttribute("member_config") == null){
 					  	</c:choose>
 					  	<span class="text-70">공개</span>
 					  	<c:choose>
-                			<c:when test="${memberInfo[0].info_flag=='N'}">
+                			<c:when test="${memberInfo.info_flag=='N'}">
 					  			<input type="radio" name="info-flag" class="conf-modify-flagN" value="N" checked="checked">
 					  		</c:when>
 					  		<c:otherwise>
@@ -193,7 +199,7 @@ if(session.getAttribute("member_config") == null){
 					</div>
 					<div class="cst-radio-st1 cst-text-wrap-st1 con-conf-radio">
 						  <c:choose>
-	                			<c:when test="${memberInfo[0].like_flag=='Y'}">
+	                			<c:when test="${memberInfo.like_flag=='Y'}">
 						  			<input type="radio" name="like-flag" class="conf-modify-flagY" value="Y" checked="checked">
 						  		</c:when>
 						  		<c:otherwise>
@@ -202,7 +208,7 @@ if(session.getAttribute("member_config") == null){
 						  	</c:choose>
 						  	<span class="text-70">공개</span>
 						  	<c:choose>
-	                			<c:when test="${memberInfo[0].like_flag=='N'}">
+	                			<c:when test="${memberInfo.like_flag=='N'}">
 						  			<input type="radio" name="like-flag" class="conf-modify-flagN" value="N" checked="checked">
 						  		</c:when>
 						  		<c:otherwise>
@@ -214,7 +220,7 @@ if(session.getAttribute("member_config") == null){
 					</div>
 					<div class="cst-radio-st1 cst-text-wrap-st1 con-conf-radio">
 					  <c:choose>
-                			<c:when test="${memberInfo[0].assessment_flag=='Y'}">
+                			<c:when test="${memberInfo.assessment_flag=='Y'}">
 					  			<input type="radio" name="assessment-flag" class="conf-modify-flagY" value="Y" checked="checked">
 					  		</c:when>
 					  		<c:otherwise>
@@ -223,7 +229,7 @@ if(session.getAttribute("member_config") == null){
 					  	</c:choose>
 					  	<span class="text-70">공개</span>
 					  	<c:choose>
-                			<c:when test="${memberInfo[0].assessment_flag=='N'}">
+                			<c:when test="${memberInfo.assessment_flag=='N'}">
 					  			<input type="radio" name="assessment-flag" class="conf-modify-flagN" value="N" checked="checked">
 					  		</c:when>
 					  		<c:otherwise>

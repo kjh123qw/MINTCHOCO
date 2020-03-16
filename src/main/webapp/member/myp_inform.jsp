@@ -24,6 +24,12 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 개인정보 -->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+	var subject = document.getElementsByClassName("hd-menu-subject")[0];
+	subject.innerHTML = "마이 페이지&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+});
+</script>
 	<form class="myp-con-info" method="post" action="" onsubmit="return ;">
 	<c:choose>
 	   	<c:when test="${detail_info.assessment_flag=='Y'}">

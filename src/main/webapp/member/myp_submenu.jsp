@@ -36,7 +36,8 @@ if(session.getAttribute("memberInfo") == null){
 <script src="https://use.fontawesome.com/releases/v5.8.0/js/all.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js/css -->
-<script src="${ contextPath }/js/member.js"></script>
+<script src="${ contextPath }/js/member/member.js"></script>
+<script src="${ contextPath }/js/member/member_mobile.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/member/myp_common.css">
 <!-- //담당자 js, css -->
 </head>
@@ -46,7 +47,7 @@ if(session.getAttribute("memberInfo") == null){
 <div class="clear"></div>
 <div class="myp">
 	<div class="myp-hd">
-		<div class="hd-stbar-wrap">
+		<div class="hd-stbar-wrap myp_pc">
 			<div class="hd-stbar-nick">${detail_info.nickName}</div>
 			<div class="hd-stbar-introduce">${detail_info.nickName}님의 마이페이지입니다.</div>
 			<div class="clear"></div>
@@ -54,16 +55,31 @@ if(session.getAttribute("memberInfo") == null){
 		</div>
 		<div class="clear"></div>
 		<div class="hd-menu-wrap">
-			<nav class="hd-menu">
+			<nav class="hd-menu myp_pc">
 				<ul class="hd-menu-list">
 					<li><a id="myp-inform-do" class="icon-privacy-wrap" href="my_page.do"><img src="${ contextPath }/images/member/privacy.png" class="icon-privacy"><span>&nbsp;정보</span></a></li>
 					<li><a id="myp-favorite-do" class="icon-fav-wrap" href="favorite.do"><img src="${ contextPath }/images/member/fav.png" class="icon-fav"><span>&nbsp;찜한목록</span></a></li>
 					<li><a id="myp-assessment-do" class="icon-assess-wrap" href="assessment.do"><img src="${ contextPath }/images/member/assess1.png" class="icon-assess1"><img src="${ contextPath }/images/member/assess2.png" class="icon-assess2"><span>&nbsp;평가목록</span></a></li>
-					<c:if test="${memberInfo[0].number==detail_info.number}">
+					<c:if test="${memberInfo.number==detail_info.number}">
 						<li><a class="icon-config-wrap" href="checkPW.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"><span>&nbsp;계정설정</span></a></li>
 					</c:if>			
 				</ul>
 			</nav>
+			
+			<div class="hd-menu-subject myp_mobile con-float" onclick="domenu('on');">&nbsp;<img class="con-menuin" src="${ contextPath }/images/member/menuin.png"></div>
+			<div class="hd-hidden-menu myp_mobile">
+				<a id="myp-inform-do" class="icon-privacy-mobile-wrap" href="my_page.do">정보</a>
+				<a id="myp-favorite-do" class="icon-fav-mobile-wrap" href="favorite.do">찜한목록</a>
+				<a id="myp-assessment-do" class="icon-assess-mobile-wrap" href="assessment.do">평가목록</a>
+				<a onclick="domenu('off');">창 닫기</a>
+			</div>	
+				<c:choose>
+					<c:when test="${memberInfo.number==detail_info.number}">
+						<a class="icon-config-mobile-wrap myp_mobile" href="checkPW.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"></a>
+					</c:when>
+					<c:otherwise><div class="hd-menu-nickname con-float-right myp_mobile">${detail_info.nickName}</div></c:otherwise>
+				</c:choose>
+			<div class="clear"></div>
 		</div>
 		<div class="clear"></div>
 	</div>

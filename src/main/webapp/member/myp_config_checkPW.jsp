@@ -18,6 +18,12 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 패스워드 확인 -->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+	var subject = document.getElementsByClassName("hd-menu-subject")[0];
+	subject.innerHTML = "계정설정&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+});
+</script>
 	<form class="myp-con-conf-checkPW" method="POST" action="config.do" onsubmit="return checkPW();">
 		<article class="con-conf-checkPW-wrap">
 			<div class="con-conf-checkPW-subject">패스워드 확인</div>

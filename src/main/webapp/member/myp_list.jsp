@@ -16,11 +16,17 @@
 <%@ include file="./myp_submenu.jsp" %>
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 찜한 목록 -->
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+	var subject = document.getElementsByClassName("hd-menu-subject")[0];
+	subject.innerHTML = "찜한목록&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+});
+</script>
 	<form class="myp-con-fav" method="post" action="favorite.do" onsubmit="return chk_cnt();">
 		<div class="con-fav-wrap">
 			<nav class="con-menu">
 				<div class="con-menu-modifyoff  con-menu-dropdown-rel"">
-					<div class="con-menu-sub">${detail_info.nickName}님의 관심영화목록</div>
+					<div class="con-menu-sub myp_pc">${detail_info.nickName}님의 관심영화목록</div>
 					<ul class="con-menu-list con-menu-dropdown-rel">
 						<li><a onclick="searchbar('on');">검색</a></li>
 						<li class="con-menu-dropdown-rel con-menu-dropdown-here">
@@ -36,14 +42,14 @@
 						     	</div>						     	
 						     </div>						   
 						</li>
-						<c:if test="${memberInfo[0].number==detail_info.number}">
+						<c:if test="${memberInfo.number==detail_info.number}">
 							<li><a onclick="modifyOn();">편집</a></li>
 						</c:if>
 					</ul>
 					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요." onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
-				<c:if test="${memberInfo[0].number==detail_info.number}">
+				<c:if test="${memberInfo.number==detail_info.number}">
 					<div class="con-menu-modifyon">
 						<div class="con-menu-sub">
 							<span class="con-chkbox-cnt">0</span>

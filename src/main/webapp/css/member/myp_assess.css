@@ -232,8 +232,36 @@
 }
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
-@media screen and (min-width: 576px) {
-      
+@media screen and (max-width: 576px) {
+.con-assess-img-poster {
+	width: 70px;
+	height: 120px;
+}
+.con-assess-cont-right-wrap{
+	width: 250px;
+}
+.con-assess-cont-subject {
+	font-size: 18px;
+	margin-bottom: 10px; 
+}
+.con-assess-stars {
+	float:left;
+}
+.con-assess-cont-wrap {
+	width: 300px;
+}
+.con-assess-cont-table-wrap {
+	overflow : hidden;
+}
+.con-assess-cont-line-wrap {
+	float : left;
+	width : -webkit-calc(100%-116px);
+	width : calc(100% - 116px);
+}
+.con-assess-img-stars {
+	float : right;
+	width : 116px;
+}
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */

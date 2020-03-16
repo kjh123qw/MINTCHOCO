@@ -36,10 +36,9 @@ public class MemberMController {
 		String myNumber = null;
 		String number = null;
 		
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			myNumber = Integer.toString(memberidx.getNumber());
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			myNumber = Integer.toString(member.getNumber());
 		}
 				
 		if (nickname == null) {
@@ -69,10 +68,10 @@ public class MemberMController {
 		// 자기번호 불러오기
 		String myNumber = null;
 		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			myNumber = Integer.toString(memberidx.getNumber());
+		
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			myNumber = Integer.toString(member.getNumber());
 		}
 				
 		if (nickname == null) {
@@ -125,10 +124,10 @@ public class MemberMController {
 		// 자기번호 불러오기
 		String myNumber = null;
 		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			myNumber = Integer.toString(memberidx.getNumber());
+		
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			myNumber = Integer.toString(member.getNumber());
 		}
 		
 		if (nickname == null) {
@@ -174,10 +173,9 @@ public class MemberMController {
 	@RequestMapping("/checkPW.do")
 	public String getCheckPWPage(FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberMDAO memberDAO, Model model, HttpSession session) {
 		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			number = Integer.toString(memberidx.getNumber());
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			number = Integer.toString(member.getNumber());
 		}
 		
 		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
@@ -188,12 +186,11 @@ public class MemberMController {
 	// 비밀번호 체크 기능
 	@ResponseBody
 	@RequestMapping(value="/checkPassword.do", method=RequestMethod.POST)
-	public String checkPassword(@RequestParam(value="password") String password, MemberMDAO memberDAO, HttpSession session){
+	public String checkPassword(@RequestParam(value="password") String password, MemberVO member, MemberMDAO memberDAO, HttpSession session){
 		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			number = Integer.toString(memberidx.getNumber());
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			number = Integer.toString(member.getNumber());
 		}
 		
 		// 비밀번호 확인
@@ -222,10 +219,9 @@ public class MemberMController {
 		
 		// 멤버 값 받아오기
 		String number = null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			number = Integer.toString(memberidx.getNumber());
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			number = Integer.toString(member.getNumber());
 		}
 		
 		// 정보수정
@@ -247,8 +243,8 @@ public class MemberMController {
 		model.addAttribute("detail_info", membermDAO.getDetailInfo(number));
 		model.addAttribute("assess_cnt", membermDAO.getAssessmentCnt(number));
 
-		List<MemberVO> memberInfo = membermDAO.loginMemberbyN(number);
-		session.setAttribute("memberInfo", memberInfo);
+		member = membermDAO.getDetailInfo(number);
+		session.setAttribute("memberInfo", member);
 		
 		return "member/myp_config.jsp";
 	}
@@ -267,13 +263,13 @@ public class MemberMController {
 	
 	@ResponseBody
 	@RequestMapping(value="/deleteMember.do", method=RequestMethod.POST)
-	public String deleteMember(@RequestParam(value="check") String check, MemberMDAO memberDAO, HttpSession session){
+	public String deleteMember(@RequestParam(value="check") String check,MemberVO member, MemberMDAO memberDAO, HttpSession session){
 		// 계정 삭제
 		String number=null;
-		List<MemberVO> memberList = (List<MemberVO>) session.getAttribute("memberInfo");
-		if (memberList != null) {
-			MemberVO memberidx = memberList.get(0);
-			number = Integer.toString(memberidx.getNumber());
+
+		member = (MemberVO) session.getAttribute("memberInfo");
+		if (member != null) {
+			number = Integer.toString(member.getNumber());
 		}
 		
 		if(check.equals("del")) {

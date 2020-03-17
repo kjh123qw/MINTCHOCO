@@ -42,9 +42,14 @@ document.addEventListener("DOMContentLoaded", function(){
 						     	</div>						     	
 						     </div>						   
 						</li>
-						<c:if test="${memberInfo.number==detail_info.number}">
-							<li><a onclick="modifyOn();">편집</a></li>
-						</c:if>
+						<c:choose>
+	   						<c:when test="${memberInfo.number==detail_info.number}">
+								<li><a onclick="modifyOn();">편집</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a class="con-fakeModify">편집</a></li>
+							</c:otherwise>
+						</c:choose>
 					</ul>
 					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요." onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>

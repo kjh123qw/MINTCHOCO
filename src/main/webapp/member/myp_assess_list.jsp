@@ -38,14 +38,19 @@ document.addEventListener("DOMContentLoaded", function(){
 						            <li><a onmouseenter="textAlign('star')" onclick="sorting('star');">평점 순</a></li>
 						            <li><a onmouseenter="textAlign('sub')" onclick="sorting('sub');">제목 순</a></li>
 						        </ul>
-						        <div class="myp-assess-mobile menu-description">
+						        <div class="menu-description">
 						     		<p class="menu-description-subject">항목 정렬을 설정합니다.</p>
 						     	</div>
 						     </div>						   
 						</li>
-						<c:if test="${memberInfo.number==detail_info.number}">
-							<li><a onclick="modifyOn();">편집</a></li>
-						</c:if>					
+						<c:choose>
+	   						<c:when test="${memberInfo.number==detail_info.number}">
+								<li><a onclick="modifyOn();">편집</a></li>
+							</c:when>
+							<c:otherwise>
+								<li><a class="con-fakeModify">편집</a></li>
+							</c:otherwise>
+						</c:choose>					
 					</ul>
 					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요."  onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>

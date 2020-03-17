@@ -74,21 +74,28 @@ h3{
    
 /* 장르 선택 메뉴 */
 
-.select-box{
+#selectBox{
 	display: block;
 }
 
-.select-box select{
-	width: 100%;
+#selectBox > .select1, #selectBox > .select2, #selectBox > .select3, #selectBox > .select4{
+	padding: 2px;
+	width: 25%;
+	height: 20px;
+	float: left;
+	text-align: center;
+	font-size: 0.7em;
+	border: 1px solid #0DEEC9;
+	background-color: #00CED1;
+	color: #F5FFFA;
 }
 
 /* 영화 관련 */
 
 .bg {
 	margin: 0 auto;
-	height: 230px;
     width: 100%;
-    overflow: hidden;
+    float: left;
     background-color: #ADCECE;
 }
 
@@ -96,7 +103,7 @@ h3{
 	display: none;
 	margin: 0 auto;
 	width: 50%;
-	height: 450px;
+	height: 230px;
 	float: left;
 	border: 1px solid #0DEEC9;
 }
@@ -116,7 +123,7 @@ h3{
 }
 
 .action > .title, .drama > .title, .thriller > .title, .animation > .title{
-	height: 50px;
+	height: 30px;
 	width: 100%;
     cursor: pointer;
     border: 1px solid #0DEEC9;
@@ -142,6 +149,14 @@ h3{
 }
 
 /* 좌우 이동 관련 */
+
+.l-action-button2, .l-drama-button2, .l-thriller-button2, .l-animation-button2{
+	display: none;
+}
+
+.r-action-button2, .r-drama-button2, .r-thriller-button2, .r-animation-button2{
+	display: none;
+}
 
 .l-action-button, .l-drama-button, .l-thriller-button, .l-animation-button{
 	display: none;
@@ -183,7 +198,7 @@ h3{
 	.action, .drama, .thriller, .animation{
 		margin: 0 auto;
 		width: 33%;
-		height: 450px;
+		height: 230px;
 		float: left;
 		border: 1px solid #0DEEC9;
 	}	
@@ -221,7 +236,7 @@ h3{
 	.action, .drama, .thriller, .animation{
 		margin: 0 auto;
 		width: 33%;
-		height: 450px;
+		height: 230px;
 		float: left;
 		border: 1px solid #0DEEC9;
 	}	
@@ -271,13 +286,23 @@ h3{
 	
 	/* 장르 선택 메뉴 */
 	
-   	.select-box{
+   	#selectBox{
    		display: none;
    	}
 	
 	/* 영화 관련 */
 	
+	.bg {
+	margin: 0 auto;
+	height: 230px;
+    width: 100%;
+    float: left;
+    overflow: hidden;
+    background-color: #ADCECE;
+	}
+	
 	.action, .drama, .thriller, .animation{
+		display: none;
 		display: block;
 		margin: 0 auto;
 		width: 25%;
@@ -285,6 +310,66 @@ h3{
 		float: left;
 		border: 1px solid #0DEEC9;
 	}	
+	
+	/* 좌우 이동 관련 */
+   
+	.l-action-button, .l-drama-button, .l-thriller-button, .l-animation-button{
+		display: none;
+	}
+	
+	.r-action-button, .r-drama-button, .r-thriller-button, .r-animation-button{
+		display: none;
+	}
+   
+	.l-action-button2, .l-drama-button2, .l-thriller-button2, .l-animation-button2{
+		display: block;
+	    left: 5px;
+	}
+	
+	.r-action-button2, .r-drama-button2, .r-thriller-button2, .r-animation-button2{
+		display: block;
+	    right: -20px;
+	}
+	
+	.l-action-button2, .r-action-button2{
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 115px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #F5FFFA;
+	}
+	
+	.l-drama-button2, .r-drama-button2{
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 395px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #F5FFFA;
+	}
+	
+	.l-thriller-button2, .r-thriller-button2{
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 675px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #F5FFFA;
+	}
+	
+	.l-animation-button2, .r-animation-button2{
+	    position: absolute;
+	    width: 75px;
+	    height: 75px;
+	    top: 955px;
+	    font-size: 50px;
+	    cursor: pointer;
+	    color: #F5FFFA;
+	}
 
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
@@ -340,6 +425,14 @@ h3{
 	}
 	
 	/* 좌우 이동 관련 */
+   
+	.l-action-button2, .l-drama-button2, .l-thriller-button2, .l-animation-button2{
+		display: none;
+	}
+	
+	.r-action-button2, .r-drama-button2, .r-thriller-button2, .r-animation-button2{
+		display: none;
+	}
    
 	.l-action-button, .l-drama-button, .l-thriller-button, .l-animation-button{
 		display: block;

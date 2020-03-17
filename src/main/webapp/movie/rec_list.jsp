@@ -46,14 +46,11 @@
 		
 		</div>
 		
-		<div class="select-box">
-		    <select id="selectBox" title="선택 구분">
-		        <option selected="selected"> 장르를 선택 해주세요. </option>
-		        <option>액션</option>
-		        <option>드라마</option>
-		        <option>스릴러</option>
-		        <option>애니메이션</option>
-	   		 </select>
+		<div id="selectBox">
+			<div class="select1">액션</div>
+			<div class="select2">드라마</div>
+			<div class="select3">스릴러</div>
+			<div class="select4">애니메이션</div>
 		</div>
 	
 	   	<div id="bg">
@@ -61,6 +58,9 @@
 			<div id="action">
 		
 				<h3>액션</h3>
+				
+				<div class="l-action-button2" >◀</div>
+				<div class="r-action-button2">▶</div>
 				
 				<div class="l-action-button" >◀</div>
 				<div class="r-action-button">▶</div>
@@ -90,6 +90,9 @@
 			
 			<h3>드라마</h3>
 			
+			<div class="l-drama-button2" >◀</div>
+			<div class="r-drama-button2">▶</div>
+			
 			<div class="l-drama-button" >◀</div>
 			<div class="r-drama-button">▶</div>
 			
@@ -114,6 +117,9 @@
 	        
 	        <h3>스릴러</h3>
 	        
+	        <div class="l-thriller-button2" >◀</div>
+			<div class="r-thriller-button2">▶</div>
+	        
 	        <div class="l-thriller-button" >◀</div>
 			<div class="r-thriller-button">▶</div>
 	        
@@ -137,6 +143,9 @@
 	        </div>
 	
 	        <h3>애니메이션</h3>
+	        
+	        <div class="l-animation-button2" >◀</div>
+			<div class="r-animation-button2">▶</div>
 	        
 	        <div class="l-animation-button" >◀</div>
 			<div class="r-animation-button">▶</div>

@@ -10,7 +10,11 @@ $(function() {
 	var normalBorder = '#bbb';
 	var normalFontColor = '#666';
 	var clearSearchFormTime;
-
+	var clearMouseOverTime;
+	var tooltipWrap = $('<div />', {'id':'tooltipWrap'});
+	var tooltipBox = $('<div />', {'id':'tooltipBox'});
+	$(tooltipWrap).append(tooltipBox);
+	
     $(window).resize(function(){
 		$('#mobMenuWrap').hide();
 		$('#mobSearchWrap').hide();
@@ -59,6 +63,8 @@ $(function() {
 			$('#mobShowTagBtnUp').hide();
 			$('#mobShowTagBtnDown').show();
 			$('#tagWrap').hide();
+			$('#moreMinus').hide();
+			$('#morePlus').show();
 		}
 	});
 	$('#mobShowTagBtn').click(function() {
@@ -77,11 +83,22 @@ $(function() {
 			$('#mobShowTagBtnUp').hide();
 			$('#mobShowTagBtnDown').show();
 			$('#tagWrap').hide();
+			$('#moreMinus').hide();
+			$('#morePlus').show();
 		}
 		
 	});
 	$('#moreTag').click(function() {
-		doMoreTagListAjax();
+		if($('#moreMinus').css('display') == 'none') {
+			$('#morePlus').hide();
+			$('#moreMinus').show();
+			doMoreTagListAjax();
+		} else {
+			$('#moreMinus').hide();
+			$('#morePlus').show();
+			$('#searchMoreTagListBox').html('');
+		}
+		tagListOutput();
 	});
 	$('#searchTagListBox').click(function() {
 		tagListOutput();
@@ -89,6 +106,11 @@ $(function() {
 	$('#searchMoreTagListBox').click(function() {
 		tagListOutput();
 	});
+
+	checkBoxTag($('div[class*=cst-chkbox-st]'));
+	radioTag();
+	textBoxTag();
+	buttonTag();
 	
 	function doTagListAjax() {
 		$.ajax({
@@ -110,6 +132,8 @@ $(function() {
 		        	checkBoxTag($('#searchTagListBox div[class*=cst-chkbox-st]'));
 	        	}
 	        }
+        }).then(function() {
+        	mouseOverUse();
         });
 	}
 	
@@ -134,13 +158,28 @@ $(function() {
 		        	checkBoxTag($('#searchMoreTagListBox div[class*=cst-chkbox-st]'));
 	        	}
 	        }
+        }).then(function() {
+        	mouseOverUse();
         });
 	}
 	
-	checkBoxTag($('div[class*=cst-chkbox-st]'));
-	radioTag();
-	textBoxTag();
-	buttonTag();
+	function mouseOverUse() {
+		var targetList = $('#searchTagListBox .cst-chkbox-wrap-st2').toArray();
+		targetList.forEach(function(item, index) {
+			$(item).attr('title', $(item).children('.cst-chkbox-text').html());
+//			$(item).mouseout(function() {
+//				clearMouseOverTime = setTimeout(function() {
+//					$(tooltipWrap).hide();
+//				}, 100);
+//			});
+//			$(item).mouseover(function() {
+//				$(item).append(tooltipWrap);
+//				$(tooltipWrap).show();
+//				clearTimeout(clearMouseOverTime);
+//			});
+		});
+	}
+	
 	
 	function tagListOutput() {
 		$('#searchTagText').html('');

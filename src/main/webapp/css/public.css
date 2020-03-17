@@ -57,6 +57,15 @@ img { border: 0; }
 	color: #fff;
 	cursor: pointer;
 }
+#tooltipBox {
+	position: absolute;
+	display: none;
+	width: 50px; height: 25px;
+	top: 5px; left: 30px;
+	background-color: #fafad2;
+	z-index: 11;
+	
+}
 /* TAG SEARCH */
 #tagWrap, #showTagBtn {
 	display: none;
@@ -91,13 +100,21 @@ img { border: 0; }
 	text-align: center;
 	cursor: pointer;
 }
+#moreMinus {
+	display: none;
+}
 #searchTagText {
 	overflow: hidden;
 	width: 300px; height: 40px;
 	margin: 0 auto 10px;
 	padding: 5px;
+	background-color: #eee;
 	border: 1px solid #acc;
 	line-height: 30px;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 1; /* 라인수 */
+	-webkit-box-orient: vertical;
 }
 #serachTagBtn > .cst-btn {
 	width: 160px;
@@ -122,6 +139,20 @@ header {
 }
 #headerNav {
 	display: none;
+}
+#homeBtn {
+	overflow: hidden;
+	width: 60px; height: 60px;
+	margin-left: 5px;
+	float: left;
+}
+#homeBtn a {
+	display: block;
+	width: inherit; height: inherit;
+	padding: 5px 0;
+}
+#homeBtn img {
+	width: 100%;
 }
 #navList > li:last-of-child {
 	display: none;
@@ -201,6 +232,7 @@ div[class *= cst-chkbox-wrap-st1] {
 	padding: 5px;
 }
 div[class *= cst-chkbox-wrap-st2] {
+	position: relative;
 	overflow: hidden;
 	display: inline-block;
 	padding: 5px;
@@ -376,32 +408,34 @@ div[class *= cst-btn-wrap-st4] > input {
 	}
 	#searchWrap {
 		display: none;
-		width: 300px; height: 60px;
+		width: 260px; height: 60px;
 		float: left;
 		color: #fff;
 	}
 	.search-form-textbox {
 		display: block;
-		width: 240px; height: 60px;
+		width: 220px; height: 60px;
 		padding: 10px 10px;
 		float: left;
 	}
 	#searchHeaderBtn {
 		display: block;
-		width: 60px; height: 60px;
+		width: 40px; height: 50px;
+		margin-top: 5px;
 		float: left;
 		font-size: 34px;
-		line-height: 60px;
+		line-height: 50px;
 		text-align: center;
 		color: #fff;
 		cursor: pointer;
 	}
 	#showSearchBtn, #showTagBtn {
 		display: block;
-		width: 60px; height: 60px;
+		width: 40px; height: 50px;
+		margin-top: 5px;
 		float: left;
 		font-size: 24px;
-		line-height: 60px;
+		line-height: 50px;
 		text-align: center;
 		color: #ccc;
 		cursor: pointer;

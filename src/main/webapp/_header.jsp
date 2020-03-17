@@ -19,12 +19,17 @@ testSession.setAttribute("memberInfo", memberVO);
 
 <header>
 	<div id="headerNav">
+		<div id="homeBtn">
+			<a href="${ contextPath }/main.do">
+				<img src="${ contextPath }/images/mincho/mincho2.png" alt="home button">
+			</a>
+		</div>
 		<ul id="navList">
 			<li>
 				<div id="searchWrap">
 					<form name="searchForm" action="${ contextPath }/movie/search.do">
 						<div class="cst-text-st1 search-form-textbox">
-							<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
+							<input type="text" class="text-210" name="searchKeyWord" placeholder="검색어 입력">
 						</div>
 						<div id="searchHeaderBtn" onclick="document.searchForm.submit();">
 							<i class="fas fa-search"></i>
@@ -74,7 +79,14 @@ testSession.setAttribute("memberInfo", memberVO);
 		<div id="serachTagBtn">
 			<div id="searchTagText"></div>
 			<div class="cst-btn">
-				<div id="moreTag"><i class="fas fa-plus-square"></i></div>
+				<div id="moreTag">
+					<div id="morePlus">
+						<i class="fas fa-plus-square"></i>
+					</div>
+					<div id="moreMinus">
+						<i class="fas fa-minus-square"></i>
+					</div>
+				</div>
 				<input type="submit" class="st1-120-40" value="검색">
 			</div>
 		</div>
@@ -98,7 +110,7 @@ testSession.setAttribute("memberInfo", memberVO);
 		<div><i class="fas fa-times"></i></div>
 	</div>
 	<ul id="mobNavList">
-		<li><a href="${ contextPath }/">홈으로</a></li>
+		<li><a href="${ contextPath }/main.do">홈으로</a></li>
 		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
 		<li><a href="${ contextPath }/movie/recommend.do">영화목록</a></li>
 		<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>

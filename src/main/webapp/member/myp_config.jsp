@@ -129,9 +129,9 @@ document.addEventListener("DOMContentLoaded", function(){
 						</select>
 					</div>
 					<div class="cst-text-st1 con-conf-intro-wrap">
-						<textarea class="con-conf-intro" name="introduce" cols="35" rows="4" wrap="hard" placeholder=""></textarea>
 						<div class=cst-text-label style="width: 80px;">자기소개</div>
-					</div>					
+						<textarea class="con-conf-intro" name="introduce" cols="35" rows="4" wrap="hard" placeholder=""></textarea>
+					</div>		
 					<div class="cst-btn con-conf-submitbtns con-conf-submitbtns-INF">
 					  <input type="submit" value="확인" class="st1-80-50">
 					  <input type="reset" value="다시" class="st2-80-50">

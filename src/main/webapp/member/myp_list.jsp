@@ -64,7 +64,8 @@ document.addEventListener("DOMContentLoaded", function(){
 				</c:if>
 			</nav>
 			<div class="clear"></div>
-						
+			
+			<div class="con-fav-margin">
 			<c:choose>
 	   			<c:when test="${detail_info.like_flag=='Y'}">
 			   		<c:if test="${fav_cnt == 0}">
@@ -94,12 +95,13 @@ document.addEventListener("DOMContentLoaded", function(){
 				</c:otherwise>
 			</c:choose>
 			<!-- 검색결과가 없을때 -->
+			</div>
 			<div class="con-search-none">검색이 완료되었습니다.</div>
 			
 		</div>
 		<div class="clear"></div>
 	</form>
-	<form class="con-sortList" name="alignForm" method="POST" action="favorite.do">
+	<form class="con-sortList con-sortList-fav" name="alignForm" method="POST" action="favorite.do">
 		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->

@@ -369,7 +369,7 @@ position: absolute;
 	width: 25px;
 }
 .hd-menu-nickname {
-	padding: 0 25px;
+	padding-right: 20px;
     line-height: 50px;
     font-size: 20px;
     font-weight: bold;
@@ -377,6 +377,31 @@ position: absolute;
 .con-menuin{
 	margin-top:10px;
 }
+
+.con-menu-sub {
+	font-size: 15px;
+	padding: 0 10px;
+}
+.con-menu a {
+	padding: 0 15px;
+	font-size: 16px;
+}
+.con-menu-list {
+	width: 218px;
+}
+.con-menu-dropdown-wrap {
+	width: 252px;
+	height: 50px!important;
+}
+.con-menu-input {
+	font-size: 16px;
+	width: 270px;
+	margin-right: 10px;
+}
+.con-menu-search {
+	margin-right: 10px;
+}
+
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
@@ -385,10 +410,25 @@ position: absolute;
 }
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 992px) {
 
+.con-menu-dropdown-wrap {
+	height: 50px!important;
+}
+.menu-description {
+	display: none;	
+}
+
+.con-menu-dropdown-here:hover .menu-description {
+	display: none;
+}
+.con-inform-none {
+	font-size: 20px;
+	border: none;
+}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
-@media screen and (min-width: 1225px) {
-    
+@media screen and (max-width: 576px) {
+
+}
 }

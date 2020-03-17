@@ -2,7 +2,12 @@
   기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
   가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
 
-
+.myp-assess-pc {
+	display: block;
+}
+.myp-assess-mobile {
+	display: none;
+}
 .con-assess {
 	margin: 0 auto;
 	padding-top : 10px;
@@ -35,6 +40,7 @@
 	font-size: 40px;
 	font-weight: bold;
 	color: #888;
+	border: none;
 }
 .con-search-none {
 	display: none;
@@ -233,35 +239,7 @@
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (max-width: 576px) {
-.con-assess-img-poster {
-	width: 70px;
-	height: 120px;
-}
-.con-assess-cont-right-wrap{
-	width: 250px;
-}
-.con-assess-cont-subject {
-	font-size: 18px;
-	margin-bottom: 10px; 
-}
-.con-assess-stars {
-	float:left;
-}
-.con-assess-cont-wrap {
-	width: 300px;
-}
-.con-assess-cont-table-wrap {
-	overflow : hidden;
-}
-.con-assess-cont-line-wrap {
-	float : left;
-	width : -webkit-calc(100%-116px);
-	width : calc(100% - 116px);
-}
-.con-assess-img-stars {
-	float : right;
-	width : 116px;
-}
+
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
@@ -270,10 +248,164 @@
 }
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
-@media screen and (min-width: 992px) {
+@media screen and (max-width: 992px) {
+.myp-assess-pc {
+	display: none;
+}
+.myp-assess-mobile {
+	display: block;
+}
+.con-assess {
+	position: relative;
+	margin: 0 auto;
+	border: none;
+	max-width: 980px;
+	margin-bottom: 0px;
+	background: transparent!important;
+	height: 125px;
+	padding: 5px;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin-bottom: 10px;
+}
+.con-assess-bg {
+	height: 125px;
+	background: transparent;
+}
 
+.con-assess-none {
+	font-size: 20px;
+}
+.con-search-none {
+	font-size: 20px;
+}
+#assess-list-delete {
+	display: none;
+}
+.con-chkbox:checked +div img{
+	transition-duration: 0.2s;
+	opacity: 0.5;
+}
+
+.con-assess-img-wrap {
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-left: 0px;
+	margin-bottom: 0px;
+}
+
+.con-assess-img-poster {
+	width: 70px;
+	height: 125px;
+}
+.con-assess-img-stars {
+	position: absolute;
+	font-size: 50px;
+	top: 45px;
+	right: 50px;
+	background-color: transparent;
+	color: white;
+	height: 0px;
+}
+.con-assess-stars-date {
+	position: absolute;
+	right: 20px;
+	top: 8px;
+	font-weight: bold;
+}
+
+.con-assess-img-stars-score {
+	width: 60px;
+	height: 0px;
+}
+.con-assess-mintchoco {
+	position: absolute;
+	right: -16px;
+	top: 0px;
+	width: 30px;
+}
+
+.con-assess-cont-line-content p {
+	float: left;
+	white-space: nowrap;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
+  	width: -webkit-calc(100% - 110px);
+    width: -moz-calc(100% - 110px);
+    width: calc(100% - 110px);
+}
+
+.con-assess-cont-line-content p::after {
+	display: none;
+}
+.con-assess-cont-line-content p::before {
+	display: none;
+}
+
+.con-assess-like {
+	margin-right: 10px;
+}
+
+.con-assess-cont-subject {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+.con-assess-cont-table-wrap {	
+	width: -webkit-calc(100% - 110px);
+    width: -moz-calc(100% - 110px);
+    width: calc(100% - 110px);
+}
+.con-assess-cont-line-wrap {
+	width: 100%;
+	background-color: transparent;
+	border: none;
+	height: 55px;
+	padding-bottom: 5px;
+}
+.con-assess-cont-line-content {
+	width: 100%;
+	height: 24px;
+	padding: 0px;
+	margin-top: 5px;
+	border: none;
+}
+.con-assess-cont-genre {
+	margin-bottom: 0px;
+}
+.con-assess-cont-tag {
+	margin-bottom: 5px;
+}
+
+.con-assess-cont-wrap {
+	margin-top: 0px;
+	width: -webkit-calc(100% - 110px);
+    width: -moz-calc(100% - 110px);
+    width: calc(100% - 110px);
+    padding-left: 10px;
+    padding-top: 5px;
+}
+
+.con-assess-cont-right-wrap {
+	width: -webkit-calc(100% - 110px);
+    width: -moz-calc(100% - 110px);
+    width: calc(100% - 110px);
+}
+.con-assess-cont-line-contents-wrap {
+	width: 100%;
+	height: 60px;
+}
+.con-th-mintcho-label {
+	width: 20px;
+}
+.con-line-th {
+	width: 100% !important;
+}
+.icon-assess-wrap {
+	border-bottom: 5px solid #00D7C0;
+}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
-@media screen and (min-width: 1225px) {
-    
+@media screen and (max-width: 1225px) {
+
 }

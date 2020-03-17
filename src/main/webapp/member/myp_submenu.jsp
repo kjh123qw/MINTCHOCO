@@ -68,9 +68,9 @@ if(session.getAttribute("memberInfo") == null){
 			
 			<div class="hd-menu-subject myp_mobile con-float" onclick="domenu('on');">&nbsp;<img class="con-menuin" src="${ contextPath }/images/member/menuin.png"></div>
 			<div class="hd-hidden-menu myp_mobile">
-				<a id="myp-inform-do" class="icon-privacy-mobile-wrap" href="my_page.do">정보</a>
-				<a id="myp-favorite-do" class="icon-fav-mobile-wrap" href="favorite.do">찜한목록</a>
-				<a id="myp-assessment-do" class="icon-assess-mobile-wrap" href="assessment.do">평가목록</a>
+				<a id="myp-inform-do-mobile" class="icon-privacy-mobile-wrap" href="my_page.do">정보</a>
+				<a id="myp-favorite-do-mobile" class="icon-fav-mobile-wrap" href="favorite.do">찜한목록</a>
+				<a id="myp-assessment-do-mobile" class="icon-assess-mobile-wrap" href="assessment.do">평가목록</a>
 				<a onclick="domenu('off');">창 닫기</a>
 			</div>	
 				<c:choose>

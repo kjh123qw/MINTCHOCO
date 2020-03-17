@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", function(){
 </script>
 	<form class="myp-con-info" method="post" action="" onsubmit="return ;">
 	<c:choose>
-	   	<c:when test="${detail_info.assessment_flag=='Y'}">
+	   	<c:when test="${detail_info.info_flag=='Y'}">
 			<article class="con-info">
 				<div class="con-info-intro con-info-wrap">			
 					<div class="con-info-subject">최근 추가한 목록</div>

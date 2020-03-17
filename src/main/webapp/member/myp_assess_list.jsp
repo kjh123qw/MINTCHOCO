@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", function(){
 						            <li><a onmouseenter="textAlign('star')" onclick="sorting('star');">평점 순</a></li>
 						            <li><a onmouseenter="textAlign('sub')" onclick="sorting('sub');">제목 순</a></li>
 						        </ul>
-						        <div class="menu-description">
+						        <div class="myp-assess-mobile menu-description">
 						     		<p class="menu-description-subject">항목 정렬을 설정합니다.</p>
 						     	</div>
 						     </div>						   
@@ -89,7 +89,10 @@ document.addEventListener("DOMContentLoaded", function(){
 								<div class="con-search-target con-assess-cont-subject">${assess.movieTitle}</div>
 								<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
 							</div>
-							<div class="con-assess-stars con-assess-float-right">
+							<div class="myp-assess-mobile con-assess-stars-date con-assess-float-right">
+								<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
+							</div>
+							<div class="myp-assess-pc con-assess-stars con-assess-float-right">
 								<div class="clear"></div>
 								<div class="con-th-mintcho"></div>
 								<div class="con-th-mintcho2 con-assess-float" style="width: ${20*assess.stars}px;"></div>
@@ -105,15 +108,21 @@ document.addEventListener("DOMContentLoaded", function(){
 											<span class="con-assess-like">${assess.likes}</span>
 											<span class="con_th2"><img src="${ contextPath }/images/member/est_bad.png"></span>
 											<span>${assess.hates}</span>
-											<div class="con-assess-stars-date con-assess-float-right">
+											<div class="myp-assess-pc con-assess-stars-date con-assess-float-right">
 												<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
 											</div>
 										</div>
 										<div class="clear"></div>
-										<div class="con-assess-cont-line-content"><p>${assess.aContent}</p></div>
+										<div class="con-assess-cont-line-content">
+											<p>${assess.aContent}</p>
+											<div class="myp-assess-mobile con-assess-img-stars con-assess-float">							
+												<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
+											<div class="con-assess-img-stars-score">${assess.astars}</div>							
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="con-assess-img-stars con-assess-float">							
+								<div class="myp-assess-pc con-assess-img-stars con-assess-float">							
 									<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
 									<div class="con-assess-img-stars-score">${assess.astars}</div>							
 								</div>
@@ -135,7 +144,7 @@ document.addEventListener("DOMContentLoaded", function(){
 		</div>
 		<div class="clear"></div>
 	</form>
-	<form class="con-sortList" name="alignForm" method="POST" action="assessment.do">
+	<form class="con-sortList con-sortList-assess" name="alignForm" method="POST" action="assessment.do">
 		<input type="hidden" name="sort" class="con-alignInput">
 	</form>
 <!-- //서브메뉴 이하 담당자 내용 -->

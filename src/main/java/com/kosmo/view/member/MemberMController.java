@@ -5,6 +5,7 @@ import java.net.URLDecoder;
 import java.util.Arrays;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -263,7 +264,7 @@ public class MemberMController {
 	
 	@ResponseBody
 	@RequestMapping(value="/deleteMember.do", method=RequestMethod.POST)
-	public String deleteMember(@RequestParam(value="check") String check,MemberVO member, MemberMDAO memberDAO, HttpSession session){
+	public String deleteMember(@RequestParam(value="check") String check,MemberVO member, MemberMDAO memberDAO, HttpSession session, HttpServletResponse response){
 		// 계정 삭제
 		String number=null;
 
@@ -271,6 +272,10 @@ public class MemberMController {
 		if (member != null) {
 			number = Integer.toString(member.getNumber());
 		}
+		
+		response.setHeader("cache-control","no-cache");
+		response.setHeader("expires","0");
+		response.setHeader("pragma","no-cache");		
 		
 		if(check.equals("del")) {
 			memberDAO.deleteMember(number);

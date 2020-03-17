@@ -58,7 +58,6 @@ function textAlign(element) {
 	} else if(m == 'star') {
 		text.innerText='부여한 점수 순으로 정렬합니다.';
 	} 
-	
 }
 
 function modifyOn() {
@@ -494,6 +493,7 @@ function sorting(element) {
 	var sortForm = document.getElementsByClassName("con-sortList")[0];
 	if (e=="rel") {
 		sort.setAttribute('value','rel');
+		
 		sortForm.submit();
 	} else if (e=="sub") {
 		sort.setAttribute('value','sub');
@@ -571,6 +571,16 @@ document.addEventListener("DOMContentLoaded", function(){
 		document.getElementById('myp-inform-do').setAttribute('href','my_page.do?nickName='+requestParam);
 		document.getElementById('myp-assessment-do').setAttribute('href','assessment.do?nickName='+requestParam);
 		document.getElementById('myp-favorite-do').setAttribute('href','favorite.do?nickName='+requestParam);
+		
+		document.getElementById('myp-inform-do-mobile').setAttribute('href','my_page.do?nickName='+requestParam);
+		document.getElementById('myp-assessment-do-mobile').setAttribute('href','assessment.do?nickName='+requestParam);
+		document.getElementById('myp-favorite-do-mobile').setAttribute('href','favorite.do?nickName='+requestParam);
+		
+		if(document.getElementsByClassName('con-sortList-assess')[0]) {
+			document.getElementsByClassName('con-sortList-assess')[0].setAttribute('action','assessment.do?nickName='+requestParam);
+		} else if(document.getElementsByClassName('con-sortList-fav')[0]) {
+			document.getElementsByClassName('con-sortList-fav')[0].setAttribute('action','favorite.do?nickName='+requestParam);
+		}
 	}	
 });
 

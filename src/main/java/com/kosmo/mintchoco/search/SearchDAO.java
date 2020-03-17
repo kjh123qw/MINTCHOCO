@@ -65,28 +65,27 @@ public class SearchDAO {
 		String[] searchKeyWordArr = searchKeyWord.split(" ");
 		char[] searchTitleArr = searchKeyWord.toCharArray();
 		String movieTitle = "";
-		String movieTitle2 = "";
+		String movieTitle2 = " (REPLACE(MOVIE_TITLE, ' ', '') LIKE '%" + searchKeyWord.replace(" ", "") + "%')";
 		String movieKind = "";
 		String movieDirector = "";
 		String movieActor = "";
 		String movieContent = "";
 		String orExpr = "";
 		boolean firstTitleCond = true;
-
+		String test = " (REPLACE(MOVIE_TITLE, ' ', '')) LIKE '%";
 		for(char titleLetter : searchTitleArr) {
 			if(titleLetter != ' ') {
 				if('0' <= titleLetter && titleLetter <= '9') {
 					movieTitle += (firstTitleCond?" (MOVIE_TITLE LIKE '":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
 				} else {
 					movieTitle += (firstTitleCond?" (MOVIE_TITLE LIKE '":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
-					movieTitle2 += (firstTitleCond?" (MOVIE_TITLE LIKE '%":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
+//					movieTitle2 += (firstTitleCond?" (MOVIE_TITLE LIKE '":" AND MOVIE_TITLE LIKE '%") + titleLetter + "%'";
 				}
 				if(firstTitleCond)
 					firstTitleCond = false;
 			}
 		}
 		movieTitle += ")";
-		movieTitle2 += ")";
 		for(String keyWord : searchKeyWordArr) {
 			movieKind += orExpr + " MOVIE_KIND LIKE '%" + keyWord + "%'";
 			movieDirector += orExpr + " MOVIE_DIRECTOR LIKE '%" + keyWord + "%'";

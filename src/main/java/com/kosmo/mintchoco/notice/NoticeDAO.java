@@ -19,7 +19,7 @@ public class NoticeDAO {
 	private PreparedStatement stmt = null;
 	private ResultSet rs = null;
 	// 쿼리
-	final private String SELECT_NOTICE_LIST = "SELECT * FROM NOTICE ORDER BY NOTICE_REGDATE DESC";
+	final private String SELECT_NOTICE_LIST = "SELECT * FROM NOTICE ORDER BY NOTICE_NUMBER DESC";
 	
 	// 영화 평점 목록
 	public List<NoticeVO> selectNoticeList() {

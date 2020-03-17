@@ -22,7 +22,7 @@ public class NoticeController {
 	@RequestMapping(value="/service/notice.do", method=RequestMethod.GET)
 	public String notice(NoticeDAO noticeDAO, Model model) {
 		model.addAttribute("noticeList", noticeDAO.selectNoticeList());
-		return "srv_notice.jsp";
+		return "srv_notice_list.jsp";
 	}
 	@RequestMapping(value="/service/noticeForm.do", method=RequestMethod.GET)
 	public String noticeForm(NoticeDAO noticeDAO, Model model) {

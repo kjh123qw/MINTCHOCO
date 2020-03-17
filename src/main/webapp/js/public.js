@@ -44,6 +44,7 @@ $(function() {
 		clearTimeout(clearSearchFormTime);
 	});
 	$('#showTagBtn').click(function() {
+    	$('#searchMoreTagListBox').html('');
 		if($('#showTagBtnUp').css('display') == 'none') {
 			$('#showTagBtnDown').hide();
 			$('#showTagBtnUp').show();
@@ -61,6 +62,7 @@ $(function() {
 		}
 	});
 	$('#mobShowTagBtn').click(function() {
+    	$('#searchMoreTagListBox').html('');
 		if($('#mobShowTagBtnUp').css('display') == 'none') {
 			$('#showTagBtnDown').hide();
 			$('#showTagBtnUp').show();

@@ -89,6 +89,7 @@ img { border: 0; }
 	color: #f44;
 	line-height: 40px;
 	text-align: center;
+	cursor: pointer;
 }
 #searchTagText {
 	overflow: hidden;

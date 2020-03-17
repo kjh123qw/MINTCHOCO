@@ -243,8 +243,13 @@
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
-@media screen and (min-width: 768px) {
-    
+@media screen and (max-width: 768px) {
+.con-assess-none {
+	font-size: 20px;
+}
+.con-search-none {
+	font-size: 20px;
+}
 }
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
@@ -273,12 +278,6 @@
 	background: transparent;
 }
 
-.con-assess-none {
-	font-size: 20px;
-}
-.con-search-none {
-	font-size: 20px;
-}
 #assess-list-delete {
 	display: none;
 }
@@ -302,14 +301,14 @@
 	position: absolute;
 	font-size: 50px;
 	top: 45px;
-	right: 50px;
+	right: 40px;
 	background-color: transparent;
 	color: white;
 	height: 0px;
 }
 .con-assess-stars-date {
 	position: absolute;
-	right: 20px;
+	right: 10px;
 	top: 8px;
 	font-weight: bold;
 }
@@ -330,9 +329,9 @@
 	white-space: nowrap;
   	text-overflow: ellipsis;
   	overflow: hidden;
-  	width: -webkit-calc(100% - 110px);
-    width: -moz-calc(100% - 110px);
-    width: calc(100% - 110px);
+  	width: -webkit-calc(100% - 105px);
+    width: -moz-calc(100% - 105px);
+    width: calc(100% - 105px);
 }
 
 .con-assess-cont-line-content p::after {
@@ -352,9 +351,9 @@
 	margin-bottom: 5px;
 }
 .con-assess-cont-table-wrap {	
-	width: -webkit-calc(100% - 110px);
-    width: -moz-calc(100% - 110px);
-    width: calc(100% - 110px);
+	width: -webkit-calc(100% - 105px);
+    width: -moz-calc(100% - 105px);
+    width: calc(100% - 105px);
 }
 .con-assess-cont-line-wrap {
 	width: 100%;
@@ -371,6 +370,8 @@
 	border: none;
 }
 .con-assess-cont-genre {
+	color: #bbb;
+	font-size: 14px;
 	margin-bottom: 0px;
 }
 .con-assess-cont-tag {
@@ -379,17 +380,17 @@
 
 .con-assess-cont-wrap {
 	margin-top: 0px;
-	width: -webkit-calc(100% - 110px);
-    width: -moz-calc(100% - 110px);
-    width: calc(100% - 110px);
+	width: -webkit-calc(100% - 105px);
+    width: -moz-calc(100% - 105px);
+    width: calc(100% - 105px);
     padding-left: 10px;
     padding-top: 5px;
 }
 
 .con-assess-cont-right-wrap {
-	width: -webkit-calc(100% - 110px);
-    width: -moz-calc(100% - 110px);
-    width: calc(100% - 110px);
+	width: -webkit-calc(100% - 105px);
+    width: -moz-calc(100% - 105px);
+    width: calc(100% - 105px);
 }
 .con-assess-cont-line-contents-wrap {
 	width: 100%;

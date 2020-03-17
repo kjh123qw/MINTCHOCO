@@ -335,6 +335,7 @@ position: absolute;
 }
 .hd-menu-wrap {
 	margin-top: 0px;
+	height: 51px;
 	position: relative;
 }
 .hd-menu-wrap a:hover {
@@ -355,10 +356,15 @@ position: absolute;
 	color: black;
 }
 .hd-menu-subject {
-	padding: 0 25px;
+	padding: 0 20px;
     line-height: 50px;
-    float: left;
+    float: left;    
+	font-weight: bold;
     font-size: 20px;	
+}
+.hd-menu-subject:hover {
+	color: #00D7C0;
+	background: rgba(200,200,200,0.5)	
 }
 .icon-config-mobile-wrap {
 	float: right!important;
@@ -369,10 +375,17 @@ position: absolute;
 	width: 25px;
 }
 .hd-menu-nickname {
+	text-align: right;
+	width: -webkit-calc(100% - 172px);
+    width: -moz-calc(100% - 172px);
+    width: calc(100% - 172px);
 	padding-right: 20px;
     line-height: 50px;
     font-size: 20px;
     font-weight: bold;
+    white-space: nowrap;
+  	text-overflow: ellipsis;
+  	overflow: hidden;
 }
 .con-menuin{
 	margin-top:10px;

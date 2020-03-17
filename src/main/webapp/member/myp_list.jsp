@@ -65,12 +65,13 @@ document.addEventListener("DOMContentLoaded", function(){
 			</nav>
 			<div class="clear"></div>
 			
-			<div class="con-fav-margin">
+			
 			<c:choose>
 	   			<c:when test="${detail_info.like_flag=='Y'}">
 			   		<c:if test="${fav_cnt == 0}">
 						<div class="con-fav-none">찜한 항목이 없습니다.</div>
 					</c:if>
+					<div class="con-fav-margin">
 					<c:forEach items="${favoriteList}" var="favorite">
 						<article class="con-fav con-fav-float" onclick="chk_enable(this);">
 						<input class="con-chkbox" type="checkbox" name="chkbox" value="${favorite.favNum}">
@@ -87,7 +88,8 @@ document.addEventListener("DOMContentLoaded", function(){
 							</div>				
 						</div>
 						</article>
-					</c:forEach>			
+					</c:forEach>
+					</div>			
 					<div class="clear"></div>
 				</c:when>
 				<c:otherwise>
@@ -95,7 +97,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				</c:otherwise>
 			</c:choose>
 			<!-- 검색결과가 없을때 -->
-			</div>
+			
 			<div class="con-search-none">검색이 완료되었습니다.</div>
 			
 		</div>

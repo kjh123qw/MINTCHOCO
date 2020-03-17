@@ -37,7 +37,7 @@ function search(){
     for(i=0;i<item.length;i++){
     	search_target = item[i].getElementsByClassName("con-search-target");
 	    if(search_target[0].innerHTML.toUpperCase().indexOf(input) > -1){
-	      item[i].style.display = "flex";
+	      item[i].style.display = "block";
 	      eos.style.display = "block";
 	    } else {
 	      item[i].style.display = "none";

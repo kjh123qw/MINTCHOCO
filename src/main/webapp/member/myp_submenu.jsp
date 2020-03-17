@@ -77,7 +77,7 @@ if(session.getAttribute("memberInfo") == null){
 					<c:when test="${memberInfo.number==detail_info.number}">
 						<a class="icon-config-mobile-wrap myp_mobile" href="checkPW.do"><img src="${ contextPath }/images/member/config.png" class="icon-config"></a>
 					</c:when>
-					<c:otherwise><div class="hd-menu-nickname con-float-right myp_mobile">${detail_info.nickName}</div></c:otherwise>
+					<c:otherwise><div class="hd-menu-nickname con-float myp_mobile">${detail_info.nickName}님</div></c:otherwise>
 				</c:choose>
 			<div class="clear"></div>
 		</div>

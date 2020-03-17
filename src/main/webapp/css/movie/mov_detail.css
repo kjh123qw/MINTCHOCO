@@ -85,11 +85,13 @@ h3{
 
 .movie .poster-image {
 	padding: 10px;
+	border: 1px solid #0DEEC9;
 	background-color: #15939C;
 	margin: 0 auto;
 }
 
 .poster-image img{
+	border: 1px solid #0DEEC9;
 	height: 240px;
 }
 
@@ -161,7 +163,7 @@ h3{
 	}
 	      
 	.movie{
-		font-size: 1.8em;
+		font-size: 1.4em;
 	}
 	      
 	.movie .table1{

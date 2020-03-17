@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import com.kosmo.mintchoco.movie.MovieDAO;
 import com.kosmo.mintchoco.movie.MovieVO;
 import com.kosmo.mintchoco.rank.Crawling;
+import com.kosmo.mintchoco.tag.TagDAO;
 
 /*
  * 담당자 : 천세문, 김정호
@@ -48,8 +49,9 @@ public class MovieController {
 	// 영화 상세 정보
 	
 	@RequestMapping("/movie/detail.do")
-	public String movieDetail(MovieDAO movieDAO, Model model, HttpServletRequest request) {
+	public String movieDetail(MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
+		model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
 		return "mov_detail.jsp";
 	}
 	

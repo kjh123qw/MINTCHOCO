@@ -146,7 +146,7 @@
 						영화 내용
 					</td>
 					<td>
-						<input type="text" name="movieContent" value="${ movie.movieContent }">
+						<textarea name="movieContent">${ movie.movieContent }</textarea>
 					</td>
 				</tr>
 				<tr>

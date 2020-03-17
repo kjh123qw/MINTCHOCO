@@ -9,6 +9,7 @@ import java.util.List;
 import org.springframework.ui.Model;
 
 import com.kosmo.mintchoco.common.JDBCUtil;
+import com.kosmo.mintchoco.tag.TagVO;
 
 /*
  * 담당자 : 천세문, 김정호
@@ -27,9 +28,6 @@ public class MovieDAO {
 	// 선택
 	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
 	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
-	
-	// request
-	final private String SELECT_TAG_MAPPING = "SELECT * FROM TAG_MAPPING where movie_number = ?"; 
 
 	// 수정
 	final private String UPDATE_MOVIE = "UPDATE MOVIE SET MOVIE_TEASER = ?, MOVIE_TITLE = ?, MOVIE_KIND = ?, MOVIE_DIRECTOR = ?, MOVIE_ACTOR = ?, MOVIE_GRADE = ?, MOVIE_TIME = ?, MOVIE_DATE = ?, MOVIE_YOUTUBE_URL = ?, MOVIE_NAVER_URL = ?, MOVIE_CONTENT = ? WHERE MOVIE_NUMBER = ?";
@@ -103,7 +101,7 @@ public class MovieDAO {
 	}
 	
 	// 영화 내용 상세
-	public MovieVO selectOneMovie(String movieNuber) {
+	public MovieVO selectOneMovie(String movieNumber) {
 		
 		MovieVO movieVO = new MovieVO();
 		
@@ -111,7 +109,7 @@ public class MovieDAO {
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(SELECT_MOVIE_ONE);
-			stmt.setString(1, movieNuber);
+			stmt.setString(1, movieNumber);
 			rs = stmt.executeQuery();
 			if(rs.next()) {
 				

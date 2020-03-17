@@ -18,6 +18,16 @@ $(function () {
 	var moveThriller = 0;
 	var moveAnimation = 0;
 	
+
+    $(window).resize(function(){
+    	$(".action").show();
+    	$(".drama").show();
+    	$(".thriller").show();
+    	$(".animation").show();
+    });
+	
+	
+	
 	/* 좌우 버튼 관련*/
 	
 	/* 액션 버튼 */

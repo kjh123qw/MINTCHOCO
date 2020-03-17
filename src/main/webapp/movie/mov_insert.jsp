@@ -146,7 +146,7 @@
 						영화 내용
 					</td>
 					<td>
-						<input type="text" name="movieContent" placeholder="Ex) 개인적인 의견은 삼가 해주시기 바랍니다.">
+						<textarea name="movieContent" placeholder="Ex) 개인적인 의견은 삼가 해주시기 바랍니다."></textarea>
 					</td>
 				</tr>
 				<tr>

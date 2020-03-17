@@ -42,6 +42,8 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <body>
 
+<div id="bg">
+
 <div id="movDetail">
 
 	<h1><a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }"> 영화 내용 상세 </a></h1>
@@ -56,55 +58,71 @@
 	
 	<!-- 영화 정보 -->
 	<div class="movie">
-		<div class="poster-image"><a onclick="window.history.go(-1);"><img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a></div>
-    	<table border="1">
-	        <!-- ${movie_poster}, ${movie_title}, ${movie_kind}, ${movie_content}, ${movie_directer}, ${movie_actor}, ${movie_yutube_url}, ${movie_naver_url} && <a> ${tag_name} <a>를 forEach로 돌림 -->
-			<tr>
-			    <td><h3> ${ movie.movieTitle } </h3></td>
-			    <td><h3> 줄거리 </h3></td>
-			</tr>
-			<tr>
-			    <td> 장르 : ${ movie.movieKind }</td>
-			    <td rowspan="4" width="50%">
-					${ movie.movieContent }
-			    </td>
-			</tr>
-			<tr>
-				<td> 감독 : ${ movie.movieDirector } </td>
-			</tr>
-			<tr>
-			    <td> 주연 : ${ movie.movieActor } </td>  
-			</tr>
+	
+		<div class="wrap1">
+		
+			<div class="poster-image"><a onclick="window.history.go(-1);"><img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a></div>
+			
+	    	<table class="table1" border="1">
+	    	
+				<tr>
+				    <td colspan="2"><h3> ${ movie.movieTitle } </h3></td>
+				</tr>
+				<tr>
+					<td width="20%"> 년 도 </td>
+					<td> ${ movie.movieDate } </td>
+	           	</tr>
+				<tr>
+					<td> 장 르 </td>
+					<td> ${ movie.movieKind } </td>
+				</tr>
+				<tr>
+					<td> 감 독 </td>
+					<td> ${ movie.movieDirector } </td>
+				</tr>
+				<tr>
+					<td> 주 연 </td>
+					<td> ${ movie.movieActor } </td>
+				</tr>
+				
+			</table>
+		
+		</div>
+		
+		<div class="teaser">
+	    	<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${ movie.movieTeaser }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		</div>
+		
+    	<table class="table2" border="1">
+
 			<tr>
 				<td>
-					<a href="#새벽의 저주">#새벽의 저주</a>
-					<a href="#좀비 vs 플랜트">#좀비 vs 플랜트</a>
-					<a href="#워킹 데드">#워킹 데드</a>
-					<a href="#언데드">#언데드</a>
-	           </td>
-	           </tr>
+			    	<c:forEach var="tag" items="${ tagList }">
+						<a href="${ contextPath }/movie/search.do?searchKeyWord=${ tag.tagContent }">#${ tag.tagContent }</a>
+			       	</c:forEach>
+				</td>
+          	</tr>
+          	
 			<tr>
-			<td></td>
 				<td>
 					<a href="${ movie.movieYoutubeUrl }">| Youtube Link |</a>
 					<a href="${ movie.movieNaverUrl }">| Naver Link |</a> 
 				</td>
 			</tr>
+			<tr>
+				<td>${ movie.movieContent }</td>
+			</tr>
+			<tr>
+				<td>게시일 : ${ movie.movieIndate }</td>
+			</tr>
+			
 		</table>
 	</div>		
-	<hr>
-	
-	<!-- 영화 티저 -->
-	<div class="teaser">
-	
-		<!-- ${movie_teaser} 를 forEach로 돌림 -->
-	    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/${ movie.movieTeaser }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-	
-	</div>
 
-	<jsp:include page="./_rating.jsp"></jsp:include>
+</div>
 
 </div>
 </body>
+<jsp:include page="./_rating.jsp"></jsp:include>
 <jsp:include page="../_footer.jsp"></jsp:include>
 </html>

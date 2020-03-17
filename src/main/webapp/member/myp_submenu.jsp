@@ -37,7 +37,6 @@ if(session.getAttribute("memberInfo") == null){
 <link rel="stylesheet" href="${ contextPath }/css/public.css">
 <!-- 담당자 js/css -->
 <script src="${ contextPath }/js/member/member.js"></script>
-<script src="${ contextPath }/js/member/member_mobile.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/member/myp_common.css">
 <!-- //담당자 js, css -->
 </head>

@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			</article>
 		</c:when>
 		<c:otherwise>
-			<div class="con-inform-none">회원정보가 비공개되어있습니다.</div>
+			<div class="con-info-none">회원정보가 비공개되어있습니다.</div>
 		</c:otherwise>
 	</c:choose>
 	</form>

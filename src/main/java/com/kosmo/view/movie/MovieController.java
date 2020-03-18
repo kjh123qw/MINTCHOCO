@@ -11,6 +11,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.kosmo.mintchoco.favorite.FavoriteDAO;
+import com.kosmo.mintchoco.favorite.FavoriteVO;
+import com.kosmo.mintchoco.member.MemberVO;
 import com.kosmo.mintchoco.movie.MovieDAO;
 import com.kosmo.mintchoco.movie.MovieVO;
 import com.kosmo.mintchoco.rank.Crawling;
@@ -49,11 +52,29 @@ public class MovieController {
 	// 영화 상세 정보
 	
 	@RequestMapping("/movie/detail.do")
-	public String movieDetail(MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
+	public String movieDetail(MemberVO member, MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 		model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
 		return "mov_detail.jsp";
 	}
+	
+	// 찜 목록에 추가
+
+	@RequestMapping("/movie/favoritePlus.do")
+	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, Model model, HttpServletRequest request) {
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+		favoriteDAO.insertFavorite(memberVO.getNumber(), request.getParameter("movieNumber"));
+		
+		return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber");
+	}
+	
+//	@RequestMapping("/favoritMinus.do")
+//	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, HttpServletRequest request) {
+//
+//		favoriteDAO.deleteFavorite(request.getParameter("movieNumber"));
+//		
+//		return "redirect:/movie/detail.do?movieNumber=";
+//	}
 	
 	// 영화 정보 수정
 	

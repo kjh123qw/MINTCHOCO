@@ -84,10 +84,18 @@ h3{
 }
 
 .movie .poster-image {
+	position: relative;
+	overflow: hidden;
 	padding: 10px;
 	border: 1px solid #0DEEC9;
 	background-color: #15939C;
 	margin: 0 auto;
+}
+
+.movie .poster-image .plus-minus input{
+	margin: 0 auto;
+	width: 20%;
+	height: 30px;
 }
 
 .poster-image img{
@@ -120,7 +128,7 @@ h3{
 	.movie .table1{
 		float: left;
 		width: 65%;
-		height: 264px;
+		height: 294px;
 	}
 	      
 	.movie .teaser{
@@ -138,7 +146,7 @@ h3{
 	}
 	      
 	.movie .table1{
-		height: 265px;
+		height: 295px;
 	}
 	      
 	.teaser{
@@ -167,7 +175,7 @@ h3{
 	}
 	      
 	.movie .table1{
-		height: 267px;
+		height: 297px;
 	}
 	      
 	.teaser{

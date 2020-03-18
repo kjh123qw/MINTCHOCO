@@ -24,7 +24,7 @@ public class FavoriteDAO {
 	private final String FAV_BY_TITLE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY MOVIE_TITLE";
 	private final String FAV_BY_RELEASE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY MOVIE_TIME DESC";
 	private final String FAV_BY_INDATE = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY FAVORITE_ID ASC";
-	private final String FAVORITE_INSERT = "INSERT INTO FAVORITE(MEMBER_NUMBER, MOVIE_NUMBER) values(?,?)";
+	private final String FAVORITE_INSERT = "INSERT INTO FAVORITE VALUES(?, ?, ?, DEFAULT)";
 	private final String LATEST_FAV = "SELECT * FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=? ORDER BY FAVORITE_REGDATE DESC LIMIT 5";
 	private final String FAV_COUNT = "SELECT COUNT(*) FROM FAVORITE_VIEW WHERE MEMBER_NUMBER=?";
 	
@@ -184,13 +184,15 @@ public class FavoriteDAO {
 		}
 	
 	// 찜목록에 추가
-	public void insertFavorite(MemberVO member, MovieVO movie) {
-		System.out.println("===> JDBC로 insertFavorite()");
+	public void insertFavorite(int memberNumber, String movieNumber) {
+
 		try {
+			
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(FAVORITE_INSERT);			
-			stmt.setInt(1, member.getNumber());
-			stmt.setInt(2, movie.getMovieNumber());
+			stmt = conn.prepareStatement(FAVORITE_INSERT);		
+			stmt.setString(1, memberNumber + movieNumber);
+			stmt.setInt(2, memberNumber);
+			stmt.setString(3, movieNumber);
 			stmt.executeUpdate();			
 		} catch(Exception e) {
 			System.out.println("insertFavorite() + e");
@@ -244,4 +246,5 @@ public class FavoriteDAO {
 			}
 				return assess_cnt;
 		}
+
 }

@@ -26,7 +26,7 @@ public class AssessmentDAO {
 	final private String SELECT_ASSESSMENT_VIEW = "SELECT * FROM ASSESSMENT_VIEW WHERE MOVIE_NUMBER = ? ORDER BY LIKES DESC, ASSESS_REGDATE DESC";
 	final private String INSERT_ASSESSMENT_LIKE = "INSERT INTO ASSESSMENT_EST VALUES(?, ?, ?, ?, default)";
 	final private String SELECT_ASSESSMENT_LIKE = "SELECT * FROM ASSESSMENT_VIEW WHERE ASSESS_ID = ?";
-	final private String SELECT_ASSESSMENT = "INSERT INTO ASSESSMENT VALUES(?, ?, ?, ?, ?, default)";
+	final private String INSERT_ASSESSMENT = "INSERT INTO ASSESSMENT VALUES(?, ?, ?, ?, ?, default)";
 	final private String DELETE_ASSESSMENT = "DELETE FROM ASSESSMENT WHERE ASSESS_ID = ?";
 
 	// 영화 평점 목록
@@ -102,13 +102,17 @@ public class AssessmentDAO {
 	
 	public int insertAssessmentLike(int memberNumber, String assessId, String assessEst) {
 		int returnValue = 1;
+		String sql = "INSERT INTO ASSESSMENT_EST VALUES(ASSESS_EST_SEQ.NEXTVAL, ?, ?, ?, default)";
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(INSERT_ASSESSMENT_LIKE);
-			stmt.setString(1, Integer.toString(memberNumber) + assessId);
-			stmt.setInt(2, memberNumber);
-			stmt.setString(3, assessId);
-			stmt.setString(4, assessEst);
+			stmt = conn.prepareStatement(sql);
+//			stmt.setString(1, Integer.toString(memberNumber) + assessId);
+//			stmt.setInt(2, memberNumber);
+//			stmt.setString(3, assessId);
+//			stmt.setString(4, assessEst);
+			stmt.setInt(1, memberNumber);
+			stmt.setString(2, assessId);
+			stmt.setString(3, assessEst);
 			stmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println("Error - updateAssessmentLike()\n");
@@ -119,34 +123,53 @@ public class AssessmentDAO {
 		return returnValue;
 	}
 	
-	public void insertAssessment(int memberNumber, int movieNumber, String assessContent, int assessStars) {
+	public boolean insertAssessment(int memberNumber, int movieNumber, String assessContent, int assessStars) {
+		boolean bResult = false;
+		String sql = "INSERT INTO ASSESSMENT VALUES(ASSESS_SEQ.NEXTVAL, ?, ?, ?, ?, default)";
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(SELECT_ASSESSMENT);
-			stmt.setString(1, Integer.toString(memberNumber) + Integer.toString(movieNumber));
-			stmt.setInt(2, memberNumber);
-			stmt.setInt(3, movieNumber);
-			stmt.setString(4, assessContent);
-			stmt.setInt(5, assessStars);
-			stmt.executeUpdate();
+			stmt = conn.prepareStatement(sql); 	// INSERT_ASSESSMENT
+//			stmt.setString(1, Integer.toString(memberNumber) + Integer.toString(movieNumber));
+//			stmt.setInt(2, memberNumber);
+//			stmt.setInt(3, movieNumber);
+//			stmt.setString(4, assessContent);
+//			stmt.setInt(5, assessStars);
+			stmt.setInt(1, memberNumber);
+			stmt.setInt(2, movieNumber);
+			stmt.setString(3, assessContent);
+			stmt.setInt(4, assessStars);
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
+			
 		} catch(Exception e) {
 			System.out.println("Error - insertAssessment()\n");
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
+		
+		return bResult;
 	}
 	
-	public void deleteAssessment(String assessId) {
+	public boolean deleteAssessment(String assessId) {
+		boolean bResult = false;
+		
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(DELETE_ASSESSMENT);
 			stmt.setString(1, assessId);
-			stmt.executeUpdate();
+			
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
+			
 		} catch(Exception e) {
 			System.out.println("Error - deleteAssessment()\n");
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
+		
+		return bResult;
 	}
 	
 	

@@ -118,18 +118,29 @@ public class MovieController {
 	@RequestMapping("/rank.do")
 	public String rank(Model model) {
 		
-		HashMap<Integer, String[]> RankList = Crawling.MegaBoxMovieRank();
-		List<MovieVO> movieList = new ArrayList<MovieVO>();
+		HashMap<Integer, String[]> megaRankList = Crawling.MegaBoxMovieRank();
+		List<MovieVO> megaMovieList = new ArrayList<MovieVO>();
+		HashMap<Integer, String[]> cgvRankList = Crawling.CGVMovieRank();
+		List<MovieVO> cgvMovieList = new ArrayList<MovieVO>();
 		
-		for(Integer key : RankList.keySet())
+		for(Integer key : megaRankList.keySet())
 		{
 			MovieVO movie = new MovieVO();
-			movie.setMovieTitle(RankList.get(key)[0]);
-			movie.setMoviePoster(RankList.get(key)[1]);
-			movieList.add(movie);
+			movie.setMovieTitle(megaRankList.get(key)[0]);
+			movie.setMoviePoster(megaRankList.get(key)[1]);
+			megaMovieList.add(movie);
+		}
+		for(Integer key : cgvRankList.keySet())
+		{
+			MovieVO movie = new MovieVO();
+			movie.setMovieTitle(cgvRankList.get(key)[0]);
+			movie.setMoviePoster(cgvRankList.get(key)[1]);
+			cgvMovieList.add(movie);
 		}
 		
-		model.addAttribute("movieList", movieList);
+
+		model.addAttribute("cgvMovieList", cgvMovieList);
+		model.addAttribute("megaMovieList", megaMovieList);
 		return "/movie/mov_rank.jsp";
 	}
 	

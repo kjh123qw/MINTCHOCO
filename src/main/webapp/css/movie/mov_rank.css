@@ -25,21 +25,30 @@
 	border-collapse: separate;
 	border-spacing: 0;
 }
+.rank-table tr:first-of-type th, .rank-table tr:first-of-type td {
+	border-top: 3px solid #599;
+}
 .rank-table tr:first-of-type th, .rank-table tr:first-of-type td,
 .rank-table tr:nth-of-type(2) th, .rank-table tr:nth-of-type(2) td,
 .rank-table tr:nth-of-type(3) th, .rank-table tr:nth-of-type(3) td {
 	padding: 5px;
-	font-size: 12px;
-	border-top: 2px solid #499;
-	border-bottom: 2px solid #acc;
+	font-size: 16px;
+	border-bottom: 2px solid #7aa;
+	background-color: #dff;
+}
+.rank-table img { height: 65px; }
+.rank-table tr:nth-of-type(1) td:nth-of-type(1),
+.rank-table tr:nth-of-type(2) td:nth-of-type(1),
+.rank-table tr:nth-of-type(3) td:nth-of-type(1) {
+	width: 50px;
 }
 .rank-table th, .rank-table td {
 	padding: 5px;
 	font-size: 12px;
-	border-bottom: 1px dashed #acc;
+	border-bottom: 1px dashed #7aa;
 }
 .rank-table th {
-	width: 40px;
+	width: 25px;
 	font-size: 14px;
 	text-align: center;
 }
@@ -47,6 +56,9 @@
 	padding: 5px;
 	font-size: 12px;
 	border-bottom: 1px dashed #acc;
+}
+.rank-table tr:last-of-type th, .rank-table tr:last-of-type td {
+	border-bottom: 1px solid #599;
 }
 .rank-blank-underline { display: none; }
 .rank-header-mega, .rank-header-cgv {
@@ -60,8 +72,10 @@
 	color: #266;
 	cursor: pointer;
 }
-.rank-header-named {
+.rank-header-mega {
 	border-right: 0;
+}
+.rank-header-cgv {
 	border-left: 0;
 }
 .rank-header-selected {
@@ -73,9 +87,40 @@
 	font-size: 20px;
 	color: #fff;
 }
+
+#megaBoxHeader, #cgvHeader {
+	width: 50%; height: 50px;
+	float: left;
+	border: 1px solid #599;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 50px;
+	color: #266;
+}
+#cgvHeader {
+	border-left: 0;
+}
+#movieList {
+	overflow: hidden;
+	padding: 0 10px;
+}
+
+
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
-     
+	.rank-blank-underline {
+		width: 20%; height: 50px;
+		display: block;
+		float: left;
+		border-bottom: 1px solid #599;
+	}
+	.rank-header-mega, .rank-header-cgv {
+		width: 25%;
+	}
+	.rank-header-selected {
+		width: 35%;
+	}
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
@@ -85,18 +130,31 @@
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
 @media screen and (min-width: 992px) {
-
-	.rank-blank-underline {
-		width: 20%; height: 50px;
-		display: block;
+	.rank-table {
+		border-left: 1px solid #599;
+		border-right: 1px solid #599;
+	}
+	.rank-table td {
+		font-size: 20px;
+	}
+	.rank-table tr:first-of-type th, .rank-table tr:first-of-type td{
+		border-top: 0;
+	}
+	.rank-table tr:first-of-type th, .rank-table tr:first-of-type td,
+	.rank-table tr:nth-of-type(2) th, .rank-table tr:nth-of-type(2) td,
+	.rank-table tr:nth-of-type(3) th, .rank-table tr:nth-of-type(3) td {
+		font-size: 20px;
+	}
+	#megaList, #cgvList {
+		width: 50%;
+		padding: 0 15px;
 		float: left;
-		border-bottom: 1px solid #599;
 	}
-	.rank-header-mega, .rank-header-cgv {
-		width: 15%;
-	}
-	.rank-header-selected {
-		width: 30%;
+	.rank-table img { height: 100px; }
+	.rank-table tr:nth-of-type(1) td:nth-of-type(1),
+	.rank-table tr:nth-of-type(2) td:nth-of-type(1),
+	.rank-table tr:nth-of-type(3) td:nth-of-type(1) {
+		width: 70px;
 	}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */

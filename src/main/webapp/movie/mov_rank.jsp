@@ -27,6 +27,7 @@
 <!-- 담당자 js/css -->
 
 <link rel="stylesheet" href="${ contextPath }/css/movie/mov_rank.css">
+<script src="${ contextPath }/js/movie/mov_rank.js"></script>
 
 <!-- //담당자 js, css -->
 </head>
@@ -36,28 +37,88 @@
 	<div id="rankWrap">
 		<h1>영화 순위</h1>
 		<hr>
-		<div id="rankHeader">
-			<div class="rank-blank-underline"></div>
-			<div id="megaBoxBtn" class="rank-header-mega rank-header-selected">메가 박스 순위</div>
-			<div id="cgvBtn" class="rank-header-cgv">CGV 순위</div>
-			<div class="rank-blank-underline"></div>
+		<div id="mobMovieList">
+			<div id="mobRankHeader">
+				<div class="rank-blank-underline"></div>
+				<div id="megaBoxBtn" class="rank-header-mega rank-header-selected">메가 박스 순위</div>
+				<div id="cgvBtn" class="rank-header-cgv">CGV 순위</div>
+				<div class="rank-blank-underline"></div>
+			</div>
+			<table id="mobMegaList" class="rank-table">
+				<c:forEach var="movie" items="${megaMovieList}" varStatus="status">
+					<c:if test="${ status.count <= 10 }">
+						<tr>
+							<th>${ status.count }</th>
+							<c:if test="${ status.count <= 3 }">
+								<td><img src="${movie.moviePoster}" alt="${ movie.movieTitle }"></td>
+								<td>${ movie.movieTitle }</td>
+							</c:if>
+							<c:if test="${ status.count > 3 }">
+								<td colspan="2">${ movie.movieTitle }</td>
+							</c:if>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
+			<table id="mobCgvList" class="rank-table" style="display: none;">
+				<c:forEach var="movie" items="${cgvMovieList}" varStatus="status">
+					<c:if test="${ status.count <= 10 }">
+						<tr>
+							<th>${ status.count }</th>
+							<c:if test="${ status.count <= 3 }">
+								<td><img src="${movie.moviePoster}" alt="${ movie.movieTitle }"></td>
+								<td>${ movie.movieTitle }</td>
+							</c:if>
+							<c:if test="${ status.count > 3 }">
+								<td colspan="2">${ movie.movieTitle }</td>
+							</c:if>
+						</tr>
+					</c:if>
+				</c:forEach>
+			</table>
 		</div>
-		<table class="rank-table">
-			<c:forEach var="movie" items="${movieList}" varStatus="status">
-				<c:if test="${ status.count <= 10 }">
-					<tr>
-						<th>${ status.count }</th>
-						<c:if test="${ status.count <= 3 }">
-							<td><img src="${movie.moviePoster}" alt="${ movie.movieTitle }" width="100px"></td>
-							<td>${ movie.movieTitle }</td>
+		<div id="movieList" style="display: none;">
+			<div id="rankHeader">
+				<div id="megaBoxHeader">메가 박스 순위</div>
+				<div id="cgvHeader">CGV 순위</div>
+			</div>
+			<div id="megaList">
+				<table class="rank-table">
+					<c:forEach var="movie" items="${megaMovieList}" varStatus="status">
+						<c:if test="${ status.count <= 10 }">
+							<tr>
+								<th>${ status.count }</th>
+								<c:if test="${ status.count <= 3 }">
+									<td><img src="${movie.moviePoster}" alt="${ movie.movieTitle }"></td>
+									<td>${ movie.movieTitle }</td>
+								</c:if>
+								<c:if test="${ status.count > 3 }">
+									<td colspan="2">${ movie.movieTitle }</td>
+								</c:if>
+							</tr>
 						</c:if>
-						<c:if test="${ status.count > 3 }">
-							<td colspan="2">${ movie.movieTitle }</td>
+					</c:forEach>
+				</table>
+			</div>
+			<div id="cgvList">
+				<table class="rank-table">
+					<c:forEach var="movie" items="${cgvMovieList}" varStatus="status">
+						<c:if test="${ status.count <= 10 }">
+							<tr>
+								<th>${ status.count }</th>
+								<c:if test="${ status.count <= 3 }">
+									<td><img src="${movie.moviePoster}" alt="${ movie.movieTitle }"></td>
+									<td>${ movie.movieTitle }</td>
+								</c:if>
+								<c:if test="${ status.count > 3 }">
+									<td colspan="2">${ movie.movieTitle }</td>
+								</c:if>
+							</tr>
 						</c:if>
-					</tr>
-				</c:if>
-			</c:forEach>
-		</table>
+					</c:forEach>
+				</table>
+			</div>
+		</div>
 		<hr>
 	</div>
 	<!-- 담당자 내용 -->

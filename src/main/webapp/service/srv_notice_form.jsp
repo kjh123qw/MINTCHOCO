@@ -39,20 +39,13 @@
 
 <div id="noticeWrap">
 	<h1>공지사항 입력</h1>
+	<form method="post" action="${ contextPath }/service/insert.do">
 	<table class="notice-form">
-		<tr>
-			<th>작성자</th>
-			<td>
-				<div class="cst-text-st1 notice-form-title">
-					<input type="text" name="memberNumber" value="1" class="text-140" readonly>
-				</div>
-			</td>
-		</tr>
 		<tr>
 			<th>제목</th>
 			<td>
 				<div class="cst-text-st1 notice-form-title">
-					<input type="text" class="text-150">
+					<input type="text" class="text-150" name="noticeTitle">
 				</div>
 			</td>
 		</tr>
@@ -65,14 +58,13 @@
 		<tr>
 			<td colspan="2">
 				<div class="cst-btn notice-form-btn">
-					<input type="button" value="취소" class="st2-120-40">
-					<input type="button" value="등록" class="st1-120-40">
+					<input type="button" value="취소" class="st2-120-40"  onclick="location.href='${ contextPath }/service/notice.do'">
+					<input type="submit" value="등록" class="st1-120-40">
 				</div>
 			</td>
 		</tr>
-		
-		
 	</table>
+	</form>
 </div>
 
 <!-- 담당자 내용 -->

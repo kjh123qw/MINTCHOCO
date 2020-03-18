@@ -36,7 +36,36 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 
-
+<div id="noticeWrap">
+	<h1>공지사항 수정</h1>
+	<form method="post" action="${ contextPath }/service/update.do">
+	<input type="hidden" name="noticeNumber" value="${ noticeVO.noticeNumber }">
+	<table class="notice-form">
+		<tr>
+			<th>제목</th>
+			<td>
+				<div class="cst-text-st1 notice-form-title">
+					<input type="text" class="text-150" name="noticeTitle" value="${ noticeVO.noticeTitle }">
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+				<textarea name="noticeContent">${ noticeVO.noticeContent }</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<div class="cst-btn notice-form-btn">
+					<input type="button" value="취소" class="st2-120-40" onclick="location.href='${ contextPath }/service/notice.do'">
+					<input type="submit" value="등록" class="st1-120-40">
+				</div>
+			</td>
+		</tr>
+	</table>
+	</form>
+</div>
 
 <!-- 담당자 내용 -->
 <jsp:include page="../_footer.jsp"></jsp:include>

@@ -48,7 +48,7 @@
 		<c:forEach var="noticeVO" items="${ noticeList }">
 			<tr>
 				<td>${ noticeVO.noticeNumber }</td>
-				<td>${ noticeVO.noticeTitle }</td>
+				<td><a href="${ contextPath }/service/detail.do?noticeNumber=${ noticeVO.noticeNumber }">${ noticeVO.noticeTitle }</a></td>
 				<td>${ noticeVO.noticeRegdate }</td>
 				<td>${ noticeVO.noticeCnt }</td>
 			</tr>
@@ -57,7 +57,7 @@
 	</table>
 	<div class="notice-buttons">
 		<div class="cst-btn notice-write-btn">
-			<input type="button" value="글쓰기" class="st1-60-40" onclick="location.href='${ contextPath }/service/noticeForm.do'">
+			<input type="button" value="글쓰기" class="st1-60-40" onclick="location.href='${ contextPath }/service/insert.do'">
 		</div>
 		<div class="cst-btn notice-search-btn">
 			<input type="button" value="검색" class="st1-60-40">

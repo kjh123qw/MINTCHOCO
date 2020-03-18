@@ -66,7 +66,9 @@ $(function() {
 						ratingScore.append(scoreBg);
 						ratingScore.append(scoreText);
 	
-						var ratingNick = $('<div />', {'class': 'rating-nick', 'text': item.memberNickname});
+						var ratingNick = $('<div />', {'class': 'rating-nick', 'text': item.memberNickname, 'click': function() {
+							location.href = contextPath + '/my_page.do?nickName=' + item.memberNickname;
+						}});
 						var ratingTop = $('<div />', {'class': 'rating-top'});
 						ratingTop.append(ratingNick);
 						ratingTop.append(ratingScore);

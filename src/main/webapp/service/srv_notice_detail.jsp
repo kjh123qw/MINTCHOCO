@@ -43,26 +43,25 @@
 			<th>제목</th>
 			<td>
 				<div class="cst-text-st1 notice-form-title">
-					<input type="text" class="text-150">
+					${ noticeVO.noticeTitle }
 				</div>
 			</td>
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea name="noticeContent"></textarea>
+				<textarea readonly>${ noticeVO.noticeContent }</textarea>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="2">
 				<div class="cst-btn notice-form-btn">
-					<input type="button" value="취소" class="st2-120-40">
-					<input type="button" value="등록" class="st1-120-40">
+					<input type="button" value="삭제" class="st2-70-40">
+					<input type="button" value="수정" class="st3-70-40" onclick="location.href='${ contextPath }/service/modify.do?noticeNumber=${ noticeVO.noticeNumber }'">
+					<input type="button" value="목록으로" class="st1-120-40" onclick="location.href='${ contextPath }/service/notice.do'">
 				</div>
 			</td>
 		</tr>
-		
-		
 	</table>
 </div>
 

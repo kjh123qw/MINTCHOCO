@@ -70,11 +70,17 @@
 	width: 100% !important;
 }
 .notice-form-btn {
-	width: 250px;
 	margin: 0 auto;
 }
 .notice-form-btn > div:first-of-type {
-	margin-right: 10px !important;
+	float: left;
+}
+.notice-form-btn > div:nth-of-type(2) {
+	margin-left: 5px;
+	float: left;
+}
+.notice-form-btn > div:last-of-type {
+	float: right;
 }
 #noticeWrap textarea {
 	display: block;
@@ -94,6 +100,9 @@
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
+	.notice-form th, .notice-form td {
+		padding: 15px;
+	}
 	#noticeWrap {
 		padding: 0 10px;
 	}
@@ -127,6 +136,10 @@
 	.notice-buttons { height: 55px; padding: 0 50px 15px 50px; }
 	.notice-form th:first-of-type {
 		width: 100px;
+	}
+	.notice-form th, .notice-form td {
+		font-size: 14px;
+		padding: 10px;
 	}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */

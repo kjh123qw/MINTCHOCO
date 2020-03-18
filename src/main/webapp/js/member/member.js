@@ -60,12 +60,20 @@ function textAlign(element) {
 	} 
 }
 
+var linkList = new Array();
 function modifyOn() {
 	var modifyon = document.getElementsByClassName('con-menu-modifyon')[0];
 	var modifyoff = document.getElementsByClassName('con-menu-modifyoff')[0];
 	modifyon.style.display = 'block';
 	modifyoff.style.display = 'none';
 	modify_mode = 1;
+	
+	var link = document.getElementsByClassName('con-movie-link');	
+	for (i=0; i<link.length; i++) {
+		linkList[i] = link[i].getAttribute('href');
+		link[i].setAttribute('href','#');
+		link[i].setAttribute('onclick', "return false;");
+    }
 }
 
 function modifyOff() {
@@ -83,6 +91,16 @@ function modifyOff() {
 
     var display_cnt = document.getElementsByClassName('con-chkbox-cnt')[0];
     display_cnt.innerText = '0';
+    
+    var link = document.getElementsByClassName('con-movie-link');	
+	for (i=0; i<link.length; i++) {
+		link[i].setAttribute('href', linkList[i]);
+		link[i].removeAttribute('onclick');
+    }
+}
+
+function movieLink(e) {
+	location.href = "/movie/detail.do?movieNumber="+e;
 }
 
 function allcheck() {
@@ -493,7 +511,6 @@ function sorting(element) {
 	var sortForm = document.getElementsByClassName("con-sortList")[0];
 	if (e=="rel") {
 		sort.setAttribute('value','rel');
-		
 		sortForm.submit();
 	} else if (e=="sub") {
 		sort.setAttribute('value','sub');

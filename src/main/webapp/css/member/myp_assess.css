@@ -118,6 +118,10 @@
   	overflow: hidden;
 }
 
+.con-assess-cont-subject:hover {
+	color: orange;
+}
+
 .con-assess-like {
 	margin-right: 10px;
 }
@@ -350,6 +354,7 @@
 	font-weight: bold;
 	margin-bottom: 5px;
 }
+
 .con-assess-cont-table-wrap {	
 	width: -webkit-calc(100% - 105px);
     width: -moz-calc(100% - 105px);

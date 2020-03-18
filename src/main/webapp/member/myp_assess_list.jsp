@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", function(){
 						</div>
 						<div class="con-assess-cont-wrap con-assess-float">
 							<div class="con-assess-cont-right-wrap con-assess-float">
-								<div class="con-search-target con-assess-cont-subject">${assess.movieTitle}</div>
+								<a href="${ contextPath }/movie/detail.do?movieNumber=${assess.movieNum}" class="con-search-target con-assess-cont-subject con-movie-link">${assess.movieTitle}</a>
 								<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
 							</div>
 							<div class="myp-assess-mobile con-assess-stars-date con-assess-float-right">

@@ -82,7 +82,9 @@ document.addEventListener("DOMContentLoaded", function(){
 						<input class="con-chkbox" type="checkbox" name="chkbox" value="${favorite.favNum}">
 						<div class="con-fav-bg">			
 							<div class="con-fav-img-wrap">
-								<img class="con-fav-poster" src="${ contextPath }/images/mov_poster/${favorite.poster}">
+								<a class="con-movie-link" href="${ contextPath }/movie/detail.do?movieNumber=${favorite.movieNum}">
+									<img class="con-fav-poster" src="${ contextPath }/images/mov_poster/${favorite.poster}">
+								</a>
 								<!-- 140x200 -->
 								<center class="con-fav-contents-wrap">
 									<div class="con-search-target con-th-mint">${favorite.movieTitle}</div>

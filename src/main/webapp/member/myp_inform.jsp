@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function(){
 				      		<div class="swiper-slide" style="background-image:url(${ contextPath }/images/mov_poster/${favorite5.poster})"></div>
 				    	</c:forEach>
 				    	<c:if test="${fn:length(favorite_five)==0}">
-				    		<div class="swiper-slide" style="background-image:url(${ contextPath }/images/member/none.png)"></div>
+				    		<div class="swiper-slide" style="background-image:url(${ contextPath }/images/member/none.png)" onclick="movieLink('${favorite5.movieNum}')"></div>
 				   		</c:if>
 				    </div>
 				    <!-- Add Pagination -->

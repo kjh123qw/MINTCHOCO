@@ -33,40 +33,33 @@
 <body>
 	<%@ include file="../_header.jsp"%>
 	<!-- 담당자 내용 -->
-	<table>
-		<c:forEach var="movie" items="${movieList}" varStatus="status">
-			<c:if test="${ status.count <= 10 }">
-				<tr>
-					<td>${ status.count }</td>
-					<c:choose>
-						<c:when test="${ status.count <= 3 }">
+	<div id="rankWrap">
+		<h1>영화 순위</h1>
+		<hr>
+		<div id="rankHeader">
+			<div class="rank-blank-underline"></div>
+			<div id="megaBoxBtn" class="rank-header-mega rank-header-selected">메가 박스 순위</div>
+			<div id="cgvBtn" class="rank-header-cgv">CGV 순위</div>
+			<div class="rank-blank-underline"></div>
+		</div>
+		<table class="rank-table">
+			<c:forEach var="movie" items="${movieList}" varStatus="status">
+				<c:if test="${ status.count <= 10 }">
+					<tr>
+						<th>${ status.count }</th>
+						<c:if test="${ status.count <= 3 }">
 							<td><img src="${movie.moviePoster}" alt="${ movie.movieTitle }" width="100px"></td>
 							<td>${ movie.movieTitle }</td>
-						</c:when>
-						<c:otherwise>
-							<td></td>
+						</c:if>
+						<c:if test="${ status.count > 3 }">
 							<td colspan="2">${ movie.movieTitle }</td>
-						</c:otherwise>
-					</c:choose>
-				</tr>
-			</c:if>
-		</c:forEach>
-	</table>
-	
-	
-<%/*
-	<div id="mov_list">
-		<div class="bg">
-			<c:forEach var="movie" items="${movieList}">
-				<div class="movie mov_float">
-					<img src="${movie.moviePoster}" alt="${ movie.movieTitle }">
-					<p>${ movie.movieTitle }</p>
-				</div>
+						</c:if>
+					</tr>
+				</c:if>
 			</c:forEach>
-			<div class="clear"></div>
-		</div>
+		</table>
+		<hr>
 	</div>
-	*/ %>
 	<!-- 담당자 내용 -->
 	<%@ include file="../_footer.jsp"%>
 </body>

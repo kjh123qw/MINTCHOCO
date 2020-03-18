@@ -1,3 +1,7 @@
+/* 기본 CSS를 작성합니다. (세로모드 모바일 디바이스)
+  기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
+  가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
+  
 /* 
 
 	담당 : 최원준
@@ -6,279 +10,99 @@
 
 /* 화면 기본 */
 
-body{
-    background-color: #00ac9a;
+#rankWrap {
+	padding: 0 5px;
 }
-
-#mov_list{
-    position: relative;
-    width: 1808px;
-    margin: 0 auto;
-    background-color: #00ac9a;
+#rankWrap h1 {
+	padding: 5px;
 }
-
-
-/* 영화 목록 바탕 */
-
-.bg {
-    background-color: #000;
+#rankWrap hr {
+	margin: 5px 0;
 }
-
-.mov_float{
-	float: left;
-}
-.clear {
-	clear: both;
-}
-/* 영화 관련 */
-
-.movie{
-    height: 450px;
-    width: 450px;
-    background-color: #565656;
-    border: 1px solid #00ac9a;
-}
-
-.movie img{
-	height: 400px;
-	width: 280px;
-    cursor: pointer;
-    border: 1px solid #008a7b;
-}
-
-.movie p{
-	height: 50px;
+.rank-table {
 	width: 100%;
-    cursor: pointer;
-    border: 1px solid #565656;
-    background-color: #008a7b;
-    color: #00d7cb;
-    font-size: 30px;
-    text-align: center;
-    
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+	background-color: #fff;
+	border-collapse: separate;
+	border-spacing: 0;
 }
-
+.rank-table tr:first-of-type th, .rank-table tr:first-of-type td,
+.rank-table tr:nth-of-type(2) th, .rank-table tr:nth-of-type(2) td,
+.rank-table tr:nth-of-type(3) th, .rank-table tr:nth-of-type(3) td {
+	padding: 5px;
+	font-size: 12px;
+	border-top: 2px solid #499;
+	border-bottom: 2px solid #acc;
+}
+.rank-table th, .rank-table td {
+	padding: 5px;
+	font-size: 12px;
+	border-bottom: 1px dashed #acc;
+}
+.rank-table th {
+	width: 40px;
+	font-size: 14px;
+	text-align: center;
+}
+.rank-table th, .rank-table td {
+	padding: 5px;
+	font-size: 12px;
+	border-bottom: 1px dashed #acc;
+}
+.rank-blank-underline { display: none; }
+.rank-header-mega, .rank-header-cgv {
+	width: 40%; height: 35px;
+	margin-top: 15px;
+	float: left;
+	border: 1px solid #599;
+	font-size: 14px;
+	text-align: center;
+	line-height: 35px;
+	color: #266;
+	cursor: pointer;
+}
+.rank-header-named {
+	border-right: 0;
+	border-left: 0;
+}
+.rank-header-selected {
+	width: 60%; height: 50px;
+	margin-top: 0;
+	line-height: 50px;
+	background-color: #599;
+	font-weight: bold;
+	font-size: 20px;
+	color: #fff;
+}
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
-/* /* @media screen and (min-width: 576px) {
-	
-화면 기본
-
-	body{
-	    background-color: #00ac9a;
-	}
-	
-	#mov_list{
-	    position: relative;
-	    width: 100%;
-	    height: 480px;
-	    overflow-x: hidden;
-	    background-color: #00ac9a;
-	}
-	
-	영화 목록 바탕
-	
-	.bg {
-	    width: 6000px;
-	    overflow: hidden;
-	    background-color: #000;
-	}
-	
-	영화 관련
-	
-	.movie{
-	    height: 450px;
-	    width: 480px;
-	    float: left;
-	    overflow: hidden;
-	    background-color: #565656;
-	    border: 1px solid #00ac9a;
-	}
-	
-	.movie img{
-		height: 400px;
-		width: 280px;
-	    cursor: pointer;
-	    border: 1px solid #008a7b;
-	}
-	
-	.movie p{
-		height: 50px;
-		width: 480px;
-	    cursor: pointer;
-	    border: 1px solid #565656;
-	    background-color: #008a7b;
-	    color: #00d7cb;
-	    font-size: 30px;
-	    text-align: center;
-	} 
+@media screen and (min-width: 576px) {
+     
 }
 
-가로 해상도가 768px 보다 큰 화면에 적용
+/* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
-
-	화면 기본
-	
-	body{
-	    background-color: #00ac9a;
-	}
-	
-	#mov_list{
-	    position: relative;
-	    width: 100%;
-	    height: 480px;
-	    overflow-x: hidden;
-	    background-color: #00ac9a;
-	}
-	
-	영화 목록 바탕
-	
-	.bg {
-	    width: 6000px;
-	    overflow: hidden;
-	    background-color: #000;
-	}
-	
-	영화 관련
-	
-	.movie{
-	    height: 450px;
-	    width: 480px;
-	    float: left;
-	    overflow: hidden;
-	    background-color: #565656;
-	    border: 1px solid #00ac9a;
-	}
-	
-	.movie img{
-		height: 400px;
-		width: 280px;
-	    cursor: pointer;
-	    border: 1px solid #008a7b;
-	}
-	
-	.movie p{
-		height: 50px;
-		width: 480px;
-	    cursor: pointer;
-	    border: 1px solid #565656;
-	    background-color: #008a7b;
-	    color: #00d7cb;
-	    font-size: 30px;
-	    text-align: center;
-	}	
-}
-
-가로 해상도가 992px 보다 큰 화면에 적용
-@media screen and (min-width: 992px) {
-	
-	화면 기본
-	
-	body{
-	    background-color: #00ac9a;
-	}
-	
-	#mov_list{
-	    position: relative;
-	    width: 100%;
-	    height: 480px;
-	    overflow-x: hidden;
-	    background-color: #00ac9a;
-	}
-	
-	영화 목록 바탕
-	
-	.bg {
-	    width: 6000px;
-	    overflow: hidden;
-	    background-color: #000;
-	}
-	
-	영화 관련
-	
-	.movie{
-	    height: 450px;
-	    width: 480px;
-	    float: left;
-	    overflow: hidden;
-	    background-color: #565656;
-	    border: 1px solid #00ac9a;
-	}
-	
-	.movie img{
-		height: 400px;
-		width: 280px;
-	    cursor: pointer;
-	    border: 1px solid #008a7b;
-	}
-	
-	.movie p{
-		height: 50px;
-		width: 480px;
-	    cursor: pointer;
-	    border: 1px solid #565656;
-	    background-color: #008a7b;
-	    color: #00d7cb;
-	    font-size: 30px;
-	    text-align: center;
-	}
-}
-
-가로 해상도가 1200px 보다 큰 화면에 적용
-@media screen and (min-width: 1225px) {
-	
-	화면 기본
-	
-	body{
-	    background-color: #00ac9a;
-	}
-	
-	#mov_list{
-	    position: relative;
-	    width: 100%;
-	    height: 480px;
-	    overflow-x: hidden;
-	    background-color: #00ac9a;
-	}
-	
-	영화 목록 바탕
-	
-	.bg {
-	    width: 6000px;
-	    overflow: hidden;
-	    background-color: #000;
-	}
-	
-	
-	영화 관련
-	
-	.movie{
-	    height: 450px;
-	    width: 480px;
-	    float: left;
-	    overflow: hidden;
-	    background-color: #565656;
-	    border: 1px solid #00ac9a;
-	}
-	
-	.movie img{
-		height: 400px;
-		width: 280px;
-	    cursor: pointer;
-	    border: 1px solid #008a7b;
-	}
-	
-	.movie p{
-		height: 50px;
-		width: 480px;
-	    cursor: pointer;
-	    border: 1px solid #565656;
-	    background-color: #008a7b;
-	    color: #00d7cb;
-	    font-size: 30px;
-	    text-align: center;
-	}
     
- */ */}
+}
+
+/* 가로 해상도가 992px 보다 큰 화면에 적용 */
+@media screen and (min-width: 992px) {
+
+	.rank-blank-underline {
+		width: 20%; height: 50px;
+		display: block;
+		float: left;
+		border-bottom: 1px solid #599;
+	}
+	.rank-header-mega, .rank-header-cgv {
+		width: 15%;
+	}
+	.rank-header-selected {
+		width: 30%;
+	}
+}
+/* 가로 해상도가 1200px 보다 큰 화면에 적용 */
+@media screen and (min-width: 1225px) {
+	#rankWrap {
+		width: 1200px;
+		margin: 0 auto;
+	}
+}

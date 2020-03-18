@@ -144,7 +144,7 @@ $(function() {
 		        	if(data.assessId == null) {
 		        		
 		        	} else {
-			        	$('#writeCommentBox').html('<div class="no-comment">작성한 평점이 존재합니다.</div>');
+//			        	$('#writeCommentBox').html('<div class="no-comment">작성한 평점이 존재합니다.</div>');
 			        	$('#myCommentBox').html('');
 		        		var regDate = new Date(data.assessRegdate);
 		        		

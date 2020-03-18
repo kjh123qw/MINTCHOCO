@@ -48,13 +48,22 @@
 
 	<h1><a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }"> 영화 내용 상세 </a></h1>
 	
-	<!-- 관리자일 경우에만 보이는 메뉴 -->
-	<div id="updateMenu" style="text-align: center;">
-
-		<input type="button" value="영화 정보 수정" onclick="location.href='${ contextPath }/movie/updateForm.do?movieNumber=${ movie.movieNumber }'">
-		<input type="button" value="기존 영화 삭제" onclick="location.href='${ contextPath }/movie/deleteForm.do?movieNumber=${ movie.movieNumber }'">
 	
-	</div>
+	
+	<div class="loginUser" hidden="hidden">${user.number}</div>
+	
+	<c:if test="${ user.name.contains('관리자') }">
+	
+		<!-- 관리자일 경우에만 보이는 메뉴 -->
+	
+		<div id="updateMenu" style="text-align: center;">
+	
+			<input type="button" value="영화 정보 수정" onclick="location.href='${ contextPath }/movie/updateForm.do?movieNumber=${ movie.movieNumber }'">
+			<input type="button" value="기존 영화 삭제" onclick="location.href='${ contextPath }/movie/deleteForm.do?movieNumber=${ movie.movieNumber }'">
+		
+		</div>
+	
+	</c:if>
 	
 	<!-- 영화 정보 -->
 	<div class="movie">
@@ -64,7 +73,7 @@
 			<div class="poster-image"><a onclick="window.history.go(-1);">
 				<img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a>
 				<div class="plus-minus">
-					<input type="button" value="찜하기!" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
+					<input class="<c:if test="${ checkFavorite == 1 }">checked</c:if>" type="button" value="찜하기!" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
 					<input type="button" value="퉤에엣!" onclick="location.href='${ contextPath }/movie/favoriteMinus.do?movieNumber=${ movie.movieNumber }'">
 				</div>
 			</div>

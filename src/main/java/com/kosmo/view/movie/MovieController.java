@@ -44,8 +44,13 @@ public class MovieController {
 	// 주제별 영화 목록
 	
 	@RequestMapping("/movie/recommend.do")
-	public String movieList(MovieDAO movieDAO, Model model) {
+	public String movieList(MovieDAO movieDAO, Model model, HttpServletRequest request) {
+		
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+		
 		model.addAttribute("movieList", movieDAO.selectMovieList());
+		model.addAttribute("user", memberVO);
+		
 		return "rec_list.jsp";
 	}
 	
@@ -53,8 +58,14 @@ public class MovieController {
 	
 	@RequestMapping("/movie/detail.do")
 	public String movieDetail(MemberVO member, MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
+		
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+		
 		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 		model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
+		model.addAttribute("checkFavorite", movieDAO.checkFavorite(memberVO.getNumber(), request.getParameter("movieNumber")));
+		model.addAttribute("user", memberVO);
+		
 		return "mov_detail.jsp";
 	}
 	

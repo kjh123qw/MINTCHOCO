@@ -39,12 +39,16 @@
 
 		<h1><a href="${ contextPath }/movie/recommend.do"> 추천 영화 목록 </a></h1>
 	
-		<!-- 관리자일 경우에만 보이는 메뉴 -->
-		<div id="updateMenu" style="text-align: center;">
+		<c:if test="${user.name.contains('관리자')}">
+	
+			<!-- 관리자일 경우에만 보이는 메뉴 -->
+			<div id="updateMenu" style="text-align: center;">
+			
+				<input type="button" value="영화 정보 입력" onclick="location.href='${ contextPath }/movie/insertForm.do'">
+			
+			</div>
 		
-			<input type="button" value="영화 정보 입력" onclick="location.href='${ contextPath }/movie/insertForm.do'">
-		
-		</div>
+		</c:if>
 		
 		<div id="selectBox">
 			<div class="select1">액션</div>

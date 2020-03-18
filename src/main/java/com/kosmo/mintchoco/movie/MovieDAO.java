@@ -28,6 +28,7 @@ public class MovieDAO {
 	// 선택
 	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
 	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
+	private final String SELECT_FAVORITE = "SELECT * FROM FAVORITE WHERE MEMBER_NUMBER = ? and MOVIE_NUMBER = ?";
 
 	// 수정
 	final private String UPDATE_MOVIE = "UPDATE MOVIE SET MOVIE_TEASER = ?, MOVIE_TITLE = ?, MOVIE_KIND = ?, MOVIE_DIRECTOR = ?, MOVIE_ACTOR = ?, MOVIE_GRADE = ?, MOVIE_TIME = ?, MOVIE_DATE = ?, MOVIE_YOUTUBE_URL = ?, MOVIE_NAVER_URL = ?, MOVIE_CONTENT = ? WHERE MOVIE_NUMBER = ?";
@@ -167,6 +168,31 @@ public class MovieDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 
+	}
+	
+	// 찜 목록 확인
+	public int checkFavorite(int memberNumber, String movieNumber) {
+		int returnValue = 1;
+		try {
+			
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(SELECT_FAVORITE);
+			stmt.setInt(1, memberNumber);
+			stmt.setString(2, movieNumber);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				returnValue = 1;
+			} else {
+				returnValue = -1;
+			}
+			
+		}catch(Exception e) {
+			returnValue = -1;
+		}finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		System.out.println(returnValue);
+		return returnValue;
 	}
 	
 	// 기존 영화 삭제

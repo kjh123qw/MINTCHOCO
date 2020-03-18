@@ -119,7 +119,9 @@ public class AssessmentDAO {
 		return returnValue;
 	}
 	
-	public void insertAssessment(int memberNumber, int movieNumber, String assessContent, int assessStars) {
+	public boolean insertAssessment(int memberNumber, int movieNumber, String assessContent, int assessStars) {
+		boolean bResult = false;
+		
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(SELECT_ASSESSMENT);
@@ -128,25 +130,38 @@ public class AssessmentDAO {
 			stmt.setInt(3, movieNumber);
 			stmt.setString(4, assessContent);
 			stmt.setInt(5, assessStars);
-			stmt.executeUpdate();
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
+			
 		} catch(Exception e) {
 			System.out.println("Error - insertAssessment()\n");
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
+		
+		return bResult;
 	}
 	
-	public void deleteAssessment(String assessId) {
+	public boolean deleteAssessment(String assessId) {
+		boolean bResult = false;
+		
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(DELETE_ASSESSMENT);
 			stmt.setString(1, assessId);
-			stmt.executeUpdate();
+			
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
+			
 		} catch(Exception e) {
 			System.out.println("Error - deleteAssessment()\n");
 		} finally {
 			JDBCUtil.close(stmt, conn);
 		}
+		
+		return bResult;
 	}
 	
 	

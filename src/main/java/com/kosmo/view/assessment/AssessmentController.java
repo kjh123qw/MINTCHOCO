@@ -39,7 +39,10 @@ public class AssessmentController {
 
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberInfo");
-		assessmentDAO.insertAssessment(memberVO.getNumber() ,Integer.parseInt(request.getParameter("movieNumber")), request.getParameter("assessContent"), Integer.parseInt(request.getParameter("assessStars")));
+		boolean bResult = assessmentDAO.insertAssessment(memberVO.getNumber() ,Integer.parseInt(request.getParameter("movieNumber")), request.getParameter("assessContent"), Integer.parseInt(request.getParameter("assessStars")));
+		if(bResult)
+			assInsertAfter(assessmentDAO, Integer.parseInt(request.getParameter("movieNumber")), request.getParameter("assessContent"));
+			
 	    return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber") + "#ratingWrap";
 	}
 	@RequestMapping(value="/comment/delete.do", method=RequestMethod.GET)
@@ -47,7 +50,13 @@ public class AssessmentController {
 
 		HttpSession session = request.getSession();
 		MemberVO memberVO = (MemberVO)session.getAttribute("memberInfo");
-		assessmentDAO.deleteAssessment(request.getParameter("assessId"));
+		
+		AssessmentVO VO = assessmentDAO.selectAssessmentLike(request.getParameter("assessId"));
+		boolean bResult = assessmentDAO.deleteAssessment(request.getParameter("assessId"));
+		if(bResult)
+			assDelAfter(assessmentDAO, VO);
+		
+		
 	    return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber") + "#ratingWrap";
 	}
 	
@@ -109,14 +118,16 @@ public class AssessmentController {
 	}
 	
 	//평가글 등록시
-	public void assInsertAfter(AssessmentVO VO, AssessmentDAO DAO)
+	public void assInsertAfter(AssessmentDAO DAO, int iMovieNumber, String strcontent)
 	{
-		List<String> tagList = getTagList(VO.getAssessContent());
+		List<String> tagList = getTagList(strcontent);
+		System.out.println("평가글 등록시 tagList : " + tagList);	//실험중
+		
 		//평가글에 #태그가 하나라도 있다면
 		for(int i = 0; i < tagList.size(); i++)
 		{
 			//Tag테이블에 추가, 이미 있으면 Cnt를 증가
-			int iResult = DAO.insertTag(tagList.get(i), VO.getMovieNumber());
+			int iResult = DAO.insertTag(tagList.get(i), iMovieNumber);
 			if(-1 == iResult)
 				DAO.updateTagUseCnt(tagList.get(i));
 			else
@@ -124,19 +135,18 @@ public class AssessmentController {
 			
 			//게시물의 평가글 중 해당 #태그를 포함한 글이 기준 이상이면 
 			//TagMapping테이블에 추가
-			int iCount = DAO.getTagCount(VO.getMovieNumber(), tagList.get(i));
+			int iCount = DAO.getTagCount(iMovieNumber, tagList.get(i));
 			if(TAG_CNT_STANDARD <= iCount)
 			{
-				int count = DAO.insertTagMapping(tagList.get(i), VO.getMovieNumber());
+				int count = DAO.insertTagMapping(tagList.get(i), iMovieNumber);
 				if(0 < count)
-					SearchController.updateMapData(VO.getMovieNumber(), tagList.get(i), true);
-					
+					SearchController.updateMapData(iMovieNumber, tagList.get(i), true);
 			}
 		}
 	}
 	
 	//평가글 삭제시
-	public void assDelAfter(AssessmentVO VO, AssessmentDAO DAO)
+	public void assDelAfter(AssessmentDAO DAO, AssessmentVO VO)
 	{
 		//영화의 게시물 중 1~3위의 글을 뽑는다.(추천수가 같을때는 날짜가 최신 순으로)
 		List<AssessmentVO> assRankList = DAO.getAssessRank(VO.getMovieNumber(), 3);
@@ -307,27 +317,38 @@ public class AssessmentController {
 	{
 		List<String> tagList = new ArrayList<String>(); 
 		int iPos, iPosEnd = 0;
-		
+
 		while(true)
 		{
-			iPos = assContent.indexOf(iPosEnd, '@');
+			iPos = assContent.indexOf('@', iPosEnd);
 			if(-1 != iPos)
 			{
-				iPosEnd = assContent.indexOf(iPos, ' ');
-				String strTag = assContent.substring(iPos, iPosEnd); 
+				iPosEnd = assContent.indexOf(' ', iPos);
+				
+				String strTag = "";
+				if(-1 == iPosEnd)
+					strTag = assContent.substring(iPos + 1);
+				else
+					strTag = assContent.substring(iPos + 1, iPosEnd);
 				
 				boolean bCheck = true;
-				for(int i = 0; i < tagList.size(); i++)
+				if(null != tagList) 
 				{
-					if(strTag.equals(tagList.get(i)))
+					for(int i = 0; i < tagList.size(); i++)
 					{
-						bCheck = false;
-						break;
+						if(strTag.equals(tagList.get(i)))
+						{
+							bCheck = false;
+							break;
+						}
 					}
+					
+					if(true == bCheck)
+						tagList.add(strTag);	
 				}
 				
-				if(true == bCheck)
-					tagList.add(strTag);
+				if(-1 == iPosEnd)
+					break;
 			}
 			else
 				break;

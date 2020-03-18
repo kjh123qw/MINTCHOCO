@@ -64,8 +64,8 @@
 			<div class="poster-image"><a onclick="window.history.go(-1);">
 				<img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a>
 				<div class="plus-minus">
-					<input type="button" value="찜" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
-					<input type="button" value="퉷" onclick="location.href='${ contextPath }/movie/favoriteMinus.do?movieNumber=${ movie.movieNumber }'">
+					<input type="button" value="찜하기!" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
+					<input type="button" value="퉤에엣!" onclick="location.href='${ contextPath }/movie/favoriteMinus.do?movieNumber=${ movie.movieNumber }'">
 				</div>
 			</div>
 			

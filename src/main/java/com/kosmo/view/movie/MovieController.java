@@ -58,23 +58,27 @@ public class MovieController {
 		return "mov_detail.jsp";
 	}
 	
-	// 찜 목록에 추가
+	// 찜 목록 추가
 
 	@RequestMapping("/movie/favoritePlus.do")
 	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, Model model, HttpServletRequest request) {
+		
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
 		favoriteDAO.insertFavorite(memberVO.getNumber(), request.getParameter("movieNumber"));
 		
 		return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber");
 	}
 	
-//	@RequestMapping("/favoritMinus.do")
-//	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, HttpServletRequest request) {
-//
-//		favoriteDAO.deleteFavorite(request.getParameter("movieNumber"));
-//		
-//		return "redirect:/movie/detail.do?movieNumber=";
-//	}
+	// 찜 목록 취소
+	
+	@RequestMapping("/movie/favoriteMinus.do")
+	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, HttpServletRequest request) {
+
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+		favoriteDAO.deleteFavorite(memberVO.getNumber(), request.getParameter("movieNumber"));
+		
+		return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber");
+	}
 	
 	// 영화 정보 수정
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="./myp_submenu.jsp" %>
 <%
 /*
 	:: 평점 리스트 ::
@@ -13,7 +14,7 @@
 <!-- 마이페이지 내 페이지별 js/css -->
 <link rel="stylesheet" href="${ contextPath }/css/member/myp_assess.css">
 <!-- //마이페이지 내 페이지별  js, css -->
-<%@ include file="./myp_submenu.jsp" %>
+
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 평가 목록 -->
 <script>
@@ -82,26 +83,26 @@ document.addEventListener("DOMContentLoaded", function(){
 					
 					<!-- 평가 틀 -->
 					<c:forEach items="${assessList}" var="assess">
-					<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.poster});" onclick="chk_enable(this);">
-					<input class="con-chkbox" type="checkbox" name="chkbox" value="${assess.assessNum}">
+					<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.moviePoster});" onclick="chk_enable(this);">
+					<input class="con-chkbox" type="checkbox" name="chkbox" value="${assess.assessId}">
 					<div class="con-assess-bg">			
 						<div class="con-assess-img-wrap con-assess-float">
-							<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.poster}">
+							<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.moviePoster}">
 							<!-- 140x200 -->
 						</div>
 						<div class="con-assess-cont-wrap con-assess-float">
 							<div class="con-assess-cont-right-wrap con-assess-float">
-								<a href="${ contextPath }/movie/detail.do?movieNumber=${assess.movieNum}" class="con-search-target con-assess-cont-subject con-movie-link">${assess.movieTitle}</a>
-								<div class="con-assess-cont-genre">${assess.kind} | ${assess.release} 개봉 | ${assess.playTime}분 | ${assess.grade}세 관람가</div>
+								<a href="${ contextPath }/movie/detail.do?movieNumber=${assess.movieNumber}" class="con-search-target con-assess-cont-subject con-movie-link">${assess.movieTitle}</a>
+								<div class="con-assess-cont-genre">${assess.movieKind} | ${assess.movieDate} 개봉 | ${assess.movieTime}분 | ${assess.movieGrade}세 관람가</div>
 							</div>
 							<div class="myp-assess-mobile con-assess-stars-date con-assess-float-right">
-								<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
+								<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessRegdate}</div>
 							</div>
 							<div class="myp-assess-pc con-assess-stars con-assess-float-right">
 								<div class="clear"></div>
 								<div class="con-th-mintcho"></div>
-								<div class="con-th-mintcho2 con-assess-float" style="width: ${20*assess.stars}px;"></div>
-								<div class="con-th-mintcho-label con-assess-float-right"><fmt:formatNumber value="${assess.stars}" pattern=".0"/></div>								
+								<div class="con-th-mintcho2 con-assess-float" style="width: ${20*assess.movieStars}px;"></div>
+								<div class="con-th-mintcho-label con-assess-float-right"><fmt:formatNumber value="${assess.movieStars}" pattern=".0"/></div>								
 							</div>
 							<div class="clear"></div>					
 						</div>
@@ -114,22 +115,22 @@ document.addEventListener("DOMContentLoaded", function(){
 											<span class="con_th2"><img src="${ contextPath }/images/member/est_bad.png"></span>
 											<span>${assess.hates}</span>
 											<div class="myp-assess-pc con-assess-stars-date con-assess-float-right">
-												<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessIndate}</div>
+												<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessRegdate}</div>
 											</div>
 										</div>
 										<div class="clear"></div>
 										<div class="con-assess-cont-line-content">
-											<p>${assess.aContent}</p>
+											<p>${assess.assessContent}</p>
 											<div class="myp-assess-mobile con-assess-img-stars con-assess-float">							
 												<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
-											<div class="con-assess-img-stars-score">${assess.astars}</div>							
+											<div class="con-assess-img-stars-score">${assess.assessStars}</div>							
 											</div>
 										</div>
 									</div>
 								</div>
 								<div class="myp-assess-pc con-assess-img-stars con-assess-float">							
 									<img src="${ contextPath }/images/member/mintchoco.png" class="con-assess-mintchoco">
-									<div class="con-assess-img-stars-score">${assess.astars}</div>							
+									<div class="con-assess-img-stars-score">${assess.assessStars}</div>							
 								</div>
 							</div>
 						<div class="clear"></div>

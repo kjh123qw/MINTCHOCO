@@ -577,7 +577,6 @@ function Request(){
 	 }
 }
 
-
 document.addEventListener("DOMContentLoaded", function(){
 	var request = new Request();
 	request.getParameter("nickName");

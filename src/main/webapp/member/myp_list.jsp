@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="./myp_submenu.jsp" %>
 <%
 /*
 	:: 찜 한 리스트 ::
@@ -13,7 +14,7 @@
 <!-- 마이페이지 내 페이지별 js/css -->
 <link rel="stylesheet" href="${ contextPath }/css/member/myp_fav.css">
 <!-- //마이페이지 내 페이지별  js, css -->
-<%@ include file="./myp_submenu.jsp" %>
+
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 찜한 목록 -->
 <script>

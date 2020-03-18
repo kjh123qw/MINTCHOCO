@@ -184,6 +184,29 @@ public class FavoriteDAO {
 			return favoriteList;
 	}
 	
+	// 평가목록 삭제(체크박스에서 받아서)
+	public void deleteFavorite(List<String> chkbox) {			
+		String qr="";
+		for (int i=0; i<chkbox.size(); i++) {
+			qr += "?,";
+		}
+		qr = qr.substring(0, qr.length()-1);
+		String FAVORITE_DELETE = "DELETE FROM FAVORITE WHERE FAVORITE_ID in (" + qr + ")";
+		System.out.println("===> JDBC로 deleteFavorite()");
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(FAVORITE_DELETE);
+			for (int i=0; i<chkbox.size(); i++) {
+				stmt.setString(i+1, chkbox.get(i));
+			}
+			stmt.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("deleteFavorite() + e");
+		} finally {
+			JDBCUtil.close(stmt, conn);
+		}
+	}
+	
 	// 찜목록에 추가
 	public void insertFavorite(int memberNumber, String movieNumber) {
 

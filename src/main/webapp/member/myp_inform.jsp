@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="./myp_submenu.jsp" %>
 <%
 /*
 	:: 마이페이지 메인/개인 정보 ::
@@ -21,7 +22,7 @@
 <link rel="stylesheet" href="${ contextPath }/css/member/myp_info.css">
 
 <!-- //마이페이지 내 페이지별  js, css -->
-<%@ include file="./myp_submenu.jsp" %>
+
 <!-- 서브메뉴 이하 담당자 내용 -->
 <!-- 개인정보 -->
 <script>

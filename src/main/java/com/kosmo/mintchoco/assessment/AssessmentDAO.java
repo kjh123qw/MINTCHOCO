@@ -28,7 +28,13 @@ public class AssessmentDAO {
 	final private String SELECT_ASSESSMENT_LIKE = "SELECT * FROM ASSESSMENT_VIEW WHERE ASSESS_ID = ?";
 	final private String INSERT_ASSESSMENT = "INSERT INTO ASSESSMENT VALUES(?, ?, ?, ?, ?, default)";
 	final private String DELETE_ASSESSMENT = "DELETE FROM ASSESSMENT WHERE ASSESS_ID = ?";
-
+	
+		// by 장세진
+	private final String ASSESSMENT_BY_TITLE = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=? ORDER BY MOVIE_TITLE DESC";
+	private final String ASSESSMENT_BY_INDATE = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=? ORDER BY ASSESS_ID DESC";
+	private final String ASSESSMENT_BY_STARS = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=? ORDER BY ASSESS_STARS DESC, STARS DESC";
+	private final String SELECT_ASSESSMENT_VIEW_BY_MEMBER = "SELECT * FROM ASSESSMENT_VIEW WHERE MEMBER_NUMBER=?";
+	
 	// 영화 평점 목록
 	public List<AssessmentVO> selectAssessmentList(int movieNumber) {
 		List<AssessmentVO> asseList = new ArrayList<AssessmentVO>();
@@ -366,4 +372,187 @@ public class AssessmentDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 	}
+	
+	
+	// 이하 by 장세진
+	// 평가목록 가져오기(멤버 번호로)
+	public List<AssessmentVO> getAssessmentList(String memberNum) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 getAssessmentList()");
+		List<AssessmentVO> asseList = new ArrayList<AssessmentVO>();		
+		try {		
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(SELECT_ASSESSMENT_VIEW_BY_MEMBER);
+			stmt.setString(1, memberNum);
+			rs = stmt.executeQuery();
+		
+			while(rs.next()) {
+				AssessmentVO assessmentVO = new AssessmentVO();
+				assessmentVO.setAssessId(rs.getString("assess_id"));
+				assessmentVO.setMemberNumber(rs.getInt("member_number"));
+				assessmentVO.setMemberNickname(rs.getString("member_nickname"));
+				assessmentVO.setMovieNumber(rs.getInt("movie_number"));
+				assessmentVO.setMoviePoster(rs.getString("movie_poster"));
+				assessmentVO.setMovieTitle(rs.getString("movie_title"));
+				assessmentVO.setMovieStars(rs.getFloat("stars"));
+				assessmentVO.setMovieKind(rs.getString("movie_kind"));
+				assessmentVO.setMovieGrade(rs.getString("movie_grade"));
+				assessmentVO.setMovieTime(rs.getInt("movie_time"));
+				assessmentVO.setMovieDate(rs.getString("movie_date"));
+				assessmentVO.setAssessContent(rs.getString("assess_content"));
+				assessmentVO.setAssessStars(rs.getInt("assess_stars"));
+				assessmentVO.setAssessRegdate(rs.getDate("assess_regdate"));
+				assessmentVO.setLikes(rs.getInt("likes"));
+				assessmentVO.setHates(rs.getInt("hates"));
+				asseList.add(assessmentVO);
+			}
+		} catch(Exception e) {
+			System.out.println("getAssessmentList()" +e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+			return asseList;
+		}
+	
+	// 제목 정렬
+	public List<AssessmentVO> getAssessSortbyTitle(String memberNum) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 getAssessSortbyTitle()");
+		List<AssessmentVO> asseList = new ArrayList<AssessmentVO>();		
+		try {		
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(ASSESSMENT_BY_TITLE);
+			stmt.setString(1, memberNum);
+			rs = stmt.executeQuery();
+		
+			while(rs.next()) {
+				AssessmentVO assessmentVO = new AssessmentVO();
+				assessmentVO.setAssessId(rs.getString("assess_id"));
+				assessmentVO.setMemberNumber(rs.getInt("member_number"));
+				assessmentVO.setMemberNickname(rs.getString("member_nickname"));
+				assessmentVO.setMovieNumber(rs.getInt("movie_number"));
+				assessmentVO.setMoviePoster(rs.getString("movie_poster"));
+				assessmentVO.setMovieTitle(rs.getString("movie_title"));
+				assessmentVO.setMovieStars(rs.getFloat("stars"));
+				assessmentVO.setMovieKind(rs.getString("movie_kind"));
+				assessmentVO.setMovieGrade(rs.getString("movie_grade"));
+				assessmentVO.setMovieTime(rs.getInt("movie_time"));
+				assessmentVO.setMovieDate(rs.getString("movie_date"));
+				assessmentVO.setAssessContent(rs.getString("assess_content"));
+				assessmentVO.setAssessStars(rs.getInt("assess_stars"));
+				assessmentVO.setAssessRegdate(rs.getDate("assess_regdate"));
+				assessmentVO.setLikes(rs.getInt("likes"));
+				assessmentVO.setHates(rs.getInt("hates"));
+				asseList.add(assessmentVO);
+			}
+		} catch(Exception e) {
+			System.out.println("getAssessSortbyTitle()" +e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+			return asseList;
+		}
+	
+	// 등록 순 정렬
+	public List<AssessmentVO> getAssessSortbyIndate(String memberNum) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 getAssessSortbyIndate()");
+		List<AssessmentVO> asseList = new ArrayList<AssessmentVO>();		
+		try {		
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(ASSESSMENT_BY_INDATE);
+			stmt.setString(1, memberNum);
+			rs = stmt.executeQuery();
+		
+			while(rs.next()) {
+				AssessmentVO assessmentVO = new AssessmentVO();
+				assessmentVO.setAssessId(rs.getString("assess_id"));
+				assessmentVO.setMemberNumber(rs.getInt("member_number"));
+				assessmentVO.setMemberNickname(rs.getString("member_nickname"));
+				assessmentVO.setMovieNumber(rs.getInt("movie_number"));
+				assessmentVO.setMoviePoster(rs.getString("movie_poster"));
+				assessmentVO.setMovieTitle(rs.getString("movie_title"));
+				assessmentVO.setMovieStars(rs.getFloat("stars"));
+				assessmentVO.setMovieKind(rs.getString("movie_kind"));
+				assessmentVO.setMovieGrade(rs.getString("movie_grade"));
+				assessmentVO.setMovieTime(rs.getInt("movie_time"));
+				assessmentVO.setMovieDate(rs.getString("movie_date"));
+				assessmentVO.setAssessContent(rs.getString("assess_content"));
+				assessmentVO.setAssessStars(rs.getInt("assess_stars"));
+				assessmentVO.setAssessRegdate(rs.getDate("assess_regdate"));
+				assessmentVO.setLikes(rs.getInt("likes"));
+				assessmentVO.setHates(rs.getInt("hates"));
+				asseList.add(assessmentVO);
+			}
+		} catch(Exception e) {
+			System.out.println("getAssessSortbyIndate()" +e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+			return asseList;
+		}
+	
+	// 평점순 정렬
+	public List<AssessmentVO> getAssessSortbyStars(String memberNum) {
+		// TODO Auto-generated method stub
+		System.out.println("===> JDBC로 getAssessSortbyStars()");
+		List<AssessmentVO> asseList = new ArrayList<AssessmentVO>();		
+		try {		
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(ASSESSMENT_BY_STARS);
+			stmt.setString(1, memberNum);
+			rs = stmt.executeQuery();
+		
+			while(rs.next()) {
+				AssessmentVO assessmentVO = new AssessmentVO();
+				assessmentVO.setAssessId(rs.getString("assess_id"));
+				assessmentVO.setMemberNumber(rs.getInt("member_number"));
+				assessmentVO.setMemberNickname(rs.getString("member_nickname"));
+				assessmentVO.setMovieNumber(rs.getInt("movie_number"));
+				assessmentVO.setMoviePoster(rs.getString("movie_poster"));
+				assessmentVO.setMovieTitle(rs.getString("movie_title"));
+				assessmentVO.setMovieStars(rs.getFloat("stars"));
+				assessmentVO.setMovieKind(rs.getString("movie_kind"));
+				assessmentVO.setMovieGrade(rs.getString("movie_grade"));
+				assessmentVO.setMovieTime(rs.getInt("movie_time"));
+				assessmentVO.setMovieDate(rs.getString("movie_date"));
+				assessmentVO.setAssessContent(rs.getString("assess_content"));
+				assessmentVO.setAssessStars(rs.getInt("assess_stars"));
+				assessmentVO.setAssessRegdate(rs.getDate("assess_regdate"));
+				assessmentVO.setLikes(rs.getInt("likes"));
+				assessmentVO.setHates(rs.getInt("hates"));
+				asseList.add(assessmentVO);
+			}
+		} catch(Exception e) {
+			System.out.println("getAssessSortbyStars()" +e);
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+			return asseList;
+		}
+	
+		// 평가목록에서 제거(선택된 체크박스로)
+		public void deleteAssessmentByChkbox(List<String> chkbox) {
+			String qr="";
+			for (int i=0; i<chkbox.size(); i++) {
+				qr += "?,";
+			}
+			qr = qr.substring(0, qr.length()-1);
+			
+			String ASSESSMENT_DELETE = "DELETE FROM ASSESSMENT WHERE ASSESS_ID in (" + qr + ")";
+			
+			System.out.println("===> JDBC로 deleteAssessment()");
+			try {
+				conn = JDBCUtil.getConnection();
+				stmt = conn.prepareStatement(ASSESSMENT_DELETE);			
+				for (int i=0; i<chkbox.size(); i++) {
+					stmt.setString(i+1, chkbox.get(i));
+				}
+				stmt.executeUpdate();
+			} catch(Exception e) {
+				System.out.println("deleteAssessment() + e");
+			} finally {
+				JDBCUtil.close(stmt, conn);
+			}
+		}
 }

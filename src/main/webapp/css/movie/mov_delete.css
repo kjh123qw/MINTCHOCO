@@ -19,6 +19,7 @@ body{
 
 h1{
     width: 100%;
+    cursor: pointer;
     color: #F5FFFA;
     background-color: #0DEEC9;
     border-top: 5px solid #F5FFFA;
@@ -27,7 +28,17 @@ h1{
 }
 
 h1 a{
+	display: block;
 	color: #F5FFFA;
+
+}
+
+h1:hover{
+    color: #F5FFFA;
+    opacity: 0.9;
+    border-top: 5px solid gold;
+    border-bottom: 5px solid gold;
+    text-align: center;
 }
 
 h3, h4{

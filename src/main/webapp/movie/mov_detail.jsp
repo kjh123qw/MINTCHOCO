@@ -73,8 +73,17 @@
 			<div class="poster-image"><a onclick="window.history.go(-1);">
 				<img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a>
 				<div class="plus-minus">
-					<input class="<c:if test="${ checkFavorite == 1 }">checked</c:if>" type="button" value="찜하기!" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
-					<input type="button" value="퉤에엣!" onclick="location.href='${ contextPath }/movie/favoriteMinus.do?movieNumber=${ movie.movieNumber }'">
+					<c:choose>
+						<c:when test="${ checkFavorite == 1 }">
+							<input class="checked" type="button" value="찜하기!">
+							<input type="button" value="퉤에엣!" onclick="location.href='${ contextPath }/movie/favoriteMinus.do?movieNumber=${ movie.movieNumber }'">
+						</c:when>
+						<c:otherwise>
+							<input type="button" value="찜하기!" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
+							<input class="none-checked" type="button" value="퉤에엣!">
+						</c:otherwise>
+					</c:choose>
+					
 				</div>
 			</div>
 			

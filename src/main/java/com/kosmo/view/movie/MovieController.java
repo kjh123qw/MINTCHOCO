@@ -57,7 +57,7 @@ public class MovieController {
 	// 영화 상세 정보
 	
 	@RequestMapping("/movie/detail.do")
-	public String movieDetail(MemberVO member, MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
+	public String movieDetail(MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
 		

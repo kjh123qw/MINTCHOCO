@@ -72,10 +72,11 @@ document.addEventListener("DOMContentLoaded", function(){
 			</nav>
 			<!-- // 평가 목록 편집 메뉴 -->
 			
-								
-			
+			<c:if test="${detail_info.assessment_flag=='N' && memberInfo.number==detail_info.number}">
+				<div class="con-assess con-assess-none con-none-my">현재 비공개로 설정되어있습니다.</div>
+			</c:if>
 			<c:choose>
-	   			<c:when test="${detail_info.assessment_flag=='Y'}">
+	   			<c:when test="${detail_info.assessment_flag=='Y' || memberInfo.number==detail_info.number}">
 			   		<!-- 평가항목 없을때 -->
 					<c:if test="${assess_cnt == 0}">
 						<div class="con-assess con-assess-none">평가된 항목이 없습니다.</div>

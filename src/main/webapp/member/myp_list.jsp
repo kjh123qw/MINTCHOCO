@@ -72,8 +72,11 @@ document.addEventListener("DOMContentLoaded", function(){
 			<div class="clear"></div>
 			
 			
+			<c:if test="${detail_info.like_flag=='N' && memberInfo.number==detail_info.number}">
+				<div class="con-fav-none con-none-my">현재 비공개로 설정되어있습니다.</div>
+			</c:if>
 			<c:choose>
-	   			<c:when test="${detail_info.like_flag=='Y'}">
+	   			<c:when test="${detail_info.like_flag=='Y' || memberInfo.number==detail_info.number}">
 			   		<c:if test="${fav_cnt == 0}">
 						<div class="con-fav-none">찜한 항목이 없습니다.</div>
 					</c:if>

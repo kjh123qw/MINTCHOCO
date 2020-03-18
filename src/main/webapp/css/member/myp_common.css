@@ -279,6 +279,10 @@ position: absolute;
 .con-fakeModify:hover {
 	color: #777!important;
 }
+.con-none-my {
+	height: 80px!important;
+	line-height: 80px!important;
+}
 .con-line-th {
 	margin-bottom: 5px;
 	width: 600px;

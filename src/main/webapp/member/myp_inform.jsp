@@ -32,8 +32,11 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 </script>
 	<form class="myp-con-info" method="post" action="" onsubmit="return ;">
+	<c:if test="${detail_info.info_flag=='N' && memberInfo.number==detail_info.number}">
+		<div class="con-info-none con-none-my">현재 비공개로 설정되어있습니다.</div>
+	</c:if>
 	<c:choose>
-	   	<c:when test="${detail_info.info_flag=='Y'}">
+	   	<c:when test="${detail_info.info_flag=='Y' || memberInfo.number==detail_info.number}">
 			<article class="con-info">
 				<div class="con-info-intro con-info-wrap">			
 					<div class="con-info-subject">최근 추가한 목록</div>

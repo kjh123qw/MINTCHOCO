@@ -289,6 +289,8 @@ function checkModify(){
 		hide('fail');
 		return false;
  	} else {
+ 		btn.disabled = true;
+		sfmodal.style.display = 'block';
  		successWindow.style.display = 'block'; 
  		hide('success');
  		return true;
@@ -304,6 +306,7 @@ function checkModifyPW(){
 	var newPW = document.getElementsByClassName('conf-modify-newPW')[0];
 	var newPWChk = document.getElementsByClassName('conf-modify-newPWChk')[0];
 	var text = document.getElementsByClassName('con-conf-status')[0];
+	var pwtext = document.getElementsByClassName('con-conf-confirmed')[0];
 	if(newPW.value==""){
 		btn.disabled = true;
 		sfmodal.style.display = 'block';
@@ -327,7 +330,9 @@ function checkModifyPW(){
 		hide('fail');
 		return false;
 	} else {
-		successWindow.style.display = 'block'; 
+		btn.disabled = true;
+		sfmodal.style.display = 'block'; 
+		successWindow.style.display = 'block';
 		hide('success');
 		return true;
 	} 
@@ -342,6 +347,7 @@ function checkModifyOPE(){
 	var text = document.getElementsByClassName('con-conf-status')[0];
 	
 	btn.disabled = true;
+	sfmodal.style.display = 'block';
 	successWindow.style.display = 'block'; 
 	hide('success');
 	return true;
@@ -381,6 +387,7 @@ function checkModifyDEL(){
         }
     });
 	
+	btn.disabled = true;
 	sfmodal.style.display = 'block';
 	successWindow.style.display = 'block';
 	

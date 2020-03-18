@@ -56,7 +56,7 @@
 		<tr>
 			<td colspan="2">
 				<div class="cst-btn notice-form-btn">
-					<input type="button" value="삭제" class="st2-70-40">
+					<input type="button" value="삭제" class="st2-70-40" onclick="if(confirm('글을 삭제하시겠습니까?')) location.href='${ contextPath }/service/delete.do?noticeNumber=${ noticeVO.noticeNumber }';">
 					<input type="button" value="수정" class="st3-70-40" onclick="location.href='${ contextPath }/service/modify.do?noticeNumber=${ noticeVO.noticeNumber }'">
 					<input type="button" value="목록으로" class="st1-120-40" onclick="location.href='${ contextPath }/service/notice.do'">
 				</div>

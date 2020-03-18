@@ -38,7 +38,7 @@
 
 <div id="noticeWrap">
 	<h1>공지사항 수정</h1>
-	<form method="post" action="${ contextPath }/service/update.do">
+	<form method="post" action="${ contextPath }/service/modify.do">
 	<input type="hidden" name="noticeNumber" value="${ noticeVO.noticeNumber }">
 	<table class="notice-form">
 		<tr>

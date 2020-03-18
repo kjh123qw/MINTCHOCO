@@ -20,7 +20,8 @@ session.setAttribute("memberInfo", memberVO);
 	<div id="headerNav">
 		<div id="homeBtn">
 			<a href="${ contextPath }/main.do">
-				<img src="${ contextPath }/images/mincho/mincho2.png" alt="home button">
+				<i class="fas fa-ice-cream"></i>
+				<!--<img src="${ contextPath }/images/mincho/mincho2.png" alt="home button">-->
 			</a>
 		</div>
 		<ul id="navList">
@@ -109,7 +110,7 @@ session.setAttribute("memberInfo", memberVO);
 		<div><i class="fas fa-times"></i></div>
 	</div>
 	<ul id="mobNavList">
-		<li><a href="${ contextPath }/main.do">홈으로</a></li>
+		<li><a href="${ contextPath }/main.do">홈</a></li>
 		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
 		<li><a href="${ contextPath }/movie/recommend.do">추천영화</a></li>
 		<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>

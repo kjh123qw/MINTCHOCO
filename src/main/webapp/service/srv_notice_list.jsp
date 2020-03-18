@@ -57,14 +57,16 @@
 	</table>
 	<div class="notice-buttons">
 		<div class="cst-btn notice-write-btn">
-			<input type="button" value="글쓰기" class="st1-60-40" onclick="location.href='${ contextPath }/service/insert.do'">
+			<input type="button" value="글쓰기" class="st1-70-40" onclick="location.href='${ contextPath }/service/insert.do'">
 		</div>
-		<div class="cst-btn notice-search-btn">
-			<input type="button" value="검색" class="st1-60-40">
-		</div>
-		<div class="cst-text-st1 notice-search-form">
-			<input type="text" class="text-140">
-		</div>
+		<form action="${ contextPath }/service/notice.do">
+			<div class="cst-btn notice-search-btn">
+				<input type="submit" value="검색" class="st1-70-40">
+			</div>
+			<div class="cst-text-st1 notice-search-form">
+				<input type="text" class="text-140" name="noticeSearch">
+			</div>
+		</form>
 	</div>
 </div>
 

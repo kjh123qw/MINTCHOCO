@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.1.4";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.1.5";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -187,7 +187,8 @@ public class DBVersionManager {
 			
 			"create table tag_mapping (" + 					// 태그맵핑  (최원준)
 			"    tag_content varchar2(60) REFERENCES TAG(tag_content) on delete cascade, " + // 태그 번호 
-			"    MOVIE_number NUMBER(10) REFERENCES MOVIE(MOVIE_number) on delete cascade" + // 영화 번호 
+			"    MOVIE_number NUMBER(10) REFERENCES MOVIE(MOVIE_number) on delete cascade, " + // 영화 번호
+			"    UNIQUE uni_mapping(tag_content, movie_number)" + 
 			")",
 			
 			"create table faq (" + 							// FAQ  (박찬영)

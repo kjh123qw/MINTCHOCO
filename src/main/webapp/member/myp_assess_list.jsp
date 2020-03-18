@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(){
 								<div class="clear"></div>
 								<div class="con-th-mintcho"></div>
 								<div class="con-th-mintcho2 con-assess-float" style="width: ${20*assess.stars}px;"></div>
-								<div class="con-th-mintcho-label con-assess-float-right">${assess.stars}</div>								
+								<div class="con-th-mintcho-label con-assess-float-right"><fmt:formatNumber value="${assess.stars}" pattern=".0"/></div>								
 							</div>
 							<div class="clear"></div>					
 						</div>

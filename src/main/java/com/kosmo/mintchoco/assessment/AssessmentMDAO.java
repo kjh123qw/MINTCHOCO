@@ -47,7 +47,7 @@ public class AssessmentMDAO {
 					assess.setRelease(rs.getString("MOVIE_DATE"));
 					assess.setaContent(rs.getString("ASSESS_CONTENT"));
 					assess.setAstars(rs.getInt("ASSESS_STARS"));
-					assess.setStars(rs.getInt("STARS"));
+					assess.setStars(rs.getFloat("STARS"));
 					assess.setAssessIndate(rs.getDate("ASSESS_REGDATE"));
 					assess.setLikes(rs.getInt("LIKES"));
 					assess.setHates(rs.getInt("HATES"));					
@@ -83,7 +83,7 @@ public class AssessmentMDAO {
 					assess.setRelease(rs.getString("MOVIE_DATE"));
 					assess.setaContent(rs.getString("ASSESS_CONTENT"));
 					assess.setAstars(rs.getInt("ASSESS_STARS"));
-					assess.setStars(rs.getInt("STARS"));
+					assess.setStars(rs.getFloat("STARS"));
 					assess.setAssessIndate(rs.getDate("ASSESS_REGDATE"));
 					assess.setLikes(rs.getInt("LIKES"));
 					assess.setHates(rs.getInt("HATES"));					
@@ -119,7 +119,7 @@ public class AssessmentMDAO {
 					assess.setRelease(rs.getString("MOVIE_DATE"));
 					assess.setaContent(rs.getString("ASSESS_CONTENT"));
 					assess.setAstars(rs.getInt("ASSESS_STARS"));
-					assess.setStars(rs.getInt("STARS"));
+					assess.setStars(rs.getFloat("STARS"));
 					assess.setAssessIndate(rs.getDate("ASSESS_REGDATE"));
 					assess.setLikes(rs.getInt("LIKES"));
 					assess.setHates(rs.getInt("HATES"));					
@@ -155,7 +155,7 @@ public class AssessmentMDAO {
 					assess.setRelease(rs.getString("MOVIE_DATE"));
 					assess.setaContent(rs.getString("ASSESS_CONTENT"));
 					assess.setAstars(rs.getInt("ASSESS_STARS"));
-					assess.setStars(rs.getInt("STARS"));
+					assess.setStars(rs.getFloat("STARS"));
 					assess.setAssessIndate(rs.getDate("ASSESS_REGDATE"));
 					assess.setLikes(rs.getInt("LIKES"));
 					assess.setHates(rs.getInt("HATES"));					

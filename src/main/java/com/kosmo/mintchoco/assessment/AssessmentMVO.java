@@ -18,7 +18,7 @@ public class AssessmentMVO {
 	private String release; // 개봉 년
 	private String aContent; // 평가 내용
 	private int astars; // 매긴 점수
-	private int stars; // 영화 점수
+	private float stars; // 영화 점수
 	private Date assessIndate; // 평가한 날짜
 	private int likes; // 평가에 대한 좋아요
 	private int hates; // 평가에 대한 싫어요
@@ -27,7 +27,7 @@ public class AssessmentMVO {
 		super();
 	}
 	
-	public AssessmentMVO(String assessNum, int movieNum, String poster, String movieTitle, String kind, String grade, int playTime, String release, String aContent, int astars, int stars, Date assessIndate, int likes, int hates) {
+	public AssessmentMVO(String assessNum, int movieNum, String poster, String movieTitle, String kind, String grade, int playTime, String release, String aContent, int astars, float stars, Date assessIndate, int likes, int hates) {
 		this.assessNum = assessNum;
 		this.movieNum = movieNum;
 		this.poster = poster;
@@ -124,11 +124,11 @@ public class AssessmentMVO {
 		this.astars = astars;
 	}
 	
-	public int getStars() {
+	public float getStars() {
 		return stars;
 	}
 
-	public void setStars(int stars) {
+	public void setStars(float stars) {
 		this.stars = stars;
 	}
 

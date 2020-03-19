@@ -183,7 +183,6 @@ public class AssessmentDAO {
 	public List<AssessmentVO> getAssessRank(int movieNum, int count) 
 	{
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 getAssessRank()");
 		List<AssessmentVO> assessList = new ArrayList<AssessmentVO>();		
 		try 
 		{		
@@ -268,7 +267,6 @@ public class AssessmentDAO {
 	public boolean insertTag(String tag, int movieNum)
 	{
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 insertTag()");
 		boolean bResult = false;
 		
 		try 
@@ -335,12 +333,12 @@ public class AssessmentDAO {
 	public boolean deleteTagMapping(String tag, int movieNumber)
 	{
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 deleteTagMapping()");
 		boolean bResult = false;
 		
 		try 
 		{		
-			String sql = "delete from TAG_MAPPING where MOVIE_NUMBER = ? and upper(TAG_CONTENT) = upper('" + tag + "')";
+			//String sql = "delete from TAG_MAPPING where MOVIE_NUMBER = ? and upper(TAG_CONTENT) = upper('" + tag + "')";
+			String sql = "delete from TAG_MAPPING where MOVIE_NUMBER = ? and upper(TAG_CONTENT) = upper('" + tag + "') and upper(TAG_CONTENT) in (select upper(tag_content) from tag where movie_number is not null)";
 			
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(sql);

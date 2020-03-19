@@ -58,8 +58,6 @@ public class SearchController {
 		for(String str : tagList)
 			strKeyWord += str + ",";
 		
-		System.out.println("keyword : " + strKeyWord);
-		
 		//결과값이 없다면
 		if(true != mapSearchResult.containsKey(strKeyWord))
 		{
@@ -113,10 +111,12 @@ public class SearchController {
 			
 			for(int i = 0; i < trgSearchList.size(); i++)
 				trgSearchList.get(i).setMovieIndex(i);
+			
+			mapSearchResult.put(strKeyWord, (ArrayList<SearchVO>)searchArrDeepCopy(trgSearchList));
+			
 		}
 		else
 			trgSearchList = searchArrDeepCopy(mapSearchResult.get(strKeyWord));
-		
 		
 		totlaSearchCount = trgSearchList.size();
 		model.addAttribute("searchCount", totlaSearchCount);

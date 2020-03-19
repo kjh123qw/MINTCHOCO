@@ -141,7 +141,6 @@ public class SearchDAO {
 					resultList.get(i).add(searchVO);
 					
 					int number = rs.getInt("movie_number");
-					System.out.println(rs.getString("movie_title"));
 					mapSearchData.put(number, searchVO);
 				}
 				

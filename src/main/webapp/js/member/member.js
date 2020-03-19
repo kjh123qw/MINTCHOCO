@@ -503,7 +503,7 @@ function hideCHK(element){
 
 
 function ageCount() {
-	for(var i=1; i<151; i++) {
+	for(var i=1; i<101; i++) {
 		var age = document.createElement("option");
 		var ageText = document.createTextNode(i);
 		age.setAttribute('value',i);

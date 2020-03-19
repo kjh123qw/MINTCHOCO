@@ -2,6 +2,24 @@
  *  담당자 : 김정호
  */
 
+function checkTagList() {
+	var checkValue = false;
+	var checkBoxList = $('#searchTagListBox input').toArray();
+	var checkMoreBoxList = $('#searchMoreTagListBox input').toArray();
+	checkBoxList.forEach(function(item, index) {
+		if($(item).is(":checked")) {
+			checkValue = true;
+		}
+	});
+	checkMoreBoxList.forEach(function(item, index) {
+		if($(item).is(":checked")) {
+			checkValue = true;
+		}
+	});
+	if(!checkValue)
+		alert('태그를 한개 이상 선택해주세요.');
+	return checkValue;
+}
 $(function() {
 	var contextPath = sessionStorage.getItem('contextPath');
 	var selectedBg = '#008a7b';
@@ -200,7 +218,8 @@ $(function() {
 			}
     	});
 	}
-
+	
+	
 	
 	//checkbox tag
 	function checkBoxTag(chkboxArr) {

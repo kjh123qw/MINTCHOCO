@@ -108,17 +108,17 @@ public class AssessmentDAO {
 	
 	public int insertAssessmentLike(int memberNumber, String assessId, String assessEst) {
 		int returnValue = 1;
-		String sql = "INSERT INTO ASSESSMENT_EST VALUES(ASSESS_EST_SEQ.NEXTVAL, ?, ?, ?, default)";
+//		String sql = "INSERT INTO ASSESSMENT_EST VALUES(ASSESS_EST_SEQ.NEXTVAL, ?, ?, ?, default)";
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-//			stmt.setString(1, Integer.toString(memberNumber) + assessId);
-//			stmt.setInt(2, memberNumber);
-//			stmt.setString(3, assessId);
-//			stmt.setString(4, assessEst);
-			stmt.setInt(1, memberNumber);
-			stmt.setString(2, assessId);
-			stmt.setString(3, assessEst);
+			stmt = conn.prepareStatement(INSERT_ASSESSMENT_LIKE);
+			stmt.setString(1, Integer.toString(memberNumber) + assessId);
+			stmt.setInt(2, memberNumber);
+			stmt.setString(3, assessId);
+			stmt.setString(4, assessEst);
+//			stmt.setInt(1, memberNumber);
+//			stmt.setString(2, assessId);
+//			stmt.setString(3, assessEst);
 			stmt.executeUpdate();
 		} catch(Exception e) {
 			System.out.println("Error - updateAssessmentLike()\n");
@@ -131,19 +131,19 @@ public class AssessmentDAO {
 	
 	public boolean insertAssessment(int memberNumber, int movieNumber, String assessContent, int assessStars) {
 		boolean bResult = false;
-		String sql = "INSERT INTO ASSESSMENT VALUES(ASSESS_SEQ.NEXTVAL, ?, ?, ?, ?, default)";
+//		String sql = "INSERT INTO ASSESSMENT VALUES(ASSESS_SEQ.NEXTVAL, ?, ?, ?, ?, default)";
 		try {
 			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(sql); 	// INSERT_ASSESSMENT
-//			stmt.setString(1, Integer.toString(memberNumber) + Integer.toString(movieNumber));
-//			stmt.setInt(2, memberNumber);
-//			stmt.setInt(3, movieNumber);
-//			stmt.setString(4, assessContent);
-//			stmt.setInt(5, assessStars);
-			stmt.setInt(1, memberNumber);
-			stmt.setInt(2, movieNumber);
-			stmt.setString(3, assessContent);
-			stmt.setInt(4, assessStars);
+			stmt = conn.prepareStatement(INSERT_ASSESSMENT); 	// INSERT_ASSESSMENT
+			stmt.setString(1, Integer.toString(memberNumber) + Integer.toString(movieNumber));
+			stmt.setInt(2, memberNumber);
+			stmt.setInt(3, movieNumber);
+			stmt.setString(4, assessContent);
+			stmt.setInt(5, assessStars);
+//			stmt.setInt(1, memberNumber);
+//			stmt.setInt(2, movieNumber);
+//			stmt.setString(3, assessContent);
+//			stmt.setInt(4, assessStars);
 			int count = stmt.executeUpdate();
 			if(0 < count)
 				bResult = true;

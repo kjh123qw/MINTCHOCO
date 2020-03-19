@@ -90,11 +90,11 @@ $(function() {
 						
 						var ratingDate = $('<div />', {'class': 'rating-date', 'text': regDate.getFullYear() + '-' + (regDate.getMonth() + 1)+ '-' + regDate.getDate()});
 						var ratingBottom = $('<div />', {'class': 'rating-bottom'});
-						var ratingDelete = $('<div />', {'class': 'rating-delete', 'text': '삭제', 'click': function() {
-							location.href = contextPath + "/comment/delete.do?assessId=" + item.assessId + "&movieNumber=" + item.movieNumber;
-						}});
+//						var ratingDelete = $('<div />', {'class': 'rating-delete', 'text': '삭제', 'click': function() {
+//							location.href = contextPath + "/comment/delete.do?assessId=" + item.assessId + "&movieNumber=" + item.movieNumber;
+//						}});
 						ratingBottom.append(ratingDate);
-						ratingBottom.append(ratingDelete);
+//						ratingBottom.append(ratingDelete);
 						ratingBottom.append(ratingUd);
 						
 						var ratingInnerBox = $('<div />', {'class': 'rating-inner-box', 'id': 'commentNumber' + item.assessId});
@@ -149,7 +149,7 @@ $(function() {
 		        	if(data.assessId == null) {
 		        		
 		        	} else {
-//			        	$('#writeCommentBox').html('<div class="no-comment">작성한 평점이 존재합니다.</div>');
+			        	$('#writeCommentBox').html('<div class="no-comment">작성한 평점이 존재합니다.</div>');
 			        	$('#myCommentBox').html('');
 		        		var regDate = new Date(data.assessRegdate);
 		        		

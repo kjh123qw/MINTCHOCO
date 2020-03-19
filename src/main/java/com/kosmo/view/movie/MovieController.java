@@ -59,15 +59,18 @@ public class MovieController {
 	@RequestMapping("/movie/detail.do")
 	public String movieDetail(MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
-		
-		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
-		model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
-		model.addAttribute("stars", movieDAO.viewRating(request.getParameter("movieNumber")));
-		model.addAttribute("checkFavorite", movieDAO.checkFavorite(memberVO.getNumber(), request.getParameter("movieNumber")));
-		model.addAttribute("user", memberVO);
-		
-		return "mov_detail.jsp";
+		MemberVO memberVO = null;
+		if(request.getSession().getAttribute("memberInfo") != null) {
+			memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+			model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
+			model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
+			model.addAttribute("stars", movieDAO.viewRating(request.getParameter("movieNumber")));
+			model.addAttribute("checkFavorite", movieDAO.checkFavorite(memberVO.getNumber(), request.getParameter("movieNumber")));
+			model.addAttribute("user", memberVO);
+			return "mov_detail.jsp";
+		} else {
+			return "redirect:/main.do";
+		}
 	}
 	
 	// 찜 목록 추가

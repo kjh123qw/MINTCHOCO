@@ -8,14 +8,14 @@
 	담당자 : 김정호
 */
 /* 임시 로그인 */
+/*
 MemberDAO memberDAO = new MemberDAO();
 MemberVO memberVO = memberDAO.loginMember("admin@gmail.com", "ac9689e2272427085e35b9d3e3e8bed88cb3434828b43b86fc0596cad4c6e270");
-session.setAttribute("memberInfo", memberVO);
+session.setAttribute("memberInfo", memberVO);*/
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
-
 <header>
 	<div id="headerNav">
 		<div id="homeBtn">
@@ -73,7 +73,7 @@ session.setAttribute("memberInfo", memberVO);
 	</div>
 </header>
 <div id="tagWrap">
-	<form name="searchTagForm" action="${ contextPath }/movie/tagSearch.do">
+	<form name="searchTagForm" action="${ contextPath }/movie/tagSearch.do" onsubmit="return checkTagList();">
 		<div id="searchTagListBox"></div>
 		<div id="searchMoreTagListBox"></div>
 		<div id="serachTagBtn">

@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.1.5";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.1.6";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -213,9 +213,9 @@ public class DBVersionManager {
 			"create sequence MEMBER_SEQ increment by 1 start with 1 NOCYCLE", // 회원 시퀀스
 			"create sequence MOVIE_SEQ increment by 1 start with 1 NOCYCLE", // 영화 시퀀스
 			"create sequence FAQ_SEQ increment by 1 start with 1 NOCYCLE", // faq 시퀀스
-			"create sequence NOTICE_SEQ increment by 1 start with 1 NOCYCLE", // 공지사항 시퀀스
-			"create sequence ASSESS_SEQ increment by 1 start with 1000 NOCYCLE", // faq 시퀀스
-			"create sequence ASSESS_EST_SEQ increment by 1 start with 1000 NOCYCLE" // 공지사항 시퀀스
+			"create sequence NOTICE_SEQ increment by 1 start with 1 NOCYCLE" // 공지사항 시퀀스
+//			"create sequence ASSESS_SEQ increment by 1 start with 1000 NOCYCLE", // faq 시퀀스
+//			"create sequence ASSESS_EST_SEQ increment by 1 start with 1000 NOCYCLE" // 공지사항 시퀀스
 	};
 	
 	// --- 이하 테스트 데이터 입력 sql ---

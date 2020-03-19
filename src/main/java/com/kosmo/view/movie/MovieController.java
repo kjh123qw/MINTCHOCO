@@ -63,6 +63,7 @@ public class MovieController {
 		
 		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 		model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
+		model.addAttribute("stars", movieDAO.viewRating(request.getParameter("movieNumber")));
 		model.addAttribute("checkFavorite", movieDAO.checkFavorite(memberVO.getNumber(), request.getParameter("movieNumber")));
 		model.addAttribute("user", memberVO);
 		

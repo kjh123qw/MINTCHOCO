@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.springframework.ui.Model;
 
+import com.kosmo.mintchoco.assessment.AssessmentVO;
 import com.kosmo.mintchoco.common.JDBCUtil;
 import com.kosmo.mintchoco.tag.TagVO;
 
@@ -23,18 +24,21 @@ public class MovieDAO {
 	
 	// 쿼리
 	// 입력
-	final private String INSERT_MOVIE = "INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?)";
+	private final String INSERT_MOVIE = "INSERT INTO MOVIE VALUES(MOVIE_SEQ.NEXTVAL, concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, DEFAULT, ?)";
 	
 	// 선택
-	final private String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
-	final private String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
+	private final String SELECT_MOVIE_LIST = "SELECT * FROM MOVIE";
+	private final String SELECT_MOVIE_ONE = "SELECT * FROM MOVIE WHERE MOVIE_NUMBER = ?";
 	private final String SELECT_FAVORITE = "SELECT * FROM FAVORITE WHERE MEMBER_NUMBER = ? and MOVIE_NUMBER = ?";
+	
+	// 평점
+	private final String SELECT_RATING = "SELECT STARS FROM SEARCH_VIEW WHERE MOVIE_NUMBER = ?";
 
 	// 수정
-	final private String UPDATE_MOVIE = "UPDATE MOVIE SET MOVIE_TEASER = ?, MOVIE_TITLE = ?, MOVIE_KIND = ?, MOVIE_DIRECTOR = ?, MOVIE_ACTOR = ?, MOVIE_GRADE = ?, MOVIE_TIME = ?, MOVIE_DATE = ?, MOVIE_YOUTUBE_URL = ?, MOVIE_NAVER_URL = ?, MOVIE_CONTENT = ? WHERE MOVIE_NUMBER = ?";
+	private final String UPDATE_MOVIE = "UPDATE MOVIE SET MOVIE_TEASER = ?, MOVIE_TITLE = ?, MOVIE_KIND = ?, MOVIE_DIRECTOR = ?, MOVIE_ACTOR = ?, MOVIE_GRADE = ?, MOVIE_TIME = ?, MOVIE_DATE = ?, MOVIE_YOUTUBE_URL = ?, MOVIE_NAVER_URL = ?, MOVIE_CONTENT = ? WHERE MOVIE_NUMBER = ?";
 	
 	// 삭제
-	final private String DELETE_MOVIE_NUM = "DELETE FROM MOVIE WHERE MOVIE_NUMBER = ?";
+	private final String DELETE_MOVIE_NUM = "DELETE FROM MOVIE WHERE MOVIE_NUMBER = ?";
 	
 	// 영화 정보 입력
 	public void insertMovie(MovieVO movieVO) {
@@ -138,6 +142,32 @@ public class MovieDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 		return movieVO;
+	}
+	
+	// 평점 확인
+	public float viewRating(String movieNumber) {
+		
+		float stars = 0f;
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(SELECT_RATING);
+			stmt.setString(1, movieNumber);
+			rs = stmt.executeQuery();
+			if(rs.next()) {
+				
+				stars = rs.getFloat("stars");
+				
+			}
+			
+		} catch(Exception e) {
+			System.out.println("Error - selectMovieList()\n");
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+		return stars;
+		
 	}
 	
 	// 영화 내용 수정

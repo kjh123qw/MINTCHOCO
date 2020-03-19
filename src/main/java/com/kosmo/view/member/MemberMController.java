@@ -87,10 +87,15 @@ public class MemberMController {
 			}	
 		}
 		
+		if(sort == null) {
+			model.addAttribute("favoriteList", favoriteDAO.getFavoriteList(number));
+		}
+		
 		// 삭제
 		if(chkbox != null) {
 			List<String> chkboxList = Arrays.asList(chkbox.split(","));
 			favoriteDAO.deleteFavorite(chkboxList);
+			model.addAttribute("favoriteList", favoriteDAO.getFavoriteList(number));
 		}
 		
 		// 정렬
@@ -106,8 +111,7 @@ public class MemberMController {
 			}
 		}
 		
-		// 기본
-		model.addAttribute("favoriteList", favoriteDAO.getFavoriteList(number));
+		// 기본		
 		model.addAttribute("fav_cnt", favoriteDAO.getFavoriteCnt(number));
 		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
 		model.addAttribute("assess_cnt", memberDAO.getAssessmentCnt(number));
@@ -143,6 +147,10 @@ public class MemberMController {
 			}	
 		}
 		
+		if(sort == null) {
+			model.addAttribute("assessList", assessDAO.getAssessmentList(number));
+		}
+		
 		// 삭제
 		if(chkbox != null) {
 			List<String> chkboxList = Arrays.asList(chkbox.split(","));
@@ -166,7 +174,6 @@ public class MemberMController {
 		// 기본
 		model.addAttribute("detail_info", memberDAO.getDetailInfo(number));
 		model.addAttribute("assess_cnt", memberDAO.getAssessmentCnt(number));
-		model.addAttribute("assessList", assessDAO.getAssessmentList(number));
 		return "member/myp_assess_list.jsp";
 	}	
 	

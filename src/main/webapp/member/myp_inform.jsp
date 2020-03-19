@@ -57,6 +57,9 @@ document.addEventListener("DOMContentLoaded", function(){
 					<div class="con-info-subject">소개</div>
 					<div class="con-info-content">
 						${detail_info.introduce}
+						<c:if test="${detail_info.introduce==null}">
+							자기소개가 작성되지 않았습니다.
+						</c:if>
 					</div>
 				</div>
 				<div class="con-info-detail con-info-wrap">			
@@ -76,8 +79,8 @@ document.addEventListener("DOMContentLoaded", function(){
 							<td>${detail_info.email}</td>						
 						</tr>
 						<tr>
-							<th>평가</th>
-							<td>${assess_cnt}</td>						
+							<th>평가 작성</th>
+							<td>${assess_cnt}건</td>						
 						</tr>
 						<tr>
 							<th>가입일</th>

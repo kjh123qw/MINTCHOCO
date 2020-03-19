@@ -37,15 +37,23 @@ public class SearchController {
 	public static Map<String, ArrayList<Integer>> mapTagByMovie = null;												//장르별 영화 저장맵
 	public static Map<String, ArrayList<SearchVO>> mapSearchResult = new HashMap<String, ArrayList<SearchVO>>();	//검색 결과 저장맵
 	
+	public SearchController()
+	{
+		settingTagMapping();
+	}
+	
 	@RequestMapping("/movie/tagSearch.do")
 	public String tagSearch(SearchDAO searchDAO, Model model, HttpServletRequest request) 
 	{
 		String tagList[] = request.getParameterValues("tagList");
+		
 		List<SearchVO> outputList = new ArrayList<SearchVO>();
 		
 		String strKeyWord = "";
 		for(String str : tagList)
-			strKeyWord += str;
+			strKeyWord += str + ",";
+		
+		System.out.println("keyword : " + strKeyWord);
 		
 		//결과값이 없다면
 		if(true != mapSearchResult.containsKey(strKeyWord))
@@ -63,7 +71,10 @@ public class SearchController {
 				}
 			}
 			
-			ArrayList<ArrayList<Integer>> valueList = new ArrayList<ArrayList<Integer>>(3); 
+			ArrayList<ArrayList<Integer>> valueList = new ArrayList<ArrayList<Integer>>();
+			for(int i = 0; i < 3; i ++)
+				valueList.add(new ArrayList<Integer>());
+			
 			for(int key : mapCheck.keySet())
 			{
 				int value = mapCheck.get(key);
@@ -76,21 +87,27 @@ public class SearchController {
 			}
 			
 			if(0 < valueList.get(0).size())
-			{
 				trgSearchList = searchDAO.searchTagMovieList(valueList.get(0));
-				for(int i = 1; i < valueList.size(); i++)
+			
+			for(int i = 1; i < valueList.size(); i++)
+			{
+				if(null != trgSearchList)
 				{
 					if(TAG_SEARCH_VIEW_COUNT <= trgSearchList.size())
 						break;
-					
-					trgSearchList.addAll(searchDAO.searchTagMovieList(valueList.get(i)));
 				}
 				
-				for(int i = 0; i < trgSearchList.size(); i++)
-					trgSearchList.get(i).setMovieIndex(i);
-				
-				mapSearchResult.put(strKeyWord, (ArrayList<SearchVO>)searchArrDeepCopy(trgSearchList));
+				if(0 < valueList.get(i).size())
+				{
+					if(null != trgSearchList)
+						trgSearchList.addAll(searchDAO.searchTagMovieList(valueList.get(i)));
+					else
+						trgSearchList = searchDAO.searchTagMovieList(valueList.get(i));
+				}
 			}
+			
+			for(int i = 0; i < trgSearchList.size(); i++)
+				trgSearchList.get(i).setMovieIndex(i);
 		}
 		else
 			trgSearchList = searchArrDeepCopy(mapSearchResult.get(strKeyWord));
@@ -184,9 +201,15 @@ public class SearchController {
 	{
 		//추가 일 시
 		if(true == bAddorDel)
-			mapTagByMovie.get(tag).add(movie_number);
+		{
+			if(false == mapTagByMovie.get(tag).contains(movie_number))
+				mapTagByMovie.get(tag).add(movie_number);
+		}
 		else
-			mapTagByMovie.get(tag).remove(movie_number);
+		{
+			if(true == mapTagByMovie.get(tag).contains(movie_number))
+				mapTagByMovie.get(tag).remove((Integer)movie_number);	
+		}	
 		
 		deleteResultValue(tag);
 	}

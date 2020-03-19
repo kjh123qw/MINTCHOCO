@@ -198,13 +198,24 @@ public class AssessmentDAO {
 		
 			while(rs.next()) 
 			{
-				AssessmentVO assess = new AssessmentVO();
-				assess.setAssessId(rs.getString("ASSESS_ID"));
-				assess.setMovieNumber(rs.getInt("MOVIE_NUMBER"));
-				assess.setAssessRegdate(rs.getDate("ASSESS_REGDATE"));
-				assess.setLikes(rs.getInt("LIKES"));
-				assess.setHates(rs.getInt("HATES"));					
-				assessList.add(assess);
+				AssessmentVO assessmentVO = new AssessmentVO();
+				assessmentVO.setAssessId(rs.getString("assess_id"));
+				assessmentVO.setMemberNumber(rs.getInt("member_number"));
+				assessmentVO.setMemberNickname(rs.getString("member_nickname"));
+				assessmentVO.setMovieNumber(rs.getInt("movie_number"));
+				assessmentVO.setMoviePoster(rs.getString("movie_poster"));
+				assessmentVO.setMovieTitle(rs.getString("movie_title"));
+				assessmentVO.setMovieStars(rs.getFloat("stars"));
+				assessmentVO.setMovieKind(rs.getString("movie_kind"));
+				assessmentVO.setMovieGrade(rs.getString("movie_grade"));
+				assessmentVO.setMovieTime(rs.getInt("movie_time"));
+				assessmentVO.setMovieDate(rs.getString("movie_date"));
+				assessmentVO.setAssessContent(rs.getString("assess_content"));
+				assessmentVO.setAssessStars(rs.getInt("assess_stars"));
+				assessmentVO.setAssessRegdate(rs.getDate("assess_regdate"));
+				assessmentVO.setLikes(rs.getInt("likes"));
+				assessmentVO.setHates(rs.getInt("hates"));					
+				assessList.add(assessmentVO);
 			}
 		} 
 		catch(Exception e) 
@@ -224,18 +235,16 @@ public class AssessmentDAO {
 	{
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 getTagCount()");
+		tag = "#" + tag;
 		int iCount = 0;
+		String sql = "select count(*) from ASSESSMENT where MOVIE_NUMBER = ? and upper(ASSESS_CONTENT) like upper('%" + tag + "%')";
 		
 		try 
 		{		
-			final String sql = "select count(*) from ASSESSMENT where MOVIE_NUMBER = ? and upper(ASSESS_CONTENT) like upper('%?%')";
-			
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, movieNum);
-			stmt.setString(2, tag);
 			rs = stmt.executeQuery();
-		
 			if(rs.next()) 
 				iCount = rs.getInt(1);
 		} 
@@ -251,22 +260,21 @@ public class AssessmentDAO {
 		return iCount;
 	}
 	
-	
-	public int insertTag(String tag)
+	public boolean insertTag(String tag)
 	{
 		return insertTag(tag, 0);
 	}
 	
 	//태크 테이블에 태그 추가
-	public int insertTag(String tag, int movieNum)
+	public boolean insertTag(String tag, int movieNum)
 	{
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 insertTag()");
-		int iCount = 0;
+		boolean bResult = false;
 		
 		try 
 		{		
-			final String sql = "insert into TAG values(?, ?)";
+			final String sql = "insert into TAG(tag_content, movie_number) values(?, ?)";
 			
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
@@ -277,7 +285,9 @@ public class AssessmentDAO {
 			else
 				stmt.setInt(2, movieNum);
 			
-			iCount = stmt.executeUpdate();
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
 		} 
 		catch(Exception e) 
 		{
@@ -288,15 +298,15 @@ public class AssessmentDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 		
-		return iCount;
+		return bResult;
 	}
 	
 	//태그맵핑 추가
-	public int insertTagMapping(String tag, int movieNum)
+	public boolean insertTagMapping(String tag, int movieNum)
 	{
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 inertTagMapping()");
-		int iCount = 0;
+		boolean bResult = false;
 		
 		try 
 		{		
@@ -307,7 +317,9 @@ public class AssessmentDAO {
 			stmt.setString(1, tag);
 			stmt.setInt(2, movieNum);
 			
-			iCount = stmt.executeUpdate();
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
 		} 
 		catch(Exception e) 
 		{
@@ -318,25 +330,27 @@ public class AssessmentDAO {
 			JDBCUtil.close(rs, stmt, conn);
 		}
 		
-		return iCount;
+		return bResult;
 	}
 	
 	//태크맵팅 삭제
-	public void deleteTagMapping(String tag, int movieNumber)
+	public boolean deleteTagMapping(String tag, int movieNumber)
 	{
 		// TODO Auto-generated method stub
 		System.out.println("===> JDBC로 deleteTagMapping()");
+		boolean bResult = false;
 		
 		try 
 		{		
-			final String sql = "delete from TAG_MAPPING where MOVIE_NUMBER = ? and upper(TAG_CONTENT) = upper('?')";
+			String sql = "delete from TAG_MAPPING where MOVIE_NUMBER = ? and upper(TAG_CONTENT) = upper('" + tag + "')";
 			
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, movieNumber);
-			stmt.setString(2, tag);
 			
-			stmt.executeUpdate();
+			int count = stmt.executeUpdate();
+			if(0 < count)
+				bResult = true;
 		} 
 		catch(Exception e) 
 		{
@@ -346,6 +360,8 @@ public class AssessmentDAO {
 		{
 			JDBCUtil.close(rs, stmt, conn);
 		}
+		
+		return bResult;
 	}
 	
 	//태그테이블의  해당 태그의 cnt + 1

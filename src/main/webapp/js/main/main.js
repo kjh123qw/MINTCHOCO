@@ -112,13 +112,12 @@ function snsEvent(){
 
 function detailMember(number){
 
-	alert("main의 js에 memberDetail 함수있습니다. 수정부탁드립니다. number로 회원번호를 같이 보내드립니다." + number + "번의 회원")
+	location.href='/mintchoco/my_page.do';
 }
 
 function detailMovie(number){
 	
-	alert("main의 js에 detailMovie 함수있습니다. 수정부탁드립니다. number로 영화 번호를 같이 보내드립니다." + number +"번의 영화")
-	
+	location.href='/mintchoco/movie/detail.do?movieNumber=' + number;
 }
 
 function goMypage(number){

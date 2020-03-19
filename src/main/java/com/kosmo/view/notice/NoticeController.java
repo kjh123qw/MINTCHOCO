@@ -50,7 +50,7 @@ public class NoticeController {
 	}
 	
 	@RequestMapping(value="/service/modify.do", method=RequestMethod.GET)
-	public String modifyNotice(@RequestParam("noticeNumber") String noticeNumber, NoticeDAO noticeDAO, Model model) {
+	public String modifyNotice(@RequestParam(value="noticeNumber", defaultValue="1") String noticeNumber, NoticeDAO noticeDAO, Model model) {
 		model.addAttribute("noticeVO", noticeDAO.selectNoticeOne(noticeNumber));
 		return "srv_notice_modify.jsp";
 	}

@@ -56,9 +56,11 @@
 		
 	</table>
 	<div class="notice-buttons">
+		<c:if test="${ sessionScope.memberInfo.number == 1 }">
 		<div class="cst-btn notice-write-btn">
 			<input type="button" value="글쓰기" class="st1-90-40" onclick="location.href='${ contextPath }/service/insert.do'">
 		</div>
+		</c:if>
 		<form action="${ contextPath }/service/notice.do">
 			<div class="cst-btn notice-search-btn">
 				<input type="submit" value="검색" class="st1-70-40">

@@ -529,7 +529,8 @@ div[class *= cst-btn-wrap-st4] > input {
 	
 	/* FOOTER */
 	#footer_wrap .about_us, #footer_wrap .contact_us, #footer_wrap .follow_us {
-		width: 250px;
+		width: 280px;
+		padding: 10px;
 		float: left;
 	}
 	#footer_wrap .follow_us {

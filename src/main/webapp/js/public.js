@@ -122,7 +122,7 @@ $(function() {
 	        	var checkBoxWrap = $('<div />', {'class': 'cst-chkbox-st2'});
 	        	if(data.length > 0) {
 		        	data.forEach(function(item, index) {
-		        		var checkBox = $('<input>', {'type': 'checkbox', 'name': 'selectedTags', 'value': item.tagContent});
+		        		var checkBox = $('<input>', {'type': 'checkbox', 'name': 'tagList', 'value': item.tagContent});
 		        		var label = $('<span>', {'class': 'text-100', 'text': item.tagContent});
 		        		
 		        		checkBoxWrap.append(checkBox);
@@ -148,7 +148,7 @@ $(function() {
 	        	var checkBoxWrap = $('<div />', {'class': 'cst-chkbox-st2'});
 	        	if(data.length > 0) {
 		        	data.forEach(function(item, index) {
-		        		var checkBox = $('<input>', {'type': 'checkbox', 'name': 'selectedTags', 'value': item.tagContent});
+		        		var checkBox = $('<input>', {'type': 'checkbox', 'name': 'tagList', 'value': item.tagContent});
 		        		var label = $('<span>', {'class': 'text-100', 'text': item.tagContent});
 		        		
 		        		checkBoxWrap.append(checkBox);

@@ -611,17 +611,17 @@ public class DBVersionManager {
 			"insert into tag(tag_content, movie_number) values('좀비', null)", 
 			"insert into tag(tag_content, movie_number) values('SF', null)", 
 			"insert into tag(tag_content, movie_number) values('전쟁', null)", 
-			"insert into tag(tag_content, movie_number) values('코미디', null)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG1', 1, 10)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG2', 1, 15)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG3', 1, 20)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG4', 2, 100)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG5', 2, 5)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG6', 2, 7)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG7', 3, 8)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG8', 3, 10)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG9', 3, 15)", 
-			"insert into tag(tag_content, movie_number, cnt) values('TAG10', 3, 22)"
+			"insert into tag(tag_content, movie_number) values('코미디', null)" 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG1', 1, 10)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG2', 1, 15)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG3', 1, 20)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG4', 2, 100)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG5', 2, 5)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG6', 2, 7)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG7', 3, 8)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG8', 3, 10)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG9', 3, 15)", 
+//			"insert into tag(tag_content, movie_number, cnt) values('TAG10', 3, 22)"
 	};
 	
 	private String[] tagMappingTDBSql = {

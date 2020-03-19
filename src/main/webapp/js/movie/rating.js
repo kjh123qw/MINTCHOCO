@@ -90,10 +90,13 @@ $(function() {
 						
 						var ratingDate = $('<div />', {'class': 'rating-date', 'text': regDate.getFullYear() + '-' + (regDate.getMonth() + 1)+ '-' + regDate.getDate()});
 						var ratingBottom = $('<div />', {'class': 'rating-bottom'});
+						var ratingDelete = $('<div />', {'class': 'rating-delete', 'text': '삭제', 'click': function() {
+							location.href = contextPath + "/comment/delete.do?assessId=" + item.assessId + "&movieNumber=" + item.movieNumber;
+						}});
 						ratingBottom.append(ratingDate);
+						ratingBottom.append(ratingDelete);
 						ratingBottom.append(ratingUd);
 						
-	
 						var ratingInnerBox = $('<div />', {'class': 'rating-inner-box', 'id': 'commentNumber' + item.assessId});
 						ratingInnerBox.append(ratingTop);
 						ratingInnerBox.append(ratingComment);

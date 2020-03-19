@@ -73,7 +73,7 @@ session.setAttribute("memberInfo", memberVO);
 	</div>
 </header>
 <div id="tagWrap">
-	<form name="searchTagForm" action="${ contextPath }/movie/search.do">
+	<form name="searchTagForm" action="${ contextPath }/movie/tagSearch.do">
 		<div id="searchTagListBox"></div>
 		<div id="searchMoreTagListBox"></div>
 		<div id="serachTagBtn">

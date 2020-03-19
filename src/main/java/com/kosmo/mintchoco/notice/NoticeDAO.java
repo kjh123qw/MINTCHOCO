@@ -21,6 +21,7 @@ public class NoticeDAO {
 	// 쿼리
 	final private String SELECT_NOTICE_LIST = "SELECT * FROM NOTICE ORDER BY NOTICE_NUMBER DESC";
 	final private String SELECT_NOTICE_ONE = "SELECT * FROM NOTICE WHERE NOTICE_NUMBER = ?";
+	final private String UPDATE_NOTICE_CNT = "UPDATE NOTICE SET NOTICE_CNT = NOTICE_CNT + 1 WHERE NOTICE_NUMBER = ?";
 	final private String INSERT_NOTICE = "INSERT INTO NOTICE VALUES(NOTICE_SEQ.NEXTVAL, 1, ?, ?, DEFAULT, DEFAULT)";
 	final private String UPDATE_NOTICE = "UPDATE NOTICE SET NOTICE_TITLE = ?, NOTICE_CONTENT = ? WHERE NOTICE_NUMBER = ?";
 	final private String DELETE_NOTICE = "DELETE FROM NOTICE WHERE NOTICE_NUMBER = ?";
@@ -88,6 +89,9 @@ public class NoticeDAO {
 		
 		try {
 			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(UPDATE_NOTICE_CNT);
+			stmt.setString(1, noticeNumber);
+			stmt.executeUpdate();
 			stmt = conn.prepareStatement(SELECT_NOTICE_ONE);
 			stmt.setString(1, noticeNumber);
 			rs = stmt.executeQuery();
@@ -100,7 +104,7 @@ public class NoticeDAO {
 				noticeVO.setNoticeRegdate(rs.getDate("notice_regdate"));
 			}
 		} catch(Exception e) {
-			System.out.println("Error - selectNoticeList()\n");
+			System.out.println("Error - selectNoticeOne()\n");
 			e.printStackTrace();
 		} finally {
 			JDBCUtil.close(rs, stmt, conn);

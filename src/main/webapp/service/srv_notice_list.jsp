@@ -57,7 +57,7 @@
 	</table>
 	<div class="notice-buttons">
 		<div class="cst-btn notice-write-btn">
-			<input type="button" value="글쓰기" class="st1-70-40" onclick="location.href='${ contextPath }/service/insert.do'">
+			<input type="button" value="글쓰기" class="st1-90-40" onclick="location.href='${ contextPath }/service/insert.do'">
 		</div>
 		<form action="${ contextPath }/service/notice.do">
 			<div class="cst-btn notice-search-btn">

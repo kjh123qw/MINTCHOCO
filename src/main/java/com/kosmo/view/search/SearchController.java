@@ -46,6 +46,11 @@ public class SearchController {
 	public String tagSearch(SearchDAO searchDAO, Model model, HttpServletRequest request) 
 	{
 		String tagList[] = request.getParameterValues("tagList");
+		if(null == request.getParameterValues("tagList"))
+		{
+			model.addAttribute("searchCount", 0);
+			return "search_list.jsp";
+		}
 		
 		List<SearchVO> outputList = new ArrayList<SearchVO>();
 		
@@ -111,6 +116,7 @@ public class SearchController {
 		}
 		else
 			trgSearchList = searchArrDeepCopy(mapSearchResult.get(strKeyWord));
+		
 		
 		totlaSearchCount = trgSearchList.size();
 		model.addAttribute("searchCount", totlaSearchCount);

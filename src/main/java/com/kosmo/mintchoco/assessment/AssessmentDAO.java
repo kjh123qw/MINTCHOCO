@@ -234,7 +234,6 @@ public class AssessmentDAO {
 	public int getTagCount(int movieNum, String tag) 
 	{
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 getTagCount()");
 		tag = "#" + tag;
 		int iCount = 0;
 		String sql = "select count(*) from ASSESSMENT where MOVIE_NUMBER = ? and upper(ASSESS_CONTENT) like upper('%" + tag + "%')";
@@ -305,7 +304,6 @@ public class AssessmentDAO {
 	public boolean insertTagMapping(String tag, int movieNum)
 	{
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 inertTagMapping()");
 		boolean bResult = false;
 		
 		try 
@@ -368,8 +366,6 @@ public class AssessmentDAO {
 	public void updateTagUseCnt(String tag)
 	{
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 updateTagUseCnt()");
-		
 		try 
 		{		
 			final String sql = "update TAG set cnt = cnt + 1 where upper(TAG_CONTENT) = upper(?)";

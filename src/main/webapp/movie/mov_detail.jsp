@@ -52,7 +52,7 @@
 	
 	<div class="loginUser" hidden="hidden">${user.number}</div>
 	
-	<c:if test="${ user.name.contains('관리자') }">
+	<c:if test="${ sessionScope.memberInfo.number == 1 }">
 	
 		<!-- 관리자일 경우에만 보이는 메뉴 -->
 	
@@ -91,6 +91,9 @@
 	    	
 				<tr>
 				    <td colspan="2"><h3> ${ movie.movieTitle } </h3></td>
+				</tr>
+				<tr>
+				    <td colspan="2"><h3> 평점 <fmt:formatNumber value="${ stars }" pattern="0.0"></fmt:formatNumber> /10.0 </h3></td>
 				</tr>
 				<tr>
 					<td width="20%"> 년 도 </td>

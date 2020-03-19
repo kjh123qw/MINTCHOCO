@@ -58,29 +58,29 @@ public class SearchDAO {
 	public Map<String, ArrayList<Integer>> selectTagbyMovie(List<String> strTagList)
 	{
 		Map<String, ArrayList<Integer>> mapTagMappingList = new HashMap<String, ArrayList<Integer>>();
-		String sql = "SELECT movie_number FROM tag_mapping WHERE upper(tag_content) = upper('?')";
+		String sql = "SELECT movie_number FROM tag_mapping WHERE upper(tag_content) = upper(?)";
 		try
 		{
 			conn = JDBCUtil.getConnection();
 			for(String str : strTagList)
 			{
 				ArrayList<Integer> movieNumberList = new ArrayList<Integer>(); 
-				mapTagMappingList.put(str, movieNumberList);
 				
 				stmt = conn.prepareStatement(sql);
 				stmt.setString(1, str);
-				
 				rs = stmt.executeQuery();
 				while(rs.next()) 
 				{
 					int number = rs.getInt("movie_number");
-					mapTagMappingList.get(str).add(number);
+					movieNumberList.add(number);
 				}
+				
+				mapTagMappingList.put(str, movieNumberList);
 			}
 		}
 		catch(Exception e) 
 		{
-			System.out.println("Error - selectMovieList()\n");
+			System.out.println("Error - selectTagbyMovie()\n");
 			e.printStackTrace();
 		}
 		finally 
@@ -97,46 +97,33 @@ public class SearchDAO {
 		List<SearchVO> movieList = null;
 		Map<Integer, SearchVO> mapSearchData = new HashMap<Integer, SearchVO>();
 		
-		//평점, 날짜, 최근 접근여부를 뽑는 쿼리
-		String arrSql[] = new String[3];
-		arrSql[0] = "SELECT * FROM (SELECT * FROM search_view ? ORDER BY stars DESC) WHERE rownum <= ?";
-		arrSql[1] = "SELECT * FROM (SELECT * FROM search_view ? ORDER BY movie_date DESC) WHERE rownum <= ?";
-		arrSql[2] = "SELECT * FROM (SELECT view.* FROM search_view view JOIN (SELECT movie_number, COUNT(*) AS cnt FROM ASSESSMENT WHERE SYSDATE - ? <= assess_regdate ? GROUP BY movie_number) movie WHERE view.movie_number = movie.movie_number ORDER BY movie.cnt DESC) WHERE ROWNUM <= ?";
-
 		String strWhere = "";
 		String strWhere2[] = {"where", "where", "and ("};
-		ArrayList<ArrayList<SearchVO>> resultList = new ArrayList<ArrayList<SearchVO>>(3);
+		ArrayList<ArrayList<SearchVO>> resultList = new ArrayList<ArrayList<SearchVO>>();
+		for(int i = 0; i < 3; i ++)
+			resultList.add(new ArrayList<SearchVO>());
 		
 		for(int i = 0; i < movie_Number.size(); i++)
 		{
 			if(0 != i)
 				strWhere += " or";
 			
-			strWhere += " movie_number = " + Integer.toString(i);
+			strWhere += " movie_number = " + Integer.toString(movie_Number.get(i));
 		}
+		
+		//평점, 날짜, 최근 접근여부를 뽑는 쿼리
+		String arrSql[] = new String[3];
+		arrSql[0] = "SELECT * FROM (SELECT * FROM search_view " + strWhere2[0] + strWhere + " ORDER BY stars DESC) WHERE rownum <= ?";
+		arrSql[1] = "SELECT * FROM (SELECT * FROM search_view " + strWhere2[1] + strWhere + " ORDER BY movie_date DESC) WHERE rownum <= ?";
+		arrSql[2] = "SELECT * FROM (SELECT view.* FROM search_view AS view JOIN (SELECT movie_number, COUNT(*) AS cnt FROM ASSESSMENT WHERE (SYSDATE - " + SearchController.TAG_SEARCH_DATE_STANDARD + " <= assess_regdate " + strWhere2[2] + strWhere + ")) GROUP BY movie_number) AS movie WHERE view.movie_number = movie.movie_number ORDER BY movie.cnt DESC) WHERE ROWNUM <= ?";
 		
 		try 
 		{
 			conn = JDBCUtil.getConnection();
 			for(int i = 0; i < arrSql.length; i++)
 			{
-				strWhere2[i] += strWhere;
 				stmt = conn.prepareStatement(arrSql[i]);
-				
-				if(0 == i || 1 == i)
-				{
-					stmt.setString(1, strWhere2[i]);
-					stmt.setInt(2, SearchController.TAG_SEARCH_VIEW_COUNT);	
-				}
-				else if(2 == i)
-				{
-					strWhere2[i] += ")";
-					
-					stmt.setInt(1, SearchController.TAG_SEARCH_DATE_STANDARD);
-					stmt.setString(2, strWhere2[i]);
-					stmt.setInt(3, SearchController.TAG_SEARCH_VIEW_COUNT);
-				}
-				
+				stmt.setInt(1, SearchController.TAG_SEARCH_VIEW_COUNT);
 				rs = stmt.executeQuery();
 				while(rs.next())
 				{
@@ -154,10 +141,11 @@ public class SearchDAO {
 					resultList.get(i).add(searchVO);
 					
 					int number = rs.getInt("movie_number");
+					System.out.println(rs.getString("movie_title"));
 					mapSearchData.put(number, searchVO);
 				}
 				
-				Collections.reverse(resultList);
+				Collections.reverse(resultList.get(i));
 			}
 			
 			//Map에 3개의 sql결과를 종합하여 점수를 매긴다(낮을 수록 우선순위 높음)
@@ -212,7 +200,7 @@ public class SearchDAO {
 			}
 		});
 
-		Collections.reverse(list);	//주석시 오름차순
+		//Collections.reverse(list);	//주석시 오름차순
 		return list;
 	}
 	
@@ -248,6 +236,7 @@ public class SearchDAO {
 		}
 		return movieList;
 	}
+	
 	// 검색 메소드
 	public List<SearchVO> searchMovieList(String searchKeyWord) {
 		// 검색용 쿼리(기본)

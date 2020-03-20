@@ -28,8 +28,8 @@ import com.kosmo.view.search.SearchController;
 @Controller
 public class AssessmentController {
 	
-	public static final int TAG_CNT_STANDARD = 5;			//평가글에 포함된 #태그가 몇번 이상이면 Mapping테이블에 올릴지 기준
-	public static final int ASS_LIKE_CNT_STANDARD = 5;		//평가글에 베스트 순위를 뽑을때 최소 추천수 기준
+	public static final int TAG_CNT_STANDARD = 2;			//평가글에 포함된 #태그가 몇번 이상이면 Mapping테이블에 올릴지 기준
+	public static final int ASS_LIKE_CNT_STANDARD = 1;		//평가글에 베스트 순위를 뽑을때 최소 추천수 기준
 	
 	private List<AssessmentVO> asseList = null;
 	private int currMovieNumber = 0;

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.mintchoco.search.SearchDAO;
 import com.kosmo.mintchoco.search.SearchVO;
+import com.kosmo.mintchoco.tag.TagDAO;
 
 
 /*
@@ -134,9 +135,8 @@ public class SearchController {
 	}
 	
 	@RequestMapping("/movie/search.do")
-	public String search(SearchDAO searchDAO, Model model, HttpServletRequest request) {
+	public String search(SearchDAO searchDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		List<SearchVO> outputList = new ArrayList<SearchVO>();
-		int count = 0;
 		if(request.getParameter("searchKeyWord") == null || request.getParameter("searchKeyWord").equals("")) {
 			trgSearchList = searchDAO.selectMovieList();
 			model.addAttribute("searchKeyWord", "전체 영화");

@@ -60,10 +60,13 @@ public class MovieController {
 	public String movieDetail(MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		
 		MemberVO memberVO = null;
+		List<String> kindTagList = null;
 		if(request.getSession().getAttribute("memberInfo") != null) {
 			memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+			kindTagList = tagDAO.selectKindTagList(request.getParameter("movieNumber"));
 			model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
 			model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
+			model.addAttribute("kindTagList", kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
 			model.addAttribute("stars", movieDAO.viewRating(request.getParameter("movieNumber")));
 			model.addAttribute("checkFavorite", movieDAO.checkFavorite(memberVO.getNumber(), request.getParameter("movieNumber")));
 			model.addAttribute("user", memberVO);

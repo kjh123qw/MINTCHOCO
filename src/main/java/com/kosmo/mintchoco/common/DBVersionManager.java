@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.1.6";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.1.7";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -25,6 +25,7 @@ public class DBVersionManager {
 			"drop table VERSION",
 			"drop table NOTICE",
 			"drop table FAQ",
+			"drop view TAG_VIEW",
 			"drop table tag_mapping",
 			"drop table tag",
 			"drop view SEARCH_VIEW",
@@ -190,6 +191,13 @@ public class DBVersionManager {
 			"    MOVIE_number NUMBER(10) REFERENCES MOVIE(MOVIE_number) on delete cascade, " + // 영화 번호
 			"    UNIQUE uni_mapping(tag_content, movie_number)" + 
 			")",
+			
+			"create or replace view TAG_VIEW " + 
+			"as " + 
+			"select t.TAG_CONTENT, tm.MOVIE_NUMBER " + 
+			"from TAG_MAPPING tm " + 
+			"join (select MOVIE_NUMBER, TAG_CONTENT from TAG where MOVIE_NUMBER is NULL) t " + 
+			"on t.TAG_CONTENT = tm.TAG_CONTENT",
 			
 			"create table faq (" + 							// FAQ  (박찬영)
 			"faq_number number(10) primary key, " + 		// 번호
@@ -611,7 +619,7 @@ public class DBVersionManager {
 			"insert into tag(tag_content, movie_number) values('좀비', null)", 
 			"insert into tag(tag_content, movie_number) values('SF', null)", 
 			"insert into tag(tag_content, movie_number) values('전쟁', null)", 
-			"insert into tag(tag_content, movie_number) values('코미디', null)" 
+			"insert into tag(tag_content, movie_number) values('코미디', null)"
 //			"insert into tag(tag_content, movie_number, cnt) values('TAG1', 1, 10)", 
 //			"insert into tag(tag_content, movie_number, cnt) values('TAG2', 1, 15)", 
 //			"insert into tag(tag_content, movie_number, cnt) values('TAG3', 1, 20)", 

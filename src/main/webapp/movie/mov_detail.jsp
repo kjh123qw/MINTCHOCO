@@ -101,7 +101,8 @@
 	           	</tr>
 				<tr>
 					<td> 장 르 </td>
-					<td> ${ movie.movieKind } </td>
+					<td> ${ kindTagList }
+					</td>
 				</tr>
 				<tr>
 					<td> 감 독 </td>

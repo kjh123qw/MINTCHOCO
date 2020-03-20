@@ -16,7 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 // 데이터 테이블 형상 관리용 메서드
 public class DBVersionManager {
-	final String THIS_VERSION = "1.1.7";				// 현재 데이터 베이스 버전 H2 용
+	final String THIS_VERSION = "1.1.8";				// 현재 데이터 베이스 버전 H2 용
 	private String chkVerTblSql = "select count(*) as result from information_schema.tables where table_name = 'VERSION'";
 	private String verInsertSql = "insert into VERSION(VERSION_ID, CURRENT_VERSION) values('ver', ?)"; // 버전 인서트 sql
 	private String verSelSql = "select CURRENT_VERSION from VERSION where VERSION_ID = 'ver'"; // 버전 확인용 sql
@@ -247,8 +247,8 @@ public class DBVersionManager {
 			"MEMBER_SEQ.NEXTVAL, " +	// 2
 			"'user01@gmail.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'유저01', " +
-			"'유저01 별명', " +
+			"'김정호', " +
+			"'정호정호', " +
 			"22, " +
 			"'M', " +
 			"'안녕하세요. 저는 영화를 좋아합니다.', " + // 회원 소개 기본값 NULL
@@ -262,11 +262,11 @@ public class DBVersionManager {
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user02@gmail.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'유저02', " +
-			"'유저02 별명', " +
+			"'박찬영', " +
+			"'영화는 영화다', " +
 			"26, " +
 			"'M', " +
-			"'저는 영화를 싫어합니다.', " + 	// 회원 소개 기본값 NULL
+			"'영화 영화!', " + 			// 회원 소개 기본값 NULL
 			"DEFAULT, " +				// 회원 가입일 
 			"'N', " +					// 찜하기목록 공개 여부
 			"'N', " +					// 평가 목록 공개 여부 
@@ -277,9 +277,9 @@ public class DBVersionManager {
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user03@gmail.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'유저03', " +
-			"'유저03 별명', " +
-			"21, " +
+			"'유지상', " +
+			"'저런저런', " +
+			"27, " +
 			"'F', " +
 			"'저는 영화를 싫어합니다.', " + 	// 회원 소개 기본값 NULL
 			"DEFAULT, " +				// 회원 가입일 
@@ -292,11 +292,26 @@ public class DBVersionManager {
 			"MEMBER_SEQ.NEXTVAL, " +
 			"'user04@gmail.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'유저04', " +
-			"'유저04 별명', " +
+			"'천세문', " +
+			"'니혼고데키마셍', " +
 			"29, " +
 			"'F', " +
-			"'저는 영화를 싫어합니다.', " + 	// 회원 소개 기본값 NULL
+			"'넷플릭스가 좋습니다.', " + 	// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'Y', " +					// 찜하기목록 공개 여부
+			"'N', " +					// 평가 목록 공개 여부 
+			"'Y'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user05@gmail.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'최원준', " +
+			"'대폭', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
 			"DEFAULT, " +				// 회원 가입일 
 			"'Y', " +					// 찜하기목록 공개 여부
 			"'N', " +					// 평가 목록 공개 여부 

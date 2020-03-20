@@ -76,10 +76,10 @@ $(function() {
 						var ratingComment = $('<div />', {'class': 'rating-comment', 'text': item.assessContent});
 	
 						var raitngDownBtn = $('<div />', {'class': 'raitng-down-btn', 'click': function() {
-							doLikeAjax(4, item.assessId, 'D');
+							doLikeAjax(item.memberNumber, item.assessId, 'D');
 							}});
 						var ratingUpBtn = $('<div />', {'class': 'rating-up-btn', 'click': function() {
-							doLikeAjax(4, item.assessId, 'L');
+							doLikeAjax(item.memberNumber, item.assessId, 'L');
 							}});
 						raitngDownBtn.html('<i class="fas fa-thumbs-down"></i> ' + item.hates);
 						ratingUpBtn.html('<i class="fas fa-thumbs-up"></i> ' + item.likes);
@@ -169,10 +169,10 @@ $(function() {
 						var ratingComment = $('<div />', {'class': 'rating-comment', 'text': data.assessContent});
 	
 						var raitngDownBtn = $('<div />', {'class': 'raitng-down-btn', 'click': function() {
-							doLikeAjax(4, data.assessId, 'D');
+							doLikeAjax(data.memberNumber, data.assessId, 'D');
 							}});
 						var ratingUpBtn = $('<div />', {'class': 'rating-up-btn', 'click': function() {
-							doLikeAjax(4, data.assessId, 'L');
+							doLikeAjax(data.memberNumber, data.assessId, 'L');
 							}});
 						raitngDownBtn.html('<i class="fas fa-thumbs-down"></i> ' + data.hates);
 						ratingUpBtn.html('<i class="fas fa-thumbs-up"></i> ' + data.likes);
@@ -221,10 +221,10 @@ $(function() {
 		    	        dataType: 'json',
 		    	        success :function(data2){
 							var raitngDownBtn = $('<div />', {'class': 'raitng-down-btn', 'click': function() {
-								doLikeAjax(4, data2.assessId, 'D');
+								doLikeAjax(memberNumber, data2.assessId, 'D');
 								}});
 							var ratingUpBtn = $('<div />', {'class': 'rating-up-btn', 'click': function() {
-								doLikeAjax(4, data2.assessId, 'L');
+								doLikeAjax(memberNumber, data2.assessId, 'L');
 								}});
 							raitngDownBtn.html('<i class="fas fa-thumbs-down"></i> ' + data2.hates);
 							ratingUpBtn.html('<i class="fas fa-thumbs-up"></i> ' + data2.likes);

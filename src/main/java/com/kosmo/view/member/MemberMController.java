@@ -233,7 +233,10 @@ public class MemberMController {
 		}
 		
 		// 정보수정
-		if(nickName != null) {
+		if(gender != null) {
+			if(nickName.equals("")) {
+				nickName = member.getNickName();
+			}
 			memberDAO.updateMember(number, nickName, gender, age,introduce);			
 		}
 		
@@ -260,7 +263,10 @@ public class MemberMController {
 	@ResponseBody
 	@RequestMapping(value="/usingNN.do", method=RequestMethod.POST)
 	public String joinCheck(@RequestParam(value="nickname") String nickname, MemberDAO memberDAO, HttpSession session){
-		// 별명 중복확인
+		// 별명 중복확인		
+		if(nickname == null) {
+			nickname = "";
+		}
 		int chkNN = memberDAO.checkUsingNickname(nickname);		
 		if(chkNN > 0) {
 			return "usingNN";

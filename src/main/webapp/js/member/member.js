@@ -259,15 +259,7 @@ function checkModify(){
         }
     });
 	
-	if(nickname.value==""){
- 		btn.disabled = true;
- 		sfmodal.style.display = 'block';
- 		failWindow.style.display = 'block';
- 		nickname.focus();
- 		text.innerText = "별명이 입력되지 않았습니다."; 
- 		hide('fail');
- 		return false;
- 	} else if(!male.checked && !female.checked){
+	if(!male.checked && !female.checked){
  		sfmodal.style.display = 'block';
  		failWindow.style.display = 'block';
  		text.innerText = "성별이 선택되지 않았습니다.";

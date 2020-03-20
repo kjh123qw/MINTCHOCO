@@ -24,7 +24,7 @@ body{
 	position: relative;
    }
    
-h1{
+#movRec h1{
 	margin: 0 auto;
     cursor: pointer;
     color: #F5FFFA;
@@ -34,12 +34,12 @@ h1{
     text-align: center;
 }
 
-h1 a{
+#movRec h1 a{
 	display: block;
 	color: #F5FFFA;
 }
 
-h1:hover{
+#movRec h1:hover{
     color: #F5FFFA;
     opacity: 0.9;
     border-top: 5px solid gold;
@@ -47,7 +47,7 @@ h1:hover{
     text-align: center;
 }
 
-h3{
+#movRec h3{
 	margin: 0 auto;
     display: none;
 }
@@ -181,7 +181,7 @@ h3{
 		position: relative;
 	}
 	
-	h1{
+	#movRec h1{
 	    width: 576px;
 	}
 	
@@ -219,7 +219,7 @@ h3{
 		position: relative;
 	}
 	
-	h1{
+	#movRec h1{
 	    width: 768px;
 	}
 	
@@ -257,11 +257,11 @@ h3{
 		position: relative;
 	}
 	
-	h1{
+	#movRec h1{
 	    width: 992px;
 	}
 	
-	h3{
+	#movRec h3{
 		display: block;
 		margin: 0 auto;
 		float: left;
@@ -389,7 +389,7 @@ h3{
 		position: relative;
 	}
 	
-	h1{
+	#movRec h1{
 	    width: 1200px;
 	}
 	

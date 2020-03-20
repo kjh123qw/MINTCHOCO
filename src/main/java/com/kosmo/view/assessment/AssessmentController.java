@@ -98,8 +98,10 @@ public class AssessmentController {
 
 	@RequestMapping(value="/comment/insertLike.do", method=RequestMethod.POST)
 	@ResponseBody
-	public String insertLike(@RequestParam(value="memberNumber", required=true) int memberNumber, @RequestParam(value="assessEst", required=true) String assessEst,  @RequestParam(value="assessId", required=true) String assessId, AssessmentDAO assessmentDAO) throws Exception {
-		int resultValue = assessmentDAO.insertAssessmentLike(memberNumber, assessId, assessEst);
+	public String insertLike(@RequestParam(value="memberNumber", required=true) int memberNumber, @RequestParam(value="assessEst", required=true) String assessEst,  @RequestParam(value="assessId", required=true) String assessId, AssessmentDAO assessmentDAO, HttpServletRequest request) throws Exception {
+		MemberVO memberVO = (MemberVO) request.getSession().getAttribute("memberInfo");
+		int memberNumberTemp = memberVO.getNumber();
+		int resultValue = assessmentDAO.insertAssessmentLike(memberNumberTemp, assessId, assessEst);
 		if(1 == resultValue)
 			assPushLikesAfter(assessmentDAO, assessId);
 		

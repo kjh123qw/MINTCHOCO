@@ -150,7 +150,7 @@ public class SearchDAO {
 				Collections.reverse(resultList.get(i));
 			}
 			
-			//Map에 3개의 sql결과를 종합하여 점수를 매긴다(낮을 수록 우선순위 높음)
+			//Map에 3개의 sql결과를 종합하여 점수를 매긴다(높을수록 우선순위 높음)
 			Map<Integer, Integer> mapSumResult = new HashMap<Integer, Integer>();
 			for(int i = 0; i < resultList.size(); i++)
 			{
@@ -158,9 +158,9 @@ public class SearchDAO {
 				{
 					int iMovieNumber = resultList.get(i).get(j).getMovieNumber();
 					if(mapSumResult.containsKey(iMovieNumber))
-						mapSumResult.put(iMovieNumber, mapSumResult.get(iMovieNumber) + j);
+						mapSumResult.put(iMovieNumber, mapSumResult.get(iMovieNumber) + SearchController.TAG_SEARCH_VIEW_COUNT - j);
 					else
-						mapSumResult.put(iMovieNumber, j);
+						mapSumResult.put(iMovieNumber, SearchController.TAG_SEARCH_VIEW_COUNT - j);
 				}
 			}
 			

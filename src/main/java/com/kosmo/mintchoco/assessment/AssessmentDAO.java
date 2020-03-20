@@ -11,7 +11,7 @@ import java.util.List;
 
 import com.kosmo.mintchoco.common.JDBCUtil;
 import com.kosmo.mintchoco.search.SearchVO;
-import com.kosmo.view.assessment.AssessmentControllerTemp;
+import com.kosmo.view.assessment.AssessmentController;
 
 /*
  * 담당자 : 김정호, 천세문
@@ -191,7 +191,7 @@ public class AssessmentDAO {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(sql);
 			stmt.setInt(1, movieNum);
-			stmt.setInt(2, AssessmentControllerTemp.ASS_LIKE_CNT_STANDARD);
+			stmt.setInt(2, AssessmentController.ASS_LIKE_CNT_STANDARD);
 			stmt.setInt(3, count);
 			rs = stmt.executeQuery();
 		

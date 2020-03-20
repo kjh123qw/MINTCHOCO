@@ -186,7 +186,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					  			<input type="radio" name="info-flag" class="conf-modify-flagY" value="Y">
 					  		</c:otherwise>
 					  	</c:choose>
-					  	<span class="text-70">공개</span>
+					  	<span class="text-50">공개</span>
 					  	<c:choose>
                 			<c:when test="${memberInfo.info_flag=='N'}">
 					  			<input type="radio" name="info-flag" class="conf-modify-flagN" value="N" checked="checked">
@@ -195,7 +195,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					  			<input type="radio" name="info-flag" class="conf-modify-flagN" value="N" >
 					  		</c:otherwise>
 					  	</c:choose>					  			
-					  	<span class="text-70">비공개</span>
+					  	<span class="text-50">비공개</span>
 					  	<div class=cst-text-label style="width: 90px; height:27px; line-height: 27px">개인정보</div>
 					</div>
 					<div class="cst-radio-st1 cst-text-wrap-st1 con-conf-radio">
@@ -207,7 +207,7 @@ document.addEventListener("DOMContentLoaded", function(){
 						  			<input type="radio" name="like-flag" class="conf-modify-flagY" value="Y">
 						  		</c:otherwise>
 						  	</c:choose>
-						  	<span class="text-70">공개</span>
+						  	<span class="text-50">공개</span>
 						  	<c:choose>
 	                			<c:when test="${memberInfo.like_flag=='N'}">
 						  			<input type="radio" name="like-flag" class="conf-modify-flagN" value="N" checked="checked">
@@ -216,7 +216,7 @@ document.addEventListener("DOMContentLoaded", function(){
 						  			<input type="radio" name="like-flag" class="conf-modify-flagN" value="N" >
 						  		</c:otherwise>
 						  	</c:choose>		
-						  	<span class="text-70">비공개</span>
+						  	<span class="text-50">비공개</span>
 					  <div class=cst-text-label style="width: 90px; height:27px; line-height: 27px">찜한 목록</div>
 					</div>
 					<div class="cst-radio-st1 cst-text-wrap-st1 con-conf-radio">
@@ -228,7 +228,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					  			<input type="radio" name="assessment-flag" class="conf-modify-flagY" value="Y">
 					  		</c:otherwise>
 					  	</c:choose>
-					  	<span class="text-70">공개</span>
+					  	<span class="text-50">공개</span>
 					  	<c:choose>
                 			<c:when test="${memberInfo.assessment_flag=='N'}">
 					  			<input type="radio" name="assessment-flag" class="conf-modify-flagN" value="N" checked="checked">
@@ -237,7 +237,7 @@ document.addEventListener("DOMContentLoaded", function(){
 					  			<input type="radio" name="assessment-flag" class="conf-modify-flagN" value="N" >
 					  		</c:otherwise>
 					  	</c:choose>
-					  	<span class="text-70">비공개</span>					  	
+					  	<span class="text-50">비공개</span>					  	
 					  <div class=cst-text-label style="width: 90px; height:27px; line-height: 27px">평가 목록</div>
 					</div>			
 					<div class="cst-btn con-conf-submitbtns con-conf-submitbtns-OPE">

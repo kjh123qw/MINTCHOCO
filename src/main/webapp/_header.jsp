@@ -54,6 +54,7 @@ session.setAttribute("memberInfo", memberVO);*/
 			<li><a href="${ contextPath }/movie/recommend.do">추천영화</a></li>
 			<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>
 			<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
+			<li><a href="${ contextPath }/logout.do">로그아웃</a></li>
 			<li></li>
 		</ul>
 	</div>
@@ -115,6 +116,7 @@ session.setAttribute("memberInfo", memberVO);*/
 		<li><a href="${ contextPath }/movie/recommend.do">추천영화</a></li>
 		<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>
 		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
+			<li><a href="${ contextPath }/logout.do">로그아웃</a></li>
 	</ul>
 </div>
 

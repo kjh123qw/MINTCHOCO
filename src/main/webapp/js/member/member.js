@@ -50,13 +50,13 @@ function textAlign(element) {
 	var m = element;
 	var text = document.getElementsByClassName('menu-description-subject')[0];
 	if (m == 'reg') {
-		text.innerText='회원님이 등록한 날짜 순으로 정렬합니다.';	
+		text.innerText='sort by registration date';	
 	} else if(m == 'rel') {
-		text.innerText='영화 개봉 날짜 순으로 정렬합니다.';
+		text.innerText='sort by release date';
 	} else if(m == 'sub') {
-		text.innerText='영화 제목 순으로 정렬합니다.';
+		text.innerText='sort by title';
 	} else if(m == 'star') {
-		text.innerText='부여한 점수 순으로 정렬합니다.';
+		text.innerText='sort by score';
 	} 
 }
 
@@ -160,11 +160,11 @@ function chk_cnt() {
     }
     
     if (checked<1) {
-        alert("항목을 1개 이상 선택해주세요.");
+        alert("select more than one");
         return false;
     }
     
-    if (confirm(checked+"건의 항목을 삭제하시겠습니까?")) {
+    if (confirm(checked+"/ Are you sure to delete?")) {
 		return true;
 	} else {
 		return false;
@@ -253,7 +253,7 @@ function checkModify(){
     		sfmodal.style.display = 'block';
     		failWindow.style.display = 'block';
     		nickname.focus();
-    		text.innerText = "오류가 발생했습니다."; 
+    		text.innerText = "There is an error."; 
     		hide('fail');
     		return false;
         }
@@ -262,14 +262,14 @@ function checkModify(){
 	if(!male.checked && !female.checked){
  		sfmodal.style.display = 'block';
  		failWindow.style.display = 'block';
- 		text.innerText = "성별이 선택되지 않았습니다.";
+ 		text.innerText = "There is not infromation of gender.";
  		hide('fail');
  		return false;
  	} else if(age.value==""){
  		sfmodal.style.display = 'block';
  		failWindow.style.display = 'block';
  		age.focus();
- 		text.innerText = "나이가 선택되지 않았습니다."; 
+ 		text.innerText = "There is not infromation of age."; 
  		hide('fail');
  		return false;
  	} else if(checkedNN == "n") {
@@ -277,7 +277,7 @@ function checkModify(){
 		sfmodal.style.display = 'block';
 		failWindow.style.display = 'block';
 		nickname.focus();
-		text.innerText = "이미 사용중인 별명입니다."; 
+		text.innerText = "There is this nickname already."; 
 		hide('fail');
 		return false;
  	} else {
@@ -304,21 +304,21 @@ function checkModifyPW(){
 		sfmodal.style.display = 'block';
 		failWindow.style.display = 'block';
 		newPW.focus();
-		text.innerText = "새 비밀번호가 입력되지 않았습니다."; 
+		text.innerText = "Please enter the new password."; 
 		hide('fail');
 		return false;
 	} else if(newPWChk.value==""){
 		sfmodal.style.display = 'block';
 		failWindow.style.display = 'block';
 		newPWChk.focus();
-		text.innerText = "확인용 비밀번호가 입력되지 않았습니다.";
+		text.innerText = "Please enter the checking password.";
 		hide('fail');
 		return false;
 	} else if(newPW.value!=newPWChk.value){
 		sfmodal.style.display = 'block';
 		failWindow.style.display = 'block';
 		newPWChk.focus();
-		text.innerText = "비밀번호가 일치하지 않습니다."; 
+		text.innerText = "Please enter the checking password correctly."; 
 		hide('fail');
 		return false;
 	} else {
@@ -344,7 +344,9 @@ function checkModifyOPE(){
 	hide('success');
 	return true;
 }
-
+function availableAlert() {
+	alert("Sorry, this is not available.");
+}
 function checkModifyDEL(){
 	var btn = document.getElementsByClassName('st1-80-50')[3];
 	var modifyINF = document.getElementsByClassName('con-conf-modifyDEL-wrap')[0];
@@ -372,7 +374,7 @@ function checkModifyDEL(){
     		sfmodal.style.display = 'block';
     		failWindow.style.display = 'block';
     		nickname.focus();
-    		text.innerText = "오류가 발생했습니다."; 
+    		text.innerText = "There is an error."; 
     		hide('fail');
     		error = "y";
     		return false;
@@ -444,7 +446,7 @@ function checkPW(){
         	bg.style.display = 'block';
     		failWindow.style.display = 'block';
     		password.focus();
-    		text.innerText = "오류가 발생했습니다."; 
+    		text.innerText = "There is an error."; 
     		hideCHK('fail');
     		confirm = "n";
     		return false;
@@ -456,7 +458,7 @@ function checkPW(){
  		bg.style.display = 'block';
  		failWindow.style.display = 'block';
  		password.focus();
- 		text.innerText = "비밀번호가 입력되지 않았습니다."; 
+ 		text.innerText = "Please enter the password."; 
  		hideCHK('fail');
  		return false;
  	} else if(confirm=="no"){
@@ -464,7 +466,7 @@ function checkPW(){
  		bg.style.display = 'block';
  		failWindow.style.display = 'block';
  		password.focus();
- 		text.innerText = "비밀번호가 일치하지 않습니다."; 
+ 		text.innerText = "Please enter the password correctly."; 
  		hideCHK('fail');
  		return false;
  	} else {
@@ -583,11 +585,11 @@ document.addEventListener("DOMContentLoaded", function(){
 		requestParam= null;
 	} else {
 		requestParam = encodeURI(requestParam);
-		document.getElementById('myp-inform-do').setAttribute('href','my_page.do?nickName='+requestParam);
+		document.getElementById('myp-inform-do').setAttribute('href','mypage.do?nickName='+requestParam);
 		document.getElementById('myp-assessment-do').setAttribute('href','assessment.do?nickName='+requestParam);
 		document.getElementById('myp-favorite-do').setAttribute('href','favorite.do?nickName='+requestParam);
 		
-		document.getElementById('myp-inform-do-mobile').setAttribute('href','my_page.do?nickName='+requestParam);
+		document.getElementById('myp-inform-do-mobile').setAttribute('href','mypage.do?nickName='+requestParam);
 		document.getElementById('myp-assessment-do-mobile').setAttribute('href','assessment.do?nickName='+requestParam);
 		document.getElementById('myp-favorite-do-mobile').setAttribute('href','favorite.do?nickName='+requestParam);
 		

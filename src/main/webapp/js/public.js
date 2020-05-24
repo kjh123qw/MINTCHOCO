@@ -20,6 +20,21 @@ function checkTagList() {
 		alert('태그를 한개 이상 선택해주세요.');
 	return checkValue;
 }
+
+function checkJoin() {
+	alert("This service is not available. \nIf you want to test, use this information. \nID : test01@mt.com \nPW : test1234");
+}
+
+function closeLogin() {
+	$('#loginLayer').hide();
+}
+
+function openLogin() {
+	$('#mobMenuWrap').hide();
+	$('#mobSearchWrap').hide();
+	$('#loginLayer').show();
+}
+
 $(function() {
 	var contextPath = sessionStorage.getItem('contextPath');
 	var selectedBg = '#008a7b';
@@ -36,8 +51,12 @@ $(function() {
     $(window).resize(function(){
 		$('#mobMenuWrap').hide();
 		$('#mobSearchWrap').hide();
+		$('#loginLayer').hide();
     })
-    
+    $('#loginForm').submit(function(event){
+    	event.preventDefault();
+		checkLogin();
+	});
 	$('#mobShowSearchBtn').click(function() {
 		$('#mobSearchWrap').show();
 		$('#mobSearchWrap input[type=text]').focus();
@@ -129,6 +148,32 @@ $(function() {
 	radioTag();
 	textBoxTag();
 	buttonTag();
+	
+    function checkLogin() {
+    	var login = false;
+    	if($('#emailForm').val() == '') {
+    		alert('Please check ID');
+    		return login;
+    	}
+    	if($('#pwdForm').val() == '') {
+    		alert('Please check password');
+    		return login;
+    	}
+    	
+    	$.ajax({
+    		url: contextPath + "/loginCheck.do",
+    		type:"post",
+    		datatype:'text',
+    		data:{email: $('#emailForm').val(), pwd: $('#pwdForm').val()},
+    		success:function(data){
+    			location.href = window.location.href;
+    		},
+    		error:function() {
+    			alert("Please check your information")
+    			login = false;
+    		}
+    	});
+    }
 	
 	function doTagListAjax() {
 		$.ajax({

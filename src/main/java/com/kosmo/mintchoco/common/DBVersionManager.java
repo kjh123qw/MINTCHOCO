@@ -1,13 +1,22 @@
 package com.kosmo.mintchoco.common;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.stream.Stream;
 
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /*
@@ -94,19 +103,19 @@ public class DBVersionManager {
 			
 			"create table movie(" + 
 			"    movie_number number(10) primary key, " + 		// 영화 확인용 고유번호(시퀀스 사용)
-			"    movie_poster varchar2(50) NOT NULL, " +		// 영화 이미지 주소 링크 
-			"    movie_teaser varchar2(200) NOT NULL, " +		// 영화 티저영상 주소 링크 
-			"    movie_title varchar2(100) NOT NULL, " +		// 영화 제목 
-			"    movie_kind varchar2(50) NOT NULL, " +			// 영화 장르(' , '로 구분) 
+			"    movie_poster varchar2(200) NOT NULL, " +		// 영화 이미지 주소 링크 
+			"    movie_teaser varchar2(100) NOT NULL, " +		// 영화 티저영상 주소 링크 
+			"    movie_title varchar2(200) NOT NULL, " +		// 영화 제목 
+			"    movie_kind varchar2(100) NOT NULL, " +			// 영화 장르(' , '로 구분) 
 			"    movie_director varchar2(30) NOT NULL, " +		// 영화 감독 
 			"    movie_actor varchar2(200) NOT NULL, " +		// 주연 배우(' , '로 구분) 
 			"    movie_grade varchar2(10) NOT NULL, " +			// 상영 등급 
-			"    movie_time number(5) NOT NULL, " +				// 상영 시간(분) 
+			"    movie_time number(10) NOT NULL, " +				// 상영 시간(분) 
 			"    movie_date varchar2(10) NOT NULL, " +			// 영화 개봉일 
 			"    movie_youtube_url varchar2(200) NOT NULL, " +	// 유튜브 링크 
 			"    movie_naver_url varchar2(200) NOT NULL, " +	// 네이버 링크 
 			"    movie_indate date default sysdate, " +			// 영화 게시일 
-			"    movie_content varchar2(1000) NOT NULL" +		// 영화 줄거리 
+			"    movie_content varchar2(2000) NOT NULL" +		// 영화 줄거리 
 			")",
 			
 			"create table favorite (" +							// 찜한 영화  (장세진) ajax 구현 
@@ -230,11 +239,11 @@ public class DBVersionManager {
 	private String[] memberTDBSql = { // 회원 테스트 데이터
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " + 	// 1
-			"'admin@gmail.com', " +
+			"'admin@mt.com', " +
 			"'" + SecurityUtil.encryptSHA256("admin1234") + "', " +
-			"'관리자', " +
-			"'관리자', " +
-			"32, " +
+			"'admin', " +
+			"'admin', " +
+			"00, " +
 			"'M', " +
 			"DEFAULT, " +				// 회원 소개 기본값 NULL
 			"DEFAULT, " +				// 회원 가입일 
@@ -245,10 +254,10 @@ public class DBVersionManager {
 			
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +	// 2
-			"'user01@gmail.com', " +
+			"'user01@mt.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'김정호', " +
-			"'정호정호', " +
+			"'user01', " +
+			"'user01', " +
 			"22, " +
 			"'M', " +
 			"'안녕하세요. 저는 영화를 좋아합니다.', " + // 회원 소개 기본값 NULL
@@ -260,61 +269,166 @@ public class DBVersionManager {
 			
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
-			"'user02@gmail.com', " +
+			"'user02@mt.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'박찬영', " +
-			"'영화는 영화다', " +
+			"'user02', " +
+			"'user02', " +
 			"26, " +
 			"'M', " +
 			"'영화 영화!', " + 			// 회원 소개 기본값 NULL
 			"DEFAULT, " +				// 회원 가입일 
-			"'N', " +					// 찜하기목록 공개 여부
-			"'N', " +					// 평가 목록 공개 여부 
-			"'N'" +						// 회원정보 공개여부 
-			")",
-			
-			"INSERT INTO MEMBER VALUES (" +
-			"MEMBER_SEQ.NEXTVAL, " +
-			"'user03@gmail.com', " +
-			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'유지상', " +
-			"'저런저런', " +
-			"27, " +
-			"'F', " +
-			"'저는 영화를 싫어합니다.', " + 	// 회원 소개 기본값 NULL
-			"DEFAULT, " +				// 회원 가입일 
-			"'N', " +					// 찜하기목록 공개 여부
-			"'Y', " +					// 평가 목록 공개 여부 
-			"'N'" +						// 회원정보 공개여부 
-			")",
-			
-			"INSERT INTO MEMBER VALUES (" +
-			"MEMBER_SEQ.NEXTVAL, " +
-			"'user04@gmail.com', " +
-			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'천세문', " +
-			"'니혼고데키마셍', " +
-			"29, " +
-			"'F', " +
-			"'넷플릭스가 좋습니다.', " + 	// 회원 소개 기본값 NULL
-			"DEFAULT, " +				// 회원 가입일 
 			"'Y', " +					// 찜하기목록 공개 여부
-			"'N', " +					// 평가 목록 공개 여부 
+			"'Y', " +					// 평가 목록 공개 여부 
 			"'Y'" +						// 회원정보 공개여부 
 			")",
 			
 			"INSERT INTO MEMBER VALUES (" +
 			"MEMBER_SEQ.NEXTVAL, " +
-			"'user05@gmail.com', " +
+			"'user03@mt.com', " +
 			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
-			"'최원준', " +
-			"'대폭', " +
+			"'user03', " +
+			"'user03', " +
+			"27, " +
+			"'F', " +
+			"'저는 영화를 싫어합니다.', " + 	// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'Y', " +					// 찜하기목록 공개 여부
+			"'Y', " +					// 평가 목록 공개 여부 
+			"'Y'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user04@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user04', " +
+			"'user04', " +
+			"29, " +
+			"'F', " +
+			"'넷플릭스가 좋습니다.', " + 	// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'N', " +					// 찜하기목록 공개 여부
+			"'N', " +					// 평가 목록 공개 여부 
+			"'N'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user05@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user05', " +
+			"'user05', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'N', " +					// 찜하기목록 공개 여부
+			"'N', " +					// 평가 목록 공개 여부 
+			"'N'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user06@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user06', " +
+			"'user06', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'N', " +					// 찜하기목록 공개 여부
+			"'N', " +					// 평가 목록 공개 여부 
+			"'N'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user07@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user07', " +
+			"'user07', " +
 			"28, " +
 			"'F', " +
 			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
 			"DEFAULT, " +				// 회원 가입일 
 			"'Y', " +					// 찜하기목록 공개 여부
+			"'Y', " +					// 평가 목록 공개 여부 
+			"'Y'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user08@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user08', " +
+			"'user08', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'N', " +					// 찜하기목록 공개 여부
 			"'N', " +					// 평가 목록 공개 여부 
+			"'N'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user09@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user09', " +
+			"'user09', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'N', " +					// 찜하기목록 공개 여부
+			"'N', " +					// 평가 목록 공개 여부 
+			"'N'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user10@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user10', " +
+			"'user10', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'N', " +					// 찜하기목록 공개 여부
+			"'N', " +					// 평가 목록 공개 여부 
+			"'N'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'user06@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("user1234") + "', " +
+			"'user11', " +
+			"'user11', " +
+			"28, " +
+			"'F', " +
+			"'영화를 좋아합니다.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'Y', " +					// 찜하기목록 공개 여부
+			"'Y', " +					// 평가 목록 공개 여부 
+			"'Y'" +						// 회원정보 공개여부 
+			")",
+			
+			"INSERT INTO MEMBER VALUES (" +
+			"MEMBER_SEQ.NEXTVAL, " +
+			"'test01@mt.com', " +
+			"'" + SecurityUtil.encryptSHA256("test1234") + "', " +
+			"'name01', " +
+			"'nickname01', " +
+			"30, " +
+			"'M', " +
+			"'I like movie so much.', " + 		// 회원 소개 기본값 NULL
+			"DEFAULT, " +				// 회원 가입일 
+			"'Y', " +					// 찜하기목록 공개 여부
+			"'Y', " +					// 평가 목록 공개 여부 
 			"'Y'" +						// 회원정보 공개여부 
 			")"
 	};
@@ -330,7 +444,7 @@ public class DBVersionManager {
 			"    '오오지즈미 요, 아리무라 카스미, 나가사와 마사미', " + 
 			"    '19', " + 
 			"    127, " + 
-			"    '2015 년', " + 
+			"    '2015', " + 
 			"    'https://www.youtube.com/watch?v=0bO2XDjKOXY', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=140693', " + 
 			"    DEFAULT, " + 
@@ -347,7 +461,7 @@ public class DBVersionManager {
 			"    '키아누 리브스, 아드리안 팔리키, 윌렘 대포', " + 
 			"    '19', " + 
 			"    108, " + 
-			"    '2014 년', " + 
+			"    '2014', " + 
 			"    'https://www.youtube.com/watch?v=jnm-qwt6w_c', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=123300', " + 
 			"    DEFAULT, " + 
@@ -369,7 +483,7 @@ public class DBVersionManager {
 			"    'Colin Firth, Samuel L. Jackson, Mark Strong, Taron Egerton, Michael Caine', " + 
 			"    '19', " + 
 			"    129, " + 
-			"    '2015 년', " + 
+			"    '2015', " + 
 			"    'https://www.youtube.com/watch?v=8vrelSzIcxo', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=114249', " + 
 			"    DEFAULT, " + 
@@ -386,7 +500,7 @@ public class DBVersionManager {
 			"    '제이슨 스타뎀, 벤 포스터', " + 
 			"    '19', " + 
 			"    92, " + 
-			"    '2011 년', " + 
+			"    '2011', " + 
 			"    'https://www.youtube.com/watch?v=wHpI9Vurby8', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=71769', " + 
 			"    DEFAULT, " + 
@@ -406,7 +520,7 @@ public class DBVersionManager {
 			"    히로세 스즈 (카에데 (일본어 목소리) 역)', " + 
 			"    '12', " + 
 			"    119, " + 
-			"    '2015 년', " + 
+			"    '2015', " + 
 			"    'https://www.youtube.com/watch?v=uN2KGhIohoQ', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=134134', " + 
 			"    DEFAULT, " + 
@@ -423,7 +537,7 @@ public class DBVersionManager {
 			"    '고수, 강동원, 정은채', " + 
 			"    '15', " + 
 			"    112, " + 
-			"    '2010 년', " + 
+			"    '2010', " + 
 			"    'https://www.youtube.com/watch?v=Unae4tKxNWg', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=73344', " + 
 			"    DEFAULT, " + 
@@ -443,7 +557,7 @@ public class DBVersionManager {
 			"    '공유, 정유미, 마동석, 김수안,김의성', " + 
 			"    '15', " + 
 			"    118, " + 
-			"    '2016 년', " + 
+			"    '2016', " + 
 			"    'https://movie.naver.com/movie/search/result.nhn?query=%EB%B6%80%EC%82%B0%ED%96%89&section=all&ie=utf8', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=130966', " + 
 			"    DEFAULT, " + 
@@ -460,7 +574,7 @@ public class DBVersionManager {
 			"    '트레비스 핌멜, 폴라 패튼, 벤 포스터, 도미닉 쿠버, 로버트 카진스키, 토비 케벨, 벤 슈네처, 다니엘 우', " + 
 			"    '12', " + 
 			"    123, " + 
-			"    '2016 년', " + 
+			"    '2016', " + 
 			"    'https://www.youtube.com/watch?v=DXgd-WnYXEk', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=75006', " + 
 			"    DEFAULT, " + 
@@ -477,7 +591,7 @@ public class DBVersionManager {
 			"    '하정우 (김구남 역), 김윤석 (면정학 역), 조성하 (김태원 역), 이철민 (최성남 역), 곽도원 (김승현 교수 역)', " + 
 			"    '19', " + 
 			"    141, " + 
-			"    '2010 년', " + 
+			"    '2010', " + 
 			"    'https://www.youtube.com/watch?v=onHmZ4sTVvw', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=69986', " + 
 			"    DEFAULT, " + 
@@ -496,7 +610,7 @@ public class DBVersionManager {
 			"    '키아누 리브스, 브리짓 모이나한, 루비 로즈', " + 
 			"    '19', " + 
 			"    123, " + 
-			"    '2017 년', " + 
+			"    '2017', " + 
 			"    'https://www.youtube.com/watch?v=nlnPjlq83uA', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=143932', " + 
 			"    DEFAULT, " + 
@@ -517,7 +631,7 @@ public class DBVersionManager {
 			"    '에밀리 블런트, 베니치오 델 토로', " + 
 			"    '19', " + 
 			"    121, " + 
-			"    '2015 년', " + 
+			"    '2015', " + 
 			"    'https://www.youtube.com/watch?v=h3HgMC41t0I', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=125466', " + 
 			"    DEFAULT, " + 
@@ -536,7 +650,7 @@ public class DBVersionManager {
 			"    '라울 멘데즈, 움베르토 부스토, 네일레아 노빈드', " + 
 			"    '15', " + 
 			"    101, " + 
-			"    '2014 년', " + 
+			"    '2014', " + 
 			"    'https://www.youtube.com/watch?v=SvMT1hdzWqs', " + 
 			"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=130430', " + 
 			"    DEFAULT, " + 
@@ -712,30 +826,30 @@ public class DBVersionManager {
 			Arrays.stream(memberTDBSql).forEach(sql -> {	// insert memberDB Stream
 				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
 			});
-			Arrays.stream(movieTDBSql).forEach(sql -> {	// insert movieDB Stream
-				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
-			});
-			Arrays.stream(favrTDBSql).forEach(sql -> {	// insert favoriteDB Stream
-				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
-			});
+//			Arrays.stream(movieTDBSql).forEach(sql -> {	// insert movieDB Stream
+//				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+//			});
+//			Arrays.stream(favrTDBSql).forEach(sql -> {	// insert favoriteDB Stream
+//				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+//			});
 //			Arrays.stream(asseTDBSql).forEach(sql -> {	// insert assess Stream
 //				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
 //			});
 //			Arrays.stream(asesTDBSql).forEach(sql -> {	// insert assess_est Stream
 //				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
 //			});
-			Arrays.stream(faqTDBSql).forEach(sql -> {	// insert faq Stream
-				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
-			});
-			Arrays.stream(noticeTDBSql).forEach(sql -> {	// insert notice Stream
-				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
-			});
-			Arrays.stream(tagTDBSql).forEach(sql -> {	// insert notice Stream
-				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
-			});
-			Arrays.stream(tagMappingTDBSql).forEach(sql -> {	// insert notice Stream
-				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
-			});
+//			Arrays.stream(faqTDBSql).forEach(sql -> {	// insert faq Stream
+//				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+//			});
+//			Arrays.stream(noticeTDBSql).forEach(sql -> {	// insert notice Stream
+//				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+//			});
+//			Arrays.stream(tagTDBSql).forEach(sql -> {	// insert notice Stream
+//				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+//			});
+//			Arrays.stream(tagMappingTDBSql).forEach(sql -> {	// insert notice Stream
+//				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+//			});
 			
 			stmt = conn.prepareStatement(verInsertSql);
 			stmt.setString(1, THIS_VERSION);
@@ -743,6 +857,173 @@ public class DBVersionManager {
 			
 		} catch(Exception e) {
 			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+	}
+//	"INSERT INTO MOVIE VALUES( " + 
+//	"    MOVIE_SEQ.NEXTVAL, " + 
+//	"    concat(concat('mov_poster_', MOVIE_SEQ.CURRVAL), '.jpg'), " + 
+//	"    'eOTbdg56eW0', " + 
+//	"    '아이 엠 어 히어로', " + 
+//	"    '액션, 모험, 좀비', " + 
+//	"    '사토 신스케', " + 
+//	"    '오오지즈미 요, 아리무라 카스미, 나가사와 마사미', " + 
+//	"    '19', " + 
+//	"    127, " + 
+//	"    '2015', " + 
+//	"    'https://www.youtube.com/watch?v=0bO2XDjKOXY', " + 
+//	"    'https://movie.naver.com/movie/bi/mi/basic.nhn?code=140693', " + 
+//	"    DEFAULT, " + 
+//	"    '“인간을 물어뜯어라!”일본 전역을 뒤덮은 정체불명의 바이러스 ‘ZQN’도심 곳곳은 사람을 물어뜯는 감염자들로 인해 대혼란이 이어지고, 우연히 살아남은 ‘히데오’와 몸의 반만 감염된 ‘히로미’는 감염자들을 피해 가까스로 생존자들의 안식처에 다다르게 된다. 하지만, 그 곳에서 예상치 못한 거대한 위협을 만나게 되는데…' " + 
+//	")"
+	public void setupCrawlingData(JSONArray movieList) {
+		String[] movieCDBSql = new String[movieList.size()];
+		
+		for(int i = 0; i < movieList.size(); i++)
+		{
+			JSONObject tempObj = (JSONObject)movieList.get(i);
+			String teaser = tempObj.get("yt_trailer_code").toString();
+			String image = tempObj.get("medium_cover_image").toString();
+			String title = tempObj.get("title_english").toString().replace(";", "").replace("[", "").replace("]", "").replace("'", "''").replace("\"", "''");
+			String genre = tempObj.get("genres").toString().replace(";", "").replace("[", "").replace("]", "").replace("'", "''").replace("\"", "").replace(",", ", ");
+			String director = "";
+			String actor = "";
+			String grade = "";
+			String year = tempObj.get("year").toString();
+			String runningTime = tempObj.get("runtime").toString();
+			String summary = tempObj.get("summary").toString().replace(";", "").replace("'", "''").replace("\"", "''");
+			String crawlingUrl = tempObj.get("url").toString();
+//			for(int j = 0; j < genreList.size(); j++) {
+//				genre += genreList.get(j).toString();
+//				if(!(j + 1 < genreList.size())) {
+//					genre += ", ";
+//				} else {
+//					break;
+//				}
+//			}
+			movieCDBSql[i] = 
+			"INSERT INTO MOVIE VALUES(" + 
+			"MOVIE_SEQ.NEXTVAL, " + 
+			"'" + image + "', " + 
+			"'" + teaser + "', " + // teaser
+			"'" + title + "', " + // title
+			"'" + genre + "', " + // genre 
+			"'a', " + // director
+			"'a', " + // actor 
+			"'a', " + // grade
+			runningTime + ", " +  // running time
+			"'" + year + "', " + // year
+			"'a', " + // youtube 
+			"'" + crawlingUrl + "', " + // naver 
+			"DEFAULT, " + // indate
+			"'" + summary + //summary 
+			"')";
+			System.out.println(movieCDBSql[i]);
+		}
+		try {
+			conn = JDBCUtil.getConnection();
+			Arrays.stream(movieCDBSql).forEach(sql -> {	// insert notice Stream
+				try { stmt = conn.prepareStatement(sql); stmt.executeUpdate(); } catch(Exception e) { System.out.println("SQL 실행 안됨 : " + sql); }
+			});
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			JDBCUtil.close(rs, stmt, conn);
+		}
+	}
+	
+	public void setupCrawlingDataTwo() {
+		System.out.println("Start Setup Crawling Data Two");
+		String strUrls[] = { "https://yts.mx/movie/doctor-who-the-day-of-the-doctor-2013", 
+				"https://yts.mx/movie/the-shawshank-redemption-1994", 
+				"https://yts.mx/movie/the-godfather-1972", 
+				"https://yts.mx/movie/natsamrat-2016", 
+				"https://yts.mx/movie/the-godfather-part-ii-1974", 
+				"https://yts.mx/movie/wheels-2014", 
+				"https://yts.mx/movie/pulp-fiction-1994", 
+				"https://yts.mx/movie/schindlers-list-1993", 
+				"https://yts.mx/movie/the-lord-of-the-rings-the-return-of-the-king-2003", 
+				"https://yts.mx/movie/12-angry-men-1957", 
+				"https://yts.mx/movie/the-mountain-ii-2016", 
+				"https://yts.mx/movie/fight-club-1999", 
+				"https://yts.mx/movie/forrest-gump-1994", 
+				"https://yts.mx/movie/inception-2010", 
+				"https://yts.mx/movie/the-phantom-of-the-opera-at-the-royal-albert-hall-2011", 
+				"https://yts.mx/movie/the-good-the-bad-and-the-ugly-1966", 
+				"https://yts.mx/movie/the-lord-of-the-rings-the-fellowship-of-the-ring-2001", 
+				"https://yts.mx/movie/led-zeppelin-celebration-day-2012", 
+				"https://yts.mx/movie/goodfellas-1990", 
+				"https://yts.mx/movie/one-flew-over-the-cuckoos-nest-1975", 
+				"https://yts.mx/movie/star-wars-episode-v-the-empire-strikes-back-1980", 
+				"https://yts.mx/movie/queen-rock-montreal-live-aid-2007", 
+				"https://yts.mx/movie/the-lord-of-the-rings-the-two-towers-2002", 
+				"https://yts.mx/movie/the-matrix-1999", 
+				"https://yts.mx/movie/porcupine-tree-anesthetize-2010", 
+				"https://yts.mx/movie/anand-1971", 
+				"https://yts.mx/movie/be-here-now-2015" };
+		Document doc = null;
+//		String url = "https://yts.mx/movie/doctor-who-the-day-of-the-doctor-2013"; // temp
+		int movie_number = 1;
+		for(String url : strUrls) {
+			try 
+			{
+				doc = Jsoup.connect(url).get();
+			}
+			catch (IOException e) 
+			{
+				e.printStackTrace();
+				System.out.println("Error!");
+			}
+		
+			//select를 이용하여 원하는 태그를 선택한다. select는 원하는 값을 가져오기 위한 중요한 기능이다.
+			Element director = doc.selectFirst("div.directors > div.list-cast > div.list-cast-info > a > span > span");    
+			Iterator<Element> actors = doc.select("div.actors > div.list-cast").iterator();
+			String sql = "";
+			String strActors = "";
+			boolean first = true;
+			int four = 0;
+			while(actors.hasNext()) {
+				if(four >= 4)
+					break;
+				if(!first) {
+					strActors += ", ";
+				} else {
+					first = false;
+				}
+				strActors += actors.next().text().split(" as")[0];
+				four++;
+			}
+			sql = "update movie set movie_director = '" + director.text() + "', movie_actor = '" + strActors + "' where movie_number = " + movie_number;
+			movie_number++;
+			System.out.println(sql); // actors
+			//Iterator을 사용하여 하나씩 값 가져오기
+//			Iterator<Element> ie1 = element.select("strong.rank").iterator();
+//			Iterator<Element> ie2 = element.select("strong.title").iterator();
+//			Iterator<Element> ie3 = element.select("span.thumb-image > img").iterator();
+//			
+//			HashMap<Integer, String[]> mapMovieRank = new HashMap<Integer, String[]>();
+//			while (ie1.hasNext())
+//			{
+//				String[] arrStr = {ie2.next().text(), ie3.next().attr("src")};
+//				
+//				String strRank = ie1.next().text();
+//				Integer iRank = Integer.parseInt(strRank.substring(strRank.indexOf('.') + 1));
+//				mapMovieRank.put(iRank, arrStr);
+//			}
+		}
+		
+	}
+	public void setupCrawlingDataTwoUpdate(String sql) {
+		
+		try {
+			conn = JDBCUtil.getConnection();
+			stmt = conn.prepareStatement(sql);
+			stmt.executeUpdate();
+		} catch(Exception e) {
+			e.printStackTrace();
+			System.out.println("SQL 실행 안됨 : " + sql);
 		} finally {
 			JDBCUtil.close(rs, stmt, conn);
 		}

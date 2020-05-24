@@ -25,210 +25,28 @@ public class SearchDAO {
 	private ResultSet rs = null;
 	// 쿼리
 	final private String SELECT_MOVIE_LIST = "SELECT * FROM SEARCH_VIEW";
-
-	// 전체 태그 목록
-	public List<String> selectTagList()
-	{
-		List<String> strList = new ArrayList<String>(); 
-		String sql = "SELECT * FROM TAG";
-		try 
-		{
-			conn = JDBCUtil.getConnection();
-			stmt = conn.prepareStatement(sql);
-			rs = stmt.executeQuery();
-			while(rs.next()) 
-			{
-				String str = rs.getString("tag_content");
-				strList.add(str);
-			}
-		}
-		catch(Exception e) 
-		{
-			System.out.println("Error - selectTagList()\n");
-			e.printStackTrace();
-		}
-		finally 
-		{
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		
-		return strList;
-	}
-	
-	//태그 맵핑 Map
-	public Map<String, ArrayList<Integer>> selectTagbyMovie(List<String> strTagList)
-	{
-		Map<String, ArrayList<Integer>> mapTagMappingList = new HashMap<String, ArrayList<Integer>>();
-		String sql = "SELECT movie_number FROM tag_mapping WHERE upper(tag_content) = upper(?)";
-		try
-		{
-			conn = JDBCUtil.getConnection();
-			for(String str : strTagList)
-			{
-				ArrayList<Integer> movieNumberList = new ArrayList<Integer>(); 
-				
-				stmt = conn.prepareStatement(sql);
-				stmt.setString(1, str);
-				rs = stmt.executeQuery();
-				while(rs.next()) 
-				{
-					int number = rs.getInt("movie_number");
-					movieNumberList.add(number);
-				}
-				
-				mapTagMappingList.put(str, movieNumberList);
-			}
-		}
-		catch(Exception e) 
-		{
-			System.out.println("Error - selectTagbyMovie()\n");
-			e.printStackTrace();
-		}
-		finally 
-		{
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		
-		return mapTagMappingList;
-	}
-	
-	// 태그 검색 메소드
-	public List<SearchVO> searchTagMovieList(ArrayList<Integer> movie_Number)
-	{
-		List<SearchVO> movieList = null;
-		Map<Integer, SearchVO> mapSearchData = new HashMap<Integer, SearchVO>();
-		List<String> kindTagList = null;
-		TagDAO tagDAO = new TagDAO();
-		String strWhere = "";
-		String strWhere2[] = {"where", "where", "and ("};
-		ArrayList<ArrayList<SearchVO>> resultList = new ArrayList<ArrayList<SearchVO>>();
-		for(int i = 0; i < 3; i ++)
-			resultList.add(new ArrayList<SearchVO>());
-		
-		for(int i = 0; i < movie_Number.size(); i++)
-		{
-			if(0 != i)
-				strWhere += " or";
-			
-			strWhere += " movie_number = " + Integer.toString(movie_Number.get(i));
-		}
-		
-		//평점, 날짜, 최근 접근여부를 뽑는 쿼리
-		String arrSql[] = new String[3];
-		arrSql[0] = "SELECT * FROM (SELECT * FROM search_view " + strWhere2[0] + strWhere + " ORDER BY stars DESC) WHERE rownum <= ?";
-		arrSql[1] = "SELECT * FROM (SELECT * FROM search_view " + strWhere2[1] + strWhere + " ORDER BY movie_date DESC) WHERE rownum <= ?";
-		arrSql[2] = "SELECT * FROM (SELECT view.* FROM search_view AS view JOIN (SELECT movie_number, COUNT(*) AS cnt FROM ASSESSMENT WHERE (SYSDATE - " + SearchController.TAG_SEARCH_DATE_STANDARD + " <= assess_regdate " + strWhere2[2] + strWhere + ")) GROUP BY movie_number) AS movie WHERE view.movie_number = movie.movie_number ORDER BY movie.cnt DESC) WHERE ROWNUM <= ?";
-		
-		try 
-		{
-			conn = JDBCUtil.getConnection();
-			for(int i = 0; i < arrSql.length; i++)
-			{
-				stmt = conn.prepareStatement(arrSql[i]);
-				stmt.setInt(1, SearchController.TAG_SEARCH_VIEW_COUNT);
-				rs = stmt.executeQuery();
-				while(rs.next())
-				{
-					kindTagList = tagDAO.selectKindTagList(rs.getString("movie_number"));
-					SearchVO searchVO = new SearchVO();
-					searchVO.setMovieNumber(rs.getInt("movie_number"));
-					searchVO.setMoviePoster(rs.getString("movie_poster"));
-					searchVO.setMovieTitle(rs.getString("movie_title"));
-					searchVO.setMovieStars(rs.getFloat("stars"));
-					searchVO.setMovieKind(kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
-					searchVO.setMovieDirector(rs.getString("movie_director"));
-					searchVO.setMovieActor(rs.getString("movie_actor"));
-					searchVO.setMovieGrade(rs.getString("movie_grade"));
-					searchVO.setMovieTime(rs.getString("movie_time"));
-					searchVO.setMovieDate(rs.getString("movie_date"));
-					resultList.get(i).add(searchVO);
-					
-					int number = rs.getInt("movie_number");
-					mapSearchData.put(number, searchVO);
-				}
-				
-				Collections.reverse(resultList.get(i));
-			}
-			
-			//Map에 3개의 sql결과를 종합하여 점수를 매긴다(높을수록 우선순위 높음)
-			Map<Integer, Integer> mapSumResult = new HashMap<Integer, Integer>();
-			for(int i = 0; i < resultList.size(); i++)
-			{
-				for(int j = 0; j < resultList.get(i).size(); j++)
-				{
-					int iMovieNumber = resultList.get(i).get(j).getMovieNumber();
-					if(mapSumResult.containsKey(iMovieNumber))
-						mapSumResult.put(iMovieNumber, mapSumResult.get(iMovieNumber) + SearchController.TAG_SEARCH_VIEW_COUNT - j);
-					else
-						mapSumResult.put(iMovieNumber, SearchController.TAG_SEARCH_VIEW_COUNT - j);
-				}
-			}
-			
-			List<Integer> list = sortByValue(mapSumResult); 
-			if(0 < list.size())
-			{
-				movieList = new ArrayList<SearchVO>(); 
-				for(int i = 0; i < list.size(); i++)
-					movieList.add(mapSearchData.get(list.get(i)));
-			}
-		}
-		catch(Exception e) 
-		{
-			System.out.println("Error - searchTagMovieList()\n");
-			e.printStackTrace();
-		}
-		finally 
-		{
-			JDBCUtil.close(rs, stmt, conn);
-		}
-		
-		return movieList;
-	}
-	
-	//맵 정렬 함수
-	public List sortByValue(final Map map)
-	{
-		List<Integer> list = new ArrayList();
-		list.addAll(map.keySet());
-		
-		Collections.sort(list, new Comparator()
-		{
-			public int compare(Object o1, Object o2)
-			{
-				Object v1 = map.get(o1);
-				Object v2 = map.get(o2);
-				
-				return ((Comparable) v2).compareTo(v1);
-			}
-		});
-
-		Collections.reverse(list);	//주석시 오름차순
-		return list;
-	}
 	
 	// 전체 영화 목록
 	public List<SearchVO> selectMovieList() {
 		List<SearchVO> movieList = new ArrayList<SearchVO>();
-		List<String> kindTagList = null;
-		TagDAO tagDAO = new TagDAO();
 		int movieIndex = 0;
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(SELECT_MOVIE_LIST);
 			rs = stmt.executeQuery();
 			while(rs.next()) {
-				kindTagList = tagDAO.selectKindTagList(rs.getString("movie_number"));
 				SearchVO searchVO = new SearchVO();
 				searchVO.setMovieNumber(rs.getInt("movie_number"));
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
+				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieStars(rs.getFloat("stars"));
-				searchVO.setMovieKind(kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
+				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				movieList.add(searchVO);
 			}
@@ -303,12 +121,13 @@ public class SearchDAO {
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
 				searchVO.setMovieStars(rs.getFloat("stars"));
-				searchVO.setMovieKind(kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
+				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
+				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				searchMovieList.add(searchVO);
 			}
@@ -322,12 +141,13 @@ public class SearchDAO {
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
 				searchVO.setMovieStars(rs.getFloat("stars"));
-				searchVO.setMovieKind(kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
+				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
+				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				searchMovieList.add(searchVO);
 			}
@@ -341,12 +161,13 @@ public class SearchDAO {
 				searchVO.setMoviePoster(rs.getString("movie_poster"));
 				searchVO.setMovieTitle(rs.getString("movie_title"));
 				searchVO.setMovieStars(rs.getFloat("stars"));
-				searchVO.setMovieKind(kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
+				searchVO.setMovieKind(rs.getString("movie_kind"));
 				searchVO.setMovieDirector(rs.getString("movie_director"));
 				searchVO.setMovieActor(rs.getString("movie_actor"));
 				searchVO.setMovieGrade(rs.getString("movie_grade"));
 				searchVO.setMovieTime(rs.getString("movie_time"));
 				searchVO.setMovieDate(rs.getString("movie_date"));
+				searchVO.setMovieContent(rs.getString("movie_content"));
 				searchVO.setMovieIndex(movieIndex++);
 				searchMovieList.add(searchVO);
 			}

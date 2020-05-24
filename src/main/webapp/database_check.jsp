@@ -4,10 +4,14 @@
 /*
 	:: 데이타 베이스 ::
 	담당자 : 김정호
+<c:if test="${ sessionScope.memberInfo.number != 1 }">
+	<c:redirect url="/main.do"></c:redirect>
+</c:if>
 */
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,6 +49,14 @@
 		height: 60px;
 		font-size: 24px;
 		background-color: red;
+		color: white;
+		cursor: pointer;
+	}
+	.crawling {
+		width: 300px;
+		height: 60px;
+		font-size: 24px;
+		background-color: deeppink;
 		color: white;
 		cursor: pointer;
 	}
@@ -98,15 +110,6 @@
 	</table>
 	<hr>
 	<table border="1" class="setuptbl">
-		<c:choose>
-			<c:when test="${ nowVersion eq 'NotRuning' }">
-				<tr>
-					<td style="text-align: center;">
-						<span>DB를 실행시켜 주세요.</span>
-					</td>
-				</tr>
-			</c:when>
-			<c:otherwise>
 				<tr>
 					<th>현재 설치된 버전</th>
 					<th>최신 릴리즈 버전</th>
@@ -141,8 +144,11 @@
 						</c:otherwise>
 					</c:choose>
 				</tr>
-			</c:otherwise>
-		</c:choose>
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<button class="crawling" onclick="location.href='http://localhost:8080/mintchoco/dbCrawling.do'">DB 크롤링</button>
+					</td>
+				</tr>
 	</table>
 </body>
 </html>

@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>공지사항</title>
+<title>NOTICE</title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -36,13 +36,13 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 <!-- 담당자 내용 -->
 <div id="noticeWrap">
-	<h1>공지사항</h1>
+	<h1>noitce</h1>
 	<table class="notice-table">
 		<tr>
-			<th>번호</th>
-			<th>제목</th>
-			<th>작성일</th>
-			<th>조회수</th>
+			<th>no</th>
+			<th>title</th>
+			<th>date</th>
+			<th>count</th>
 		</tr>
 		
 		<c:forEach var="noticeVO" items="${ noticeList }">
@@ -58,12 +58,12 @@
 	<div class="notice-buttons">
 		<c:if test="${ sessionScope.memberInfo.number == 1 }">
 		<div class="cst-btn notice-write-btn">
-			<input type="button" value="글쓰기" class="st1-90-40" onclick="location.href='${ contextPath }/service/insert.do'">
+			<input type="button" value="write" class="st1-90-40" onclick="location.href='${ contextPath }/service/insert.do'">
 		</div>
 		</c:if>
 		<form action="${ contextPath }/service/notice.do">
 			<div class="cst-btn notice-search-btn">
-				<input type="submit" value="검색" class="st1-70-40">
+				<input type="submit" value="search" class="st1-70-40">
 			</div>
 			<div class="cst-text-st1 notice-search-form">
 				<input type="text" class="text-140" name="noticeSearch">

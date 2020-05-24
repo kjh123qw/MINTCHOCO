@@ -20,51 +20,51 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 	var subject = document.getElementsByClassName("hd-menu-subject")[0];
-	subject.innerHTML = "찜한목록&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+	subject.innerHTML = "favorite&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
 });
 </script>
 	<form class="myp-con-fav" method="post" action="favorite.do" onsubmit="return chk_cnt();">
 		<div class="con-fav-wrap">
 			<nav class="con-menu">
 				<div class="con-menu-modifyoff  con-menu-dropdown-rel"">
-					<div class="con-menu-sub myp_pc">${detail_info.nickName}님의 관심영화목록</div>
+					<div class="con-menu-sub myp_pc">${detail_info.nickName}'s favorite</div>
 					<ul class="con-menu-list con-menu-dropdown-rel">
-						<li><a onclick="searchbar('on');">검색</a></li>
+						<li><a onclick="searchbar('on');">search</a></li>
 						<li class="con-menu-dropdown-rel con-menu-dropdown-here">
-							<a class="con-menu-dropdown-a">목록정렬</a>
+							<a class="con-menu-dropdown-a">sort</a>
 							<div class="con-menu-dropdown-wrap">
 						        <ul class="con-menu-dropdown">
-						            <li><a onmouseenter="textAlign('reg');" onclick="sorting('reg');">등록 순</a></li>
-						            <li><a onmouseenter="textAlign('rel');" onclick="sorting('rel');">개봉 순</a></li>
-						            <li><a onmouseenter="textAlign('sub');" onclick="sorting('sub');">제목 순</a></li>
+						            <li><a onmouseenter="textAlign('reg');" onclick="sorting('reg');">registration</a></li>
+						            <li><a onmouseenter="textAlign('rel');" onclick="sorting('rel');">release</a></li>
+						            <li><a onmouseenter="textAlign('sub');" onclick="sorting('sub');">title</a></li>
 						        </ul>						        
 						         <div class="menu-description">
-						     		<p class="menu-description-subject">항목 정렬을 설정합니다.</p>
+						     		<p class="menu-description-subject">sort</p>
 						     	</div>						     	
 						     </div>						   
 						</li>
 						<c:choose>
 	   						<c:when test="${memberInfo.number==detail_info.number}">
-								<li><a onclick="modifyOn();">편집</a></li>
+								<li><a onclick="modifyOn();">edit</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a class="con-fakeModify">편집</a></li>
+								<li><a class="con-fakeModify">edit</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
-					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요." onkeyup="search();">
+					<input type="text" class="con-menu-input"  placeholder="keyword" onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
 				<c:if test="${memberInfo.number==detail_info.number}">
 					<div class="con-menu-modifyon">
 						<div class="con-menu-sub">
 							<span class="con-chkbox-cnt">0</span>
-							<span>개 선택</span>
+							<span>selected</span>
 						</div>
 						<ul class="con-menu-list">
-							<li><a onclick="allcheck();">전체선택</a></li>
-							<li><a onclick="modifyOff();">취소</a></li>
-							<li><a><input type="submit" id="fav-list-delete" class="con-list-delete"><label for="fav-list-delete">삭제</label></a></li>
+							<li><a onclick="allcheck();">whole</a></li>
+							<li><a onclick="modifyOff();">cancel</a></li>
+							<li><a><input type="submit" id="fav-list-delete" class="con-list-delete"><label for="fav-list-delete">delete</label></a></li>
 						</ul>
 					</div>
 				</c:if>
@@ -73,12 +73,12 @@ document.addEventListener("DOMContentLoaded", function(){
 			
 			
 			<c:if test="${detail_info.like_flag=='N' && memberInfo.number==detail_info.number}">
-				<div class="con-fav-none con-none-my">현재 비공개로 설정되어있습니다.</div>
+				<div class="con-fav-none con-none-my">this is not open.</div>
 			</c:if>
 			<c:choose>
 	   			<c:when test="${detail_info.like_flag=='Y' || memberInfo.number==detail_info.number}">
 			   		<c:if test="${fav_cnt == 0}">
-						<div class="con-fav-none">찜한 항목이 없습니다.</div>
+						<div class="con-fav-none">there is not item.</div>
 					</c:if>
 					<div class="con-fav-margin">
 					<c:forEach items="${favoriteList}" var="favorite">
@@ -87,13 +87,13 @@ document.addEventListener("DOMContentLoaded", function(){
 						<div class="con-fav-bg">			
 							<div class="con-fav-img-wrap">
 								<a class="con-movie-link" href="${ contextPath }/movie/detail.do?movieNumber=${favorite.movieNum}">
-									<img class="con-fav-poster" src="${ contextPath }/images/mov_poster/${favorite.poster}">
+									<img class="con-fav-poster" src="${favorite.poster}">
 								</a>
 								<!-- 140x200 -->
 								<center class="con-fav-contents-wrap">
 									<div class="con-search-target con-th-mint">${favorite.movieTitle}</div>
 									<div class="con-fav-movie-kind">${favorite.kind}</div>
-									<div class="con-fav-movie-detail con-th-gray">${favorite.playtime}분, ${favorite.grade}세 관람가</div>
+									<div class="con-fav-movie-detail con-th-gray">${favorite.playtime}m</div>
 									<div class="con-fav-movie-indate con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${favorite.favIndate}</div>
 								</center>
 							</div>				
@@ -104,12 +104,12 @@ document.addEventListener("DOMContentLoaded", function(){
 					<div class="clear"></div>
 				</c:when>
 				<c:otherwise>
-					<div class="con-fav-none">해당 정보가 비공개되어있습니다.</div>
+					<div class="con-fav-none">there is not available.</div>
 				</c:otherwise>
 			</c:choose>
 			<!-- 검색결과가 없을때 -->
 			
-			<div class="con-search-none">검색이 완료되었습니다.</div>
+			<div class="con-search-none">completed</div>
 			
 		</div>
 		<div class="clear"></div>

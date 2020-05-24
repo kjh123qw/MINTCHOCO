@@ -18,6 +18,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -40,12 +41,6 @@ public class MemberController {
 	MemberDAO dao = new MemberDAO();
 
 
-	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
-	public String main(MovieDAO movieDAO, Model model) {
-		model.addAttribute("movieInfo", movieDAO.selectMovieList()); //최신영화
-		return "main.jsp";
-	}
-	
 	@ResponseBody
 	@RequestMapping(value = "/sendMail.do", method = RequestMethod.POST)
 	public void sendMail(HttpServletRequest request) {
@@ -163,22 +158,18 @@ public class MemberController {
 	
 	@ResponseBody
 	@RequestMapping(value = "/loginCheck.do", method = RequestMethod.POST)
-	public String loginCheck(HttpServletRequest request) throws Exception {
-		
-		String email = request.getParameter("email");
-		String pwd = request.getParameter("pwd");
-		String rememberCheck = request.getParameter("rememberCheck"); //true or false
+	public String loginCheck(@RequestParam(required=true) String email, @RequestParam(required=true) String pwd, HttpServletRequest request, MemberDAO memberDAO) throws Exception {
 		
 		String newPwd = SecurityUtil.encryptSHA256(pwd);
-		
-		int loginCheck = dao.loginCheck(email, newPwd);
-		
-		if(loginCheck == 1) {
-			return "loginCheck";
-		}else {
+		HttpSession session = request.getSession();
+				
+		MemberVO memberVO = memberDAO.loginMember(email, newPwd);
+		if(memberVO != null) {
+			session.setAttribute("memberInfo", memberVO);
+		} else {
 			throw new Exception();
 		}
-
+		return "login";
 	}
 	
 	@RequestMapping(value = "/logout.do")
@@ -186,42 +177,26 @@ public class MemberController {
 		
 		session.removeAttribute("memberInfo");
 		
-		return "index.jsp";
+		return "redirect:main.do";
 	}
 
 
 	@RequestMapping(value = "/login.do", method = RequestMethod.POST)
-	public String login(HttpServletRequest request, MemberDAO memberDAO) throws Exception {
+	public String login(HttpServletRequest request, MemberDAO memberDAO, String currentURL) throws Exception {
 		
 		
 		String email = request.getParameter("email");
-		String pwd = request.getParameter("pwd");
-		
-		String newPwd = SecurityUtil.encryptSHA256(pwd);
-		
-		String rememberCheck; // on or null
-		
-
-		if(request.getParameter("rememberCheck") == null) {
-			rememberCheck = "null";
-		}else {
-			rememberCheck = request.getParameter("rememberCheck");
-		}
+		String pwd = SecurityUtil.encryptSHA256(request.getParameter("pwd"));
 		
 		HttpSession session = request.getSession();
 		
-		if(rememberCheck.equals("on")) {
-			session.setAttribute("rememberEmail", email);
-		}else {
-			session.removeAttribute("rememberEmail");
+		//최신영화정보 10개
+		MemberVO memberVO = memberDAO.loginMember(email, pwd);
+		if(memberVO != null) {
+			session.setAttribute("memberInfo", memberVO);
 		}
 		
-		
-		//최신영화정보 10개
-
-		session.setAttribute("memberInfo", memberDAO.loginMember(email, newPwd));
-		
-		return "redirect:main.do";
+		return "redirect:" + currentURL;
 		
 	}
 	

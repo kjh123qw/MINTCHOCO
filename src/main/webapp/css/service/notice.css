@@ -2,7 +2,11 @@
   기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
   가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
 #noticeWrap {
-	padding: 0 5px;
+	margin: 5px;
+	padding: 5px;
+	box-shadow: 0 6px 12px -5px rgba(50, 50, 93, 0.25),
+	  0 5px 12px -5px rgba(0, 0, 0, 0.3), 0 -3px 12px -3px rgba(0, 0, 0, 0.025);
+	background-color: #fff;
 }
 #noticeWrap h1 {
 	padding: 5px;
@@ -146,7 +150,7 @@
 @media screen and (min-width: 1225px) {
     #noticeWrap {
     	width: 1200px;
-    	margin: 0 auto;
+    	margin: 10px auto;
     }
 	.notice-form th:first-of-type {
 		width: 150px;

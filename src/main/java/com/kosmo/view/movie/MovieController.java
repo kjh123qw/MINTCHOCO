@@ -3,20 +3,29 @@ package com.kosmo.view.movie;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.kosmo.mintchoco.favorite.FavoriteDAO;
 import com.kosmo.mintchoco.favorite.FavoriteVO;
 import com.kosmo.mintchoco.member.MemberVO;
 import com.kosmo.mintchoco.movie.MovieDAO;
 import com.kosmo.mintchoco.movie.MovieVO;
 import com.kosmo.mintchoco.rank.Crawling;
+import com.kosmo.mintchoco.search.SearchDAO;
+import com.kosmo.mintchoco.search.SearchVO;
 import com.kosmo.mintchoco.tag.TagDAO;
 
 /*
@@ -26,8 +35,48 @@ import com.kosmo.mintchoco.tag.TagDAO;
 @Controller
 public class MovieController {
 	
-	// 영화 정보 입력
+	List<SearchVO> mainMovieList = null;
 	
+	// 영화 정보 입력
+
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(Locale locale, Model model) {
+		return "redirect:/main.do";
+	}
+	
+	@RequestMapping(value = "/main.do", method = RequestMethod.GET)
+	public String main(SearchDAO searchDAO, Model model) {
+		
+		model.addAttribute("maindo", 1);
+		mainMovieList = searchDAO.selectMovieList();
+//		model.addAttribute("mainMovieList", searchDAO.selectMovieList()); //최신영화
+		return "index.jsp";
+	}
+	
+	@RequestMapping(value="/main/nextpage.do", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> nextPage(@RequestParam(required=true) int seq) throws Exception {
+		ObjectMapper mapper = new ObjectMapper();
+		HttpHeaders responseHeaders = new HttpHeaders();  //헤더객체를 만들어서 
+		int nowSeq = seq;
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8"); //헤더정보 추가
+		List<SearchVO> outputList =  new ArrayList<SearchVO>();
+		if(mainMovieList != null) {
+			for(int i = 0; i < 10; i++) {
+				if(nowSeq < mainMovieList.size()) {
+					outputList.add(mainMovieList.get(nowSeq));
+					nowSeq += 1;
+				} else {
+					break;
+				}
+			}
+		} else {
+			outputList = null;
+		}
+		String returnString = mapper.writeValueAsString(outputList);
+	    return new ResponseEntity<String>(returnString, responseHeaders, HttpStatus.CREATED);
+	}
+
 	@RequestMapping("/movie/insertForm.do")
 	public String insertForm() {
 		return "mov_insert.jsp";
@@ -59,44 +108,46 @@ public class MovieController {
 	@RequestMapping("/movie/detail.do")
 	public String movieDetail(MovieDAO movieDAO, TagDAO tagDAO, Model model, HttpServletRequest request) {
 		
-		MemberVO memberVO = null;
-		List<String> kindTagList = null;
-		if(request.getSession().getAttribute("memberInfo") != null) {
-			memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
-			kindTagList = tagDAO.selectKindTagList(request.getParameter("movieNumber"));
-			model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
-			model.addAttribute("tagList", tagDAO.selectTagList(request.getParameter("movieNumber")));
-			model.addAttribute("kindTagList", kindTagList.toString().substring(1, kindTagList.toString().length() - 1));
-			model.addAttribute("stars", movieDAO.viewRating(request.getParameter("movieNumber")));
-			model.addAttribute("checkFavorite", movieDAO.checkFavorite(memberVO.getNumber(), request.getParameter("movieNumber")));
-			model.addAttribute("user", memberVO);
-			return "mov_detail.jsp";
-		} else {
-			return "redirect:/main.do";
-		}
+		model.addAttribute("movie", movieDAO.selectOneMovie(request.getParameter("movieNumber")));
+		model.addAttribute("stars", movieDAO.viewRating(request.getParameter("movieNumber")));
+		return "mov_detail.jsp";
+	}
+	
+	// 찜 확인
+	@RequestMapping(value="/movie/checkfv.do", method=RequestMethod.POST)
+	@ResponseBody
+	public ResponseEntity<String> movieFavorite(@RequestParam(required=true) int seq, FavoriteDAO favoriteDAO, HttpServletRequest request) throws Exception {
+		String returnString = "";
+		ObjectMapper mapper = new ObjectMapper();
+		HttpHeaders responseHeaders = new HttpHeaders();  //헤더객체를 만들어서 
+		responseHeaders.add("Content-Type", "text/html; charset=utf-8"); //헤더정보 추가
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+		returnString = favoriteDAO.selectFavoriteOne(memberVO.getNumber(), Integer.toString(seq));
+		return new ResponseEntity<String>(mapper.writeValueAsString(returnString), responseHeaders, HttpStatus.CREATED);
 	}
 	
 	// 찜 목록 추가
-
-	@RequestMapping("/movie/favoritePlus.do")
-	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, Model model, HttpServletRequest request) {
+	@RequestMapping(value="/movie/favoritePlus.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String movieLike(@RequestParam(required=true) int seq, FavoriteDAO favoriteDAO, HttpServletRequest request) {
 		
 		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
-		favoriteDAO.insertFavorite(memberVO.getNumber(), request.getParameter("movieNumber"));
+		favoriteDAO.insertFavorite(memberVO.getNumber(), Integer.toString(seq));
 		
-		return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber");
+		return "OK";
 	}
 	
 	// 찜 목록 취소
-	
-	@RequestMapping("/movie/favoriteMinus.do")
-	public String movieDetail(FavoriteVO favoriteVO, FavoriteDAO favoriteDAO, HttpServletRequest request) {
-
-		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
-		favoriteDAO.deleteFavorite(memberVO.getNumber(), request.getParameter("movieNumber"));
+	@RequestMapping(value="/movie/favoriteMinus.do", method=RequestMethod.POST)
+	@ResponseBody
+	public String movieCancel(@RequestParam(required=true) int seq, FavoriteDAO favoriteDAO, HttpServletRequest request) {
 		
-		return "redirect:/movie/detail.do?movieNumber=" + request.getParameter("movieNumber");
+		MemberVO memberVO = (MemberVO)request.getSession().getAttribute("memberInfo");
+		favoriteDAO.deleteFavorite(memberVO.getNumber(), Integer.toString(seq));
+		
+		return "OK";
 	}
+	
 	
 	// 영화 정보 수정
 	

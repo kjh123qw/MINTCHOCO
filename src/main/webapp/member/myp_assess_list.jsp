@@ -20,7 +20,7 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 	var subject = document.getElementsByClassName("hd-menu-subject")[0];
-	subject.innerHTML = "평가목록&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+	subject.innerHTML = "comment&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
 });
 </script>
 	<!-- 평가 목록 편집 메뉴 -->
@@ -28,32 +28,32 @@ document.addEventListener("DOMContentLoaded", function(){
 		<div class="con-assess-wrap">
 			<nav class="con-menu">
 				<div class="con-menu-modifyoff con-menu-dropdown-rel">
-					<div class="con-menu-sub myp_pc">${detail_info.nickName}님이 작성한 한줄평</div>
+					<div class="con-menu-sub myp_pc">${detail_info.nickName} comment</div>
 					<ul class="con-menu-list">
-						<li><a onclick="searchbar('on');">검색</a></li>
+						<li><a onclick="searchbar('on');">search</a></li>
 						<li class="con-menu-dropdown-rel con-menu-dropdown-here">
-							<a class="con-menu-dropdown-a">목록정렬</a>
+							<a class="con-menu-dropdown-a">sort</a>
 							<div class="con-menu-dropdown-wrap">
 						        <ul class="con-menu-dropdown">
-						            <li><a onmouseenter="textAlign('reg')" onclick="sorting('reg');">등록 순</a></li>
-						            <li><a onmouseenter="textAlign('star')" onclick="sorting('star');">평점 순</a></li>
-						            <li><a onmouseenter="textAlign('sub')" onclick="sorting('sub');">제목 순</a></li>
+						            <li><a onmouseenter="textAlign('reg')" onclick="sorting('reg');">registration</a></li>
+						            <li><a onmouseenter="textAlign('star')" onclick="sorting('star');">score</a></li>
+						            <li><a onmouseenter="textAlign('sub')" onclick="sorting('sub');">title</a></li>
 						        </ul>
 						        <div class="menu-description">
-						     		<p class="menu-description-subject">항목 정렬을 설정합니다.</p>
+						     		<p class="menu-description-subject">sort</p>
 						     	</div>
 						     </div>						   
 						</li>
 						<c:choose>
 	   						<c:when test="${memberInfo.number==detail_info.number}">
-								<li><a onclick="modifyOn();">편집</a></li>
+								<li><a onclick="modifyOn();">edit</a></li>
 							</c:when>
 							<c:otherwise>
-								<li><a class="con-fakeModify">편집</a></li>
+								<li><a class="con-fakeModify">edit</a></li>
 							</c:otherwise>
 						</c:choose>					
 					</ul>
-					<input type="text" class="con-menu-input"  placeholder="검색하실 영화제목을 입력하세요."  onkeyup="search();">
+					<input type="text" class="con-menu-input"  placeholder="keyword"  onkeyup="search();">
 					<div class="con-menu-search" onclick="searchbar('off');"><img src="${ contextPath }/images/member/back.png"></div>
 				</div>
 				<c:if test="${memberInfo.number==detail_info.number}">
@@ -63,9 +63,9 @@ document.addEventListener("DOMContentLoaded", function(){
 							<span>개 선택</span>
 						</div>
 						<ul class="con-menu-list">
-							<li><a onclick="allcheck();">전체선택</a></li>
-							<li><a onclick="modifyOff();">취소</a></li>
-							<li><a onclick="selChkbox();"><input type="submit" id="assess-list-delete" class="con-list-delete"><label for="assess-list-delete">삭제</label></a></li>
+							<li><a onclick="allcheck();">whole</a></li>
+							<li><a onclick="modifyOff();">cancel</a></li>
+							<li><a onclick="selChkbox();"><input type="submit" id="assess-list-delete" class="con-list-delete"><label for="assess-list-delete">delete</label></a></li>
 						</ul>
 					</div>
 				</c:if>	
@@ -73,28 +73,28 @@ document.addEventListener("DOMContentLoaded", function(){
 			<!-- // 평가 목록 편집 메뉴 -->
 			
 			<c:if test="${detail_info.assessment_flag=='N' && memberInfo.number==detail_info.number}">
-				<div class="con-assess con-assess-none con-none-my">현재 비공개로 설정되어있습니다.</div>
+				<div class="con-assess con-assess-none con-none-my">This is not open.</div>
 			</c:if>
 			<c:choose>
 	   			<c:when test="${detail_info.assessment_flag=='Y' || memberInfo.number==detail_info.number}">
 			   		<!-- 평가항목 없을때 -->
 					<c:if test="${assess_cnt == 0}">
-						<div class="con-assess con-assess-none">평가된 항목이 없습니다.</div>
+						<div class="con-assess con-assess-none">There is not comment.</div>
 					</c:if>
 					
 					<!-- 평가 틀 -->
 					<c:forEach items="${assessList}" var="assess">
-					<article class="con-assess" style="background-image: url(${ contextPath }/images/mov_poster/${assess.moviePoster});" onclick="chk_enable(this);">
+					<article class="con-assess" style="background-image: url(${assess.moviePoster});" onclick="chk_enable(this);">
 					<input class="con-chkbox" type="checkbox" name="chkbox" value="${assess.assessId}">
 					<div class="con-assess-bg">			
 						<div class="con-assess-img-wrap con-assess-float">
-							<img class="con-assess-img-poster" src="${ contextPath }/images/mov_poster/${assess.moviePoster}">
+							<img class="con-assess-img-poster" src="${assess.moviePoster}">
 							<!-- 140x200 -->
 						</div>
 						<div class="con-assess-cont-wrap con-assess-float">
 							<div class="con-assess-cont-right-wrap con-assess-float">
 								<a href="${ contextPath }/movie/detail.do?movieNumber=${assess.movieNumber}" class="con-search-target con-assess-cont-subject con-movie-link">${assess.movieTitle}</a>
-								<div class="con-assess-cont-genre">${assess.movieKind} | ${assess.movieDate} 개봉 | ${assess.movieTime}분 | ${assess.movieGrade}세 관람가</div>
+								<div class="con-assess-cont-genre">${assess.movieKind} | ${assess.movieDate} | ${assess.movieTime}m</div>
 							</div>
 							<div class="myp-assess-mobile con-assess-stars-date con-assess-float-right">
 								<div class="con-th-gray"><img src="${ contextPath }/images/member/cal.png" class="con-fav-cal">&nbsp;${assess.assessRegdate}</div>
@@ -141,12 +141,12 @@ document.addEventListener("DOMContentLoaded", function(){
 					<!-- //평가 틀 -->
 				</c:when>
 				<c:otherwise>
-					<div class="con-assess con-assess-none">해당 정보가 비공개되어있습니다.</div>
+					<div class="con-assess con-assess-none">This is not available.</div>
 				</c:otherwise>
 			</c:choose>	
 			
 			<!-- 검색결과가 없을때 -->
-			<div class="con-search-none">검색이 완료되었습니다.</div>
+			<div class="con-search-none">completed</div>
 					
 		</div>
 		<div class="clear"></div>

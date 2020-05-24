@@ -17,6 +17,8 @@ public class SearchVO {
 	private String movieGrade;
 	private String movieTime;
 	private String movieDate;
+	private String movieContent;
+	private String movieSplitContent;
 	private int movieIndex;
 	
 	public int getMovieNumber() {
@@ -84,5 +86,17 @@ public class SearchVO {
 	}
 	public void setMovieIndex(int movieIndex) {
 		this.movieIndex = movieIndex;
+	}
+	public void setMovieSplitContent(String movieSplitContent) {
+		this.movieSplitContent = movieSplitContent;
+	}
+	public String getMovieSplitContent() {
+		return movieSplitContent;
+	}
+	public void setMovieContent(String movieContent) {
+		this.movieContent = movieContent;
+	}
+	public String getMovieContent() {
+		return movieContent;
 	}
 }

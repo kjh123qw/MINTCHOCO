@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.sql.DataSource;
+
 /*
  * 담당자 : 김정호
  */
@@ -14,8 +16,9 @@ public class JDBCUtil {
 	
 	public static Connection getConnection() throws Exception {
 		try {
-			Class.forName("org.h2.Driver");
-			Connection con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
+			DBConfig dbConfig = new DBConfig();
+			DataSource ds = dbConfig.dataSource();
+			Connection con = ds.getConnection();//DriverManager.getConnection("jdbc:h2:tcp://localhost/~/test", "sa", "");
 			return con;
 		} catch(Exception e) {
 			e.printStackTrace();

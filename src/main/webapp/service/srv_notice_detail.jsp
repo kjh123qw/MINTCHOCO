@@ -19,7 +19,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>공지사항</title>
+<title>NOTICE</title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -37,10 +37,10 @@
 <!-- 담당자 내용 -->
 
 <div id="noticeWrap">
-	<h1>공지사항</h1>
+	<h1>notice</h1>
 	<table class="notice-form">
 		<tr>
-			<th>제목</th>
+			<th>title</th>
 			<td colspan="3">
 				<div class="cst-text-st1 notice-form-title">
 					${ noticeVO.noticeTitle }
@@ -48,13 +48,13 @@
 			</td>
 		</tr>
 		<tr>
-			<th>날짜</th>
+			<th>date</th>
 			<td>
 				<div class="cst-text-st1 notice-form-title">
 					${ noticeVO.noticeRegdate }
 				</div>
 			</td>
-			<th>조회수</th>
+			<th>count</th>
 			<td>
 				<div class="cst-text-st1 notice-form-title">
 					${ noticeVO.noticeCnt }
@@ -62,7 +62,7 @@
 			</td>
 		</tr>
 		<tr>
-			<th>내용</th>
+			<th>content</th>
 			<td colspan="3">
 				<textarea readonly>${ noticeVO.noticeContent }</textarea>
 			</td>
@@ -71,10 +71,10 @@
 			<td colspan="4">
 				<div class="cst-btn notice-form-btn">
 				<c:if test="${ sessionScope.memberInfo.number == 1 }">
-					<input type="button" value="삭제" class="st2-70-40" onclick="if(confirm('글을 삭제하시겠습니까?')) location.href='${ contextPath }/service/delete.do?noticeNumber=${ noticeVO.noticeNumber }';">
-					<input type="button" value="수정" class="st3-70-40" onclick="location.href='${ contextPath }/service/modify.do?noticeNumber=${ noticeVO.noticeNumber }';">
+					<input type="button" value="delete" class="st2-70-40" onclick="if(confirm('글을 삭제하시겠습니까?')) location.href='${ contextPath }/service/delete.do?noticeNumber=${ noticeVO.noticeNumber }';">
+					<input type="button" value="modify" class="st3-70-40" onclick="location.href='${ contextPath }/service/modify.do?noticeNumber=${ noticeVO.noticeNumber }';">
 				</c:if>
-					<input type="button" value="목록으로" class="st1-120-40" onclick="location.href='${ contextPath }/service/notice.do';">
+					<input type="button" value="list" class="st1-120-40" onclick="location.href='${ contextPath }/service/notice.do';">
 				</div>
 			</td>
 		</tr>

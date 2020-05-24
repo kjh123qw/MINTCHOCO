@@ -93,9 +93,9 @@
 	color: white;
 	padding-top : 10px;
 	padding-bottom : 10px;
-	padding-left : 15px;
-	padding-right : 15px;
-	font-size: 20px;
+	padding-left : 10px;
+	padding-right : 10px;
+	font-size: 16px;
 	transition-duration: 0.2s;
 }
 .checkPW-btn {

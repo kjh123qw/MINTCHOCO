@@ -20,7 +20,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta charset="UTF-8">
-<title> 영화 내용 상세 </title>
+<title>DETAILS - ${ movie.movieTitle }</title>
 
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
@@ -34,26 +34,16 @@
 <script src="${ contextPath }/js/movie/mov_detail.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/movie/mov_detail.css">
 
+<script src="${ contextPath }/js/movie/mov_favorite.js"></script>
 <script src="${ contextPath }/js/movie/rating.js"></script>
 <link rel="stylesheet" href="${ contextPath }/css/movie/rating.css">
 
 <!-- //담당자 js/css -->
 </head>
-<jsp:include page="../_header.jsp"></jsp:include>
 <body>
+<jsp:include page="../_header.jsp"></jsp:include>
 
-<div id="bg">
-
-<div id="movDetail">
-
-	<h1><a href="${ contextPath }/movie/detail.do?movieNumber=${ movie.movieNumber }"> 영화 내용 상세 </a></h1>
-	
-	
-	
-	<div class="loginUser" hidden="hidden">${user.number}</div>
-	
 	<c:if test="${ sessionScope.memberInfo.number == 1 }">
-	
 		<!-- 관리자일 경우에만 보이는 메뉴 -->
 	
 		<div id="updateMenu" style="text-align: center;">
@@ -64,93 +54,81 @@
 		</div>
 	
 	</c:if>
+<div id="movieDetailWrap">
+	<div id="movieDetail">
+		<div class="img-box">
+			<img src="${ movie.moviePoster }" alt="${ movie.movieTitle }">
+		</div>
+		<div class="info">
+			<h3>${ movie.movieTitle }</h3>
+			<div class="date-genre">${ movie.movieDate } | ${ movie.movieKind }</div>
+			<div class="md-search-score">
+				<div class="md-score-bg">
+					<div class="md-score-img" style="width: ${ stars * 10 }%"></div>
+				</div>
+				<div class="md-score-text"> <fmt:formatNumber value="${ stars }" pattern="0.0" /></div>
+			</div>
+			<div class="director-header">director</div>
+			<div class="director">${ movie.movieDirector }</div>
+			<div class="actor-header">actor</div>
+			<div class="actor">${ movie.movieActor }</div>
+		</div>
+		<div class="summary">${ movie.movieContent }</div>
+		<div class="like-box">
+			<div id="likeBtn"><i class="fas fa-heart"></i></div>
+		</div>
+		<div class="youtube-box">
+		<iframe src="https://www.youtube.com/embed/${ movie.movieTeaser }" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			<!-- <div class="youtube-link" onclick="location.href='${ movie.movieYoutubeUrl }'">
+				${ movie.movieTitle } Youtube
+			</div>-->
+		</div>
+	</div>
 	
-	<!-- 영화 정보 -->
-	<div class="movie">
-	
-		<div class="wrap1">
-		
-			<div class="poster-image"><a onclick="window.history.go(-1);">
-				<img src="${ contextPath }/images/mov_poster/${ movie.moviePoster }" alt="${ movie.movieTitle }"></a>
-				<div class="plus-minus">
-					<c:choose>
-						<c:when test="${ checkFavorite == 1 }">
-							<input class="checked" type="button" value="찜하기!">
-							<input type="button" value="퉤에엣!" onclick="location.href='${ contextPath }/movie/favoriteMinus.do?movieNumber=${ movie.movieNumber }'">
-						</c:when>
-						<c:otherwise>
-							<input type="button" value="찜하기!" onclick="location.href='${ contextPath }/movie/favoritePlus.do?movieNumber=${ movie.movieNumber }'">
-							<input class="none-checked" type="button" value="퉤에엣!">
-						</c:otherwise>
-					</c:choose>
-					
+	<div id="movieRating">
+	<c:if test="${ not empty sessionScope.memberInfo }">
+		<form method="post" action="${ contextPath }/comment/insert.do" name="commentInsert" id="commentInsertFrm">
+			<div class="rating-title">write a comment</div>
+			<div id="writeCommentBox">
+				<div class="rating-nick">${ sessionScope.memberInfo.nickName }</div>
+				<div class="score-text">Score</div>
+				<select name="assessStars">
+					<option value="1">1
+					<option value="2">2
+					<option value="3">3
+					<option value="4">4
+					<option value="5">5
+					<option value="6">6
+					<option value="7">7
+					<option value="8">8
+					<option value="9">9
+					<option value="10">10
+				</select>
+				<div class="comment-text">
+					<textarea name="assessContent" id="commentContent"></textarea>
+				</div>
+				<div class="comment-btn">
+				  	<input type="submit" value="write" onclick="return checkComment();">
 				</div>
 			</div>
-			
-	    	<table class="table1" border="1">
-	    	
-				<tr>
-				    <td colspan="2"><h3> ${ movie.movieTitle } </h3></td>
-				</tr>
-				<tr>
-				    <td colspan="2"><h3> 평점 <fmt:formatNumber value="${ stars }" pattern="0.0"></fmt:formatNumber> /10.0 </h3></td>
-				</tr>
-				<tr>
-					<td width="20%"> 년 도 </td>
-					<td> ${ movie.movieDate } </td>
-	           	</tr>
-				<tr>
-					<td> 장 르 </td>
-					<td> ${ kindTagList }
-					</td>
-				</tr>
-				<tr>
-					<td> 감 독 </td>
-					<td> ${ movie.movieDirector } </td>
-				</tr>
-				<tr>
-					<td> 주 연 </td>
-					<td> ${ movie.movieActor } </td>
-				</tr>
-				
-			</table>
-		
+			<input type="hidden" name="movieNumber" value="${ param.movieNumber }">
+		</form>
+		<div id="myCommentBoxTitle" class="rating-title">my comment</div>
+		<div id="myCommentBox"></div>
+		<hr>
+	</c:if>
+		<div class="rating-title">comment list</div>
+		<div id="ratingCommentBox">
 		</div>
-		
-		<div class="teaser">
-	    	<iframe width="100%" height="100%" src="https://www.youtube.com/embed/${ movie.movieTeaser }" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+		<div id="ratingPage">
+			&nbsp;&nbsp;<span class="page-arrow"><i class="fas fa-angle-left"></i></span>&nbsp;&nbsp;
+			&nbsp;&nbsp;<span class="page-arrow"><i class="fas fa-angle-right"></i></span>&nbsp;&nbsp;
 		</div>
-		
-    	<table class="table2" border="1">
-
-			<tr>
-				<td>
-			    	<c:forEach var="tag" items="${ tagList }">
-						<a href="${ contextPath }/movie/search.do?searchKeyWord=${ tag.tagContent }">#${ tag.tagContent }</a>
-			       	</c:forEach>
-				</td>
-          	</tr>
-          	
-			<tr>
-				<td>
-					<a href="${ movie.movieYoutubeUrl }">| Youtube Link |</a>
-					<a href="${ movie.movieNaverUrl }">| Naver Link |</a> 
-				</td>
-			</tr>
-			<tr>
-				<td>${ movie.movieContent }</td>
-			</tr>
-			<tr>
-				<td>게시일 : ${ movie.movieIndate }</td>
-			</tr>
-			
-		</table>
-	</div>		
-
+	</div>
+	
 </div>
-
-</div>
-</body>
-<jsp:include page="./_rating.jsp"></jsp:include>
+<input type="hidden" value="${ param.movieNumber }" id="selectedMovieNumber">
+<input type="hidden" value="${ sessionScope.memberInfo.number }" id="memberNumber">
 <jsp:include page="../_footer.jsp"></jsp:include>
+</body>
 </html>

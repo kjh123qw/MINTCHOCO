@@ -9,7 +9,6 @@
 %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
 <!-- 마이페이지 내 페이지별 js/css -->
 
@@ -28,25 +27,25 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 	var subject = document.getElementsByClassName("hd-menu-subject")[0];
-	subject.innerHTML = "마이 페이지&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+	subject.innerHTML = "my page&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
 });
 </script>
 	<form class="myp-con-info" method="post" action="" onsubmit="return ;">
 	<c:if test="${detail_info.info_flag=='N' && memberInfo.number==detail_info.number}">
-		<div class="con-info-none con-none-my">현재 비공개로 설정되어있습니다.</div>
+		<div class="con-info-none con-none-my">this is not available.</div>
 	</c:if>
 	<c:choose>
 	   	<c:when test="${detail_info.info_flag=='Y' || memberInfo.number==detail_info.number}">
 			<article class="con-info">
 				<div class="con-info-intro con-info-wrap">			
-					<div class="con-info-subject">최근 추가한 목록</div>
+					<div class="con-info-subject">recent favorite</div>
 					<div class="swiper-container">
 				    <div class="swiper-wrapper">
 				    	<c:forEach items="${favorite_five}" var="favorite5">
-				      		<div class="swiper-slide" style="background-image:url(${ contextPath }/images/mov_poster/${favorite5.poster})"></div>
+				      		<div class="swiper-slide" style="background-image:url(${favorite5.poster})"></div>
 				    	</c:forEach>
-				    	<c:if test="${fn:length(favorite_five)==0}">
-				    		<div class="swiper-slide" style="background-image:url(${ contextPath }/images/member/none.png)" onclick="movieLink('${favorite5.movieNum}')"></div>
+				    	<c:if test="${empty favorite_five}">
+				    		<div class="swiper-slide" onclick="movieLink('${favorite5.movieNum}')" style="text-align: center; font-size: 18px; padding: 20px 0;">There is not a movie.</div>
 				   		</c:if>
 				    </div>
 				    <!-- Add Pagination -->
@@ -54,36 +53,36 @@ document.addEventListener("DOMContentLoaded", function(){
 				  </div>
 				</div>
 				<div class="con-info-intro con-info-wrap">			
-					<div class="con-info-subject">소개</div>
+					<div class="con-info-subject">introduce</div>
 					<div class="con-info-content">
 						${detail_info.introduce}
 						<c:if test="${detail_info.introduce==null}">
-							자기소개가 작성되지 않았습니다.
+							there is not a information.
 						</c:if>
 					</div>
 				</div>
 				<div class="con-info-detail con-info-wrap">			
-					<div class="con-info-subject">정보</div>
+					<div class="con-info-subject">information</div>
 					<table class="con-info-table">
 						<tr>
-							<th>성별</th>
+							<th>gender</th>
 							<c:if test="${detail_info.gender == 'M'}">
-								<td>남자</td>
+								<td>male</td>
 							</c:if>
 							<c:if test="${detail_info.gender == 'F'}">
-								<td>여자</td>
+								<td>female</td>
 							</c:if>			
 						</tr>
 						<tr>
-							<th>이메일 주소</th>
+							<th>email</th>
 							<td>${detail_info.email}</td>						
 						</tr>
 						<tr>
-							<th>평가 작성</th>
-							<td>${assess_cnt}건</td>						
+							<th>comment</th>
+							<td>${assess_cnt}</td>						
 						</tr>
 						<tr>
-							<th>가입일</th>
+							<th>join date</th>
 							<td>${detail_info.indate}</td>						
 						</tr>
 					</table>
@@ -91,7 +90,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			</article>
 		</c:when>
 		<c:otherwise>
-			<div class="con-info-none">회원정보가 비공개되어있습니다.</div>
+			<div class="con-info-none">this is not available.</div>
 		</c:otherwise>
 	</c:choose>
 	</form>

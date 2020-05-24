@@ -16,6 +16,21 @@ session.setAttribute("memberInfo", memberVO);*/
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <% request.setCharacterEncoding("UTF-8"); %>
 <c:set var="contextPath" value="${ pageContext.request.contextPath }" />
+<c:if test="${ empty sessionScope.memberInfo }">
+<div id="loginLayer" style="display: none;">
+	<form method="post" action="${ contextPath }/login.do" id="loginForm" name="loginForm">
+		<div id="loginWindow">
+			<h3>LOGIN</h3>
+			<input type="text" id="emailForm" name="email" placeholder="EMAIL">
+			<input type="password" id="pwdForm" name="pwd" placeholder="PASSWORD">
+			<input type="hidden" id="currentURL" name="currentURL">
+			<input type="submit" id="loginBtn" value="Login">
+			<div id="joinBtn" onclick="checkJoin();">Join</div>
+			<div id="loginCancelBtn" onclick="closeLogin();">Close</div>
+		</div>
+	</form>
+</div>
+</c:if>
 <header>
 	<div id="headerNav">
 		<div id="homeBtn">
@@ -40,21 +55,18 @@ session.setAttribute("memberInfo", memberVO);*/
 					<i class="fas fa-search"></i>
 				</div>
 			</li>
-			<li>
-				<div id="showTagBtn">
-					<div id="showTagBtnUp" style="display: none;">
-						<i class="fas fa-caret-up"></i>
-					</div>
-					<div id="showTagBtnDown">
-						<i class="fas fa-caret-down"></i>
-					</div>
-				</div>
-			</li>
-			<li><a href="${ contextPath }/rank.do">영화순위</a></li>
-			<li><a href="${ contextPath }/movie/recommend.do">추천영화</a></li>
-			<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>
-			<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
-			<li><a href="${ contextPath }/logout.do">로그아웃</a></li>
+			<li><a href="${ contextPath }/main.do">HOME</a></li>
+			<li><a href="${ contextPath }/service/notice.do">NOTICE</a></li>
+			<c:choose>
+				<c:when test="${ empty sessionScope.memberInfo }">
+					<li id="loginMenu" onclick="openLogin();">LOGIN</li>
+					<li id="joinMenu" onclick="checkJoin();">JOIN</li>
+				</c:when>
+				<c:otherwise>
+					<li><a href="${ contextPath }/mypage.do">MYPAGE</a></li>
+					<li><a href="${ contextPath }/logout.do">LOGOUT</a></li>
+				</c:otherwise>
+			</c:choose>
 			<li></li>
 		</ul>
 	</div>
@@ -64,40 +76,12 @@ session.setAttribute("memberInfo", memberVO);*/
 	<div id="mobShowSearchBtn">
 		<i class="fas fa-search"></i>
 	</div>
-	<div id="mobShowTagBtn">
-		<div id="mobShowTagBtnUp" style="display: none;">
-			<i class="fas fa-caret-up"></i>
-		</div>
-		<div id="mobShowTagBtnDown">
-			<i class="fas fa-caret-down"></i>
-		</div>
-	</div>
 </header>
-<div id="tagWrap">
-	<form name="searchTagForm" action="${ contextPath }/movie/tagSearch.do" onsubmit="return checkTagList();">
-		<div id="searchTagListBox"></div>
-		<div id="searchMoreTagListBox"></div>
-		<div id="serachTagBtn">
-			<div id="searchTagText"></div>
-			<div class="cst-btn">
-				<div id="moreTag">
-					<div id="morePlus">
-						<i class="fas fa-plus-square"></i>
-					</div>
-					<div id="moreMinus">
-						<i class="fas fa-minus-square"></i>
-					</div>
-				</div>
-				<input type="submit" class="st1-120-40" value="검색">
-			</div>
-		</div>
-	</form>
-</div>
 <div id="mobSearchWrap">
 	<form name="mobSearchForm" action="${ contextPath }/movie/search.do">
 		<div class="search-form-wrap">
 			<div class="cst-text-st1 search-form-textbox">
-				<input type="text" class="text-230" name="searchKeyWord" placeholder="검색어 입력">
+				<input type="text" class="text-230" name="searchKeyWord" placeholder="keyword">
 			</div>
 			<div id="mobSearchHeaderBtn" onclick="document.mobSearchForm.submit();">
 				<i class="fas fa-search"></i>
@@ -111,15 +95,20 @@ session.setAttribute("memberInfo", memberVO);*/
 		<div><i class="fas fa-times"></i></div>
 	</div>
 	<ul id="mobNavList">
-		<li><a href="${ contextPath }/main.do">홈</a></li>
-		<li><a href="${ contextPath }/rank.do">영화순위</a></li>
-		<li><a href="${ contextPath }/movie/recommend.do">추천영화</a></li>
-		<li><a href="${ contextPath }/service/notice.do">공지사항</a></li>
-		<li><a href="${ contextPath }/my_page.do">마이페이지</a></li>
-			<li><a href="${ contextPath }/logout.do">로그아웃</a></li>
+		<li><a href="${ contextPath }/main.do">HOME</a></li>
+		<li><a href="${ contextPath }/service/notice.do">NOTICE</a></li>
+		<c:choose>
+			<c:when test="${ empty sessionScope.memberInfo }">
+				<li id="loginMenu" onclick="openLogin();">LOGIN</li>
+				<li id="joinMenu" onclick="checkJoin();">JOIN</li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="${ contextPath }/mypage.do">MYPAGE</a></li>
+				<li><a href="${ contextPath }/logout.do">LOGOUT</a></li>
+			</c:otherwise>
+		</c:choose>
 	</ul>
 </div>
-
 
 <script>
 	sessionStorage.setItem('contextPath', '${ contextPath }');

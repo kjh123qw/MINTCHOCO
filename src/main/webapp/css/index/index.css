@@ -2,198 +2,156 @@
   기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
   가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
 
-body, html, #contentBox{
-  height: 100%;
-  overflow: hidden;
+#indexWrap, #searchListWrap {
+	width: 100%;
+	padding: 5px;
+}
+#searchListWrap hr {
+	margin: 10px 0;
+}
+#mainMovieBox {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: 160px;
+	grid-gap: 10px;
+}
+#mainMovieBox .movie {
+	display: grid;
+	grid-template-columns: 95px 1fr;
+	grid-gap: 5px;
+	padding: 5px;
+	box-shadow: 0 6px 12px -5px rgba(50, 50, 93, 0.25),
+	  0 5px 12px -5px rgba(0, 0, 0, 0.3), 0 -3px 12px -3px rgba(0, 0, 0, 0.025);
+	cursor: pointer;
+	background-color: #fff;
 }
 
-#contentBox{
-   display: inline;
+#mainMovieBox .movie:hover {
+	background-color: #efe;
 }
-
-/* 메인 동영상 화면 */
-#mainDiv1{
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  background-color: #6b6350;
+.movie .img-box {
+	overflow: hidden;
 }
-
-#skipBtn1, #skipBtn2{
-  font-family: 'Anton', sans-serif;
-  position: absolute;
-  font-size: 40px;
-  left: 50%;
-  bottom: 30px;
-  color: #39313b;
-  /* text-shadow: 5px 5px 10px #d1ebd9; */
-  transition: 0.5s;
-  cursor: pointer;
-  transform: translate(-50%);
+.img-box img {
+	width: 100%;
 }
-
-#skipBtn2{
-    visibility: hidden;
-    opacity: 0;
-    transition: 0.5s;
-    position: absolute;
-    right: 0; 
-    top: 2px; 
+.info {
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-auto-rows: 15px;
+	align-items: center;
 }
-
-#skipBtn1:hover{
-  transform: translate(-80%);
-  color: #70ad92;
-}
-
-#skipBtn1:hover > #skipBtn2{
-  transform: translate(100%);
-  visibility: visible;
-  opacity: 1;
-  color: #70ad92;
-}
-
-/* //메인 동영상 화면 */
-
-#mainDiv2{
-  top: 100%;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-image: url('../../images/index/introImage.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#mainDiv2 > video{
-	z-index: -100;
-}
-
-#upBtn{
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 500;
-  border-bottom: 3px solid #39313b;
-  transition: 0.5s;
-  
-}
-
-.fa-arrow-up{
-  font-size: 50px;
-  color: #39313b;
-  transition: 0.5s;
-
-}
-.fa-arrow-up:hover{
-  transform: translateY(-30%);
-/*   transform:rotate(-90deg); */
-}
-
-
-
-#loginDiv{
-  position: absolute;
-  left:100%;
-  height: 100%;
-  width: 100%;
-  background-color: #d0c6bc;
-  text-align: center;
-}
-
-.title{
-  color: #39313b;
-  font-family: 'Pacifico', cursive;
-  margin-top: 50px;
-  margin-bottom: 40px;
-}
-
-/* 임의변경 */
-
-div[class *= cst-text-box]{
-	margin:10px auto;
-	float: none;
-	width: 300px!important;
-}
-
-.cst-text-box > input{
-	width: 300px!important;
-	background-color:transparent;
-}
-
-div[class *= cst-btn]{
-	margin: 30px auto;
-	width: 150px;
-	text-align: left;
-}
-
-/* 임의변경 */
-
-#optionDiv > a{
+.info h3 {
 	font-weight: bold;
-	text-decoration: underline!important;
+	font-size: 12px;
+	grid-row-start: 1;
+	grid-row-end: 3;
 }
-
-
-
-#joinDiv{
-  position: absolute;
-  left:100%;
-  height: 100%;
-  width: 100%;
-  background-color: #d0c6bc;
-  text-align: center;
+.info .date-genre {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 10px;
+	color: #444;
+	grid-row-start: 3;
 }
-
-#joinHr{
-	margin: 30px auto;
-	width:80%;
+.info .search-score {
+	width: 150px; height: 26px;
+	padding: 3px 0;
+	grid-row-start: 4;
+	grid-row-end: 6;
 }
-
-
-#findDiv{
-  position: absolute;
-  left:100%;
-  height: 100%;
-  width: 100%;
-  background-color: #d0c6bc;
-  text-align: center;
+.info .score-bg {
+	width: 100px; height: 20px;
+	float: left;
+	background-image: url('../../images/mincho/mincho_search_bg.jpg');
+    background-repeat: repeat-x;
+	background-size: 20px;
 }
-
-#findDivSubTitle{
-	margin-bottom: 40px;
+.info .score-img {
+	height: 20px;
+	background-image: url('../../images/mincho/mincho_search.jpg');
+    background-repeat: repeat-x;
+	background-size: 20px;
 }
-
-
-
-
-
+.info .score-text {
+	width: 40px; height: 20px;
+	float: left;
+	font-size: 16px;
+	color: #00796a;
+	font-weight: bold;
+	line-height: 18px;
+	text-align: center;
+}
+.info .summary {
+	overflow: hidden;
+	font-size: 10px;
+	color: #888;
+	grid-row-start: 6;
+	grid-row-end: 11;
+	align-self: start;
+}
+#moreBtn {
+	width: 240px; height: 50px;
+	margin: 15px auto;
+	background-color: #006859;
+	border-radius: 5px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	text-align: center;
+	line-height: 50px;
+	cursor: pointer;
+}
+#moreBtn:hover {
+	background-color: #00796a;
+}
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
+	#mainMovieBox {
+		grid-auto-rows: 180px;
+	}
+	#mainMovieBox .movie {
+		grid-template-columns: 110px 1fr;
+	}
+	.info {
+		grid-auto-rows: 17px;
+	}
+	.info h3 {
+		font-size: 16px;
+	}
+	.info .date-genre {
+		font-size: 14px;
+	}
+	.info .summary {
+		font-size: 14px;
+	}  
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
-
-    
+	#mainMovieBox {
+		grid-auto-rows: 200px;
+	}
+	#mainMovieBox .movie {
+		padding: 10px;
+		grid-template-columns: 120px 1fr;
+	}
 }
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
 @media screen and (min-width: 992px) {
-
-	#loginDiv, #joinDiv, #findDiv{
-		width:40%;
+	#mainMovieBox {
+		grid-template-columns: 1fr 1fr;
 	}
-	
-	#upBtn{
-		left:61%;
-	}
-
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
 @media screen and (min-width: 1225px) {
-
-  
+    #indexWrap, #searchListWrap {
+    	width: 1200px;
+    	margin: 0 auto;
+    	padding: 10px;
+    }
 }

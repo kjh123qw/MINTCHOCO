@@ -7,6 +7,9 @@
 ol, ul { list-style: none; }
 a { outline: 0; text-decoration: none !important; color: #555; cursor: pointer; }
 img { border: 0; }
+body { background-color: #ddd; 
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif; }
 
 
 /* SEARCH FORM */
@@ -163,7 +166,7 @@ header {
 }
 #navList > li:last-of-child {
 	display: none;
-	width: 100px; height: 60px;
+	height: 60px;
 }
 #mobMenuWrap {
 	position: fixed;
@@ -196,8 +199,11 @@ header {
 	line-height: 48px;
 	text-align: center;
 	cursor: pointer;
+	color: #ccc;
 }
 #mobNavList > li > a {
+	display: block;
+	width: 100%; height: 100%;
 	color: #ccc;
 }
 
@@ -221,6 +227,7 @@ header {
 footer {
 	overflow: hidden;
 	padding: 10px 5px;
+	margin-top: 10px;
 	background-color: #008a7b;
 	color: white;
 	font-size: 14px;
@@ -396,6 +403,78 @@ div[class *= cst-btn-wrap-st4] > input {
 	color: #fff;
 }
 
+/* login */
+#loginLayer {
+	position: fixed;
+	width: 100%; height: 100%;
+	background-color: rgba(0, 0, 0, 0.8);
+	z-index: 12;
+}
+#loginWindow {
+	width: 100%; height: 300px;
+	padding-top: 15px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 10px;
+	align-items: center;
+	padding: 20px;
+	background-color: #eee;
+}
+#loginWindow h3 {
+	grid-column-start: 1;
+	border-bottom: 1px solid #666;
+}
+#loginWindow hr {
+	grid-column-start: 1;
+}
+#emailForm {
+	height: 35px;
+	outline: none;
+	padding: 5px;
+	font-size: 16px;
+}
+#pwdForm {
+	height: 35px;
+	outline: none;
+	padding: 5px;
+	font-size: 16px;
+}
+#loginBtn {
+	outline: none;
+	background-color: #0086a7;
+	border: 0;
+	height: 35px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 33px;
+	text-align: center;
+	cursor: pointer;
+}
+#joinBtn {
+	outline: none;
+	background-color: #1aa800;
+	border: 0;
+	height: 35px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 18px;
+	line-height: 33px;
+	text-align: center;
+	cursor: pointer;
+}
+#loginCancelBtn {
+	outline: none;
+	background-color: #555;
+	border: 0;
+	height: 35px;
+	color: #ddd;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 33px;
+	text-align: center;
+	cursor: pointer;
+}
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
@@ -420,7 +499,10 @@ div[class *= cst-btn-wrap-st4] > input {
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
-	
+	#loginWindow {
+		width: 450px;
+		margin: 100px auto;
+	}
 }
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
@@ -440,12 +522,15 @@ div[class *= cst-btn-wrap-st4] > input {
 	    padding: 0 5px;
 	    line-height: 60px;
 	    float: left;
+	    font-size: 18px;
+	    color: #ddd;
+	    cursor: pointer;
 	}
 	#navList li a {
 	    font-size: 18px;
 	    color: #ddd;
 	}
-	#navList li a:hover {
+	#navList li a:hover, #navList li:hover {
 	    font-size: 18px;
 	    color: #fff;
 	}

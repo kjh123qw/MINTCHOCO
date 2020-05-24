@@ -29,7 +29,7 @@ import com.kosmo.mintchoco.member.MemberVO;
 public class MemberMController {
 	
 	// 마이페이지 메인
-	@RequestMapping("/my_page.do")	
+	@RequestMapping("/mypage.do")	
 	public String getInfo(@RequestParam(value="nickName", required=false) String nickname, FavoriteVO vo, FavoriteDAO favoriteDAO, MemberVO member, MemberDAO memberDAO, Model model, HttpSession session) throws UnsupportedEncodingException {
 		// 초기화
 		session.removeAttribute("member_config");

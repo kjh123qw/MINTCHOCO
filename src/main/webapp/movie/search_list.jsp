@@ -19,7 +19,7 @@
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
 <meta charset="UTF-8">
-<title>검색결과</title>
+<title>Search result</title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -30,7 +30,7 @@
 
 <!-- 담당자 js/css -->
 <script src="${ contextPath }/js/search_list.js"></script>
-<link rel="stylesheet" href="${ contextPath }/css/search_list.css">
+<link rel="stylesheet" href="${ contextPath }/css/index/index.css">
 <!-- 담당자 js/css -->
 </head>
 
@@ -39,60 +39,13 @@
 <jsp:include page="../_header.jsp"></jsp:include>
 
 	<div id="searchListWrap">
-	    <p><b>${ searchKeyWord }</b> 검색 결과 입니다. &lt;<b>${ searchCount }</b> 건&gt;</p>
+	    <p><b>${ searchKeyWord }</b> search result &lt;<b>${ searchCount }</b>&gt;</p>
 		<hr>
-		<div id="searchResultBox">
-			<c:if test="${ not empty searchMovieList }">
-				<c:forEach var="searchVO" items="${ searchMovieList }">
-					<div class="search-movie-box">
-						<div class="search-movie-innerbox" onclick="location.href='${ contextPath }/movie/detail.do?movieNumber=${ searchVO.movieNumber }'">
-							<div class="search-title">
-								${ searchVO.movieTitle }
-							</div>
-							<div class="search-score">
-								<div class="score-bg">
-									<div class="score-img" style="width: <fmt:formatNumber value="${ searchVO.movieStars * 10 }" pattern="0" />%"></div>
-								</div>
-								<div class="score-text"><fmt:formatNumber value="${ searchVO.movieStars }" pattern="0.0" /></div>
-							</div>
-							<div class="search-info-box">
-								<div class="search-movie-image">
-									<img src="${ contextPath }/images/mov_poster/${ searchVO.moviePoster }" alt="${ searchVO.movieTitle } 포스터">
-								</div>
-								<div class="search-info-ele-box">
-									<div class="search-info-ele">
-										${ searchVO.movieDate } | ${ searchVO.movieTime } 분 | ${ searchVO.movieGrade }
-									</div>
-									<div class="search-info-ele">
-										${ searchVO.movieKind }
-									</div>
-									<div class="search-info-ele">
-										감독 : ${ searchVO.movieDirector }
-									</div>
-									<div class="search-info-ele actor">
-										${ searchVO.movieActor }
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</c:forEach>
-			</c:if>
+		<div id="mainMovieBox">
+		
 		</div>
 	</div>
-	<c:if test="${ moreSearchCount > 0 }">
-		<div id="searchMoreBtn">
-			(${ searchCount - moreSearchCount } / ${ searchCount })
-			<c:choose>
-				<c:when test="${ moreSearchCount > 5 }">
-					5 건 더보기
-				</c:when>
-				<c:otherwise>
-					${ moreSearchCount } 건 더보기
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</c:if>
+	<div id="moreBtn">More</div>
 <jsp:include page="../_footer.jsp"></jsp:include>
 
 </body>

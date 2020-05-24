@@ -5,75 +5,59 @@
 $(function() {
 	var contextPath = sessionStorage.getItem('contextPath');
 	var totlaSearchCount;
-	$('#searchMoreBtn').click(function() {
-	    $.ajax({
+	let endPoint = false;
+	nextPage(0);
+	$('#moreBtn').click(function() {
+		nextPage($("#mainMovieBox").children().length);
+	});
+	function nextPage(seq) {
+		$.ajax({
 	        url :"nextpage.do",
 	        type :"POST",
-	        data :{ pageNum: '한글1' },
+	        data :{ seq: seq },
 	        dataType: 'json',
 	        success :function(data){
+	        	if(data.length !== 10) {
+	        		endPoint = true;
+	        	}
 	        	data.forEach(function(item, index) {
 	        		
-					
-					var infoBox1 = $('<div />', {'class': 'search-info-ele', 'text': item.movieDate + ' | ' + item.movieTime + ' 분 | ' +item.movieGrade})
-					var infoBox2 = $('<div />', {'class': 'search-info-ele', 'text': item.movieKind})
-					var infoBox3 = $('<div />', {'class': 'search-info-ele', 'text': '감독 : ' + item.movieDirector})
-					var infoBox4 = $('<div />', {'class': 'search-info-ele actor', 'text': item.movieActor})
-					var searchInfoEleBox = $('<div />', {'class': 'search-info-ele-box'});
-					searchInfoEleBox.append(infoBox1);
-					searchInfoEleBox.append(infoBox2);
-					searchInfoEleBox.append(infoBox3);
-					searchInfoEleBox.append(infoBox4);
-					
-					var searchMovieImageImg = $('<img >', {'src': contextPath + '/images/mov_poster/' + item.moviePoster, 'alt': item.movieTitle + ' 포스터'});
-					var searchMovieImageDiv = $('<div />', {'class': 'search-movie-image'});
-					searchMovieImageDiv.append(searchMovieImageImg);
-
-					var searchInfoBox = $('<div />', {'class': 'search-info-box'});
-					searchInfoBox.append(searchMovieImageDiv);
-					searchInfoBox.append(searchInfoEleBox);
-
-					var searchImg = $('<div />', {'class': 'score-img', 'style': 'width: ' + (item.movieStars * 10) + '%'});
-					var searchBg = $('<div />', {'class': 'score-bg'});
-					searchBg.append(searchImg);
-					
-					var searchText = $('<div />', {'class': 'score-text', 'text': item.movieStars});
-					var searchScore = $('<div />', {'class': 'search-score'});
-					searchScore.append(searchBg);
-					searchScore.append(searchText);
-					
-					var searchTitle = $('<div />', {'class': 'search-title', 'text': item.movieTitle});
-					
-					var searchMovieInnerboxDiv = $('<div />', {
-						'class': 'search-movie-innerbox',
+	        		var movie = $('<div />', {
+	        			'class':'movie',
 						'click': function() {
 							location.href = contextPath + '/movie/detail.do?movieNumber=' + item.movieNumber;
 						}
-					});
-					searchMovieInnerboxDiv.append(searchTitle);
-					searchMovieInnerboxDiv.append(searchScore);
-					searchMovieInnerboxDiv.append(searchInfoBox);
-					
-					var searchMovieBoxDiv = $('<div />', {'class': 'search-movie-box'});
-					searchMovieBoxDiv.append(searchMovieInnerboxDiv);
-					
-					$("#searchResultBox").append(searchMovieBoxDiv);
+	        			})
+					var imgBox = $('<div />', {'class': 'img-box'});
+	        		var img = $('<img />', {'src': item.moviePoster});
+					imgBox.append(img);
+	        		movie.append(imgBox);
+
+	        		var info = $('<div />', {'class': 'info'});
+	        		var title = $('<h3 />', {'text': item.movieTitle});
+	        		var dateGenre = $('<div />', {'class': 'date-genre', 'text': item.movieDate + ' | ' + item.movieKind});
+					var scoreImg = $('<div />', {'class': 'score-img', 'style': 'width: ' + (item.movieStars * 10) + '%'});
+					var scoreBg = $('<div />', {'class': 'score-bg'});
+					var searchText = $('<div />', {'class': 'score-text', 'text': Math.round(item.movieStars * 10) / 10});
+					var searchScore = $('<div />', {'class': 'search-score'});
+					var summary = $('<div />', {'class': 'summary', 'text': item.movieContent.substring(0, 140) + ' ...'});
+					scoreBg.append(scoreImg);
+					searchScore.append(scoreBg);
+					searchScore.append(searchText);
+					info.append(title);
+					info.append(dateGenre);
+					info.append(searchScore);
+					info.append(summary);
+	        		movie.append(info);
+	        		
+					$("#mainMovieBox").append(movie);
+	        		
 	        	});
 	        }
 	    }).done(function() {
-	    	$.ajax({
-		        url :"nextpagecount.do",
-		        type :"POST",
-		        dataType: 'json',
-		        success :function(data){
-		        	var outputCount = 5;
-		        	if(data.remainPageCount < 5)
-		        		outputCount = data.remainPageCount;
-					$("#searchMoreBtn").html("(" + (data.totalSearchCount - data.remainPageCount) + " / " + data.totalSearchCount + ") " + outputCount + " 건 더보기");
-					if(data.remainPageCount == 0)
-						$("#searchMoreBtn").hide();
-		        }
-	    	});
+	    	if(endPoint) {
+	    		$('#moreBtn').remove();
+	    	}
 	    });
-	});
+	}
 });

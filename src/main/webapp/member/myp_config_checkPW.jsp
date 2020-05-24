@@ -22,20 +22,20 @@
 <script>
 document.addEventListener("DOMContentLoaded", function(){
 	var subject = document.getElementsByClassName("hd-menu-subject")[0];
-	subject.innerHTML = "계정설정&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
+	subject.innerHTML = "account&nbsp;<img class='con-menuin' src='${ contextPath }/images/member/menuin.png'>";
 });
 </script>
 	<form class="myp-con-conf-checkPW" method="POST" action="config.do" onsubmit="return checkPW();">
 		<article class="con-conf-checkPW-wrap">
-			<div class="con-conf-checkPW-subject">패스워드 확인</div>
-			<div class="con-conf-checkPW-content">개인정보 보호를 위해 현재 패스워드를 확인합니다.</div>
-			<input type="password" class="con-conf-text" placeholder="기존 패스워드 입력">			
+			<div class="con-conf-checkPW-subject">password</div>
+			<div class="con-conf-checkPW-content">Check your password</div>
+			<input type="password" class="con-conf-text" placeholder="password">			
 			<br>
 			<div class="checkPW-btn">
 				<input type="submit" id="con-conf-submit" class="con-conf-checkPW">
-				<label for="con-conf-submit" class="con-conf-submit-btn">확 인</label>
+				<label for="con-conf-submit" class="con-conf-submit-btn">confirm</label>
 				<input type="button" id="con-conf-cancel" onclick="history.back();">
-				<label for="con-conf-cancel" class="con-conf-submit-btn checkPW-btn-cancel">취 소</label>
+				<label for="con-conf-cancel" class="con-conf-submit-btn checkPW-btn-cancel">cancel</label>
 			</div>			
 		</article>
 	</form>
@@ -45,14 +45,14 @@ document.addEventListener("DOMContentLoaded", function(){
 				<span class="icon-confirmed-wrap"><img src="${ contextPath }/images/member/confirmed.svg" class="icon-confirmed"></span>
 				<span>Confirm</span>
 			</div>
-			<div class="con-conf-confirmed conf-detail-content">입력하신 정보로 확인 중입니다...</div>
+			<div class="con-conf-confirmed conf-detail-content">checking...</div>
 		</article>
 		<article class="con-conf-confirmed-failed  con-conf-horizontalCenter">
 			<div class="con-conf-confirmed-subject conf-detail-subject">
 				<span class="icon-confirmed-wrap"><img src="${ contextPath }/images/member/failed.svg" class="icon-confirmed"></span>
 				<span>Failed</span>
 			</div>
-			<div class="con-conf-confirmed con-conf-status conf-detail-content">입력하신 정보가 올바르지 않거나,<br>시스템 오류가 발생했습니다.</div>
+			<div class="con-conf-confirmed con-conf-status conf-detail-content">There is some errors.</div>
 		</article>
 	</div>
 	<div class="clear"></div>

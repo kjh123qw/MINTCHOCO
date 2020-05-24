@@ -6,214 +6,341 @@
 
 /* 화면 기본 */
 
-#bg{
-	background: #3ABAB5;
+#movieDetailWrap {
+	display: grid;
+	padding: 5px;
+	grid-template-columns: 1fr;
+	grid-gap: 10px;
 }
-
-#mov-detail{
-    position: relative;
-    width: 100%;
-    height: 450px;
-    overflow-x: hidden;
+#movieDetail {
+	display: grid;
+	grid-template-columns: 95px 1fr;
+	grid-gap: 5px;
+	padding: 5px;
+	box-shadow: 0 6px 12px -5px rgba(50, 50, 93, 0.25),
+	  0 5px 12px -5px rgba(0, 0, 0, 0.3), 0 -3px 12px -3px rgba(0, 0, 0, 0.025);
+	background-color: #fff;
 }
-
-h1{
-    width: 100%;
-    cursor: pointer;
-    color: #F5FFFA;
-    background-color: #0DEEC9;
-    border-top: 5px solid #F5FFFA;
-    border-bottom: 5px solid #F5FFFA;
-    text-align: center;
+#movieDetail .img-box {
+	overflow: hidden;
+	grid-column-start: 1;
+	grid-row-start: 1;
+	grid-row-end: 2;
 }
-
-h1 a{
-	display: block;
-	color: #F5FFFA;
-
-}
-
-h1:hover{
-    color: #F5FFFA;
-    opacity: 0.9;
-    border-top: 5px solid gold;
-    border-bottom: 5px solid gold;
-    text-align: center;
-}
-
-h3{
-    width: 100%;
-    color: #00FA9A;
-    text-align: center;
-}
-
-/* 관리자 메뉴 */
-
-#updateMenu{
+.img-box img {
 	width: 100%;
-	height: 26px;
-	background-color: #00FA9A;
+}
+.info {
+	overflow: hidden;
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	grid-auto-rows: 15px;
+	align-items: center;
 }
 
-#updateMenu input{
-	padding: 1px;
-	vertical-align: middle;
-	cursor: pointer;
-	background-color: #0DEEC9;
-	border: 2px solid yellow;
-	color: #F5FFFA;
+.info h3 {
+	font-weight: bold;
+	font-size: 12px;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 1;
+	grid-row-end: 3;
 }
-
-#updateMenu input:hover{
-	color: yellow;
+.info .date-genre {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 10px;
+	color: #444;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 3;
 }
-
-/* 영화 관련 */
-
-.movie{
+.info .md-search-score {
+	width: 150px; height: 20px;
+	padding: 0;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	grid-row-start: 4;
+	grid-row-end: 6;
+}
+.info .md-score-bg {
+	width: 100px; height: 20px;
+	float: left;
+	background-image: url('../../images/mincho/mincho_search_bg.jpg');
+    background-repeat: repeat-x;
+	background-size: 20px;
+}
+.info .md-score-img {
+	height: 20px;
+	background-image: url('../../images/mincho/mincho_search.jpg');
+    background-repeat: repeat-x;
+	background-size: 20px;
+}
+.info .md-score-text {
+	width: 40px; height: 20px;
+	float: left;
+	font-size: 16px;
+	color: #00796a;
+	font-weight: bold;
+	line-height: 18px;
 	text-align: center;
 }
 
-.wrap1{
-	overflow: hidden;
+.info .director-header, .info .actor-header, .info .director, .info .actor{
+	font-size: 12px;
 }
-
-.movie table{
-	width: 100%;
-	background-color: #37B5BE;
-	color: #F5FFFA;
-	border: 1px solid #0DEEC9;
-}
-
-.movie .poster-image {
-	position: relative;
-	overflow: hidden;
-	padding: 10px;
-	border: 1px solid #0DEEC9;
-	background-color: #15939C;
-	margin: 0 auto;
-}
-
-.movie .poster-image .plus-minus input{
-	margin: 0 auto;
-	width: 20%;
-	height: 30px;
-	border: 4px solid #00FA9A;
-	font-size: 1.0 em;
+.info .director-header, .info .actor-header {
 	font-weight: bold;
-	background-color: #0DEEC9;
-	color: #F5FFFA;
+}
+.info .director-header, .info .director {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	grid-row-start: 6;
+}
+.info .actor-header, .info .actor {
+	overflow: hidden;
+	grid-row-start: 7;
+	grid-row-end: 9;
+	align-self: start;
+}
+#movieDetail .summary {
+	overflow: hidden;
+	border: 1px solid #ccc;
+	padding: 5px;
+	font-size: 12px;
+	color: #222;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	align-self: start;
+}
+#movieDetail .youtube-box {
+	overflow: hidden;
+	width: 100%; height: 250px;
+	padding: 0;
+	margin-top: 10px;
+	align-self: center;
+	justify-self: center;
+	grid-column-start: 1;
+	grid-column-end: 3;
+	font-size: 14px;
+	color: #000;
+}
+.youtube-box iframe {
+	width: 100%; height: 250px;
+}
+#movieDetail .youtube-link {
+	padding: 10px;
+	align-self: center;
+	text-align: center;
+	background-color: #277;
+	color: #fff;
 	cursor: pointer;
 }
-
-.movie .poster-image .plus-minus input:hover{
-	border: 4px solid #F3392C;
-	background-color: #F5FFFA;
-	color: red;
+#movieDetail .youtube-link:hover {
+	background-color: #499;
+}
+#movieDetail .like-box {
+	overflow: hidden;
+	width: 35px; height: 35px;
+	margin: 2px;
+	align-self: start;
+	justify-self: start;
+	grid-column-start: 1;
+	grid-column-end: 2;
+	grid-row-start: 1;
+	grid-row-end: 2;
+	z-index: 10;
+}
+#likeBtn {
+	padding: 3px;
+	width: 100%; height: 100%;
+	text-align: center;
+	line-height: 30px;
+	color: #bbb;
+	font-size: 20px;
+	background-color: rgba(0, 0, 0, 0.7);
+	cursor: pointer;
+}
+#likeBtn:hover {
+	background-color: rgba(50, 50, 50, 0.7);
 }
 
-.movie .poster-image .plus-minus .checked{
-	border: 4px solid blue;
-	background-color: #F5FFFA;
-	color: blue;
-}
 
-.movie .poster-image .plus-minus .checked:hover{
-	border: 4px solid blue;
-	background-color: #F5FFFA;
-	color: blue;
-	cursor: default;
-}
+/* ========================================================================== */
 
-
-.poster-image img{
-	border: 1px solid #0DEEC9;
-	height: 240px;
-}
-
-.movie table a{
-	color: #00FA9A;
-}
-
-.movie table a:hover{
-	color: #F5FFFA;
-}
-
-.teaser{
-	margin: 0 auto;
-	height: 240px;
-	width: 100%;
-}
 
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
-      
-	.movie .poster-image{
-		float: left;
-		width: 35%
+	#movieDetail {
+		grid-template-columns: 110px 1fr;
+		grid-gap: 5px;
+		padding: 5px;
 	}
-	      
-	.movie .poster-image .plus-minus input{
-		width: 30%;
+	.info {
+		grid-template-columns: 60px 1fr;
+		grid-auto-rows: 18px;
 	}
-	      
-	.movie .table1{
-		float: left;
-		width: 65%;
-		height: 296px;
+	.info h3 {
+		font-size: 16px;
 	}
-	      
-	.movie .teaser{
-		margin: 0 auto;
-		height: 480px;
-		width: 100%;
+	.info .date-genre {
+		font-size: 14px;
 	}
-
+	.info .md-search-score {
+		width: 150px; height: 20px;
+	}
+	.info .md-score-bg {
+		width: 100px; height: 20px;
+		background-size: 20px;
+	}
+	.info .md-score-img {
+		height: 20px;
+		background-size: 20px;
+	}
+	.info .md-score-text {
+		width: 40px; height: 20px;
+		font-size: 18px;
+		line-height: 18px;
+	}
+	.info .actor-header, .info .actor {
+		grid-row-start: 7;
+		grid-row-end: 8;
+	}
+	.info .director-header, .info .actor-header, .info .director, .info .actor{
+		font-size: 14px;
+	}
+	#movieDetail .summary {
+		font-size: 14px;
+	}
+	#movieDetail .youtube-box {
+		height: 410px;
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+	.youtube-box iframe {
+		height: 410px;
+	}
 }
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
+	#movieDetail {
+		grid-template-columns: 200px 1fr;
+		grid-gap: 15px;
+		padding: 15px;
+	}
+	#movieDetail .img-box {
+		grid-column-start: 1;
+		grid-row-start: 1;
+		grid-row-end: 4;
+	}
+	.info {
+		grid-template-columns: 70px 1fr;
+		grid-auto-rows: 25px;
+	}
+	.info h3 {
+		font-size: 20px;
+	}
+	.info .date-genre {
+		font-size: 14px;
+	}
+	.info .md-search-score {
+		width: 210px; height: 30px;
+	}
+	.info .md-score-bg {
+		width: 150px; height: 30px;
+		background-size: 30px;
+	}
+	.info .md-score-img {
+		height: 30px;
+		background-size: 30px;
+	}
+	.info .md-score-text {
+		width: 60px; height: 30px;
+		font-size: 18px;
+		line-height: 20px;
+	}
 	
-	.movie{
-		font-size: 1.2em;
+	.info .director-header, .info .actor-header, .info .director, .info .actor{
+		font-size: 14px;
 	}
-	      
-	.movie .table1{
-		height: 297px;
+	#movieDetail .summary {
+		font-size: 14px;
+		grid-column-start: 2;
+		grid-row-start: 2;
+		grid-row-end: 3;
 	}
-	      
-	.teaser{
-		margin: 0 auto;
-		height: 720px;
-		width: 100%;
+	#movieDetail .youtube-box {
+		height: 470px;
+		grid-column-start: 1;
+		grid-column-end: 3;
 	}
-	
+	.youtube-box iframe {
+		height: 470px;
+	}
+	#movieDetail .like-box {
+		width: 40px; height: 40px;
+		margin: 5px;
+	}
+	#likeBtn {
+		line-height: 35px;
+		font-size: 26px;
+	}
 }
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
 @media screen and (min-width: 992px) {
-
-	
-
+	#movieDetail {
+		grid-template-columns: 220px 1fr;
+		grid-gap: 15px;
+		padding: 15px;
+	}
+	.info {
+		grid-template-columns: 70px 1fr;
+		grid-auto-rows: 25px;
+	}
+	.info h3 {
+		font-size: 26px;
+	}
+	.info .date-genre {
+		font-size: 16px;
+	}
+	.info .md-search-score {
+		width: 210px; height: 30px;
+	}
+	.info .md-score-bg {
+		width: 150px; height: 30px;
+		background-size: 30px;
+	}
+	.info .md-score-img {
+		height: 30px;
+		background-size: 30px;
+	}
+	.info .md-score-text {
+		width: 60px; height: 30px;
+		font-size: 18px;
+		line-height: 20px;
+	}
+	#movieDetail .summary {
+		font-size: 16px;
+	}
+	.info .director-header, .info .actor-header, .info .director, .info .actor{
+		font-size: 16px;
+	}
+	#movieDetail .youtube-box {
+		width: 970px; height: 540px;
+		grid-column-start: 1;
+		grid-column-end: 3;
+	}
+	.youtube-box iframe {
+		height: 500px;
+	}
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
 @media screen and (min-width: 1225px) {
-	      
-	#movDetail{
+	#movieDetailWrap{
     	width: 1200px;
     	margin: 0 auto;
-	}
-	      
-	.movie{
-		font-size: 1.4em;
-	}
-	      
-	.movie .table1{
-		height: 300px;
-	}
-	      
-	.teaser{
-		margin: 0 auto;
-		height: 960px;
-		width: 100%;
 	}
     
 }

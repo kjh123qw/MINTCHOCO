@@ -25,7 +25,7 @@ if(memberInfo.getNumber() != 1) { %>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
 <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>공지사항 입력 폼</title>
+<title>write notice</title>
 <script src="${ contextPath }/js/jquery.2.1.3.min.js"></script>
 <script src="${ contextPath }/js/jquery-ui.min.js"></script>
 <script src="${ contextPath }/js/jquery.easing.1.3.js"></script>
@@ -44,11 +44,11 @@ if(memberInfo.getNumber() != 1) { %>
 
 
 <div id="noticeWrap">
-	<h1>공지사항 입력</h1>
+	<h1>write notice</h1>
 	<form method="post" action="${ contextPath }/service/insert.do">
 	<table class="notice-form">
 		<tr>
-			<th>제목</th>
+			<th>title</th>
 			<td>
 				<div class="cst-text-st1 notice-form-title">
 					<input type="text" class="text-150" name="noticeTitle">
@@ -56,7 +56,7 @@ if(memberInfo.getNumber() != 1) { %>
 			</td>
 		</tr>
 		<tr>
-			<th>내용</th>
+			<th>content</th>
 			<td>
 				<textarea name="noticeContent"></textarea>
 			</td>
@@ -64,8 +64,8 @@ if(memberInfo.getNumber() != 1) { %>
 		<tr>
 			<td colspan="2">
 				<div class="cst-btn notice-form-btn">
-					<input type="button" value="취소" class="st2-120-40"  onclick="location.href='${ contextPath }/service/notice.do'">
-					<input type="submit" value="등록" class="st1-120-40">
+					<input type="button" value="cnacel" class="st2-120-40"  onclick="location.href='${ contextPath }/service/notice.do'">
+					<input type="submit" value="write" class="st1-120-40">
 				</div>
 			</td>
 		</tr>

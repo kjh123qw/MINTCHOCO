@@ -210,7 +210,7 @@ int result = 0;
 	public MemberVO loginMember(String email, String newPwd) {
 		
 
-		MemberVO memberVO = new MemberVO();
+		MemberVO memberVO = null;
 		try {
 			conn = JDBCUtil.getConnection();
 			stmt = conn.prepareStatement(MEMBER_INFO);	
@@ -219,7 +219,7 @@ int result = 0;
 			rs = stmt.executeQuery();
 			
 			if(rs.next()) {
-				
+				memberVO = new MemberVO();
 				memberVO.setNumber(rs.getInt("MEMBER_NUMBER"));
 				//비번생략
 				memberVO.setName(rs.getString("MEMBER_NAME"));

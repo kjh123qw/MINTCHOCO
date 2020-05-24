@@ -22,6 +22,29 @@ import com.kosmo.mintchoco.common.Unicode;
 
 public class Crawling 
 {
+	public static JSONArray movieData()
+	{
+		HashMap<Integer, String[]> mapMovieRank = new HashMap<Integer, String[]>();
+		
+		String strUrl = "https://yts.mx/api/v2/list_movies.json?sort_by=rating&limit=30";
+		String strResponse = ApiCall.post(strUrl);
+//		strResponse = Unicode.decode(strResponse);
+        JSONArray movieList = null;
+		
+		try 
+		{
+            JSONParser jsonParser = new JSONParser(); //parser
+            JSONObject jsonObj = (JSONObject) jsonParser.parse(strResponse);
+            JSONObject movieData = (JSONObject) jsonObj.get("data");
+            movieList = (JSONArray) movieData.get("movies");
+        }
+		catch (ParseException e) 
+		{
+            e.printStackTrace();
+        }
+		
+		return movieList;
+	}
 	public static HashMap<Integer, String[]> CGVMovieRank()
 	{
 		String strUrl = "http://www.cgv.co.kr/movies/"; 

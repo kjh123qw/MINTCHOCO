@@ -81,7 +81,6 @@ public class MemberMDAO {
 	// 계정 정보
 	public MemberVO getDetailInfo(String memberNum) {
 		// TODO Auto-generated method stub
-		System.out.println("===> JDBC로 getDetailInfo()");
 		MemberVO member = new MemberVO();
 		
 		try {		

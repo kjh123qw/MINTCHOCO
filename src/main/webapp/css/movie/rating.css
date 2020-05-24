@@ -1,93 +1,139 @@
 /* 기본 CSS를 작성합니다. (세로모드 모바일 디바이스)
   기본으로 작성되는 CSS는 576px보다 작은 화면에서 작동 됩니다.
   가로모드 모바일 디바이스 (가로 해상도가 576px 보다 큰 화면에 적용) */
-  
-  /* 임시 */
-#movDetail h1, #updateMenu, .movie, .teaser {
-	/*display: none !important;*/
-}
-  /* 임시 */
 
-.rating-line { margin: 10px 0 5px 0; }
-.rating-line-bottom { margin: 0 0 10px 0; }
-#ratingWrap {
+#movieRating {
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-gap: 5px;
 	padding: 5px;
+	box-shadow: 0 6px 12px -5px rgba(50, 50, 93, 0.25),
+	  0 5px 12px -5px rgba(0, 0, 0, 0.3), 0 -3px 12px -3px rgba(0, 0, 0, 0.025);
+	background-color: #fff;
+	justify-items: center;
 }
-.rating-header-wrap { height: 50px; }
-.rating-blank-underline { display: none; }
-.rating-header-comment, .rating-header-named, .rating-header-write {
-	width: 30%; height: 35px;
-	margin-top: 15px;
-	float: left;
-	border: 1px solid #599;
+.rating-title {
+	align-self: center;
+	padding: 5px 5px 0 5px;
+	font-size: 16px;
+	font-weight: bold;
+	color: #333;
+}
+#movieRating form {
+	width: 100%;
+	align-items: center;
+}
+#writeCommentBox {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 1fr 50px 50px;
+	grid-gap: 2px;
+	padding: 5px;
+	align-items: center;
+}
+#writeCommentBox .rating-nick {
 	font-size: 14px;
-	text-align: center;
-	line-height: 35px;
-	color: #266;
+}
+#writeCommentBox .score-text {
+	font-size: 14px;
+	text-align: right;
+}
+#writeCommentBox select {
+	width: 100%; height: 25px;
+	outline: none;
+}
+.comment-text {
+	height: 60px;
+	grid-column-start: 1;
+	grid-column-end: 3;
+}
+.comment-text textarea {
+	width: 100%; height: 60px;
+	padding: 5px;
+	outline: none;
+	resize: none;
+}
+.comment-btn {
+	width: 100%; height: 60px;
+}
+.comment-btn input {
+	width: 100%; height: 60px;
+	margin: 0 auto;
+	background-color: #008697;
+	color: #fff;
+	outline: none;
+	border: 0;
 	cursor: pointer;
 }
-.rating-header-named {
-	border-right: 0;
-	border-left: 0;
+.comment-btn input:hover {
+	background-color: #0098a8;
 }
-.rating-header-selected {
-	width: 40%; height: 50px;
-	margin-top: 0;
-	line-height: 50px;
-	background-color: #599;
-	font-weight: bold;
-	font-size: 20px;
-	color: #fff;
-}
-.rating-inner-box, #writeCommentBox, #namedCommentBox {
-	border: 1px solid #acc;
-	padding: 5px;
+#movieRating hr {
+	width: 100%;
 	margin: 5px 0;
 }
-#myCommentBox {
-	padding: 0 5px;
+#movieRating .no-comment {
+	width: 100%;
+	font-size: 16px;
+	text-align: center;
+	border: 1px solid #aaa;
+	padding: 15px;
 }
-.my-comment-box{
-	border: 2px solid #7aa;
-	background-color: #eff;
+#movieRating .comment {
+	width: 100%;
+	display: grid;
+	grid-template-columns: 1fr 50px 70px 70px;
+	grid-gap: 2px;
+	padding: 2px;
+	align-items: center;
+	justify-items: center;
+	border: 1px solid #006475;
 }
-.rating-top {
-	height: 30px;
+#movieRating .my-comment {
+	background-color: #dee;
 }
-.rating-nick {
-	width: 136px; height: 30px;
-	float: left;
-	padding-left: 5px;
+.comment .nickname {
+	height: 26px;
+	justify-self: start;
+	grid-column-start: 1;
+	grid-column-end: 3;
 	font-size: 14px;
-	font-weight: bold;
-	line-height: 30px;
+	line-height: 24px;
 	cursor: pointer;
 }
-.rating-nick:hover {
-	color: #3aa;
+.comment .nickname:hover {
 	text-decoration: underline;
 }
-
-/* score */
-.rating-score {
-	width: 150px; height: 30px;
+.comment .content {
+	overflow: hidden;
+	white-space: initial;
+	width: 100%;
+	grid-column-start: 1;
+	grid-column-end: 5;
 	padding: 5px;
-	float: right;
+	font-size: 12px;
+	border: 1px solid #ddd;
 }
-.score-bg {
+.comment .rating-score {
+	width: 150px; height: 26px;
+	padding: 3px 0;
+	grid-column-start: 3;
+	grid-column-end: 5;
+}
+.comment .score-bg {
 	width: 100px; height: 20px;
 	float: left;
 	background-image: url('../../images/mincho/mincho_search_bg.jpg');
     background-repeat: repeat-x;
 	background-size: 20px;
 }
-.score-img {
+.comment .score-img {
 	height: 20px;
 	background-image: url('../../images/mincho/mincho_search.jpg');
     background-repeat: repeat-x;
 	background-size: 20px;
 }
-.score-text {
+.comment .score-text {
 	width: 40px; height: 20px;
 	float: left;
 	font-size: 16px;
@@ -96,169 +142,97 @@
 	line-height: 18px;
 	text-align: center;
 }
-.rating-comment {
-	padding: 5px;
-	border-top: 1px solid #bdd;
-	border-bottom: 1px solid #bdd;
-}
-.rating-bottom {
-	height: 40px;
-}
-.rating-date {
-	width: 80px; height: 40px;
-	float: left;
-	padding: 10px 5px;
-	color: #777;
-	font-size: 14px;
-	line-height: 20px;
-}
-.rating-delete {
-	width: 40px; height: 30px;
-	margin-top: 5px;
-	float: left;
+.comment .rating-date {
+	width: 100%; height: 24px;
 	font-size: 12px;
-	font-weight: bold;
-	line-height: 30px;
-	background-color: red;
+	color: #999;
+}
+.comment .rating-delete {
+	width: 40px; height: 24px;
+	font-size: 12px;
 	color: #fff;
 	text-align: center;
+	line-height: 22px;
+	background-color: red;
 	cursor: pointer;
 }
-.rating-ud {
-	width: 166px;height: 40px;
-	float: right;
-	padding: 5px;
-}
-.rating-up-btn, .raitng-down-btn {
-	height: 30px;
-	padding: 0 10px;
-	float: right;
-	border: 1px solid #ccc;
+.comment .thumbs-up {
+	width: 60px; height: 24px;
+	font-size: 12px;
+	color: red;
 	text-align: center;
-	line-height: 28px;
+	line-height: 22px;
 	cursor: pointer;
 }
-.rating-up-btn { margin-right: 10px; color: red; }
-.raitng-down-btn { color: #666; }
+.comment .thumbs-down {
+	width: 60px; height: 24px;
+	font-size: 12px;
+	color: #444;
+	text-align: center;
+	line-height: 22px;
+	cursor: pointer;
+}
+#ratingCommentBox {
+	display: grid;
+	width: 100%;
+	grid-template-columns: 1fr;
+	grid-gap: 2px;
+	align-items: center;
+	justify-items: center;
+}
 #ratingPage {
-	height: 30px;
+	font-size: 16px;
 	text-align: center;
-	line-height: 30px;
-	font-size: 18px;
-	color: #777;
 }
-.page-number-selected {
-	font-weight: bold;
-	color: #000;
-}
-.page-number, .page-arrow {
+#ratingPage .page-number {
+	font-size: 14px;
+	color: #444;
 	cursor: pointer;
 }
-
-/* write box */
-#writeCommentBox {
-	overflow: hidden;
-	display: none;
+#ratingPage .page-number-selected {
+	font-weight: bold;
 }
-.score-selector {
-	width: 120px; height: 30px;
-	float: right;
-	line-height: 30px;
-	text-align: right;
+#myCommentBox, #ratingCommentBox, #writeCommentBox, .rating-title {
+	width: 100%;
 }
-.score-selector select {
-	width: 60px; height: 30px;
-	outline: none;
-}
-.comment-text { padding-top: 10px; }
-.comment-text textarea {
-	display: block;
-	width: 100%; height: 100px;
-	padding: 5px;
-	resize: none;
-	outline: none;
-}
-.btn-area { padding: 5px; }
-.cst-btn > div {
-	float: right;
-}
-/* Named Comment Box */
-#namedCommentBox {
-	overflow: hidden;
-	display: none;
-}
-.no-comment {
-	padding: 20px;
-	height: 70px;
-	font-size: 14px;
-	text-align: center;
-	line-height: 30px;
-}
-
 /* 가로 해상도가 576px 보다 큰 화면에 적용 */
 @media screen and (min-width: 576px) {
-	.rating-top {
-		height: 40px;
-	}
-	.rating-nick {
-		width: 248px; height: 40px;
-		padding: 0 10px;
-		font-size: 20px;
-		line-height: 40px;
-	}
-	.rating-ud {
-		width: 218px;height: 40px;
-		float: right;
-		padding: 5px;
-	}
-	/* score */
-	.rating-score {
-		width: 210px; height: 40px;
-	}
-	.score-bg {
-		width: 150px; height: 30px;
-		background-size: 30px;
-	}
-	.score-img {
-		height: 30px;
-		background-size: 30px;
-	}
-	.score-text {
-		width: 50px; height: 30px;
-		font-size: 24px;
-		line-height: 28px;
-	}
 }
 
 /* 가로 해상도가 768px 보다 큰 화면에 적용 */
 @media screen and (min-width: 768px) {
-    
+	#writeCommentBox {
+		grid-template-columns: 1fr 80px 80px;
+		grid-gap: 5px;
+	}
+    #ratingCommentBox {
+    	grid-gap: 5px;
+    }
+    #movieRating {
+    	padding: 10px;
+    	grid-gap: 5px;
+    }
+    #movieRating .comment {
+    	padding: 5px;
+    	grid-gap: 4px;
+    }
+    .rating-title {
+    	font-size: 18px;
+    }
 }
 
 /* 가로 해상도가 992px 보다 큰 화면에 적용 */
 @media screen and (min-width: 992px) {
-	.rating-blank-underline {
-		width: 20%; height: 50px;
-		display: block;
-		float: left;
-		border-bottom: 1px solid #599;
+	#writeCommentBox {
+		grid-template-columns: 1fr 100px 100px;
+		padding: 5px;
 	}
-	.rating-header-comment, .rating-header-named, .rating-header-write {
-		width: 15%;
+	#myCommentBox, #ratingCommentBox, #writeCommentBox, .rating-title, #movieRating form {
+		width: 940px;
 	}
-	.rating-header-selected {
-		width: 30%;
-	}
-	.score-selector {
-		width: 150px; height: 40px;
-		float: right;
-		line-height: 40px;
-		text-align: right;
-	}
-	.score-selector select {
-		width: 70px; height: 40px;
-		outline: none;
-	}
+    .rating-title {
+    	font-size: 22px;
+    }
 }
 /* 가로 해상도가 1200px 보다 큰 화면에 적용 */
 @media screen and (min-width: 1225px) {
